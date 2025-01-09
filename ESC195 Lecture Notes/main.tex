@@ -1,0 +1,118 @@
+\documentclass[11pt]{article}
+\input{preamble}
+\begin{document}
+\thispagestyle{empty}
+{\LARGE \bf ESC 195 Lecture Notes}\\
+{\large Hei Shing Cheung}\\
+Caculus II, Winter 2024 \hfill ESC 195\\
+\section{More on Integrals}
+\subsection{Riemann Sum - Non-Uniform Petition}
+\begin{example}
+    Given the following definite integral:
+    $$\int^2_0 \sqrt{x} dx$$, we cannot evaluate its Riemann sum with uniforms partition, since the series of root cannot be easily evaluated. 
+\end{example}
+
+The definite integral of $\sqrt{x}$ from $0$ to $2$ using a Riemann sum with a non-uniform partition is given by:
+
+$$
+\int_{0}^{2} \sqrt{x} \, dx = \lim_{n \to \infty} \sum_{i=1}^n \sqrt{x_i} \Delta x_i
+$$
+
+where:
+\begin{itemize}
+    \item $x_0 = 0, \, x_n = 2$,
+    \item $x_i = i^2 \cdot \frac{2}{n^2}$ for $i = 0, 1, 2, \dots, n$,
+    \item $\Delta x_i = x_i - x_{i-1} = \frac{2}{n^2} \cdot (2i - 1)$.
+\end{itemize}
+
+The Riemann sum becomes:
+$$
+S_n = \sum_{i=1}^n \sqrt{i^2 \cdot \frac{2}{n^2}} \cdot \frac{2}{n^2} \cdot (2i - 1).
+$$
+
+Simplifying further:
+$$
+S_n = \sum_{i=1}^n \sqrt{\frac{2i^2}{n^2}} \cdot \frac{2}{n^2} \cdot (2i - 1).
+$$
+
+Taking the limit as $n \to \infty$, the sum converges to the exact value of the integral using the series of squares. 
+$$
+\int_{0}^{2} \sqrt{x} \, dx = \frac{4\sqrt{2}}{3}.
+$$
+\paragraph{Condition} $n \to \infty$ Ensures $\Delta x_i \to 0$
+\paragraph{} As $n \to \infty$, the partition points $x_i$ become increasingly dense. This ensures that the partition becomes infinitely fine.
+
+\subsection{Integration By Parts}
+Using the product rule:
+$$
+\frac{d}{dx} \big[ u(x) v(x) \big] = u'(x)v(x) + u(x)v'(x),
+$$
+integrating both sides with respect to $x$ gives:
+$$
+u(x)v(x) = \int u'(x) v(x) \, dx + \int u(x) v'(x) \, dx.
+$$
+Rearranging this:
+$$
+\int u'(x) v(x) \, dx = u(x)v(x) - \int u(x) v'(x) \, dx.
+$$
+
+\paragraph{Integration by parts formula}
+\begin{equation}
+\int u \, dv = uv - \int v \, du.
+\end{equation}
+\begin{example}
+We want to solve the integral $$ \int x e^{2x} \, dx $$ using integration by parts.
+
+Let:
+$$ u = x, \quad dv = e^{2x} \, dx. $$
+
+Then, we compute the derivatives and integrals:
+$$ du = dx, \quad v = \frac{e^{2x}}{2}. $$
+
+Now, apply the integration by parts formula:
+$$ \int u \, dv = uv - \int v \, du. $$
+
+Substituting in the values:
+$$ \int x e^{2x} \, dx = x \cdot \frac{e^{2x}}{2} - \int \frac{e^{2x}}{2} \, dx. $$
+
+Next, compute the remaining integral:
+$$ \int \frac{e^{2x}}{2} \, dx = \frac{e^{2x}}{4}. $$
+
+Thus, the result is:
+$$ \int x e^{2x} \, dx = \frac{x e^{2x}}{2} - \frac{e^{2x}}{4} + C. $$
+
+\end{example}
+
+\begin{example}
+We want to solve $$ \int x^2 \sin(2x) \, dx $$ using double integration by parts.
+
+First, let:
+$$ u = x^2, \quad dv = \sin(2x) \, dx. $$
+
+Then:
+$$ du = 2x \, dx, \quad v = -\frac{1}{2} \cos(2x). $$
+
+Using the IBP formula:
+$$ \int u \, dv = uv - \int v \, du, $$
+
+we get:
+$$ \int x^2 \sin(2x) \, dx = -\frac{x^2}{2} \cos(2x) + \int x \cos(2x) \, dx. $$
+
+Now, apply IBP again to \( \int x \cos(2x) \, dx \), let:
+$$ u = x, \quad dv = \cos(2x) \, dx. $$
+
+Then:
+$$ du = dx, \quad v = \frac{1}{2} \sin(2x). $$
+
+Using the IBP formula again:
+$$ \int x \cos(2x) \, dx = \frac{x}{2} \sin(2x) - \int \frac{1}{2} \sin(2x) \, dx, $$
+
+and solving the remaining integral:
+$$ \int \frac{1}{2} \sin(2x) \, dx = -\frac{1}{4} \cos(2x). $$
+
+Thus, the final result is:
+$$ \int x^2 \sin(2x) \, dx = -\frac{x^2}{2} \cos(2x) + \frac{x}{2} \sin(2x) + \frac{1}{4} \cos(2x) + C. $$
+
+\end{example}
+\paragraph{} 
+\end{document}

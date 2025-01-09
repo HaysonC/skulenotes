@@ -1,0 +1,132 @@
+\documentclass[11pt]{article}
+\input{preamble}
+\begin{document}
+\thispagestyle{empty}
+{\LARGE \bf ECE 159 Lecture Notes}\\
+{\large Hei Shing Cheung}\\
+Fundamentals of Electric Circuits, Winter 2024 \hfill ECE 159\\
+\vspace{10pt}
+\section{Basic Concepts}
+\subsection{Basic Defintions}
+\begin{definition}[Voltage]
+    The difference of the electric potential between two points in a circuit.
+    \begin{equation}
+        V \defeq \int_C \textbf{E} \cdot d\textbf{l}
+    \end{equation}
+    \end{definition}
+    
+    \begin{definition}[Current]
+    Rate of change of charge at a particular point in the circuit.
+    \begin{equation}
+        I \defeq \frac{dq}{dt}
+    \end{equation}
+    \end{definition}
+    
+    \begin{definition}[Power]
+    The rate of change of energy for an element in the circuit. Power is the product of voltage and current.
+    \end{definition}
+    
+    \begin{definition}[Resistors]
+    A circuit element that restricts the flow of charge.
+    \end{definition}
+    
+    \begin{definition}[Ideal Sources]
+    A circuit element that provides a set voltage or current regardless of what it is connected to.
+    \end{definition}
+    
+    \begin{definition}[Dependent Sources]
+    A circuit element that provides a voltage or current to the circuit depending on another voltage or current in the circuit.
+    \end{definition}
+    
+    \begin{definition}[Passive Sign Convention]
+    If a positive current flows out of the positive side of a voltage, that element is \textbf{delivering} power. Otherwise, it is \textbf{absorbing} power. All resistors absorb power.
+    \end{definition}
+\subsection{High School Review}
+\paragraph{Electric Field} $\textbf{E}$ is created when charges are separated. It leads to a potential difference.
+\paragraph{Worked done by Electric Field} Force due to the field is:
+\begin{equation}
+    \textbf{F} = q\textbf{E}
+\end{equation}
+, such that it moves charges and do work.
+\paragraph{Capacitor} Energy stored in capacity is:
+\begin{equation}
+    U_\text{E} = \frac{1}{2}CV^2
+\end{equation}
+\paragraph{Energy Density} The energy [J/m$^3$] in a dielectric material is:
+\begin{equation}
+    u_\text{E} = \frac{1}{2}\epsilon_r \epsilon_0 E^2
+\end{equation}
+where:
+\begin{center}
+    $\epsilon_0$ = Permittivity of free space \\
+    $\epsilon_r$ = Relative Permittivity
+\end{center}
+\paragraph{Magnetic field} \textbf{B} is created when charges move.
+\paragraph{An electromotive force (emf)} can be induced when the magnetic flux
+through a loop is changing with time. Induced emf does the same thing as the potential difference of a
+battery. 
+\paragraph{Induced EMF} An inductor can store energy in a ``magnetic form"
+\begin{equation}
+    U_B = \frac{1}{2} L i^2 \quad 
+\end{equation}
+\paragraph{Energy Density}
+\begin{equation}
+    u_B = \frac{1}{2 \mu_r \mu_0} B^2
+\end{equation}
+\subsection{Voltage and Current}
+\paragraph{} Now instead of dealing with electric and magnetic vector fields, we can
+use the scalar quantities of voltage and current:
+\begin{align}
+    \text{Voltage} &\defeq \text{Difference in Electric Potential}\nonumber \\ 
+    \Delta V &= V_A - V_B \nonumber \\
+    &= \int_B^A \textbf{E} \cdot dl \nonumber\\
+    &= \frac{\Delta W}{q}
+\end{align}
+
+\paragraph{Electromotive Force (emf) / Voltage} Work is performed by 
+the electric field to move a charge from one point to another. 
+The work done per unit charge is the voltage.
+\begin{equation}
+    \text{Voltage} = \frac{\Delta W}{q}
+\end{equation}
+\subsection{Power and Energy}
+\paragraph{Power} To relate power to  voltage and current, we can use the following equation:
+\begin{equation}
+    P \defeq \frac{dW}{dt} = \frac{dW}{dq} \cdot \frac{dq}{dt} = V \cdot I
+\end{equation}
+\paragraph{Sign} If $P = V \cdot I > 0$, the element is delivering power. If $P = V \cdot I < 0$, the element is absorbing power.
+\paragraph{Energy}  the energy absorbed or supplied by an element
+from time $t_0$ to time $t_1$ is:
+\begin{equation}
+    W = \int_{t_0}^{t_1} P(t) dt
+\end{equation}
+\subsection{Circuit Elements}
+\paragraph{Active Elements} Active elements are sources of energy. They can deliver power to the circuit. While passive elements are elements that can only absorb power.
+\paragraph{Ideal Sources} Ideal sources are sources that provide a set voltage or current regardless of what it is connected to. We often assume that sources are ideal.
+\paragraph{Independent Sources} Independent sources are sources that provide a set voltage or current regardless of what it is connected to.
+\paragraph{Dependent Sources} Dependent sources are sources that provide a voltage or current to the circuit depending on another voltage or current in the circuit.
+\paragraph{Resistor} A resistor is a circuit element that restricts the flow of charge. The voltage across a resistor is proportional to the current through it.
+
+\subsection{Resistance}
+\paragraph{Ohm's Law} Ohm's Law states that the current through a resistor is proportional to the voltage across it.
+\begin{equation}
+    V = IR
+\end{equation}
+\paragraph{Resistivity} The resistance of a material is proportional to the length of the material and inversely proportional to the cross-sectional area of the material.
+\begin{equation}
+    R = \rho \frac{l}{A}
+\end{equation}
+\paragraph{Short and Open Circuits} A short circuit is a circuit with no resistance, while an open circuit is a circuit with infinite resistance.
+\paragraph{Conductance} The reciprocal of resistance is conductance. The unit of conductance is mho (ohm spelled backwards), \rotatebox[origin=c]{180}{$\Omega$}.
+\begin{equation}
+    G = \frac{1}{R}
+\end{equation}
+\paragraph{Power in Resistors} The power dissipated in a resistor is given by:
+\begin{equation}
+    P = I^2R = \frac{V^2}{R}
+\end{equation}
+
+\section{DC Circuits}
+\paragraph{}
+
+\end{document}
