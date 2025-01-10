@@ -9,15 +9,137 @@ Linear Algebra, Winter 2024 \hfill MAT 185\\
 \begin{definition}[Vector Space in $\mathbb{R}$]
     A vectors space,${V}$, over $\mathbb{R}$ is a collection of \textbf{object} $\textbf{v} \in V$ s.t. the follow axioms are followed
     \begin{enumerate}
-        \item \textbf{Closure Under Addition} $\textbf{x},\textbf{y} \in V \implies \textbf{x} + \textbf{y} \in V$
-        \item \textbf{Order of Addition} $\textbf{x},\textbf{y}, \textbf{z} \in V \implies (\textbf{x} + \textbf{y}) + \textbf{z} = \textbf{x} + (\textbf{y} + \textbf{z}) \in V$
-        \item \textbf{Existence of Additional Identity} $\exists \textbf{0} \in V$ s.t. $\textbf{x} \in V \implies \textbf{x} + \textbf{0} = \textbf{x}$
-        \item \textbf{Existence of Additional Inverse} $\forall \textbf{x} \in V \exists \textbf{-x} \in V$ s.t. $\textbf{x} + \textbf{-x} = \textbf{0}$
-        \item \textbf{Closure under Scalar Multiplication} $\forall \textbf{x} \in V$ and $\forall \alpha \in \mathbb{R} \implies \alpha\textbf{x} \in V$
-        \item \textbf{Order of Scalar Multiplication} $\forall \textbf{x} \in V$ and $\alpha, \beta \in \mathbb{R}$, $(\alpha\beta)\textbf{x} \implies \alpha(\beta\textbf{x})$
-        \item \textbf{Distributive Scalar Multiplication} $\forall \textbf{x} \in V$ and $\alpha, \beta \in \mathbb{R}$, $(\alpha + \beta)\textbf{x} = \alpha\textbf{x} + \beta\textbf{x}$
-        \item \textbf{Existence of Multiplicative Identity} $\forall \textbf{x} \in V$, $1\textbf{x} = \textbf{x}$
+        \item \textbf{Addition Axioms}
+        \begin{enumerate}
+            \item \textbf{Closure Under Addition:} \\
+            $\textbf{x}, \textbf{y} \in V \implies \textbf{x} + \textbf{y} \in V$
+            
+            \item \textbf{Associativity of Addition:} \\
+            $\textbf{x}, \textbf{y}, \textbf{z} \in V \implies (\textbf{x} + \textbf{y}) + \textbf{z} = \textbf{x} + (\textbf{y} + \textbf{z})$
+            
+            \item \textbf{Existence of Additive Identity:} \\
+            $\exists \, \textbf{0} \in V$ such that $\textbf{x} \in V \implies \textbf{x} + \textbf{0} = \textbf{x}$
+            
+            \item \textbf{Existence of Additive Inverse:} \\
+            $\forall \, \textbf{x} \in V, \, \exists \, \textbf{-x} \in V$ such that $\textbf{x} + \textbf{-x} = \textbf{0}$
+        \end{enumerate}
+        
+        \item \textbf{Scalar Multiplication Axioms}
+        \begin{enumerate}
+            \item \textbf{Closure Under Scalar Multiplication:} \\
+            $\forall \, \textbf{x} \in V \, \text{and} \, \forall \, \alpha \in \mathbb{R}, \, \alpha \textbf{x} \in V$
+            
+            \item \textbf{Associativity of Scalar Multiplication:} \\
+            $\forall \, \textbf{x} \in V \, \text{and} \, \forall \, \alpha, \beta \in \mathbb{R}, \, (\alpha \beta) \textbf{x} = \alpha (\beta \textbf{x})$
+            
+            \item \textbf{Distributive Property of Scalar Multiplication:} \\
+            $\forall \, \textbf{x} \in V \, \text{and} \, \forall \, \alpha, \beta \in \mathbb{R}, \, (\alpha + \beta) \textbf{x} = \alpha \textbf{x} + \beta \textbf{x}$
+            
+            \item \textbf{Existence of Multiplicative Identity:} \\
+            $\forall \, \textbf{x} \in V, \, 1 \textbf{x} = \textbf{x}$
+        \end{enumerate}
     \end{enumerate}
-\paragraph{Note} It could be shown that the axiom imply the commutativity of in addition, namely $\forall \textbf{x} \implies \textbf{y} \in \mathbb{R}$, $\textbf{x} + \textbf{y} = \textbf{y} + \textbf{x}$
+     
+    \paragraph{Note} It could be shown that the axiom imply the commutativity of in addition, namely $\forall \textbf{x} \implies \textbf{y} \in \mathbb{R}$, $\textbf{x} + \textbf{y} = \textbf{y} + \textbf{x}$
 \end{definition}
+\paragraph{Example} $\mathbb{R}^n$ is a vector space over $\mathbb{R}$, where $\textbf{x} = (x_1, x_2, \ldots, x_n)$ and $\textbf{y} = (y_1, y_2, \ldots, y_n)$, then $\textbf{x} + \textbf{y} = (x_1 + y_1, x_2 + y_2, \ldots, x_n + y_n)$ and $\alpha\textbf{x} = (\alpha x_1, \alpha x_2, \ldots, \alpha x_n)$
+\begin{theorem}[Cancelation, Part 1]
+    Let $V$ be a vector space and $\textbf{x}, \textbf{y}, \textbf{z} \in V$, then:
+    \begin{align*}
+        \textbf{x} + \textbf{z} &= \textbf{y} + \textbf{z} \\
+        \textbf{x} &= \textbf{y}
+    \end{align*} 
+\end{theorem}
+\begin{proof}
+    \begin{align*}
+        \textbf{x} + \textbf{z} &= \textbf{y} + \textbf{z} \\
+        \intertext{From additive inverse we know that \textbf{-z} exists}
+        (\textbf{x} + \textbf{z}) + \textbf{-z} &= (\textbf{y} + \textbf{z}) + \textbf{-z} \\
+        \intertext{By order of addition we have: }
+        \textbf{x} + (\textbf{z} + \textbf{-z}) &= \textbf{y} + (\textbf{z} + \textbf{-z}) \\
+        \textbf{x} + \textbf{0} &= \textbf{y} + \textbf{0} \\
+        \intertext{By additive identity we have: }
+        \textbf{x} &= \textbf{y}
+    \end{align*}
+\end{proof}
+\begin{theorem}[Cancelation, Part 2]
+    Let $V$ be a vector space and $\textbf{x}, \textbf{y}, \textbf{z} \in V$, then:
+    \begin{align*}
+        \textbf{z} + \textbf{x} &= \textbf{z} + \textbf{y} \\
+        \textbf{x} &= \textbf{y}
+    \end{align*} 
+\end{theorem}
+To proof that, it would require the following propostion:
+\begin{lemma}
+    Let $V$ be a vector space and $\textbf{z} \in V$, then $\textbf{-z} + \textbf{z} = 0 $
+\end{lemma}
+\begin{proof}
+    \begin{align*}
+        \intertext{We know:}
+        \textbf{-z} + \textbf{z} &= (\textbf{-z} + \textbf{z}) + 0\\
+        &= (\textbf{-z} + \textbf{z}) + (\textbf{-z} + \textbf{-(-z)}) \\
+        \intertext{By the order of additon, }
+        &= \textbf{-z} + (\textbf{z} + (\textbf{-z} + \textbf{-(-z)})) \\
+        \intertext{Again, by the order of additon, }
+        &= \textbf{-z} + ((\textbf{z} + \textbf{-z}) + \textbf{-(-z)}) \\
+        &= \textbf{-z} + \textbf{-(-z)} \\
+        &= 0
+    \end{align*}
+\end{proof}
+Now, to prove the part 2 of the Cancelation Theorem:
+\begin{proof}
+    \begin{align*}
+        \textbf{z} + \textbf{x} &= \textbf{z} + \textbf{y} \\
+        \intertext{From additive inverse we know that \textbf{-z} exists}
+        \textbf{-z} + (\textbf{z} + \textbf{x}) &= \textbf{-z} + (\textbf{z} + \textbf{y})\\
+        (\textbf{-z} + \textbf{z}) + \textbf{x} &= (\textbf{-z} + \textbf{z}) + \textbf{y}\\
+        \intertext{From above, we have $\textbf{-z} + \textbf{z} = 0$}
+        0 + \textbf{x} &= 0 + \textbf{y} \\
+        \textbf{x} &= \textbf{y}
+    \end{align*}
+\end{proof}
+\begin{lemma}[Inverse of an inverse]
+    Let $V$ be a vector space and $\textbf{x} \in V$, then:
+    \begin{align*}
+        \textbf{-(-x)} &= \textbf{x}
+    \end{align*}
+\end{lemma}
+\begin{proof}
+    Assume $0$, $0^\star$ are the additive identity of $V$ and $\textbf{-x}$, $\textbf{-x}^\star$ are the additive inverse of $\textbf{x}$. We have:
+    \begin{equation*}
+        u+0 = u + 0^\star
+    \end{equation*}
+    By Cancelation Theorem, we have $0 = 0^\star$. Thus, the additive identity is unique. Now, we have:
+    \begin{align*}
+        \textbf{x} + \textbf{-x} &= 0 \\
+        \textbf{x} + \textbf{-x}^\star &= 0
+        \intertext{Thus, by the uniqueness of the additive inverse, we have:}
+        \textbf{x} + \textbf{-x} &= \textbf{x} + \textbf{-x}^\star
+        \intertext{By the Cancelation Theorem, we have:}
+        \textbf{-x} &= \textbf{-x}^\star
+    \end{align*}
+    Now, we have that the additive inverse is unique. Thus, $\textbf{-(-x)}$ must be unique and nessarily $\textbf{x}$. 
+\end{proof}
+\paragraph{Results from above}
+\begin{enumerate}
+    \item The additive identity is unique
+    \item The additive inverse is unique
+\end{enumerate}
+\begin{definition}[Subtraction]
+    Let $V$ be a vector space and $\textbf{x}, \textbf{y} \in V$, then:
+    \begin{align*}
+        \textbf{x} - \textbf{y} &\defeq \textbf{x} + \textbf{-y}
+    \end{align*}
+\end{definition}
+\begin{theorem}[Commutativity of Addition]
+    Let $V$ be a vector space and $\textbf{x}, \textbf{y} \in V$, then:
+    \begin{align*}
+        \textbf{x} + \textbf{y} &= \textbf{y} + \textbf{x}
+    \end{align*} 
+\end{theorem}
+\begin{proof}
+    \begin{align*}
+        \textbf{x} + \textbf{y} &=  
+    \end{align*}
+\end{proof}   
 \end{document}
