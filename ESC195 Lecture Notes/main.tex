@@ -397,6 +397,69 @@ where $t$ is the angle of the sector along the parametrization $\{(x,y)\mid x = 
     \text{arsech } x &= \ln\left(\frac{1}{x} + \sqrt{\frac{1}{x^2} - 1}\right) \\[10pt]
     \text{arcoth } x &= \frac{1}{2} \ln\left(\frac{x + 1}{x - 1}\right)
 \end{align}
+\section{Further Applications of Integrals}
+\subsection{Arc Length}
+\paragraph{Arc Length}
+    Given the curve $C: y = f(x)$, the arc length of the curve between two points $a$ and $b$, where $y'(x)$ is continuous, we would like the compute the arc length of the curve:
+    $$ L = \int_C ds$$
+\paragraph{Formula} We can derive the formula for the arc length of a curve $y = f(x)$ between two points $a$ and $b$ as:
+\begin{align}
+    \intertext{At $x_i$ and $x_{i+1}$, the length of the segment is:}
+    \Delta s &\approx \sqrt{(x_{i+1} - x_i)^2 + (y_{i+1} - y_i)^2} \nonumber \\
+            &= \sqrt{\Delta_i x^2 + \Delta_i y^2} \nonumber \\
+    \intertext{We also have, by MVT:}
+    \frac{\Delta y}{\Delta x} &= y'(c) \nonumber \\
+    \Delta y &= y'(c) \Delta x \nonumber \\
+    \Delta s &\approx \sqrt{\Delta x^2 + (y'(c) \Delta x)^2} \nonumber \\
+            &= \sqrt{1 + y'(c)^2} \Delta x \nonumber \\
+    \intertext{Taking a Riemann sum:}
+    L &= \lim_{n \to \infty} \sum_{i=1}^n \sqrt{1 + y'(c_i)^2} \Delta x \nonumber \\
+    &= \int_a^b \sqrt{1 + y'(x)^2} \, dx 
+\end{align}
+\begin{example}
+    Given $f(x) = x^\frac{3}{2}$ between $x = 0$ and $x = 44$, we would like to compute the arc length of the curve:
+    \begin{align*}
+        L &= \int_0^{44} \sqrt{1 + \left(\frac{3}{2}x^{\frac{1}{2}}\right)^2} \, dx \\
+        &= \int_0^{44} \sqrt{1 + \frac{9}{4}x} \, dx \\
+        &= \frac{8}{27} \left(1 + \frac{9}{4}x\right)^{\frac{3}{2}} \Big|_0^{44} = 296
+    \end{align*}
+\end{example}
+\subsection{Surface Area of Revolution}
+\paragraph{Surface Area of Revolution} Given the curve $C: y = f(x)$, the surface area of the curve between two points $a$ and $b$, where $y'(x)$ is continuous, we would like the compute the surface area of the curve:
+    $$ A = \int_C 2\pi y \, ds$$
+\paragraph{Formula} Deriving the formula for the surface area of a curve $y = f(x)$ between two points $a$ and $b$ is similar to the arc length formula:
+\begin{align}
+    \intertext{At $x_i$ and $x_{i+1}$, the length of the segment is:}
+    \Delta s &\approx \sqrt{\Delta_i x^2 + \Delta_i y^2} \nonumber \\
+    \intertext{The surface area of the segment is, by continuity:}
+    A_i &= \pi (y_i + y_{i+1}) \Delta s = 2\pi y^\star \Delta s \quad 
+    \intertext{As the difference between $y^\star$ and $y_i$ diminishes as $\Delta x \rightarrow 0$, taking a Riemann sum:}
+    A &= \lim_{n \to \infty} \sum_{i=1}^n 2\pi y_i \sqrt{\Delta_i x^2 + \Delta_i y^2} \nonumber \\
+    &= \int_a^b 2\pi y \sqrt{1 + y'(x)^2} \, dx
+\end{align}
+\begin{example}
+    Given $y = \sqrt{x}$ between $x = 0$ and $x = 1$, we would like to compute the surface area of the curve:
+    \begin{align*}
+        A &= \int_0^1 2\pi \sqrt{x} \sqrt{1 + \frac{1}{4x}} \, dx \\
+        &= \pi \int^1_0 \sqrt{4x + 1} \, dx \\
+        \intertext{Let $u = 4x + 1$, then $du = 4dx$:}
+        &= \frac{\pi}{4} \int^5_1 \sqrt{u} \, du \\
+        &= \frac{\pi}{6}\left(5^\frac{3}{2} -1\right)
+    \end{align*}
+\end{example}
+\subsection{Applications to Physics and Engineering}
+\paragraph{Hydrostatic Pressure} The hydrostatic pressure and Force is given by the Archimedes' principle:
+\begin{subequations}
+    \begin{align}
+        P &= \rho g \cdot d, \\
+        F &= \rho g \cdot d \cdot A
+    \end{align}
+\end{subequations}
+\paragraph{Formula} Given a tank rectangular with width defined by $w = f(x)$, where $x$ is depth, we would like to compute the force exerted on the tank by the water:
+\begin{align*}
+    F &= \int_0^b \rho g x f(x) \cdot dx
+\end{align*}
+
 \appendix
 \input{appendix.tex}
 \end{document}

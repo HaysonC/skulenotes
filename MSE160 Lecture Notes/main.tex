@@ -124,6 +124,61 @@ where $\nu$ is the Poisson's ratio.
 \begin{equation}
     \nu = -\frac{\epsilon_{\text{lat}}}{\epsilon_{\text{axial}}}
 \end{equation}
+\subsection{Testing}
+\begin{definition}[Gauge Length]
+The gauge length, $l_0$, is the length of the sample over which the strain is measured.
+\end{definition}
+\begin{definition}[Reduced Section]
+The reduced section is the part of the sample where the cross-sectional area is reduced to a smaller value.
+\end{definition}
+\paragraph{} Gauge length is always no longer than the reduced section. The reduced section is where the sample will likely break.
+\paragraph{Testing Ceremics} In relation to tensile testing, ceramics have the following properties:
+\begin{itemize}
+    \item \textbf{Brittle} Ceramics are brittle and will break suddenly.
+    \item \textbf{High Strength} Ceramics have high strength and thus difficult to machine the sample.
+    \item \textbf{Sample Alignment} The sample must be aligned properly to test for pure tension. Unlike metals and polymers, which are self-aligning.
+    \item \textbf{Fracture} Ceramics will fracture while still off-axis. Hence, there would be a large shear component. 
+\end{itemize}
+\paragraph{} Thus, we often approxiate tensile behaviour with a point loading on a horizontal beam, with two point support (3 point bending test). Peak stress is given by:
+\begin{equation}
+    \sigma_{\text{peak}} = \frac{3FL}{2bd^2}
+\end{equation}
+, where:
+\begin{itemize}
+    \item $L$ (span) is the distance between the two supports.
+    \item $b$ is the width of the sample
+    \item $d$ is the thickness/depth of the sample
+\end{itemize}
+\section{Seleection of Materials}
+\begin{example}[Aircraft Wing Spar]
+    The aircraft wing spar is beam (loaded in bending) that supports the wing. The spar is made of a material with the objective of minimize mass under the following constraints:
+    \begin{itemize}
+        \item \textbf{Deflection} There is a maximum allowable deflection of the wing.
+        \item There is more..., but for this example, we will only consider the deflection.
+    \end{itemize}
+    The material selection solve for a \textbf{light stiff beam}.
+
+    \paragraph{Mass} The mass of the beam is given by:
+    $$ m = \rho V = \rho A L $$
+    \paragraph{Deflection} The deflection of the beam is given by:
+    \begin{align*} 
+        \delta &= \frac{FL^3}{48EI} 
+        \intertext{For a beam with a rectangular cross-section, we have:}
+        \delta &= \frac{FL^3}{48E} \cdot \frac{12}{bh^3} = \frac{FL^3}{4Ebh^3}  
+        \intertext{We can set $b$ proportional to $h$:}
+        \delta &= \frac{FL^3}{cE} \cdot \frac{1}{A^2},\quad \text{for some constant $c$} 
+        \intertext{We can then isolate for $A$, the free variable, and minimize the mass via the objective equation $m = \rho A L$:}
+        A &= \sqrt{\frac{FL^3}{cE\delta}} \\
+        m &= \rho L \sqrt{\frac{FL^3}{cE\delta}} = \rho L \sqrt{\frac{FL^3}{cE\delta}}
+        \intertext{Arrange into the form (functional)(geometric)(material):}
+        m &= \left(\frac{F}{c\delta}\right)^\frac{1}{2} \cdot \left(L^\frac{5}{2}\right)\left(\frac{\rho}{E^\frac{1}{2}}\right)
+    \end{align*}
+\end{example}
+\paragraph{Material Peformance Index} The material performance index is given by:
+    \begin{equation}
+        \text{Material Performance Index (MSI)} = \frac{E^\frac{1}{2}}{\rho}
+\end{equation}
+\paragraph{MPI Graph} We plot $\log E$ against $\log \rho$ to get the MPI graph. 
 \appendix
 \includepdf[pages=-, angle=90]{EquationSheet.pdf}
 \end{document}
