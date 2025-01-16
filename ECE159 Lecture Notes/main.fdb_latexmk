@@ -1,6 +1,6 @@
 # Fdb version 4
-["pdflatex"] 1736518573.23429 "/Users/haysoncheung/programs/SKULE/ECE159 Lecture Notes/main.tex" "main.pdf" "main" 1736518574.76378 0
-  "/Users/haysoncheung/programs/SKULE/ECE159 Lecture Notes/main.tex" 1736518572.49851 7196 d2ba3f6dd7f55f20f6c3bacca2cf3363 ""
+["pdflatex"] 1736807751.73528 "/Users/haysoncheung/programs/SKULE/ECE159 Lecture Notes/main.tex" "main.pdf" "main" 1736807753.29884 0
+  "/Users/haysoncheung/programs/SKULE/ECE159 Lecture Notes/main.tex" 1736807751.54353 7394 c01da61c67168be4a2e08736ec8399ff ""
   "/usr/local/texlive/2024/texmf-dist/fonts/map/fontname/texfonts.map" 1577235249 3524 cb3e574dea2d1052e39280babc910dc8 ""
   "/usr/local/texlive/2024/texmf-dist/fonts/tfm/public/amsfonts/cmextra/cmex7.tfm" 1246382020 1004 54797486969f23fa377b128694d548df ""
   "/usr/local/texlive/2024/texmf-dist/fonts/tfm/public/amsfonts/cmextra/cmex8.tfm" 1246382020 988 bdf658c3bfc2d96d3c8b02cfc1c94c20 ""
@@ -215,9 +215,9 @@
   "/usr/local/texlive/2024/texmf-var/fonts/map/pdftex/updmap/pdftex.map" 1736306544.17718 5467645 128b85b7cde5f5edc5cb7f1dd7ff8736 ""
   "/usr/local/texlive/2024/texmf-var/web2c/pdftex/pdflatex.fmt" 1736306461 8221439 c62d8059860d756d52b53a0d1587ecd1 ""
   "/usr/local/texlive/2024/texmf.cnf" 1710266656 577 e590dabc9e28c5b61546e15f63eebcdf ""
-  "main.aux" 1736518574.62168 4152 fce15fbb7edd0f55036acfb2891dfed7 "pdflatex"
-  "main.out" 1736518574.62264 1234 983d317827bfa793227fd7b2bf3e8e4e "pdflatex"
-  "main.tex" 1736518572.49851 7196 d2ba3f6dd7f55f20f6c3bacca2cf3363 ""
+  "main.aux" 1736807753.15151 4152 a3fa88ffd7356791c0513b3f122b94ad "pdflatex"
+  "main.out" 1736807753.15259 1234 983d317827bfa793227fd7b2bf3e8e4e "pdflatex"
+  "main.tex" 1736807751.54353 7394 c01da61c67168be4a2e08736ec8399ff ""
   "preamble.tex" 1736393242.69871 1310 2c3e45534d9329bf1f84e8d14ffddf7e ""
   (generated)
   "main.aux"

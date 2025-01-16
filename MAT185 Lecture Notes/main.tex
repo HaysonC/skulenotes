@@ -52,7 +52,7 @@ Linear Algebra, Winter 2024 \hfill MAT 185\\
 \end{theorem}
 \begin{proof}
     \begin{align*}
-        \textbf{x} + \textbf{z} &= \textbf{y} + \textbf{z} \\
+        \textbf{x} + \textbf{z} &= \textbf{y} + \textbf{z} \\ 
         \intertext{From additive inverse we know that \textbf{-z} exists}
         (\textbf{x} + \textbf{z}) + \textbf{-z} &= (\textbf{y} + \textbf{z}) + \textbf{-z} \\
         \intertext{By order of addition we have: }
@@ -141,5 +141,46 @@ Now, to prove the part 2 of the Cancelation Theorem:
     \begin{align*}
         \textbf{x} + \textbf{y} &=  
     \end{align*}
-\end{proof}   
+\end{proof} 
+\subsection{Vector Subspace}
+\begin{definition}[Vector Subspace]
+    Let $V$ be a vector space and $W \subseteq V$, then $W$ is a vector subspace of $V$ if $W$ is a vector space.
+\end{definition}
+\begin{theorem}[Subspace Test, I]
+    Let $V$ be a vector space over $\mathbb{R}$ and $W \subseteq V$ with the usual addition and scalar multiplication, then $W$ is a subspace of $V$ iff for all $\textbf{x}, \textbf{y} \in W$ and $\alpha \in \mathbb{R}$:
+    \begin{enumerate}
+        \item $\textbf{x} + \textbf{y} \in W$
+        \item $\alpha \textbf{x} \in W$
+        \item $\textbf{0} \in W$
+    \end{enumerate}
+\end{theorem}
+\begin{proof}
+    ($\Rightarrow$) Assume $W$ is a subspace of $V$, then $W$ is a vector space. Thus, the axioms of vector space are satisfied. \\
+    ($\Leftarrow$) Assume the three conditions are satisfied, then $W$ is a vector space. Thus, $W$ is a subspace of $V$.
+\end{proof}
+\subsection{Linear combinations}
+\begin{definition}[Linear Combination]
+    Let $V$ be a vector space and $\textbf{v}_1, \textbf{v}_2, \ldots, \textbf{v}_n \in V$ and $\alpha_1, \alpha_2, \ldots, \alpha_n \in \mathbb{R}$, then:
+    \begin{align*}
+        \alpha_1 \textbf{v}_1 + \alpha_2 \textbf{v}_2 + \ldots + \alpha_n \textbf{v}_n
+    \end{align*}
+    is a linear combination of $\textbf{v}_1, \textbf{v}_2, \ldots, \textbf{v}_n$
+\end{definition}
+\begin{definition}[Linear independence]
+    Let $V$ be a vector space and $\textbf{v}_1, \textbf{v}_2, \ldots, \textbf{v}_n \in V$ and $\alpha_1, \alpha_2, \ldots, \alpha_n \in \mathbb{R}$. If the equation:
+    \begin{align*}
+        \alpha_1 \textbf{v}_1 + \alpha_2 \textbf{v}_2 + \ldots + \alpha_n \textbf{v}_n = \textbf{0}
+    \end{align*}
+    has only the trivial solution $\alpha_1 = \alpha_2 = \ldots = \alpha_n = 0$.
+
+    Then, $\textbf{v}_1, \textbf{v}_2, \ldots, \textbf{v}_n$ are said to be linearly independent; otherwise, they are linearly dependent.
+\end{definition}
+\begin{definition}[Span]
+    Let $V$ be a vector space and $\textbf{v}_1, \textbf{v}_2, \ldots, \textbf{v}_n \in V$, then:
+    \begin{align*}
+        \text{Span}(\textbf{v}_1, \textbf{v}_2, \ldots, \textbf{v}_n) = \left\{ \alpha_1 \textbf{v}_1 + \alpha_2 \textbf{v}_2 + \ldots + \alpha_n \textbf{v}_n \, | \, \alpha_1, \alpha_2, \ldots, \alpha_n \in \mathbb{R} \right\}
+    \end{align*}
+    is the set of all linear combinations of $\textbf{v}_1, \textbf{v}_2, \ldots, \textbf{v}_n$
+\end{definition}
+
 \end{document}

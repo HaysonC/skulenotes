@@ -154,12 +154,19 @@ $$ I = \frac{1}{8} \int \sin^2(2x) \, dx + \frac{1}{8} \int \cos(2x)\sin^2(2x) \
     \int \sin^n(x) \, dx, \quad \int \cos^n(x) \, dx 
 \end{equation}
 , where $n$ is a positive integer. For demonstartion, We can obtain the reduction formula of $\sin^n(x)$ via IBP.
-\begin{align*}
-    I_n &= \int \sin^n(x) \, dx \\
-    &= \int \sin^{n-1}(x) \sin(x) \, dx \\
-    &= \frac{-\cos(x) \sin^{n-1}(x)}{n} + \frac{(n-1)}{n} \int \cos^2(x) \sin^{n-2}(x) \, dx \\
+\begin{align}
+    I_n &= \int \sin^n(x) \, dx \nonumber \\
+    &= \int \sin^{n-1}(x) \sin(x) \, dx \nonumber \\
+    &= \frac{-\cos(x) \sin^{n-1}(x)}{n} + \frac{(n-1)}{n} \int \cos^2(x) \sin^{n-2}(x) \, dx \nonumber \\
     &= \frac{-\cos(x) \sin^{n-1}(x)}{n} + \frac{(n-1)}{n} I_{n-2}
-\end{align*}
+\end{align}
+\paragraph{Reduction for $\cos^n(x)$} We can obtain the reduction formula of $\cos^n(x)$ via IBP.
+\begin{align}
+    I_n &= \int \cos^n(x) \, dx \nonumber \\
+    &= \int \cos^{n-1}(x) \cos(x) \, dx \nonumber \\
+    &= \frac{\sin(x) \cos^{n-1}(x)}{n} + \frac{(n-1)}{n} \int \sin^2(x) \cos^{n-2}(x) \, dx \nonumber \\
+    &= \frac{\sin(x) \cos^{n-1}(x)}{n} + \frac{(n-1)}{n} I_{n-2}
+\end{align} 
 \paragraph{Case IV} The following is generally solvable via simple trigonometric integrals. In general, we solve the integral by applying the angle sum formulas.
 \paragraph{} We want to solve the classes of integrals:
 \begin{equation}
@@ -182,6 +189,20 @@ We could apply the angle sum formulas:
     \int \tan^n(x) \, dx, \quad \int \cot^n(x) \, dx 
 \end{equation}
 We know that $tan^2(x) = \sec^2(x) - 1$. Thus, we can solve the integral by reducing the power of the tangent function.
+\paragraph{Reduction for $\tan^n(x)$} We can obtain the reduction formula of $\tan^n(x)$ via the trigonometric identities.
+\begin{align}
+    I_n &= \int \tan^n(x) \, dx \nonumber \\
+    &= \int \tan^{n-1}(x) \tan(x) \, dx \nonumber \\
+    &= \frac{\tan^{n-1}(x)}{n-1} - \int \tan^{n-2}(x) \, dx \nonumber \\
+    &= \frac{\tan^{n-1}(x)}{n-1} - I_{n-2}
+\end{align}
+\paragraph{Reduction for $\cot^n(x)$} We can obtain the reduction formula of $\cot^n(x)$ via the trigonometric identities.
+\begin{align}
+    I_n &= \int \cot^n(x) \, dx \nonumber \\
+    &= \int \cot^{n-1}(x) \cot(x) \, dx \nonumber \\
+    &= \frac{\cot^{n-1}(x)}{n-1} - \int \cot^{n-2}(x) \, dx \nonumber \\
+    &= \frac{\cot^{n-1}(x)}{n-1} - I_{n-2}
+\end{align}
 \paragraph{Case VI} The following is generally solvable via the trigonometric identities (\ref{eq:tan2}) and (\ref{eq:cot2}).
 \paragraph{} We want to solve the classes of integral:
 \begin{equation} 
@@ -206,6 +227,11 @@ $$ \int \frac{\cos(\theta) \, d\theta}{\sqrt{1 - \sin^2(\theta)}} = \int \frac{\
     \item $x = a\tan(\theta)$ for $\sqrt{a^2 + x^2}$,
     \item $x = a\sec(\theta)$ for $\sqrt{x^2 - a^2}$.
 \end{itemize}
+\paragraph{Weierstrass Substitution} We can solve integrals by using the Weierstrass substitution:
+\begin{equation}
+    \tan\left(\frac{x}{2}\right) = t \Leftrightarrow \cos(x) = \frac{1-t^2}{1+t^2} \quad \sin(x) = \frac{2t}{1+t^2} \quad dx = \frac{2dt}{1+t^2}
+\end{equation}
+This substitution is useful for solving integrals with trigonometric functions, by converting them into rational functions.
 \paragraph{Summary} We can solve trigonometric integrals by using the following strategies:
 \begin{table}[h!]
     \centering
@@ -231,7 +257,56 @@ $$ \int \frac{\cos(\theta) \, d\theta}{\sqrt{1 - \sin^2(\theta)}} = \int \frac{\
     \end{tabular}
     \caption{Strategies and General Forms for Case I-VIII Integrals}
 \end{table}
+\subsection{Partial Fractions}
+\paragraph{Partial Fraction Decomposition} We can decompose a rational function into partial fractions to simplify integration.
+\paragraph{} We want to solve the integral:
+\begin{equation}
+    \int \frac{P(x)}{Q(x)} \, dx
+\end{equation}
+, where $P(x)$ and $Q(x)$ are polynomials.
+\begin{example}
+We want to solve the integral:
+$$ \int \frac{2x^2 + 3x + 1}{x^3 + 2x^2 + x} \, dx $$
+\end{example}
+We can decompose the rational function into partial fractions:
+$$ \frac{2x^2 + 3x + 1}{x^3 + 2x^2 + x} = \frac{A}{x} + \frac{B}{x+1} + \frac{C}{(x+1)^2} $$
+\paragraph{} We can solve for the constants $A$, $B$, and $C$ by equating the coefficients of the partial fractions to the original function. We have:
+\begin{align*}
+    2x^2 + 3x + 1 &= A(x+1)^2 + Bx(x+1) + Cx \\
+    \intertext{Thus, we can solve it by setting $x = 0$, $x = -1$}
+\end{align*}
+\paragraph{Summary} We can solve integrals using partial fraction decomposition by following these steps:
+\begin{table}[h!]
+    \centering
+    \begin{tabular}{|c|l|}
+    \hline
+    \textbf{Step} & \textbf{Description} \\ \hline
+    1 & Factorize the denominator of the rational function. \\
+    2 & Write the partial fraction decomposition. \\
+    3 & Solve for the constants by equating the coefficients. \\
+    4 & Integrate the partial fractions. \\ \hline
+    \end{tabular}
+    \caption{Steps for Partial Fraction Decomposition}
+\end{table}
+\subsection{Improper Integrals}
+\paragraph{Improper Integral} An improper integral is an integral with an infinite limit or a discontinuity in the interval of integration.
+\paragraph{} We want to solve the integral:
+\begin{equation}
+    \int_a^b f(x) \, dx
+\end{equation}
+, where $a$ or $b$ is infinite or $f(x)$ is discontinuous.
+\begin{example}
+We want to solve the integral:
+$$ \int_0^\infty e^{-x} \, dx $$
 
+Evaluating the integral:
+\begin{align*}
+    \int_0^\infty e^{-x} \, dx &= \lim_{b \to \infty} \int_0^b e^{-x} \, dx \\
+    &= \lim_{b \to \infty} -e^{-x} \Big|_0^b \\
+    &= \lim_{b \to \infty} -e^{-b} + 1 \\
+    &= 1
+\end{align*}
+\end{example}
 \section{Hyperbolic Trigonometric Functions}
 \begin{definition}[Hyperbolic Sine]
     The hyperbolic sine function is defined as:
@@ -322,5 +397,6 @@ where $t$ is the angle of the sector along the parametrization $\{(x,y)\mid x = 
     \text{arsech } x &= \ln\left(\frac{1}{x} + \sqrt{\frac{1}{x^2} - 1}\right) \\[10pt]
     \text{arcoth } x &= \frac{1}{2} \ln\left(\frac{x + 1}{x - 1}\right)
 \end{align}
-
+\appendix
+\input{appendix.tex}
 \end{document}

@@ -9,12 +9,12 @@ Fundamentals of Electric Circuits, Winter 2024 \hfill ECE 159\\
 \section{Basic Concepts}
 \subsection{Basic Defintions}
 \begin{definition}[Voltage]
-    The difference of the electric potential between two points in a circuit.
+    The difference of the electric potential between two points in a circuit. The enegy required to move a charge from one point to another.
     \begin{equation}
-        V \defeq \int_C \textbf{E} \cdot d\textbf{l}
+        V \defeq \int_C \textbf{E} \cdot d\textbf{l} = \frac{dW}{dq}
     \end{equation}
     \end{definition}
-    
+    \paragraph{Polarity} The polarity is fliped as illustrated when the voltage is indicated as negative.
     \begin{definition}[Current]
     Rate of change of charge at a particular point in the circuit.
     \begin{equation}
@@ -24,6 +24,9 @@ Fundamentals of Electric Circuits, Winter 2024 \hfill ECE 159\\
     
     \begin{definition}[Power]
     The rate of change of energy for an element in the circuit. Power is the product of voltage and current.
+    \begin{equation}
+        P \defeq \frac{dW}{dt} = \frac{dW}{dq} \cdot \frac{dq}{dt} = V \cdot I
+    \end{equation}
     \end{definition}
     
     \begin{definition}[Resistors]
@@ -134,6 +137,14 @@ from time $t_0$ to time $t_1$ is:
     \frac{1}{R_{\text{eq}}} = \frac{1}{R_1} + \frac{1}{R_2} + \dots + \frac{1}{R_n}
 \end{equation}
 \paragraph{Comination of Series and Parallel Resistors} To find the equivalent resistance of a combination of series and parallel resistors, first find the equivalent resistance of the resistors in series, then find the equivalent resistance of the resistors in parallel.
+\paragraph{Voltage Division} The voltage across a resistor in series is proportional to the resistance of the resistor.
+\begin{equation}
+    V_i = V \frac{R_i}{R_{\text{eq}}}
+\end{equation}
+\paragraph{Current Division} The current through a resistor in parallel is proportional to the conductance of the resistor.
+\begin{equation}
+    I_i = I \frac{G_i}{G_{\text{eq}}}
+\end{equation}
 \subsection{Node, Branch, and Loop}
 \paragraph{} Three important ideas in electric circuit analysis are:
 \begin{enumerate}
@@ -141,6 +152,17 @@ from time $t_0$ to time $t_1$ is:
     \item \textbf{Node}: A point of connection of two or more branches within an electric circuit.
     \item \textbf{Loop}: Any closed path in an electric circuit. To form a loop, one must start and end at the same point and never pass through the same node twice.
 \end{enumerate}
+\subsection{Kirchhoff's Laws}
+\paragraph{} Kirchhoff's Laws are two laws that are used to analyze electric circuits.
+\paragraph{Kirchhoff's Current Law (KCL)} The sum of currents entering a node is equal to the sum of currents leaving a node.
+\begin{equation}
+    \sum I_{\text{in}} = \sum I_{\text{out}}
+\end{equation}
+\paragraph{Kirchhoff's Voltage Law (KVL)} The sum of voltages around a closed loop is equal to zero.
+\begin{equation}
+    \sum V_{\text{loop}} = 0
+\end{equation}
+
 \section{DC Circuits}
 \paragraph{}
 

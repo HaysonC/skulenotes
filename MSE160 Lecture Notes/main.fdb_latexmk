@@ -1,6 +1,6 @@
 # Fdb version 4
-["pdflatex"] 1736541765.58541 "/Users/haysoncheung/programs/SKULE/MSE160 Lecture Notes/main.tex" "main.pdf" "main" 1736541768.3813 0
-  "/Users/haysoncheung/programs/SKULE/MSE160 Lecture Notes/main.tex" 1736541762.50903 7034 382fb5111f171022dcc949fab60c6de4 ""
+["pdflatex"] 1737057949.31064 "/Users/haysoncheung/programs/SKULE/MSE160 Lecture Notes/main.tex" "main.pdf" "main" 1737057950.98602 0
+  "/Users/haysoncheung/programs/SKULE/MSE160 Lecture Notes/main.tex" 1736914273.62651 7045 62b36e24856438f0dca871215cafa635 ""
   "/usr/local/texlive/2024/texmf-dist/fonts/enc/dvips/cm-super/cm-super-ts1.enc" 1136849721 2900 1537cc8184ad1792082cd229ecc269f4 ""
   "/usr/local/texlive/2024/texmf-dist/fonts/map/fontname/texfonts.map" 1577235249 3524 cb3e574dea2d1052e39280babc910dc8 ""
   "/usr/local/texlive/2024/texmf-dist/fonts/tfm/jknappen/ec/tcrm1095.tfm" 1136768653 1536 02c06700a42be0f5a28664c7273f82e7 ""
@@ -306,9 +306,9 @@
   "/usr/local/texlive/2024/texmf-var/web2c/pdftex/pdflatex.fmt" 1736306461 8221439 c62d8059860d756d52b53a0d1587ecd1 ""
   "/usr/local/texlive/2024/texmf.cnf" 1710266656 577 e590dabc9e28c5b61546e15f63eebcdf ""
   "EquationSheet.pdf" 1736325532 241091 973f8afb31b5e38dcae741dbe48e0985 ""
-  "main.aux" 1736541768.18402 3617 009b2fa7f558cb28526a43af964ac87f "pdflatex"
-  "main.out" 1736541768.18489 1215 f1589865579bca8597dad9aabc6eef53 "pdflatex"
-  "main.tex" 1736541762.50903 7034 382fb5111f171022dcc949fab60c6de4 ""
+  "main.aux" 1737057950.86238 3617 009b2fa7f558cb28526a43af964ac87f "pdflatex"
+  "main.out" 1737057950.86297 1215 f1589865579bca8597dad9aabc6eef53 "pdflatex"
+  "main.tex" 1736914273.62651 7045 62b36e24856438f0dca871215cafa635 ""
   "preamble.tex" 1736455158.26181 1446 9edeb1a479ea91527eae0241a1f90498 ""
   (generated)
   "main.aux"
