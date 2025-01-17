@@ -163,9 +163,9 @@ Now, to prove the part 2 of the Cancelation Theorem:
 \end{proof}
 \begin{definition}[Null Space]
     Let $V$ be a vector space and $A \in {^m\mathbb{R}^n}$\footnote{Same as $\mathbb{R}^{m\times n}$, The set of all $m \times n$ matrices with real entries}, then:
-    \begin{align*}
+    \begin{align}
         \text{null}(A) = \left\{ \textbf{x} \in {^n\mathbb{R}} \, | \, A\textbf{x} = \textbf{0} \right\}
-    \end{align*}
+    \end{align}
     is the null space of $A$, otherwise known as the \textbf{kernel} of $A$ or the solution space of $A\textbf{x} = \textbf{0}$
 \end{definition}
     \paragraph{} We can use the Subspace Test I to show that the null space of a matrix is a subspace of $^n\mathbb{R}$.
@@ -187,6 +187,19 @@ Now, to prove the part 2 of the Cancelation Theorem:
     ($\Rightarrow$) Assume $W$ is a subspace of $V$, then $W$ is a vector space. Thus, the axioms of vector space are satisfied. \\
     ($\Leftarrow$) Assume the condition is satisfied, then $W$ is a vector space. Thus, $W$ is a subspace of $V$.
 \end{proof}
+\begin{definition}[Intersection of Sets]
+    Let $A$ and $B$ be sets, then:
+    \begin{align}
+        A \cap B = \left\{ x \, | \, x \in A \, \text{and} \, x \in B \right\}
+    \end{align}
+\end{definition}
+\begin{definition}[Union of Sets]
+    Let $A$ and $B$ be sets, then:
+    \begin{align}
+        A \cup B = \left\{ x \, | \, x \in A \, \text{or} \, x \in B \right\}
+    \end{align}
+\end{definition}
+
 \subsection{Linear combinations}
 \begin{definition}[Linear Combination]
     Let $V$ be a vector space and $\textbf{v}_1, \textbf{v}_2, \ldots, \textbf{v}_n \in V$ and $\alpha_1, \alpha_2, \ldots, \alpha_n \in \mathbb{R}$, then:
@@ -206,9 +219,9 @@ Now, to prove the part 2 of the Cancelation Theorem:
 \end{definition}
 \begin{definition}[Span]
     Let $V$ be a vector space and $\textbf{v}_1, \textbf{v}_2, \ldots, \textbf{v}_n \in V$, then:
-    \begin{align*}
+    \begin{align}
         \text{Span}(\textbf{v}_1, \textbf{v}_2, \ldots, \textbf{v}_n) = \left\{ \alpha_1 \textbf{v}_1 + \alpha_2 \textbf{v}_2 + \ldots + \alpha_n \textbf{v}_n \, | \, \alpha_1, \alpha_2, \ldots, \alpha_n \in \mathbb{R} \right\}
-    \end{align*}
+    \end{align}
     is the set of all linear combinations of $\textbf{v}_1, \textbf{v}_2, \ldots, \textbf{v}_n$
 \end{definition}
 \end{document}

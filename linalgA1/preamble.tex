@@ -1,0 +1,156 @@
+\usepackage{mathtools}
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{amsfonts}
+\usepackage{amsthm}
+\usepackage{xcolor}
+\usepackage{graphicx}
+\usepackage[top=2.0cm,bottom=2.0cm,left=2.5cm,right=2.5cm]{geometry}
+\usepackage{tikz}
+\usepackage{float}
+\usepackage{multicol}
+\usepackage{pgfplots}
+\usepackage{lastpage}
+\usepackage{siunitx}
+\usepackage{xspace}
+\usepackage[labelfont=bf]{caption}
+\usepackage[hidelinks, urlcolor=blue, linkcolor=blue, colorlinks=true]{hyperref}
+\usepackage[capitalize,noabbrev]{cleveref}
+\usepackage[absolute]{textpos}
+\usepackage{systeme}
+
+\newcommand{\R}{\mathbb{R}}
+\newcommand{\C}{\mathbb{C}}
+%% define course title
+\newcommand{\course}{MAT185}
+\newcommand{\assignmenttitle}{Assignment 1}
+
+%% header and footer
+\firstpageheader{}{}{\textbf{{\color{red} Due:} 10:00pm, Tuesday Jan. 21, 2025}}
+\firstpageheadrule
+\runningheader{}{Page~\thepage~of~\numpages}{\course~--~\assignmenttitle}
+\footer{}{}{}
+
+\setlength\parindent{0pt} % no indentation in document
+
+%% formats exam class
+\qformat{\textbf{Question \thequestiontitle:}\hfill} % title of question 
+\boxedpoints
+\pointpoints{mark}{marks}
+\pointsinrightmargin
+\hpword{Marks:}
+\hsword{Your score:}
+\unframedsolutions
+\totalformat{\boxed{\textnormal{\totalpoints~\if\totalpoints1 mark\else marks\fi}}}
+\definecolor{SolutionColor}{rgb}{0,0,1}
+\renewcommand{\solutiontitle}{}
+\AtBeginEnvironment{solution}{\color{blue}}
+
+% %correct choices in solution
+\CorrectChoiceEmphasis{\rm}
+\checkedchar{\tikz\draw[blue,fill=blue] (0,0) circle (1ex);}
+
+% % increase distance between checkbox items
+\renewcommand{\checkboxeshook}{\setlength{\itemsep}{6pt}}
+
+%% distance between questions and parts
+\renewcommand{\questionshook}{\setlength{\parsep}{10pt}}
+\renewcommand{\partshook}{\setlength{\parsep}{15pt}}
+
+%% define arrows in text
+\newcommand{\arrow}{$\rightarrow$\xspace}
+\newcommand{\Arrow}{$\Rightarrow$\xspace}
+
+% % math notation:
+%\veccol{1}{2}{3}
+\newcommand{\veccol}[3]{
+    \begin{bmatrix}
+        #1\\
+        #2\\
+        #3\\
+    \end{bmatrix}}
+  
+%\vecrow{1}{2}{3}
+\newcommand{\vecrow}[3]{\left[#1~#2~ #3\right]}
+
+%\matrixTwo{1}{2}{3}{4}
+\newcommand{\matrixTwo}[4]{\left[\begin{array}{cc}#1&#2\\#3&#4\end{array}\right]}
+
+% \matrixThree{1}{2}{3}{4}{5}{6}{7}{8}{9}
+\newcommand{\matrixThree}[9]{\left[\begin{array}{ccc}#1&#2&#3\\#4&#5&#6\\#7&#8&#9\end{array}\right]}
+
+%\matrixCorner{1}{2}{3}{4}
+\newcommand{\matrixCorner}[4]{\left[\begin{array}{ccc}#1& \cdots&#2\\ \vdots & \ddots & \vdots\\#3&
+      \cdots&#4\end{array}\right]}
+
+% \nR
+\newcommand{\nR}{{}^{n}\mathbb{R}}
+% \Rn
+\newcommand{\Rn}{\mathbb{R}^{n}}
+% \nRn
+\newcommand{\nRn}{{}^{n}\mathbb{R}^{n}}
+% \nRm
+\newcommand{\nRm}{{}^{n}\mathbb{R}^{m}}
+% \nRm
+\newcommand{\mRn}{{}^{m}\mathbb{R}^{n}}
+% \mRm
+\newcommand{\mRm}{{}^{m}\mathbb{R}^{m}}        
+
+% \u
+\renewcommand{\u}{{\bf u}}      
+% \v
+\renewcommand{\v}{{\bf v}}      
+% \w
+\newcommand{\w}{{\bf w}}    
+% \V
+\newcommand{\V}{{\bf V}}                   
+       
+%% define abbreviations
+\newcommand{\row}{\operatorname{row}\,}
+\newcommand{\col}{\operatorname{col}\,}
+\renewcommand{\dim}{\operatorname{dim}\,}
+\renewcommand{\span}{\operatorname{span}\,}
+\newcommand{\rank}{\operatorname{rank}\,}
+\renewcommand{\ker}{\operatorname{ker}\,}
+\newcommand{\nul}{\operatorname{null}\,}
+\renewcommand{\det}{\operatorname{det}\,}
+\newcommand{\adj}{\operatorname{adj}\,}
+
+\usepackage{xcolor}
+% Sean's original colours:
+%\definecolor{dkrgreen}{rgb}{0.1, 0.4, 0.3} 
+\definecolor{dkrgreen}{HTML}{009988} % this is the color-blind friendly teal from below
+%\definecolor{dkred}{rgb}{0.8, 0.05, 0.05} 
+\definecolor{dkred}{HTML}{EE3377}  % this is the colour-blind friendly magenta from below
+%\definecolor{orange}{rgb}{0.8, 0.33, 0.0}
+%\definecolor{goldenrod}{rgb}{0.85, 0.65, 0.13}
+\definecolor{blue}{HTML}{1965B0} % this is the colour-blind friendly blue from below
+%
+% colour-blind-friendly colours from https://personal.sron.nl/~pault/
+\definecolor{tolBlue}{HTML}{1965B0}
+\definecolor{tolMedBlue}{HTML}{5289C7}
+\definecolor{tolLightBlue}{HTML}{7BAFDE} 
+\definecolor{tolRed}{HTML}{E8601C} 
+\definecolor{tolYellow}{HTML}{F6C141}
+\definecolor{tolTeal}{HTML}{009988}
+%\definecolor{tolBlue}{HTML}{0077BB} 
+\definecolor{tolCyan}{HTML}{33BBEE}
+\definecolor{tolTeal}{HTML}{009988} 
+\definecolor{tolOrange}{HTML}{EE7733} 
+%\definecolor{tolRed}{HTML}{CC3311} 
+\definecolor{tolMagenta}{HTML}{EE3377} 
+\definecolor{tolGrey}{HTML}{BBBBBB}
+
+%%% This command makes a framed box of a chosen height.
+\newcommand{\makenonemptybox}[2]{%
+\par\nobreak\vspace{\ht\strutbox}\noindent
+\setlength{\fboxrule}{0pt} % set this to 0pt to make invisible
+\fbox{%
+\parbox[c][#1][t]{\dimexpr\linewidth-2\fboxsep}{
+  \hrule width \hsize height 0pt
+  \vspace{-0.6cm}
+  \color{SolutionColor}#2\color{black}
+ }%
+}%
+}
+

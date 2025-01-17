@@ -1,0 +1,570 @@
+\documentclass[10pt,addpoints,answers]{exam}
+\input{preamble}
+
+\begin{document}
+
+\vspace*{-0.5cm}
+\begin{center}
+  \large
+  \textbf{\Large \course~--~Linear Algebra}\\[0.1cm]
+  \textbf{\assignmenttitle}
+\end{center}
+\bigskip
+
+\textbf{\large Instructions:}\\
+\normalsize
+
+Please read the {\bf MAT185 Assignment Policies \& FAQ} document for details on
+submission policies, collaboration rules and academic integrity, and general
+instructions.
+
+\begin{enumerate}
+
+
+\item \textbf{Submissions are only accepted by}
+  \href{https://www.gradescope.ca}{Gradescope}. Do not send anything by email.
+  Late submissions are not accepted under any circumstance. Remember you can
+  resubmit anytime before the deadline.
+
+\item \textbf{Submit solutions using only this template pdf}.  Your submission
+  should be a single pdf with your full written solutions for each question. If
+  your solution is not written using this template pdf (scanned print or
+  digital) then your submission will not be assessed. Organize your work neatly
+  in the space provided.  Do not submit rough work.
+
+\item \textbf{Show your work and justify your steps} on every question but do
+  not include extraneous information.  Put your final answer in the box
+  provided, if necessary.  We recommend you write draft solutions on separate
+  pages and afterwards write your polished solutions here on this template.
+
+\item \textbf{You must fill out and sign the academic integrity statement
+    below}; otherwise, you will receive zero for this assignment.
+
+\end{enumerate}
+
+\vspace{10pt}
+
+
+\textbf{\large Academic Integrity Statement:} \\
+
+%%% Student information
+
+% Student 1
+\fbox{
+  \begin{minipage}{\textwidth}
+    \vspace{0.75cm}
+    \makebox[\textwidth]{\large Full Name: Cheung, Hei Shing\enspace\hrulefill}\\[0.75cm]
+    \makebox[\textwidth]{\large Student number: 101090782\enspace\hrulefill}\\
+  \end{minipage}
+}
+
+\vspace*{0.1in}
+
+% Student 2
+\fbox{
+  \begin{minipage}{\textwidth}
+    \vspace{0.75cm}
+    \makebox[\textwidth]{\large Full Name:\enspace\hrulefill}\\[0.75cm]
+    \makebox[\textwidth]{\large Student number:\enspace\hrulefill}\\
+  \end{minipage}
+}
+
+\bigskip
+\large \textbf{I confirm that:}
+\normalsize
+
+\begin{itemize} 
+\item I have read and followed the policies described in the document {\bf
+    MAT185 Assignment Policies \& FAQ}.
+\item In particular, I have read and understand the rules for
+  collaboration, and permitted resources on assignments as described in
+  subsection II of the the aforementioned document. I have not violated
+  these rules while completing and writing this assignment.
+\item I have not used generative AI in writing this assignment.
+\item I understand the consequences of violating the University's academic
+  integrity policies as outlined in the
+  \href{http://www.governingcouncil.utoronto.ca/policies/behaveac.htm}{Code of
+    Behaviour on Academic Matters}. I have not violated them while completing
+  and writing this assignment.
+\end{itemize}
+\bigskip
+
+\large \textbf{By submitting this assignment to Gradescope, I agree that the
+  statements above are true.}  \normalsize
+
+\newpage
+
+\begin{questions}
+  \question In this problem, you will prove that the elementary operations you
+  learnt in ESC103 do not change the set of solutions of a system of linear
+  equations.  Consider the four linear systems
+$$
+\hspace{.8cm} \mathcal{A}: \hspace{.5cm} \left\{ \arraycolsep=1.4pt
+	\begin{array}{rcrrcrcr}
+          3x &+&2y &+&2z &= &9\\
+          11x &+&7y &+&3z &=& 15\\
+          3x &+&2y &+&z &=& 5
+	\end{array} \right.
+      \hspace{1.9cm}
+      \mathcal{B}: \hspace{.5cm} \left\{
+        \arraycolsep=1.4pt
+	\begin{array}{rcrcrccr}
+          3x &+&2y &+&2z &= &9\\
+          11x &+&7y &+&3z &=& 15\\
+          (3 + 11 \beta) x &+&(2+7 \beta) y &+&(1+3 \beta) z &=& 5 + 15 \beta
+	\end{array} \right.
+$$
+$$
+\hspace{-3.3cm} \mathcal{C}: \hspace{.5cm} \left\{ \arraycolsep=1.4pt
+	\begin{array}{rcrcrccr}
+          3x &+&2y &+&2z &= &9\\
+          11 \alpha x &+&7 \alpha y &+&3 \alpha z &=& 15 \alpha\\
+          3x &+&2y &+&z &=& 5
+	\end{array} \right.
+      \hspace{.9cm}
+      \mathcal{D}: \hspace{.5cm} \left\{
+        \arraycolsep=1.4pt
+	\begin{array}{rcrcrccr}
+          11x &+&7y &+&3z &=& 15\\
+          3x &+&2y &+&2z &= &9\\
+          3x &+&2y &+&z &=& 5
+	\end{array} \right.
+$$
+Above, $x$, $y$, and $z$ are all \textbf{variables}.  The parameters $\alpha$
+and $\beta$ are real numbers.
+
+Let $A \subseteq \R^3$ be the \textbf{set of solutions} of the linear system
+$\mathcal{A}$.  A point $(a,b,c) \in A$ means that
+$$
+\hspace{.8cm} \mathcal{A}: \hspace{.5cm} \left\{ \arraycolsep=1.4pt
+	\begin{array}{rcrcrccrl}
+          3a &+&2b &+&2c &= &9  &\hspace{.5cm} \mbox{\textbf{TRUE}}\\
+          11a &+&7b &+&3c &=& 15 & \mbox{\textbf{TRUE}}\\
+          3a &+&2b &+&c &=& 5 & \mbox{\textbf{TRUE}}
+	\end{array} \right.
+$$
+Because $a$, $b$, and $c$ are all \textbf{real numbers}, equations involving
+them are either true (as in $1+1=2$ is true) or false (as in $1+1=3$ is false).
+And so, $(a,b,c)$ is in $A$ (is a solution of $\mathcal{A}$) if all three
+equations are true when the variables $x$, $y$, and $z$ take on the values $a$,
+$b$, and $c$ respectively.  If there are no points $(a,b,c)$ for which the three
+equations are all true then $\mathcal{A}$ has no solutions and
+$A = \varnothing$.  \textit{Note: this does not contradict the statement that
+  $A \subseteq \R^3$ because $\varnothing \subseteq \R^3$.}
+
+\underline{Pro tip:} If you have an equation where the left-hand side and
+right-hand side are real numbers (or are numbers in any field) then the equation
+$LHS = RHS$ is \textbf{TRUE} if and only if $LHS-RHS = 0$ and is \textbf{FALSE}
+if and only if $LHS-RHS \neq 0$.
+
+Finally, there is the question of how you could show that two sets, $A$ and $B$,
+are equal.
+\begin{itemize}
+\item If you want to prove that $A = B$ and $A = \varnothing$ then you need to
+  prove that $B = \varnothing$.  %That is, $A$ and $B$ are both the empty set.
+\item If you want to prove that $A = B$ and $B = \varnothing$ then you need to
+  prove that $A = \varnothing$.  %That is, $A$ and $B$ are both the empty set.
+\item If you want to prove that $A = B$ and neither $A$ nor $B$ are nonempty
+  then you can do this by proving
+  \begin{itemize}
+  \item if $a \in A$ then $a \in B$ (this proves $A \subseteq B$) \textbf{and}
+  \item if $b \in B$ then $b \in A$ (this proves $B \subseteq A$).
+  \end{itemize}
+\end{itemize} If you have sets $A$ and $B$ and you don't know whether or not
+they are empty or nonempty, you have do all three steps above.
+
+\textbf{For the curious:} The third case is related to another common proof
+technique: if you want to prove that two real numbers are equal, $a=b$, you
+first use one idea/approach to prove $a \leq b$ and a different idea/approach to
+prove $a \geq b$.  This technique is jarring the first few times one sees it.
+This approach works for any totally-ordered field; it doesn't work for the
+complex numbers, for example.
+
+\vfil
+	
+\begin{parts}
+  \part Let $A$ be the set of solutions of $\mathcal{A}$ and $B$ be the set of
+  solutions of $\mathcal{B}$.  Prove that $A = B$.    \textit{Note: you don't know
+    whether or not $\mathcal{A}$ or $\mathcal{B}$ have any solutions.  This
+    means that you must address all three possible cases: $A = \varnothing$,
+    $B = \varnothing$, and neither $A$ nor $B$ are the empty set.}
+    
+    \textbf{Please start your answer on the next page, not on this one.  The grader will not look at this page.  You can continue your answer on the top of page 4, if needed.}
+    
+  
+  \newpage
+
+   \textcolor{black}{\underline{case 1: $A = \varnothing$}}
+  %%% Do not change the height of this box. Your work must fit inside it.
+  \makenonemptybox{130pt}{
+    \paragraph{Note} I denote the $k^{\text{th}}$ equation of $\mathcal{P}$ as $\mathcal{P}_k$ for linear system $\mathcal{P} \in \{\mathcal{A}, \mathcal{B}, \mathcal{C}, \mathcal{D}\}$.
+
+
+    %%% Your work goes here!  
+   \paragraph{} We prove that $B = \varnothing$. Assume, for the sake of contradiction, that $B \neq \varnothing$. Then there exists a point $(a,b,c) \in B$ such that
+       $\mathcal{B}_1$, $\mathcal{B}_2$, and $\mathcal{B}_3$ are \textbf{TRUE}. Thus:
+       \begin{itemize}
+        \item For all $\beta \in \mathbb{R}$, $\beta\mathcal{B}_2: 11\beta a + 7\beta b + 3\beta c = 15\beta$ is \textbf{TRUE}; also
+        \item $\mathcal{B}_3$ is \textbf{TRUE}. 
+       \end{itemize}
+    Hence, $\mathcal{B}_3 - \beta \mathcal{B}_2$ is \textbf{TRUE} for all $\beta \in \mathbb{R}$. This implies there exist $(a,b,c)$ s.t.: $3a + 2b + c = 5$ is \textbf{TRUE}. It follows from $\mathcal{A}_3: 3a + 2b + c = 5$ and that $\mathcal{B}_2 = \mathcal{A}_2$ and that $\mathcal{B}_1 = \mathcal{A}_1$ are all \textbf{TRUE}. Thus, $A \neq \varnothing$, a contradiction. Therefore, $B = \varnothing$.
+
+
+
+% end of your answer to case 1 unless you need to continue the answer on page 4
+}
+
+
+
+   \textcolor{black}{ \underline{case 2: $B = \varnothing$} }
+   %%% Do not change the height of this box. Your work must fit inside it.
+  \makenonemptybox{130pt}{
+   %%% Your work goes here!  
+   \paragraph{} We prove that $A = \varnothing$. Assume, for the sake of contradiction, that $A \neq \varnothing$. Then there exists a point $(a,b,c) \in A$ such that $\mathcal{A}_1$, $\mathcal{A}_2$, and $\mathcal{A}_3$ are \textbf{TRUE}. Thus:
+       \begin{itemize}
+        \item For all $\beta \in \mathbb{R}$, $\beta\mathcal{A}_2: 11\beta a + 7\beta b + 3\beta c = 15\beta$ is \textbf{TRUE}; also
+        \item $\mathcal{A}_3$ is \textbf{TRUE}. 
+       \end{itemize}
+    Hence, $\mathcal{B}_3 = \mathcal{A}_3 + \beta \mathcal{A}_2$ is \textbf{TRUE} for all $\beta \in \mathbb{R}$. It follows from $\mathcal{A}_2 = \mathcal{B}_2$ and that $\mathcal{A}_1 = \mathcal{B}_1$ are all \textbf{TRUE}. Thus, $B \neq \varnothing$, a contradiction. Therefore, $A = \varnothing$.
+% end of your answer to case 2 unless you need to continue the answer on page 4
+}
+
+
+   \textcolor{black}{ \underline{case 3: both $A$ and $B$ are nonempty} }
+   %%% Do not change the height of this box. Your work must fit inside it.
+  \makenonemptybox{120pt}{
+   %%% Your work goes here!  
+   \paragraph{} ($A \subseteq B$) Take $(a_1, a_2, a_3) \in A$. Then $\mathcal{A}_1$, $\mathcal{A}_2$, and $\mathcal{A}_3$ are \textbf{TRUE}. Thus:
+       \begin{itemize}
+        \item For all $\beta \in \mathbb{R}$, $\beta\mathcal{A}_2: 11\beta a_1 + 7\beta a_2 + 3\beta a_3 = 15\beta$ is \textbf{TRUE}; also
+        \item $\mathcal{A}_3$ is \textbf{TRUE}. 
+       \end{itemize}
+    Hence, $\mathcal{B}_3 = \mathcal{A}_3 + \beta \mathcal{A}_2$ is \textbf{TRUE} for all $\beta \in \mathbb{R}$. It follows from $\mathcal{A}_2 = \mathcal{B}_2$ and that $\mathcal{A}_1 = \mathcal{B}_1$ are all \textbf{TRUE}. Thus, $(a_1, a_2, a_3) \in B$. Therefore, $A \subseteq B$.
+
+    \paragraph{} ($B \subseteq A$) Take $(b_1, b_2, b_3) \in B$. Then $\mathcal{B}_1$, $\mathcal{B}_2$, and $\mathcal{B}_3$ are \textbf{TRUE}. Thus:
+       \begin{itemize}
+        \item For all $\beta \in \mathbb{R}$, $\beta\mathcal{B}_2: 11\beta b_1 + 7\beta b_2 + 3\beta b_3 = 15\beta$ is \textbf{TRUE}; also
+        \item $\mathcal{B}_3$ is \textbf{TRUE}. 
+       \end{itemize}
+    Hence, $\mathcal{A}_3 = \mathcal{B}_3 - \beta \mathcal{B}_2$ is \textbf{TRUE} for all $\beta \in \mathbb{R}$. It follows from $\mathcal{B}_2 = \mathcal{A}_2$ and that $\mathcal{B}_1 = \mathcal{A}_1$ are all \textbf{TRUE}. Thus, $(b_1, b_2, b_3) \in A$. Therefore, $B \subseteq A$.
+
+
+% end of your answer to case 3 unless you need to continue the answer on page 4
+}
+
+
+  \newpage
+  
+  \textbf{You can continue your answer here.  If you do so, please make it clear which of the
+  three cases you're continuing!}
+
+    %%% Do not change the height of this box. Your work must fit inside it.
+  \makenonemptybox{232pt}{
+    %%% Your work goes here!  Here is where you can put the continuation of your work from page 3
+    %%% to page 4.  It is your responsibility to trim down your answer so that it doesn't run into 
+    %%% the next question
+    
+    
+    
+    
+    %%% end of your answer    
+  }
+ 
+ %\vspace{1cm}
+ 
+ \part Let $A$ be the set of solutions of $\mathcal{A}$ and $C$ be the set of
+solutions of $\mathcal{C}$.
+ 
+ \begin{subparts} \subpart The system $\mathcal{C}$ has a parameter $\alpha \in
+\R$.  Under what conditions on $\alpha$ is $A \subseteq C$?  \textit{No justification needed,
+just one complete sentence.}
+ 
+\vspace{.15in}
+
+   %%% Do not change the height of this box. Your work must fit inside it.
+  \makenonemptybox{25pt}{ 
+    %%% Your work goes here!  It is your responsibility to trim down your answer so that it doesn't 
+    $\alpha \in \mathbb{R}$
+    %%% end of your answer    
+  }
+ 
+  \vspace{.15in}
+  
+  \subpart Under what conditions on $\alpha$ is $C \subseteq A$? \textit{No justification needed,
+just one complete sentence.} \vspace{.15in}
+\makenonemptybox{25pt}{ 
+    %%% Your work goes here!  It is your responsibility to trim down your answer so that it doesn't 
+    $\alpha \neq 0$
+    %%% end of your answer    
+  }
+ 
+  \subpart Assuming the condition of part ii. holds, prove that $C \subseteq A$.
+\textit{You may assume that $C \neq \varnothing$; we'll assume that if you can
+address the $C = \varnothing$ case based on your methods in part (a).}\\
+
+%%% Do not change the height of this box. Your work must fit inside it.
+  \makenonemptybox{25pt}{
+    %%% Your work goes here!  It is your responsibility to trim down your answer so that it doesn't 
+    \paragraph{} Given nonempty $A,\, C$, take $(a, b, c) \in C$ such that $\mathcal{C}_1$, $\mathcal{C}_2$, and $\mathcal{C}_3$ are \textbf{TRUE}.  For all $\alpha \neq 0$, we have $\frac{1}{\alpha} \in \mathbb{R}$. So $\frac{1}{\alpha}\mathcal{C}_2$ is \textbf{TRUE}. Thus $\mathcal{B}_2 = \mathcal{C}_2$ is \textbf{TRUE}. It follows that $\mathcal{C}_3 = \mathcal{B}_3$ is \textbf{TRUE} and that $\mathcal{C}_1 = \mathcal{B}_1$ is \textbf{TRUE}. Therefore, $(a, b, c) \in A$. Hence, $C \subseteq A$. 
+
+
+
+    %%% end of your answer      
+  }
+
+ \end{subparts}
+
+ \newpage
+ 
+ \begin{tikzpicture}
+\path (0,0) (.5,0) (.5,.5) (0,.5) (0,0);
+\end{tikzpicture}
+ 
+ \part Let $D$ be the set of solutions of $\mathcal{D}$.  Prove that $A = D$.
+\textit{You may assume that both $A$ and $D$ are nonempty; we'll assume you can
+address the case where either of them is the empty set based on your work in
+part (a).}  
+
+\textbf{This part is worth zero points.  Your proof will not be
+graded.  If you got stuck, or wrote a proof
+you aren't quite sure of, please post to piazza or come to office hours.}
+
+\textbf{YOU MUST UPLOAD THIS PAGE EVEN IF YOU WROTE NOTHING ON IT.}
+
+
+ 
+%%% Do not change the height of this box. Your work must fit inside it.
+
+\makenonemptybox{500pt}{
+    %%% Your work goes here!  It is your responsibility to trim down your answer so that it doesn't 
+    \paragraph{} We have $\mathcal{A}_1 = \mathcal{D}_2$ and $\mathcal{A}_2 = \mathcal{D}_1$ and $\mathcal{A}_3 = \mathcal{D}_3$. Given nonempty $A,\, B$, we have:
+
+    \paragraph{} ($A \subseteq D$) Take $(a_1, a_2, a_3) \in A$. Then $\mathcal{A}_1$, $\mathcal{A}_2$, and $\mathcal{A}_3$ are \textbf{TRUE}. Thus, in respective order:
+       \begin{itemize}
+        \item $\mathcal{D}_2$ is \textbf{TRUE}; also
+        \item $\mathcal{D}_1$ is \textbf{TRUE}; also
+        \item $\mathcal{D}_3$ is \textbf{TRUE},
+       \end{itemize} 
+       so, it follows that $(a_1, a_2, a_3) \in D$. Therefore, $A \subseteq D$.
+
+
+    \paragraph{} ($D \subseteq A$) Take $(d_1, d_2, d_3) \in D$. Then $\mathcal{D}_1$, $\mathcal{D}_2$, and $\mathcal{D}_3$ are \textbf{TRUE}. Thus, in respective order:
+        \begin{itemize}
+          \item $\mathcal{A}_2$ is \textbf{TRUE}; also
+          \item $\mathcal{A}_1$ is \textbf{TRUE}; also
+          \item $\mathcal{A}_3$ is \textbf{TRUE},
+        \end{itemize}
+        so, it follows that $(d_1, d_2, d_3) \in A$. Therefore, $D \subseteq A$.
+
+    %%% end of your answer
+ }
+
+ \newpage
+ 
+ \part At this point, you should have proven that the three elementary
+operations did not change the set of solutions of the linear system
+$\mathcal{A}$.  The key insights of your proofs didn't rely on $\mathcal{A}$'s
+having exactly three equations and three variables and having coefficients $3$,
+$2$, $11$ and so forth.  We asked you to think about a simple, concrete example
+so that you could focus on the elementary operations and not be distracted by
+notation.  Now we are asking you to face the notation and prove something about
+a general linear system.
+ 
+ Consider a system of $m$ linear equations with $n$ variables
+ $$
+ \mathcal{A}: \hspace{.5cm} \left\{ \sum_{j=1}^n a_{ij} x_j = b_i \qquad 1 \leq
+i \leq m \right.
+ $$
+ where the coefficients $a_{ij}$ and constants $b_i$ are all real numbers.  Let
+$\mathcal{B}$ be the linear system where the $i_0$th equation of $\mathcal{A}$
+has been multiplied by $\alpha \neq 0$.
+
+ Assume that both $\mathcal{A}$ and $\mathcal{B}$ have solutions.  Prove that
+$\mathcal{A}$ and $\mathcal{B}$ have the same set of solutions.  
+
+\textbf{This part is worth zero points.  Your proof will not be
+graded.  If you got stuck, or wrote a proof
+you aren't quite sure of, please post to piazza or come to office hours.}
+
+\textbf{YOU MUST UPLOAD THIS PAGE EVEN IF YOU WROTE NOTHING ON IT.}
+
+
+%%% Do not change the height of this box. Your work must fit inside it.
+\makenonemptybox{200pt}{
+    %%% Your work goes here!  It is your responsibility to trim down your answer so that it doesn't 
+    
+
+
+    %%% end of your answer   
+ }
+
+ 
+ \newpage
+ 
+ \part Consider writing down the augmented matrix of a linear system
+$\mathcal{A}$ and applying elementary row operations to the matrix until you
+have a matrix in reduced row echelon form (RREF).  Let $\mathcal{R}$ be a linear
+system represented by that RREF matrix.  Explain why $\mathcal{A}$ and
+$\mathcal{R}$ have the same set of solutions.  \textit{There's a lot of white
+space here but this isn't to indicate that you need to write at length to answer
+this question.  You should be able to write your explanation w/ 100 or fewer
+words (in the space above the horizontal line). }
+
+%%% Do not change the height of this box. Your work must fit inside it.
+\makenonemptybox{250pt}{
+    %%% Your work goes here!  It is your responsibility to trim down your answer so that it doesn't 
+    Consider the augmented matrix of $\mathcal{A}$ and apply elementary row operations to obtain the RREF matrix of $\mathcal{A}$. For each elementary row operation, the set of solutions of $\mathcal{A}$ remains unchanged. Thus, $\mathcal{A}$ and $\mathcal{R}$ have the same set of solutions.
+    %%% end of your answer  
+}
+
+ \noindent\rule{.93\textwidth}{1pt}
+ 
+\newpage
+ 
+ \end{parts}
+ 
+ 
+ \question One of the goals of this question is to get you into good shape for
+True/False questions on exams.
+ 
+ For questions (b), (c), and (d) below, please assume the ``natural'' vector
+addition and scalar multiplication.  For example, for functions assume the
+addition and multiplication given in section 4.2 of Medici.  The ones given in
+the ``An Unusual Vector Space'' example are completely valid but are considered
+``unnatural'' for this problem.
+ 
+ \begin{parts}
+ \part Prove the following lemma by showing that all the vector space axioms
+hold.  It's very useful and once you've proven it you can use it whenever you
+want.
+ 
+\noindent{\bf \color{dkrgreen} Lemma}: Let $\V$ be a vector space over the
+real numbers. If $\V_0 \subseteq \V$ contains ${\bf 0}$ and,
+with the same vector addition and scalar multiplication of $\V$,
+ is closed under vector
+addition and scalar multiplication 
+then $\V_0$ is a vector space over the
+real numbers.
+
+%%% Do not change the height of this box. Your work must fit inside it.
+\makenonemptybox{400pt}{
+    %%% Your work goes here!  It is your responsibility to trim down your answer so that it doesn't 
+    %%% run into the next question or off the bottom of the page (and don't get too close to the bottom
+    %%% either, please!)
+
+
+
+    %%% end of your answer     
+}
+
+ \newpage
+
+ \begin{EnvUplevel} \textbf{True or False:} Unsupported answers will not receive
+full credit. Organize your work in a reasonably neat and coherent way.\\[0.25cm]
+Indicate your final answers by \textbf{filling in exactly one circle} for each
+part below (unfilled \tikz\draw[black] (0,0) circle (.8ex); \, filled
+\tikz\draw[black,fill=black] (0,0) circle (.8ex);).
+
+\textbf{Hint: if you think any of the following are vector spaces, ask yourself whether 
+there's a way of 
+proving that this is true without having to start at the definition and proving that all eight
+axioms hold.}
+
+ \end{EnvUplevel}
+    
+ \part The set $\V$ of all nonpositive real-valued functions on $[2,3]$ 
+  with the usual addition and scalar multiplication
+ is a
+vector space over $\R$.  \textit{Note: a real-valued function on $[2,3]$ is a function
+$f: [2,3] \to \R$.  That is, its domain is $[2,3]$ and its range is a subset of
+$\R$.  Its range could be all of $\R$, of course.  A function is nonpositive if
+$f(x) \leq 0$ for all $x$ in its domain.}
+ 
+ % mark option as correct by using \CorrectChoice
+\begin{checkboxes}
+  \choice True
+  \choice False
+\end{checkboxes}
+
+ %%% Do not change the height of this box. Your work must fit inside it.
+ \makenonemptybox{150pt}{
+    %%% Your work goes here!  It is your responsibility to trim down your answer so that it doesn't 
+    %%% run into the next question or off the bottom of the page (and don't get too close to the bottom
+    %%% either, please!)
+
+
+
+    %%% end of your answer   
+ }
+ 
+\part The set $\V$ of all real polynomials of degree exactly $n$ 
+ with the usual addition and scalar multiplication
+is a vector
+space.  \textit{Note: A ``real polynomial'' is a polynomial whose coefficients
+are all real numbers.}
+
+% mark option as correct by using \CorrectChoice
+\begin{checkboxes}
+  \choice True
+  \choice False
+\end{checkboxes}
+
+ %%% Do not change the height of this box. Your work must fit inside it.
+ \makenonemptybox{100pt}{
+    %%% Your work goes here!  It is your responsibility to trim down your answer so that it doesn't 
+    %%% run into the next question or off the bottom of the page (and don't get too close to the bottom
+    %%% either, please!)
+
+
+
+    %%% end of your answer    
+ }
+
+\newpage
+ \begin{EnvUplevel} \textbf{True or False:} Unsupported answers will not receive
+full credit. Organize your work in a reasonably neat and coherent way.\\[0.25cm]
+Indicate your final answers by \textbf{filling in exactly one circle} for each
+part below (unfilled \tikz\draw[black] (0,0) circle (.8ex); \, filled
+\tikz\draw[black,fill=black] (0,0) circle (.8ex);).
+
+\textbf{Hint: if you think the following is a vector space, ask yourself whether 
+there's a way of 
+proving that this is true without having to start at the definition and proving that all eight
+axioms hold.}
+ \end{EnvUplevel}
+
+
+\part The set of $2 \times 2$ upper triangular real matrices with
+the usual entry-wise addition and scalar multiplication
+is a vector
+space over the real numbers.  
+
+\textit{Notes: An $n \times n$ matrix ${\bf A} = [a_{ij}]$ is upper triangular if
+$a_{ij}=0$ for all $1 \leq j < i \leq n$.  A matrix is real if all of its entries are
+real numbers.  All integer matrices and all rational matrices are also real
+matrices.  After doing this problem, ask yourself how your answer would apply
+to $n \times n$ upper triangular matrices.}
+
+
+% mark option as correct by using \CorrectChoice
+\begin{checkboxes}
+  \choice True
+  \choice False
+\end{checkboxes}
+
+ %%% Do not change the height of this box. Your work must fit inside it.
+ \makenonemptybox{175pt}{
+    %%% Your work goes here!  It is your responsibility to trim down your answer so that it doesn't 
+    %%% run into the next question or off the bottom of the page (and don't get too close to the bottom
+    %%% either, please!)
+
+
+
+    %%% end of your answer     
+ }
+
+ 
+ \end{parts}
+\end{questions}
+
+\end{document}

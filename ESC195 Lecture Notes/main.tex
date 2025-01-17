@@ -324,7 +324,7 @@ Evaluating the integral:
 \end{align}
 \paragraph{Identities} The hyperbolic functions satisfy the following identities:
 \begin{align}
-    \cosh^2(x) - \sinh^2(x) &= 1, \\
+    \cosh^2(x) + \sinh^2(x) &= 1, \\
     \cosh(2x) &= \cosh^2(x) + \sinh^2(x), \\
     \sinh(2x) &= 2\sinh(x)\cosh(x).
 \end{align}
@@ -448,6 +448,7 @@ where $t$ is the angle of the sector along the parametrization $\{(x,y)\mid x = 
     \end{align*}
 \end{example}
 \subsection{Applications to Physics and Engineering}
+\subsubsection{Hydrostatic Pressure and Force}
 \paragraph{Hydrostatic Pressure} The hydrostatic pressure and Force is given by the Archimedes' principle:
 \begin{subequations}
     \begin{align}
@@ -456,9 +457,87 @@ where $t$ is the angle of the sector along the parametrization $\{(x,y)\mid x = 
     \end{align}
 \end{subequations}
 \paragraph{Formula} Given a tank rectangular with width defined by $w = f(x)$, where $x$ is depth, we would like to compute the force exerted on the tank by the water:
+\begin{equation}
+    F = \int_0^b \rho g x f(x) \cdot dx
+\end{equation}
+, which is derived by considering $dx$ as the depth a horizontal slice of the tank.
+\subsubsection{Center of Mass and Moments of Inertia}
+\paragraph{Properties of the Center of Mass} The center of mass of a region $R$ has the following properties:
+\begin{enumerate}
+    \item \textbf{Symetry}: For all axis of symmetry, the center of mass lies on the axis.
+    \item \textbf{Additivity}: The center of mass of a region is the weighted average of the centers of mass of its parts. The weights are the areas of the parts.
+    \begin{equation}
+        \bar{x} = \sum_i \frac{A_i\bar{x_i}}{A}
+    \end{equation}
+\end{enumerate}
+\paragraph{Formula} The centroid of a uniformly-dense region $R$ bounded by $y=f(x),\,x\in[a,b],\,y\in[f(a),f(b)]$ is derived as follows:
+\begin{align}
+    \intertext{We first have $x_i^\star$ and $A_i$ as follows:}
+    x_i^\star = \frac{1}{2}(x_i + x_{i+1}) &\quad A_i = f(x_i) \Delta x \nonumber \\
+    \intertext{For $\bar{x}$, we have:}
+    A\bar{x} &\approx \sum_i x_i^\star A_i \nonumber \\
+    \intertext{Taking a Riemann sum:}
+    A\bar{x} &= \lim_{n \to \infty} \sum_i x_i^\star A_i  \nonumber \\
+    \bar{x} &= \frac{1}{A}\int_a^b x f(x) \, dx
+    \intertext{Similarly, for $\bar{y}$:}
+    A\bar{y} &= \lim_{n \to \infty} \sum_i f(x_i^\star) A_i \nonumber \\
+    \bar{y} &= \frac{1}{A}\int_a^b \frac{1}{2}(f(x))^2 \, dx
+\end{align}
+\begin{theorem}[Pappus's Theorem]
+    The volume of a solid of revolution is given by the product of the area of the region and the distance, $R$, traveled by the centroid of the region from the axis of rotation.
+    \begin{equation}
+        V = 2\pi R A
+    \end{equation}
+\end{theorem}
+\begin{example}[Eliptical Torus]
+    Given an eliptical torus (tall donut) with major axis $a$ and minor axis $b$, we would like to compute the volume of the torus:
+    \begin{align*}
+        V &= 2\pi R A \\
+        &= 2\pi R \cdot \pi ab = 2\pi^2 abR
+    \end{align*}
+    This could be, alternatively, shown via the washer method and the shell method.
+\end{example}
+\subsection{Applications to Economics and Biology}
+``Biologists are so bad at math'' - Prof. Davis as he proceeds to erase the board and skip to the next section.
+\section{Parametric Equations and Polar Coordinates}
+\subsection{Curves Defined by Parametric Equations}
+\paragraph{Parametric Equations} For $t \in \mathbb{R}$, we have:
+\begin{equation}
+    x = x(t), \quad y = y(t)
+\end{equation}
+\begin{example}[Newton's Laws of Motion]
+    Given $\ddot{x} = 0$, $\ddot{y} = -g$, we have:
+    \begin{align*}
+        x(t) &= A_1 t + A_2, \\
+        y(t) &= -\frac{1}{2}gt^2 + B_1 t + B_2
+    \end{align*}
+    At initial conditions $t = 0$, we have $x(0) = 0$, $y(0) = 0$, $\dot x(0) = v_0 \cos(\theta)$, $\dot y(0) = v_0 \sin(\theta) - \frac{1}{2}gt^2$.
+\end{example}
+\begin{example}[Ellipse]
+    Given $x = a\cos(t)$, $y = b\sin(t)$, we have:
+    \begin{align*}
+        x^2 &= a^2\cos^2(t), \\
+        y^2 &= b^2\sin^2(t)
+    \end{align*}
+    , which satisfies $x^2/a^2 + y^2/b^2 = 1$.
+\end{example}
+\paragraph{Intersections of Parametric Curves} Given two parametric curves $C_1,\,C_2$, defined by:
 \begin{align*}
-    F &= \int_0^b \rho g x f(x) \cdot dx
+    C_1:\, x_1 &= x_1(t), \quad y_1 = y_1(t) \\
+    C_2:\, x_2 &= x_2(t), \quad y_2 = y_2(t)
 \end{align*}
+, we can find the intersection points by solving the system of equations:
+\begin{align*}
+    x_1(t) &= x_2(t) \\
+    y_1(t) &= y_2(t)
+\end{align*}
+\begin{example}
+    Given $x_1 = 2t+t$, $y_1 = 5-4t$, $x_2 = 3 - 5\cos(\pi t)$, $y_2 = 1 + 5\sin(\pi t)$, we have:
+    \begin{align*}
+        2t + 1 &= 3 - 5\cos(\pi t) \\
+        5 - 4t &= 1 + 5\sin(\pi t)
+    \end{align*}
+\end{example}
 
 \appendix
 \input{appendix.tex}
