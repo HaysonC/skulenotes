@@ -1,12 +1,14 @@
 # Fdb version 4
-["pdflatex"] 1737410347.59011 "/Users/haysoncheung/programs/SKULE/ECE159 Lecture Notes/main.tex" "main.pdf" "main" 1737410348.62619 0
-  "/Users/haysoncheung/programs/SKULE/ECE159 Lecture Notes/main.tex" 1737410347.40488 9371 c587b0483ce4fbbb540e8db60aa0247e ""
+["pdflatex"] 1737424408.01157 "/Users/haysoncheung/programs/SKULE/ECE159 Lecture Notes/main.tex" "main.pdf" "main" 1737424409.58216 0
+  "/Users/haysoncheung/programs/SKULE/ECE159 Lecture Notes/main.tex" 1737412285.74497 9097 1979d4fce468c38cf53557d39217707b ""
   "/usr/local/texlive/2024/texmf-dist/fonts/map/fontname/texfonts.map" 1577235249 3524 cb3e574dea2d1052e39280babc910dc8 ""
   "/usr/local/texlive/2024/texmf-dist/fonts/tfm/public/amsfonts/cmextra/cmex7.tfm" 1246382020 1004 54797486969f23fa377b128694d548df ""
   "/usr/local/texlive/2024/texmf-dist/fonts/tfm/public/amsfonts/cmextra/cmex8.tfm" 1246382020 988 bdf658c3bfc2d96d3c8b02cfc1c94c20 ""
   "/usr/local/texlive/2024/texmf-dist/fonts/tfm/public/amsfonts/symbols/msam10.tfm" 1246382020 916 f87d7c45f9c908e672703b83b72241a3 ""
+  "/usr/local/texlive/2024/texmf-dist/fonts/tfm/public/amsfonts/symbols/msam5.tfm" 1246382020 924 9904cf1d39e9767e7a3622f2a125a565 ""
   "/usr/local/texlive/2024/texmf-dist/fonts/tfm/public/amsfonts/symbols/msam7.tfm" 1246382020 928 2dc8d444221b7a635bb58038579b861a ""
   "/usr/local/texlive/2024/texmf-dist/fonts/tfm/public/amsfonts/symbols/msbm10.tfm" 1246382020 908 2921f8a10601f252058503cc6570e581 ""
+  "/usr/local/texlive/2024/texmf-dist/fonts/tfm/public/amsfonts/symbols/msbm5.tfm" 1246382020 940 75ac932a52f80982a9f8ea75d03a34cf ""
   "/usr/local/texlive/2024/texmf-dist/fonts/tfm/public/amsfonts/symbols/msbm7.tfm" 1246382020 940 228d6584342e91276bf566bcf9716b83 ""
   "/usr/local/texlive/2024/texmf-dist/fonts/tfm/public/cm/cmbx10.tfm" 1136768653 1328 c834bbb027764024c09d3d2bf908b5f0 ""
   "/usr/local/texlive/2024/texmf-dist/fonts/tfm/public/cm/cmbx12.tfm" 1136768653 1324 c910af8c371558dc20f2d7822f66fe64 ""
@@ -217,9 +219,9 @@
   "/usr/local/texlive/2024/texmf-var/fonts/map/pdftex/updmap/pdftex.map" 1736306544.17718 5467645 128b85b7cde5f5edc5cb7f1dd7ff8736 ""
   "/usr/local/texlive/2024/texmf-var/web2c/pdftex/pdflatex.fmt" 1736306461 8221439 c62d8059860d756d52b53a0d1587ecd1 ""
   "/usr/local/texlive/2024/texmf.cnf" 1710266656 577 e590dabc9e28c5b61546e15f63eebcdf ""
-  "main.aux" 1737410348.5319 5488 f2b4f45f108ed026f3bda97a17b1e9af "pdflatex"
-  "main.out" 1737410348.53253 1375 0ac9210d7fcb1f89f2a0a799bed71ff7 "pdflatex"
-  "main.tex" 1737410347.40488 9371 c587b0483ce4fbbb540e8db60aa0247e ""
+  "main.aux" 1737424409.42811 5287 b76144391ebeaad2ac82d0c7e41e1363 "pdflatex"
+  "main.out" 1737424409.42899 1375 2a3f04274b6eb20dac7094c39c759e86 "pdflatex"
+  "main.tex" 1737412285.74497 9097 1979d4fce468c38cf53557d39217707b ""
   "preamble.tex" 1736393242.69871 1310 2c3e45534d9329bf1f84e8d14ffddf7e ""
   (generated)
   "main.aux"

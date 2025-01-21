@@ -7,7 +7,6 @@
 Fundamentals of Electric Circuits, Winter 2024 \hfill ECE 159\\
 \\
 The up-to-date version of this document can be found at \url{https://github.com/HaysonC/skulenotes}\\
-
 \vspace{10pt}
 \section{Basic Concepts}
 \subsection{Basic Defintions}
@@ -106,6 +105,7 @@ from time $t_0$ to time $t_1$ is:
 \begin{equation}
     W = \int_{t_0}^{t_1} P(t) dt
 \end{equation}
+\section{DC Circuits}
 \subsection{Circuit Elements}
 \paragraph{Active Elements} Active elements are sources of energy. They can deliver power to the circuit. While passive elements are elements that can only absorb power.
 \paragraph{Ideal Sources} Ideal sources are sources that provide a set voltage or current regardless of what it is connected to. We often assume that sources are ideal.
@@ -159,20 +159,16 @@ from time $t_0$ to time $t_1$ is:
 \paragraph{} Kirchhoff's Laws are two laws that are used to analyze electric circuits.
 \paragraph{Kirchhoff's Current Law (KCL)} The sum of currents entering a node is equal to the sum of currents leaving a node.
 \begin{equation}
-    \sum I_{\text{in}} = \sum I_{\text{out}}
+    \sum I_{\text{in}} = \sum I_{\text{out}} \quad \text{or} \quad \sum_\text{$n$ in node} I_n = 0
 \end{equation}
+\paragraph{Node Analysis} Node Analysis is a method used to analyze electric circuits by writing KCL equations at each node.
+\paragraph{Ground Node} Ground is a reference point in a circuit. It is often used as a reference point for voltage.
 \paragraph{Kirchhoff's Voltage Law (KVL)} The sum of voltages around a closed loop is equal to zero.
 \begin{equation}
-    \sum V_{\text{loop}} = 0
+    \sum_\text{$n$ in loop} V_{n} = 0
 \end{equation}
-\paragraph{Node and Mesh Analysis} Node and Mesh Analysis are two methods used to analyze electric circuits.
-\paragraph{Node Analysis} Node Analysis is a method used to analyze electric circuits by writing KCL equations at each node.
-\paragraph{Ground Node} A ground node is a node in an electric circuit that is used as a reference point for voltage measurements.
 \paragraph{Mesh Analysis} Mesh Analysis is a method used to analyze electric circuits by writing KVL equations for each loop.
-\paragraph{Supermesh} A supermesh is a loop that contains a current source. To analyze a supermesh, write a KVL equation for the supermesh and a KCL equation for the node that the current source is connected to.
 \paragraph{Multiple Meshes} To analyze a circuit with multiple meshes, write KVL equations for each mesh and KCL equations for each node. There would be times where we add currents via KCL equations.
-
-\section{DC Circuits}
 \paragraph{}
 
 \end{document}

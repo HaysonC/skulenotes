@@ -1,6 +1,6 @@
 # Fdb version 4
-["pdflatex"] 1737134835.42906 "/Users/haysoncheung/programs/SKULE/linalgA1/main.tex" "main.pdf" "main" 1737134836.61074 0
-  "/Users/haysoncheung/programs/SKULE/linalgA1/main.tex" 1737134835.29891 23988 bde3d8eafaa0414f6b92c93ec40a76b7 ""
+["pdflatex"] 1737423463.17486 "/Users/haysoncheung/programs/SKULE/linalgA1/main.tex" "main.pdf" "main" 1737423465.39713 0
+  "/Users/haysoncheung/programs/SKULE/linalgA1/main.tex" 1737423462.96292 27822 91de1d7c0ad6def15b3aa457a041a849 ""
   "/usr/local/texlive/2024/texmf-dist/fonts/enc/dvips/cm-super/cm-super-ts1.enc" 1136849721 2900 1537cc8184ad1792082cd229ecc269f4 ""
   "/usr/local/texlive/2024/texmf-dist/fonts/map/fontname/texfonts.map" 1577235249 3524 cb3e574dea2d1052e39280babc910dc8 ""
   "/usr/local/texlive/2024/texmf-dist/fonts/tfm/jknappen/ec/tcrm1000.tfm" 1136768653 1536 e07581a4bb3136ece9eeb4c3ffab8233 ""
@@ -24,6 +24,7 @@
   "/usr/local/texlive/2024/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi7.pfb" 1248133631 36281 c355509802a035cadc5f15869451dcee ""
   "/usr/local/texlive/2024/texmf-dist/fonts/type1/public/amsfonts/cm/cmr10.pfb" 1248133631 35752 024fb6c41858982481f6968b5fc26508 ""
   "/usr/local/texlive/2024/texmf-dist/fonts/type1/public/amsfonts/cm/cmr12.pfb" 1248133631 32722 d7379af29a190c3f453aba36302ff5a9 ""
+  "/usr/local/texlive/2024/texmf-dist/fonts/type1/public/amsfonts/cm/cmr5.pfb" 1248133631 31809 8670ca339bf94e56da1fc21c80635e2a ""
   "/usr/local/texlive/2024/texmf-dist/fonts/type1/public/amsfonts/cm/cmr7.pfb" 1248133631 32762 224316ccc9ad3ca0423a14971cfa7fc1 ""
   "/usr/local/texlive/2024/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy10.pfb" 1248133631 32569 5e5ddc8df908dea60932f3c484a54c0d ""
   "/usr/local/texlive/2024/texmf-dist/fonts/type1/public/amsfonts/cm/cmti10.pfb" 1248133631 37944 359e864bd06cde3b1cf57bb20757fb06 ""
@@ -217,9 +218,9 @@
   "/usr/local/texlive/2024/texmf-var/fonts/map/pdftex/updmap/pdftex.map" 1736306544.17718 5467645 128b85b7cde5f5edc5cb7f1dd7ff8736 ""
   "/usr/local/texlive/2024/texmf-var/web2c/pdftex/pdflatex.fmt" 1736306461 8221439 c62d8059860d756d52b53a0d1587ecd1 ""
   "/usr/local/texlive/2024/texmf.cnf" 1710266656 577 e590dabc9e28c5b61546e15f63eebcdf ""
-  "main.aux" 1737134836.51313 3724 ea5f5181828d1b1d5abe229fb39d4b9d "pdflatex"
-  "main.out" 1737134836.31532 0 d41d8cd98f00b204e9800998ecf8427e "pdflatex"
-  "main.tex" 1737134835.29891 23988 bde3d8eafaa0414f6b92c93ec40a76b7 ""
+  "main.aux" 1737423465.2402 4024 98fef59324d3e1cab0e0c0990bbf9537 "pdflatex"
+  "main.out" 1737423464.8506 0 d41d8cd98f00b204e9800998ecf8427e "pdflatex"
+  "main.tex" 1737423462.96292 27822 91de1d7c0ad6def15b3aa457a041a849 ""
   "preamble.tex" 1737088524.14642 4765 c35cdc2d2a83b0face8cae71d713b244 ""
   (generated)
   "main.aux"
