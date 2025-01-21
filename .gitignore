@@ -4,4 +4,4 @@
 **/*.out
 **/*.fls    
 **/*.fdb_latexmk
-
+**/linalgA1/
