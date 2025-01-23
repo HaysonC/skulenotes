@@ -310,6 +310,11 @@ Evaluating the integral:
     &= 1
 \end{align*}
 \end{example}
+\subsection{Convergence Test}
+\paragraph{Convergence} An improper integral converges if the limit of the integral exists. 
+\paragraph{Comparison Test} We can compare the integral to another integral to determine convergence or divergence.
+\paragraph{Spliting the Integral} We can split the integral into two parts to determine convergence. We split it into two limits on the left and right, for example:
+$$ \int_a^b f(x)\, dx = \lim_{t \to c^-} \int_a^t f(x) \, dx + \lim_{t \to c^+} \int_t^b f(x) \, dx $$
 \section{Hyperbolic Trigonometric Functions}
 \begin{definition}[Hyperbolic Sine]
     The hyperbolic sine function is defined as:
@@ -427,23 +432,29 @@ where $t$ is the angle of the sector along the parametrization $\{(x,y)\mid x = 
         &= \frac{8}{27} \left(1 + \frac{9}{4}x\right)^{\frac{3}{2}} \Big|_0^{44} = 296
     \end{align*}
 \end{example}
+\paragraph{Inverse} Also, we can take $x = f^{-1}(y)$ to compute the arc length of a curve.
+\begin{equation}
+    L = \int_{f(a)}^{f(b)} \sqrt{1 + ((f{^{-1}})'(y))^2} \, dy
+\end{equation}
 \subsection{Surface Area of Revolution}
 \paragraph{Surface Area of Revolution} Given the curve $C: y = f(x)$, we would like to compute the surface area of the curve between two points $a$ and $b$ when rotated about the $x$-axis:
-    $$ A = \int_C 2\pi y \, ds$$
-\paragraph{Formula} Deriving the formula for the surface area of a curve $y = f(x)$ between two points $a$ and $b$ is similar to the arc length formula:
+    $$ A_x = \int_C 2\pi y \, ds$$
+\paragraph{Formula} Deriving the formula for the surface area of a curve $y = f(x)$ between two points $a$ and $b$ rotated about the $x$-axis as follows:
 \begin{align}
     \intertext{At $x_i$ and $x_{i+1}$, the length of the segment is:}
     \Delta s &\approx \sqrt{\Delta_i x^2 + \Delta_i y^2} \nonumber \\
     \intertext{The surface area of the segment is, by continuity:}
     A_i &= \pi (y_i + y_{i+1}) \Delta s = 2\pi y^\star \Delta s \quad 
     \intertext{As the difference between $y^\star$ and $y_i$ diminishes as $\Delta x \rightarrow 0$, taking a Riemann sum:}
-    A &= \lim_{n \to \infty} \sum_{i=1}^n 2\pi y_i \sqrt{\Delta_i x^2 + \Delta_i y^2} \nonumber \\
+    A_x &= \lim_{n \to \infty} \sum_{i=1}^n 2\pi y_i \sqrt{\Delta_i x^2 + \Delta_i y^2} \nonumber \\
     &= \int_a^b 2\pi y \sqrt{1 + y'(x)^2} \, dx
+    \intertext{The surface area of a curve $y = f(x)$ (i.e. $x = f^{-1}$)between two points $f(a)$ and $f(b)$ rotated about the $y$-axis is:}
+    A_y &= \int_{f(a)}^{f(b)} 2\pi x \sqrt{1 + x'(y)^2} \, dy
 \end{align}
 \begin{example}
     Given $y = \sqrt{x}$ between $x = 0$ and $x = 1$, we would like to compute the surface area of the curve:
     \begin{align*}
-        A &= \int_0^1 2\pi \sqrt{x} \sqrt{1 + \frac{1}{4x}} \, dx \\
+        A_x &= \int_0^1 2\pi \sqrt{x} \sqrt{1 + \frac{1}{4x}} \, dx \\
         &= \pi \int^1_0 \sqrt{4x + 1} \, dx \\
         \intertext{Let $u = 4x + 1$, then $du = 4dx$:}
         &= \frac{\pi}{4} \int^5_1 \sqrt{u} \, du \\
@@ -575,7 +586,7 @@ Hence, if $x'(t_0) = 0$, we have a vertical tangent; if $y'(t_0) = 0$, we have a
 \paragraph{} The sign of the area of a parametric curve $C$ is given by the orientation of the curve.
 \paragraph{Area of Closed Curves} The area of a closed parametric curve $C$ is given by:
 \begin{equation}
-    A = \oiint_C dA = \int_{t_1}^{t_2} y(t) x'(t) \, dt = \int_{t_1}^{t_2} x(t) y'(t) \, dt
+    A = \oint_C dA = \int_{t_1}^{t_2} y(t) x'(t) \, dt = \int_{t_1}^{t_2} x(t) y'(t) \, dt
 \end{equation}
 , where
 \begin{equation*}
