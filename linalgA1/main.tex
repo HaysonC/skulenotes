@@ -414,7 +414,8 @@ words (in the space above the horizontal line). }
 %%% Do not change the height of this box. Your work must fit inside it.
 \makenonemptybox{250pt}{
     %%% Your work goes here!  It is your responsibility to trim down your answer so that it doesn't 
-    Consider the augmented matrix of $\mathcal{A}$ and apply elementary row operations to obtain the RREF matrix of $\mathcal{A}$. For each elementary row operation, the set of solutions of $\mathcal{A}$ remains unchanged. Thus, $\mathcal{A}$ and $\mathcal{R}$ have the same set of solutions.
+    Consider the augmented matrix of $\mathcal{A}$ and apply elementary row operations to obtain the RREF matrix of $\mathcal{A}$. For each elementary row operation, the set of solutions of $\mathcal{A}$ remains unchanged. This is proven in the previous parts.
+    Thus, $\mathcal{A}$ and $\mathcal{R}$ have the same set of solutions.
     %%% end of your answer  
 }
 
@@ -469,7 +470,7 @@ real numbers.
     \begin{enumerate}
       \item By assumption, $\V_0$ is closed under scalar multiplication. Thus, for all $c \in \mathbb{R}$ and $\textbf{u} \in \V_0$, $c\textbf{u} \in \V_0$.
       \item By assumption, $\V_0$ has the same scalar multiplication as $\V$ and $\V$ is a vector space. Thus, for all $c, d \in \mathbb{R}$ and $\textbf{u} \in \V_0 \subseteq \V$, $(cd)\textbf{u} = c(d\textbf{u})$.
-      \item By assumption, $\V_0$ has the same scalar multiplication as $\V$ and $\V$ is a vector space. Thus, for all $c \in \mathbb{R}$ and $\textbf{u}, \textbf{v} \in \V_0 \subseteq \V$, $c(\textbf{u} + \textbf{v}) = c\textbf{u} + c\textbf{v}$.
+      \item By assumption, $\V_0$ has the same scalar multiplication as $\V$ and $\V$ is a vector space. Thus, for all $c \in \mathbb{R}$ and $\textbf{u}, \textbf{v} \in \V_0 \subseteq \V$, $(c + d)\textbf{u} = c\textbf{u} + d\textbf{u}$.
       \item By assumption, $\V_0$ has the same scalar multiplication as $\V$ and $\V$ is a vector space. Thus, for all $\textbf{u} \in \V_0 \subseteq \V$, $1\textbf{u} = \textbf{u}$.
     \end{enumerate}
       
@@ -570,31 +571,74 @@ to $n \times n$ upper triangular matrices.}
  %%% Do not change the height of this box. Your work must fit inside it.
  \makenonemptybox{175pt}{
     %%% Your work goes here!  It is your responsibility to trim down your answer so that it doesn't 
-    Given that $^2\mathbb{R}^2$ is a vector space, the set of $2 \times 2$ upper triangular real matrices is a subset of $^2\mathbb{R}^2$. Thus, we prove that $\V$ is a vector space of $^2\mathbb{R}^2$ by showing subspace test holds.
+    We have the following:
+    \paragraph{Additive Axioms}
     \begin{enumerate}
-      \item $\mathbf{0} \in \V$: $\mathbf{0}$ is an upper triangular matrix with $\textbf{0} = \begin{bmatrix}
-        0 & 0 \\
-        0 & 0
-      \end{bmatrix}$. Given usual entry-wise addition, for all $\textbf{A} \in \V$, $\textbf{A} + \textbf{0} = \begin{bmatrix}
-        a_{11} + 0 & a_{12} + 0 \\
-        0 & a_{22} + 0
-      \end{bmatrix} = \textbf{A}$. Thus, $\mathbf{0} \in \V$.
-      \item Closure under addition: Let $A, B \in \V$. Then $A + B = \begin{bmatrix}
+      \item For all $A, B \in \V$, $A + B = \begin{bmatrix}
         a_{11} + b_{11} & a_{12} + b_{12} \\
         0 & a_{22} + b_{22}
-      \end{bmatrix}$. So $A + B$ is upper triangular, and $A + B \in \V$.
-      \item Closure under scalar multiplication: Let $A \in \V$ and $c \in \mathbb{R}$. Then $cA = \begin{bmatrix}
+      \end{bmatrix}$ is upper triangular.
+      \item For all $A, B, C \in \V$, for $(A+B)+C$, we have:
+      \begin{equation*}
+      \begin{aligned}
+        (A+B)+C &= \begin{bmatrix}
+          a_{11} + b_{11} & a_{12} + b_{12} \\
+          0 & a_{22} + b_{22}
+        \end{bmatrix} + C \\
+        &= \begin{bmatrix}
+          a_{11} + b_{11} + c_{11} & a_{12} + b_{12} + c_{12} \\
+          0 & a_{22} + b_{22} + c_{22}
+        \end{bmatrix} 
+        = A + \begin{bmatrix}
+          b_{11} + c_{11} & b_{12} + c_{12} \\
+          0 & b_{22} + c_{22}
+        \end{bmatrix} \\
+        &= A + (B+C).
+      \end{aligned}
+    \end{equation*}
+      \item $\mathbf{0}$ is upper triangular. We take $\textbf{0} = \begin{bmatrix}
+        0 & 0 \\
+        0 & 0
+      \end{bmatrix}$. For all $A \in \V$, $A + \textbf{0} = \begin{bmatrix}
+        a_{11} + 0 & a_{12} + 0 \\
+        0 & a_{22} + 0
+      \end{bmatrix} = A$.
+      \item For all $A \in \V$, We take another upper triangular matrix $-A = \begin{bmatrix}
+        -a_{11} & -a_{12} \\
+        0 & -a_{22}
+      \end{bmatrix}$. For all $A \in \V$, $A + (-A) = \begin{bmatrix}
+        a_{11} - a_{11} & a_{12} - a_{12} \\
+        0 & a_{22} - a_{22}
+      \end{bmatrix} = \textbf{0}$.
+    \end{enumerate}
+    \paragraph{Scalar Multiplication Axioms}
+    \begin{enumerate}
+      \item For all $A \in \V$, $c \in \mathbb{R}$, $cA = \begin{bmatrix}
         ca_{11} & ca_{12} \\
         0 & ca_{22}
-      \end{bmatrix}$. So $cA$ is upper triangular, and $cA \in \V$.
+      \end{bmatrix}$ is upper triangular. So $cA \in \V$.
+      \item For all $A \in \V$, $c(dA) = \begin{bmatrix}
+        cda_{11} & cda_{12} \\
+        0 & cda_{22}
+      \end{bmatrix} = (cd)A$.
+      \item For all $A \in \V$, $(c+d)A = \begin{bmatrix}
+        (c+d)a_{11} & (c+d)a_{12} \\
+        0 & (c+d)a_{22} \end{bmatrix} = \begin{bmatrix}
+          ca_{11} & ca_{12} \\
+          0 & ca_{22}
+        \end{bmatrix} + \begin{bmatrix}
+          da_{11} & da_{12} \\
+          0 & da_{22}
+        \end{bmatrix} = cA + dA$.
+      \item For all $A \in \V$, $1A = \begin{bmatrix}
+        1a_{11} & 1a_{12} \\
+        0 & 1a_{22}
+      \end{bmatrix} = A$.
     \end{enumerate}
-
-
 
     %%% end of your answer     
  }
 
- 
  \end{parts}
 \end{questions}
 

@@ -8,6 +8,7 @@ Linear Algebra, Winter 2024 \hfill MAT 185\\
 \\
 The up-to-date version of this document can be found at \url{https://github.com/HaysonC/skulenotes}\\
 \section{Vector Space}
+\subsection{Foundamental Properties}
 \begin{definition}[Vector Space in $\mathbb{R}$]
     This course concerns with real vector spaces. A vectors space, ${V}$, over $\mathbb{R}$ is a collection of \textbf{object} $\textbf{v} \in V$ s.t. the follow axioms are followed
     \begin{enumerate}
@@ -211,19 +212,23 @@ Now, to prove the part 2 of the Cancelation Theorem:
     is a linear combination of $\textbf{v}_1, \textbf{v}_2, \ldots, \textbf{v}_n$
 \end{definition}
 \begin{definition}[Linear independence]
-    Let $V$ be a vector space and $\textbf{v}_1, \textbf{v}_2, \ldots, \textbf{v}_n \in V$ and $\alpha_1, \alpha_2, \ldots, \alpha_n \in \mathbb{R}$. If the equation:
+    Let $V$ be a vector space and $\textbf{v}_1, \textbf{v}_2, \ldots, \textbf{v}_n \in V$ and $\alpha_1, \alpha_2, \ldots, \alpha_n \in \mathbb{R}$. If and only if the equation:
     \begin{align*}
         \alpha_1 \textbf{v}_1 + \alpha_2 \textbf{v}_2 + \ldots + \alpha_n \textbf{v}_n = \textbf{0}
     \end{align*}
-    has only the trivial solution $\alpha_1 = \alpha_2 = \ldots = \alpha_n = 0$.
+    has \textbf{only} the trivial solution $\alpha_1 = \alpha_2 = \ldots = \alpha_n = 0$.
 
     Then, $\textbf{v}_1, \textbf{v}_2, \ldots, \textbf{v}_n$ are said to be linearly independent; otherwise, they are linearly dependent.
 \end{definition}
+
 \begin{definition}[Span]
     Let $V$ be a vector space and $\textbf{v}_1, \textbf{v}_2, \ldots, \textbf{v}_n \in V$, then:
     \begin{align}
         \text{Span}(\textbf{v}_1, \textbf{v}_2, \ldots, \textbf{v}_n) = \left\{ \alpha_1 \textbf{v}_1 + \alpha_2 \textbf{v}_2 + \ldots + \alpha_n \textbf{v}_n \, | \, \alpha_1, \alpha_2, \ldots, \alpha_n \in \mathbb{R} \right\}
     \end{align}
     is the set of all linear combinations of $\textbf{v}_1, \textbf{v}_2, \ldots, \textbf{v}_n$
+\end{definition}
+\begin{definition}[Basis]
+    Let $V$ be a vector space and $\textbf{v}_1, \textbf{v}_2, \ldots, \textbf{v}_n \in V$. If $\textbf{v}_1, \textbf{v}_2, \ldots, \textbf{v}_n$ are linearly independent and $\text{Span}(\textbf{v}_1, \textbf{v}_2, \ldots, \textbf{v}_n) = V$, then $\textbf{v}_1, \textbf{v}_2, \ldots, \textbf{v}_n$ is a basis of $V$.
 \end{definition}
 \end{document}

@@ -163,8 +163,10 @@ The reduced section is the part of the sample where the cross-sectional area is 
     \paragraph{Mass} The mass of the beam is given by:
     $$ m = \rho V = \rho A L $$
     \paragraph{Deflection} The deflection of the beam is given by:
+    \begin{equation}
+        \delta = \frac{FL^3}{48EI} 
+    \end{equation}
     \begin{align*} 
-        \delta &= \frac{FL^3}{48EI} 
         \intertext{For a beam with a rectangular cross-section, we have:}
         \delta &= \frac{FL^3}{48E} \cdot \frac{12}{bh^3} = \frac{FL^3}{4Ebh^3}  
         \intertext{We can set $b$ proportional to $h$:}
@@ -182,6 +184,48 @@ The reduced section is the part of the sample where the cross-sectional area is 
 \end{equation}
 \paragraph{MPI Graph} We plot $\log E$ against $\log \rho$ to get the MPI graph. 
 \paragraph{Tempered Glass} Temperglass are made to resist tension. It is done by applying a compressive stress to the surface of the glass. This is done by cooling the surface of the glass faster than the core or chemically treating the surface.
-\appendix
+\subsection{Density}
+\paragraph{Density} The density of a material is given by:
+\begin{equation}
+    \rho = \frac{m}{V}
+\end{equation}
+\paragraph{Archimedes' Principle} The buoyant force on an object is equal to the weight of the fluid displaced by the object. Derive from that, we have:
+\begin{equation}
+    \rho = \frac{m}{V} = \frac{m_{\text{object}}}{m_{\text{object}} - m_{\text{object in fluid}}}
+\end{equation}
+\paragraph{Ordered structures} We have the following three orders:
+\begin{enumerate}
+    \item \textbf{Long Range Order (LRO)} Atoms are arranged in a well-defined pattern over long distances in repeating units. \\
+    (Example) Diamonds, some polymers, most metals, many ceramics, graphite, quartz, etc.
+    \item \textbf{Short Range Order (SRO)} Periodic arrangement of atoms over a few atomic or molecular spacings. \\
+    (Example) Most polymers, glasses, amorphous materials, etc.
+    \item \textbf{No Order (NO)} Atoms are randomly arranged. \\
+    (Example) Ideal gases, etc.
+\end{enumerate}
+\paragraph{Describing Crystal Structures} We can describe crystal structures by the following:
+\begin{itemize}
+    \item \textbf{Unit Cell} The smallest repeating unit of a crystal structure that could be used to represent the entire crystal.
+    \item \textbf{Lattice} The repeating arrangement of points that repersent the positions of atoms in the unit cell.\\
+    (Example) Simple Cubic, Body-Centered Cubic, Face-Centered Cubic, etc.
+    \item \textbf{Lattice Plus Basis} \textit{Not required for this course}
+\end{itemize}
+\paragraph{Theortical Density of Metals} The theoretical density of metals is given by:
+\begin{equation}
+    \rho = \frac{nM}{V_c N_A}
+\end{equation}
+, where:
+\begin{itemize}
+    \item $n$ is the number of atoms in the unit cell.
+    \item $M$ is the atomic mass of the element (amu = g/mol).
+    \item $V_c$ is the volume of the unit cell.
+    \item $N_A$ is Avogadro's number ($6.022 \times 10^{23} \text{mol}^{-1}$)
+\end{itemize}
+\paragraph{Simple Cubic} The simple cubic structure has the following properties:
+\begin{itemize}
+    \item \textbf{Centers of atoms} Located at the eight corners of a cube
+    \item \textbf{Packing Density} Rare due to low packing density (only known example: Polonium, Po)
+    \item \textbf{Close-packed directions} As cube edges.
+    \item \textbf{Coordination Number} Number of nearest neighbor
+\end{itemize}
 \includepdf[pages=-, angle=90]{EquationSheet.pdf}
 \end{document}

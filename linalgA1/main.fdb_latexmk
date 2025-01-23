@@ -1,6 +1,6 @@
 # Fdb version 4
-["pdflatex"] 1737423463.17486 "/Users/haysoncheung/programs/SKULE/linalgA1/main.tex" "main.pdf" "main" 1737423465.39713 0
-  "/Users/haysoncheung/programs/SKULE/linalgA1/main.tex" 1737423462.96292 27822 91de1d7c0ad6def15b3aa457a041a849 ""
+["pdflatex"] 1737508173.78309 "/Users/haysoncheung/programs/SKULE/linalgA1/main.tex" "main.pdf" "main" 1737508177.08037 0
+  "/Users/haysoncheung/programs/SKULE/linalgA1/main.tex" 1737508173.5784 29058 4e6b4e759265f01fc591743d2d1bc1f8 ""
   "/usr/local/texlive/2024/texmf-dist/fonts/enc/dvips/cm-super/cm-super-ts1.enc" 1136849721 2900 1537cc8184ad1792082cd229ecc269f4 ""
   "/usr/local/texlive/2024/texmf-dist/fonts/map/fontname/texfonts.map" 1577235249 3524 cb3e574dea2d1052e39280babc910dc8 ""
   "/usr/local/texlive/2024/texmf-dist/fonts/tfm/jknappen/ec/tcrm1000.tfm" 1136768653 1536 e07581a4bb3136ece9eeb4c3ffab8233 ""
@@ -218,9 +218,9 @@
   "/usr/local/texlive/2024/texmf-var/fonts/map/pdftex/updmap/pdftex.map" 1736306544.17718 5467645 128b85b7cde5f5edc5cb7f1dd7ff8736 ""
   "/usr/local/texlive/2024/texmf-var/web2c/pdftex/pdflatex.fmt" 1736306461 8221439 c62d8059860d756d52b53a0d1587ecd1 ""
   "/usr/local/texlive/2024/texmf.cnf" 1710266656 577 e590dabc9e28c5b61546e15f63eebcdf ""
-  "main.aux" 1737423465.2402 4024 98fef59324d3e1cab0e0c0990bbf9537 "pdflatex"
-  "main.out" 1737423464.8506 0 d41d8cd98f00b204e9800998ecf8427e "pdflatex"
-  "main.tex" 1737423462.96292 27822 91de1d7c0ad6def15b3aa457a041a849 ""
+  "main.aux" 1737508176.89841 4241 d486d7cfc2032587af950e0a90aca546 "pdflatex"
+  "main.out" 1737508176.4241 0 d41d8cd98f00b204e9800998ecf8427e "pdflatex"
+  "main.tex" 1737508173.5784 29058 4e6b4e759265f01fc591743d2d1bc1f8 ""
   "preamble.tex" 1737088524.14642 4765 c35cdc2d2a83b0face8cae71d713b244 ""
   (generated)
   "main.aux"
