@@ -701,6 +701,87 @@ Similarly, the surface area of a parametric curve $C$ rotated about the $y$-axis
     \end{align*}
     At these points, we can find the $x$ and $y$ coordinates of the intersection points. But also, we must check for the origin point $(x,y) = (0,0)$. Also $r_1 = r_2$ is not always reliable so we have to check it intuitively.
 \end{example}
+\subsection{Area and Length in Polar Coordinates}
+\paragraph{Area in Polar Coordinates} The area of a region $R: r = g(\theta)$ in polar coordinates is given by:
+\begin{align}
+    A &\approx \sum_{i} \frac{1}{2} [g(\theta_i)]^2 \Delta \theta_i \nonumber \\
+    \intertext{Taking a Riemann sum:}
+    &= \int_{\alpha}^{\beta} \frac{1}{2} [g(\theta)]^2 \, d\theta
+\end{align}
+\begin{example}
+    Given $r = 1 + \cos \theta$, we have:
+    \begin{align*}
+        A &= \int_0^{2\pi} \frac{1}{2} (1 + \cos \theta)^2 \, d\theta \\
+        &= \int_0^{2\pi} \frac{1}{2} (1 + 2\cos \theta + \cos^2 \theta) \, d\theta \\
+        &= \frac{1}{2}\int_0^{2\pi} 2 + 2\cos \theta + \frac{1 + \cos 2\theta}{2} \, d\theta \\
+        &= \frac{1}{2}\left(2\pi + 2\sin \theta + \frac{\theta}{2} + \frac{\sin 2\theta}{4}\right) \Big|_0^{2\pi}= \frac{3\pi}{2}
+    \end{align*}
+\end{example}
+\paragraph{Area between Two Polar Curves} The area between two polar curves $r^2 = f(\theta)$ and $r = g(\theta)$ is given by:
+\begin{equation}
+    A = \int_{\alpha}^{\beta} \frac{1}{2} [f(\theta)^2 - g(\theta)^2] \, d\theta
+\end{equation}
+\begin{example}
+    Given lemniscate $r^2 = 4\cos 2\theta$, circle $r = 1$, to find the area between the two curves, outside the circle, and inside the lemniscate. We have:
+    \begin{align*}
+        \intertext{We first consider the intersection points}
+        4\cos 2\theta &= 1 \\
+        \cos 2\theta &= \frac{1}{4} \\
+        \intertext{We have points at $\theta = \pm 0.659$. Also, since the lemniscate is symmetric about the $y$-axis, we have:}
+        \frac{1}{2}A &= \int_{-0.659}^{0.659} 4\cos^2 2\theta - 1 \, d\theta \\
+        A &= 2.554
+    \end{align*}
+\end{example}
+\begin{example}
+    Given $r = \sin \theta$, $r = \cos \theta$, we have:
+    \begin{align*}
+        \intertext{We first consider the intersection points}
+        \sin \theta &= \cos \theta \\
+        \tan \theta &= 1 \\
+        \theta &= \frac{\pi}{4}
+        \intertext{We then consider the area between the two curves, notice that (0, 0) is also an intersection point.}
+        A &= \frac{1}{2}\int_0^{\frac{\pi}{4}}  (\sin \theta)^2 - (\cos \theta)^2 \, d\theta \\
+        &= \frac{\pi - 2}{8}
+    \end{align*}
+\end{example}
+\paragraph{Tangent Lines in Polar Coordinates} The tangent line to a polar curve $r = r(\theta)$ is derived as follows:
+\begin{align}
+    x(\theta) &= r(\theta)\cos \theta, \quad y(\theta) = r(\theta)\sin \theta \nonumber \\
+    \intertext{By chain rule, we have and product rule, we have:}
+    \frac{dy}{dx} &= \frac{r'(\theta)\sin \theta + r(\theta)\cos \theta}{r'(\theta)\cos \theta - r(\theta)\sin \theta} \\
+\end{align}
+\paragraph{Length of a Polar Curve} Derived from above, the length of a polar curve $r = r(\theta)$ between $\alpha$ and $\beta$ is given by:
+\begin{equation}
+    L = \int_{\alpha}^{\beta} \sqrt{[r(\theta)]^2 + [r'(\theta)]^2} \, d\theta
+\end{equation}
+\begin{example}
+    Given $r = a - a\cos \theta$, we have:
+    \begin{align*}
+        r' &= a\sin \theta \\
+        L &= \int_0^{2\pi} \sqrt{(a - a\cos \theta)^2 + a^2\sin^2 \theta} \, d\theta \\
+        &= a\int_0^{2\pi} \sqrt{2 - 2\cos \theta} \, d\theta \\
+        \intertext{We can use the double angle formula to simplify the integral, with $\cos 2\theta = 1 - 2\sin^2 \theta$:}
+        &= 8a
+    \end{align*}
+\end{example}
+\section{Infinite Sequences and Series}
+\subsection{Sequences}
+\paragraph{Sequences} A sequence is a list of numbers written in a specific order.
+\begin{example}
+    Let $f: A \to \mathbb{R}$ be a function, and $f(x) = \frac{1}{x}$. We can restrict the domain of $f$ to $A = \{1, 2, 3, \ldots\} = \mathbb{N}$, and we can define the sequence $a_n = f(n) = \frac{1}{n}$.
+\end{example}
+\paragraph{Notation} Typcially, we denote a sequence as $\{a_n\}$, where $a_n$ is the $n$th term of the sequence. We can also denote with curly bracket as $\{a_n\} = \{a_1, a_2, a_3, \ldots\} = \{f(n)\}$.
+\paragraph{Ratio} The ratio of two sequences $\{a_n\}$ and $\{b_n\}$ for some $n \le N$ is a sequence $\{c_n\}$ such that $c_n = \frac{a_n}{b_n}$.
+\begin{example}
+    Let $a_n = n^2$, $b_n = e^n$, we have:
+    $$\frac{a_n}{b_n} = \{\frac{1}{e}, \frac{4}{e^2}, \frac{9}{e^3}, \ldots\}$$
+\end{example}
+\paragraph{Bounded Above} A sequence $\{a_n\}$ is said to be bounded above if there exists a number $M$ such that $|a_n| \le M$ for all $n$. (Similarly for bounded below).
+\begin{definition}[Monotonic Sequences]
+    A sequence $\{a_n\}$ is said to be non decreasing if $a_{n+1} \ge a_n$ for all $n$. Similarly, a sequence is said to be non increasing if $a_{n+1} \le a_n$ for all $n$. A sequence is said to be increasing if $a_{n+1} > a_n$ for all $n$. Similarly, a sequence is said to be decreasing if $a_{n+1} < a_n$ for all $n$.
+\\ A sequence $\{a_n\}$ is said to be monotonic if it is either increasing, decreasing, non increasing, or non decreasing.
+\end{definition}
+\paragraph{Convergent Sequences} A sequence $\{a_n\}$ is said to be convergent if there exists a number $L$ such that for all $\epsilon > 0$, there exists an $N$ such that $|a_n - L| < \epsilon$ for all $n \ge N$.
 \appendix
 \input{appendix.tex}
 \end{document}
