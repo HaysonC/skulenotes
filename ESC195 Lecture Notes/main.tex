@@ -17,11 +17,8 @@ The up-to-date version of this document can be found at \url{https://github.com/
 
 The definite integral of $\sqrt{x}$ from $0$ to $2$ using a Riemann sum with a non-uniform partition is given by:
 
-$$
-\int_{0}^{2} \sqrt{x} \, dx = \lim_{n \to \infty} \sum_{i=1}^n \sqrt{x_i} \Delta x_i
-$$
-
-where:
+$$\int_{0}^{2} \sqrt{x} \, dx = \lim_{n \to \infty} \sum_{i=1}^n \sqrt{x_i} \Delta x_i$$
+, where:
 \begin{itemize}
     \item $x_0 = 0, \, x_n = 2$,
     \item $x_i = i^2 \cdot \frac{2}{n^2}$ for $i = 0, 1, 2, \dots, n$,
@@ -55,9 +52,7 @@ $$
 u(x)v(x) = \int u'(x) v(x) \, dx + \int u(x) v'(x) \, dx.
 $$
 Rearranging this:
-$$
-\int u'(x) v(x) \, dx = u(x)v(x) - \int u(x) v'(x) \, dx.
-$$
+$$\int u'(x) v(x) \, dx = u(x)v(x) - \int u(x) v'(x) \, dx.$$
 
 \paragraph{Integration by parts formula}
 \begin{equation}
@@ -634,7 +629,78 @@ Similarly, the surface area of a parametric curve $C$ rotated about the $y$-axis
     \end{align*}
     This has no analytical solution, but can be solved numerically. Typically, we take $\epsilon = \sqrt{\frac{a^2-b^2}{a^2}}$.
 \end{example}
-
+\section{Polar Coordinates}
+\paragraph{Polar Coordinates} Given a point $P$ in the plane, we can define the polar coordinates of $P$ as $(r, \theta)$, where $r$ is the distance from the origin to $P$ and $\theta$ is the angle between the positive $x$-axis and the line segment from the origin to $P$.
+\paragraph{Transformation} We can convert between polar and Cartesian coordinates as follows:
+\begin{equation}
+    x = r\cos \theta, \quad y = r\sin \theta
+\end{equation}
+\paragraph{Reverse Transformation} We can convert between Cartesian and polar coordinates as follows:
+\begin{equation}
+    r = \sqrt{x^2 + y^2}, \quad \theta = \arctan\left(\frac{y}{x}\right)
+\end{equation}
+\paragraph{Note} The angle $\theta$ is not unique, as $\theta + 2\pi n$ for $n \in \mathbb{Z}$ represents the same point, beware of this when converting between polar and Cartesian coordinates.
+\begin{example}[Lines]
+    \begin{align*}
+        y = mx + b &\implies \theta = \alpha = \arctan m \\
+        x = a &\implies r = a\sec \theta \\
+        y = a &\implies r = a\csc \theta
+    \end{align*}
+\end{example}
+\begin{example}[Cirlces]
+    \begin{align*}
+        x^2 + y^2 = a^2 &\implies r = a \\
+    \end{align*}
+    Let $r = 6\sin \theta$, we have:
+    \begin{align*}
+        r^2 &= 6r\sin \theta \\
+        x^2 + y^2 &= 6y \\
+        x^2 + (y-3)^2 &= 9
+    \end{align*}
+    We deduce that the curve is a circle with radius $3$ and center $(0,3)$.
+\end{example}
+\paragraph{Cylinrical Coordinates} Given a point $P$ in space, we can define the cylindrical coordinates of $P$ as $(r, \theta, z)$, where $r$ is the distance from the $z$-axis to $P$, $\theta$ is the angle between the positive $x$-axis and the projection of the line segment from the origin to $P$ onto the $xy$-plane, and $z$ is the distance from the $xy$-plane to $P$.
+\paragraph{Spherical Coordinates} Given a point $P$ in space, we can define the spherical coordinates of $P$ as $(\rho, \theta, \phi)$, where $\rho$ is the distance from the origin to $P$, $\theta$ is the angle between the positive $x$-axis and the projection of the line segment from the origin to $P$ onto the $xy$-plane, and $\phi$ is the angle between the positive $z$-axis and the line segment from the origin to $P$.
+\subsection{Graphing in Polar Coordinates}
+\begin{example}
+    Let $r = \frac{1}{2} + \cos \theta$, we first figure out the origin of the curve by setting $r = 0$:
+    \begin{align*}
+        0 &= \frac{1}{2} + \cos \theta \\
+        \theta &= \frac{2\pi}{3},\, \frac{4\pi}{3}
+    \end{align*}
+    We then deduce the maximum and minimum of the curve to the origin by setting $\frac{dr}{d\theta} = 0$:
+    \begin{align*}
+        \frac{dr}{d\theta} &= -\sin \theta = 0 \\
+        \theta &= 0,\, \pi,\, 2\pi
+    \end{align*}
+    We also look for symmetry in the curve by checking $r(\theta) = r(-\theta)$:
+    \begin{align*}
+        \frac{1}{2} + \cos \theta &= \frac{1}{2} + \cos(-\theta) \\
+    \end{align*}
+    Thus, the curve is symmetric about the $x$-axis. We also look for symmetry about the $y$-axis by checking $r(\theta) = r(\pi + \theta)$:
+    \begin{align*}
+        \frac{1}{2} + \cos \theta \neq \frac{1}{2} + \cos(\pi + \theta) \\
+    \end{align*}
+    Thus, the curve is not symmetric about the $y$-axis. We also look for intervals in which the curve is increasing or decreasing by checking $r'(\theta) > 0$ or $r'(\theta) < 0$.
+\end{example}
+\paragraph{Common Polar Curves} Some common polar curves are:
+\begin{enumerate}
+    \item \textbf{Cardioid}: $r = a(1 + \cos \theta)$ (heart-shaped)
+    \item \textbf{Circle}: $r = a\cos \theta$ 
+    \item \textbf{Limascons}: $r = a + b\sin \theta$ (heart with a hole)
+    \item \textbf{Lemniscate}: $r^2 = a^2\sin 2\theta$ (infinity symbol, diagonal) \vspace{1em} $\quad r^2 = a^2\cos 2\theta$ (infinity symbol, horizontal)
+    \item \textbf{Petal Curves}: $r = a\cos n\theta$ ($mn$-petal flower) \vspace{1em} $\quad r = a\sin n\theta$ ($mn$-petal flower); $m=2$ if $n$ is even, $m=1$ if $n$ is odd.
+\end{enumerate}
+\subsection{The intersection of Polar Curves}
+\begin{example}
+    Let $r_1 = \sin \theta$, $r_2 = -\cos \theta$, we have:
+    \begin{align*}
+        \sin \theta &= -\cos \theta \\
+        \tan \theta &= -1 \\
+        \theta &= \frac{3\pi}{4},\, \frac{7\pi}{4}
+    \end{align*}
+    At these points, we can find the $x$ and $y$ coordinates of the intersection points. But also, we must check for the origin point $(x,y) = (0,0)$. Also $r_1 = r_2$ is not always reliable so we have to check it intuitively.
+\end{example}
 \appendix
 \input{appendix.tex}
 \end{document}

@@ -152,6 +152,7 @@ The reduced section is the part of the sample where the cross-sectional area is 
     \item $d$ is the thickness/depth of the sample
 \end{itemize}
 \section{Seleection of Materials}
+\subsection{Material Performance}
 \begin{example}[Aircraft Wing Spar]
     The aircraft wing spar is beam (loaded in bending) that supports the wing. The spar is made of a material with the objective of minimize mass under the following constraints:
     \begin{itemize}
@@ -193,6 +194,8 @@ The reduced section is the part of the sample where the cross-sectional area is 
 \begin{equation}
     \rho = \frac{m}{V} = \frac{m_{\text{object}}}{m_{\text{object}} - m_{\text{object in fluid}}}
 \end{equation}
+\section{Atomic Structures}
+\subsection{General Definitions}
 \paragraph{Ordered structures} We have the following three orders:
 \begin{enumerate}
     \item \textbf{Long Range Order (LRO)} Atoms are arranged in a well-defined pattern over long distances in repeating units. \\
@@ -210,7 +213,7 @@ The reduced section is the part of the sample where the cross-sectional area is 
     \item \textbf{Lattice Plus Basis} \textit{Not required for this course}
 \end{itemize}
 \paragraph{Theortical Density of Metals} The theoretical density of metals is given by:
-\begin{equation}
+\begin{equation} \label{eq:theoretical-density}
     \rho = \frac{nM}{V_c N_A}
 \end{equation}
 , where:
@@ -220,12 +223,80 @@ The reduced section is the part of the sample where the cross-sectional area is 
     \item $V_c$ is the volume of the unit cell.
     \item $N_A$ is Avogadro's number ($6.022 \times 10^{23} \text{mol}^{-1}$)
 \end{itemize}
-\paragraph{Simple Cubic} The simple cubic structure has the following properties:
+\subsection{Describing Basic Unit Cells}
+\begin{definition}[Coordination Number (CN)]
+    The coordination number is the number of nearest neighbors an atom has in a crystal structure.
+\end{definition}
+\begin{definition}[Atomic Packing Factor (APF)]
+    The atomic packing factor is the fraction of the volume of the unit cell that is occupied by hard spheres. It is given by:
+    \begin{equation}
+        \text{APF} = \frac{\text{Volume of atoms in unit cell}}{\text{Volume of unit cell}}
+    \end{equation}
+\end{definition}
+\paragraph{Simple Cubic (SC)} The simple cubic structure has the following properties:
 \begin{itemize}
     \item \textbf{Centers of atoms} Located at the eight corners of a cube
-    \item \textbf{Packing Density} Rare due to low packing density (only known example: Polonium, Po)
+    \item \textbf{Rare Packing Density}  Due to low packing density (only known example: Polonium, Po)
     \item \textbf{Close-packed directions} As cube edges.
-    \item \textbf{Coordination Number} Number of nearest neighbor
+    \item \textbf{Coordination Number} Number of nearest neighbor: 6
 \end{itemize}
+\paragraph{Face-Centered Cubic (FCC)} The face-centered cubic structure has an atom on the centre of each face of the cube. It has the following properties:
+\begin{itemize}
+    \item \textbf{Ductile} and \textbf{Malleable} due to the close-packed planes. Common examples include: \\ $\ch{Al}\, ,\ch{Cu}\, ,\ch{Au}\, ,\ch{Ag}$.
+    \item \textbf{Coordination Number} Number of nearest neighbor: 12
+    \item \textbf{Close-packed directions} As cube diagonals.
+    \item \textbf{Theortical Density} The theoretical density of FCC is derived from Equation (\ref{eq:theoretical-density}):
+    \begin{align}
+        \rho &= \frac{nM}{V_c N_A} \nonumber \\
+        \intertext{With $n = 4$ (8 corners $\times \frac{1}{8}$ atom each + 6 faces $\times \frac{1}{2}$ atom each) and $V_c = a^3$ (where $a$ is the \textbf{lattice parameter}):}
+        \rho_\text{FCC} &= \frac{4M}{a^3 N_A} \nonumber \\
+        \intertext{We can then obtain $a$ via the relationship between the atomic radius, $r$, and the lattice parameter via the geometry on the close-packed direction (face diagonal):}
+        a &= 2\sqrt{2}r \nonumber \\
+        \intertext{Substitute $a$ back into the equation:}
+        \rho_\text{FCC} &= \frac{4M}{(2\sqrt{2}r)^3 N_A} = \frac{4M}{16\sqrt{2}r^3 N_A} \nonumber \\
+        &= \frac{M}{4\sqrt{2}r^3 N_A} 
+    \end{align}
+    \item \textbf{Atomic Packing Factor} The atomic packing factor of FCC is given by:
+    \begin{equation}
+        \text{APF}_\text{FCC} = \frac{\text{Volume of atoms in unit cell}}{\text{Volume of unit cell} } = \frac{4 \times \frac{4}{3}\pi r^3}{a^3} = \frac{4 \times \frac{4}{3}\pi r^3}{(2\sqrt{2}r)^3} = \frac{\pi}{6\sqrt{2}} = \textbf{0.74}
+    \end{equation}
+    This is the highest possible packing factor for spheres. Thus, no other structure can have a higher packing factor.
+\end{itemize}
+\begin{example}[Density of Aluminum]
+    Given that the atomic radius of aluminum is $r = 143$ pm and the atomic mass is $M = 26.98$ g/mol, we can calculate the density of aluminum with FCC structure. We have:
+    \begin{align*}
+        \rho_\text{Al} &= \frac{M}{4\sqrt{2}r^3 N_A} = \frac{26.98}{4\sqrt{2} \times (143 \times 10^{-12})^3 \times 6.022 \times 10^{23}} \\
+        &= \frac{26.98}{4\sqrt{2} \times (143 \times 10^{-12})^3 \times 6.022 \times 10^{23}} = 2.7 \text{ g/cm}^3
+    \end{align*}
+\end{example}
+\section{Geometric Descriptions of Crystals}
+\subsection{Crystallographic Directions and Planes}
+\paragraph{Point Coordinates} A lattice positon in a unit cell is determined as fractional multiples of the unit cell edge lengths $a$, $b$, and $c$. (Defining the origin at one corner of the unit cell and $a=b=c=\textbf{1}$)
+\paragraph{Crystallographic Directions} A crystallographic direction is a line between two points in a crystal. It is denoted by square brackets, $[uvw]$. The direction is determined from the ``tail'' to the ``head'' of the vector. Also:
+\begin{enumerate}
+    \item It \textbf{shall not} include commas; and
+    \item It \textbf{shall be reduced}to the smallest integers; and
+    \item Negative signs are represented by a bar over the number.
+\end{enumerate}
+\begin{example}
+    The crystallographic direction from $(0,0,0)$ to $(-1,0,1/2)$ is $[\bar{2}01]$.
+\end{example}
+\paragraph{Family of Directions} A family of directions is a set of directions that are parallel to each other. It is denoted by $<uvw>$.
+\begin{example}
+    The family of directions $<100>$ is the set of directions $[100]$, $[010]$, $[001]$, $[\bar{1}00]$, $[0\bar{1}0]$, and $[00\bar{1}]$.
+\end{example}
+\paragraph{Angle between Directions} The angle between two directions in a \textbf{cubic} crystal is given by:
+\begin{equation}
+    \cos \theta = \frac{h_1h_2 + k_1k_2 + l_1l_2}{\sqrt{h_1^2 + k_1^2 + l_1^2}\sqrt{h_2^2 + k_2^2 + l_2^2}}
+\end{equation}
+, which is simply the normalized dot product of the two vectors.
+\paragraph{Crystallographic Planes} A crystallographic plane is a set of parallel planes in a crystal. It is denoted by $(hkl)$. The plane is determined by the intercepts on the $x$, $y$, and $z$ axes. 
+\paragraph{} Generally, we find the intercepts by finding the points where the plane intersects the axes. We then take the reciprocals of the intercepts and multiply by the smallest integer to get the Miller Indices.
+\paragraph{Family of Planes} A family of planes is a set of planes that are parallel to each other. It is denoted by $\{hkl\}$.
+\paragraph{Distance between Planes} The distance between two planes with miller indices $(h_1k_1l_1)$ and $(h_2k_2l_2)$ is given by:
+\begin{equation}
+    d = \frac{a}{\sqrt{h^2 + k^2 + l^2}}
+\end{equation}
+, where $a$ is the lattice parameter.
 \includepdf[pages=-, angle=90]{EquationSheet.pdf}
 \end{document}

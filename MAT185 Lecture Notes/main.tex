@@ -203,7 +203,7 @@ Now, to prove the part 2 of the Cancelation Theorem:
     \end{align}
 \end{definition}
 
-\subsection{Linear combinations}
+\section{Linear combinations}
 \begin{definition}[Linear Combination]
     Let $V$ be a vector space and $\textbf{v}_1, \textbf{v}_2, \ldots, \textbf{v}_n \in V$ and $\alpha_1, \alpha_2, \ldots, \alpha_n \in \mathbb{R}$, then:
     \begin{align*}
@@ -211,6 +211,7 @@ Now, to prove the part 2 of the Cancelation Theorem:
     \end{align*}
     is a linear combination of $\textbf{v}_1, \textbf{v}_2, \ldots, \textbf{v}_n$
 \end{definition}
+\subsection{Linear Independence, Span, and Basis}
 \begin{definition}[Linear independence]
     Let $V$ be a vector space and $\textbf{v}_1, \textbf{v}_2, \ldots, \textbf{v}_n \in V$ and $\alpha_1, \alpha_2, \ldots, \alpha_n \in \mathbb{R}$. If and only if the equation:
     \begin{align*}
@@ -220,7 +221,6 @@ Now, to prove the part 2 of the Cancelation Theorem:
 
     Then, $\textbf{v}_1, \textbf{v}_2, \ldots, \textbf{v}_n$ are said to be linearly independent; otherwise, they are linearly dependent.
 \end{definition}
-
 \begin{definition}[Span]
     Let $V$ be a vector space and $\textbf{v}_1, \textbf{v}_2, \ldots, \textbf{v}_n \in V$, then:
     \begin{align}
@@ -228,7 +228,39 @@ Now, to prove the part 2 of the Cancelation Theorem:
     \end{align}
     is the set of all linear combinations of $\textbf{v}_1, \textbf{v}_2, \ldots, \textbf{v}_n$
 \end{definition}
+\begin{theorem}[Unique Representation]
+    Let $V$ be a vector space and $\textbf{v}_1, \textbf{v}_2, \ldots, \textbf{v}_n \in V$ and $\alpha_1, \alpha_2, \ldots, \alpha_n \in \mathbb{R}/0$, and that they span $V$. For any $\textbf{v}_{n+1} \in V$, if $\textbf{v}_1, \textbf{v}_2, \ldots, \textbf{v}_n$ are linearly independent, then the equation:
+    \begin{align*}
+        \alpha_1 \textbf{v}_1 + \alpha_2 \textbf{v}_2 + \ldots + \alpha_n \textbf{v}_n = \textbf{v}_{n+1}  
+    \end{align*} 
+    is the only way to express $\textbf{v}_{n+1}$ as a linear combination of $\textbf{v}_1, \textbf{v}_2, \ldots, \textbf{v}_n$.
+\end{theorem}
+We can prove by contrapositive:
+\begin{proof}
+    Assume that there exists another way to express $\textbf{v}_{n+1}$ as a linear combination of $\textbf{v}_1, \textbf{v}_2, \ldots, \textbf{v}_n$, then:
+    \begin{align*}
+        \alpha_1 \textbf{v}_1 + \alpha_2 \textbf{v}_2 + \ldots + \alpha_n \textbf{v}_n = \beta_1 \textbf{v}_1 + \beta_2 \textbf{v}_2 + \ldots + \beta_n \textbf{v}_n
+    \end{align*}
+    Rearranging the equation, we have:
+    \begin{align*}
+        (\alpha_1 - \beta_1) \textbf{v}_1 + (\alpha_2 - \beta_2) \textbf{v}_2 + \ldots + (\alpha_n - \beta_n) \textbf{v}_n = \textbf{0}
+    \end{align*}
+    Since ($\alpha_i - \beta_i$) for $i = 1, 2, \ldots, n$ are not all zero, then $\textbf{v}_1, \textbf{v}_2, \ldots, \textbf{v}_n$ are linearly dependent. Thus, the contrapositive is true.
+\end{proof}
+\begin{theorem}[Growing and Pruning] The following are the two theorems describe the relationship between linear independence and the span: \\ \\
+    \textbf{Growing} Let $V$ be a vector space and $\textbf{v}_1, \textbf{v}_2, \ldots, \textbf{v}_n \in V$ be linearly independent. If $\textbf{v}_{n+1} \in V$ and $\textbf{v}_{n+1} \notin \text{Span}(\textbf{v}_1, \textbf{v}_2, \ldots, \textbf{v}_n)$, then $\textbf{v}_1, \textbf{v}_2, \ldots, \textbf{v}_n, \textbf{v}_{n+1}$ are linearly independent. \\ \\
+    \textbf{Pruning} Let $V$ be a vector space and $\textbf{v}_1, \textbf{v}_2, \ldots, \textbf{v}_n \in V$. If $\textbf{v}_1, \textbf{v}_2, \ldots, \textbf{v}_n$ are linearly dependent, then there exists a $\textbf{v}_i$ such that $\textbf{v}_i \in \text{Span}(\textbf{v}_1, \textbf{v}_2, \ldots, \textbf{v}_{i-1}, \textbf{v}_{i+1}, \ldots, \textbf{v}_n)$.
+\end{theorem}
 \begin{definition}[Basis]
     Let $V$ be a vector space and $\textbf{v}_1, \textbf{v}_2, \ldots, \textbf{v}_n \in V$. If $\textbf{v}_1, \textbf{v}_2, \ldots, \textbf{v}_n$ are linearly independent and $\text{Span}(\textbf{v}_1, \textbf{v}_2, \ldots, \textbf{v}_n) = V$, then $\textbf{v}_1, \textbf{v}_2, \ldots, \textbf{v}_n$ is a basis of $V$.
 \end{definition}
+\subsection{Fundamental Theorem of Linear Algebra}
+\begin{theorem}[Fundamental Theorem of Linear Algebra]
+    Let $V$ be a vector space and $\textbf{v}_1, \textbf{v}_2, \ldots, \textbf{v}_n \in V$. If $\textbf{v}_1, \textbf{v}_2, \ldots, \textbf{v}_n$ are linearly independent and $\text{Span}(\textbf{v}_1, \textbf{v}_2, \ldots, \textbf{v}_n) = V$, then:
+    \begin{enumerate}
+        \item Any basis of $V$ has the same number of elements.
+        \item Any linearly independent set of $V$ has at most $n$ elements.
+        \item Any spanning set of $V$ has at least $n$ elements.
+    \end{enumerate}
+\end{theorem}
 \end{document}
