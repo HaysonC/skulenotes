@@ -261,6 +261,23 @@ The reduced section is the part of the sample where the cross-sectional area is 
         \text{APF}_\text{FCC} = \frac{\text{Volume of atoms in unit cell}}{\text{Volume of unit cell} } = \frac{4 \times \frac{4}{3}\pi r^3}{a^3} = \frac{4 \times \frac{4}{3}\pi r^3}{(2\sqrt{2}r)^3} = \frac{\pi}{6\sqrt{2}} = \textbf{0.74}
     \end{equation}
     This is the highest possible packing factor for spheres. Thus, no other structure can have a higher packing factor.
+    \item \textbf{Stacking} The FCC structure can be thought of as stacking close-packed planes. The stacking sequence is ABCABC... (where A, B, and C describe the orientation hexagonal close-packed planes).
+\end{itemize}
+\paragraph{Hexagonal Close-Packed (HCP)} The hexagonal close-packed structure is \textbf{crytal structure} by stacking close-packed hexagonal planes. It has the following properties:
+\begin{itemize}
+    \item \textbf{Coordination Number} Number of nearest neighbor: 12
+    \item \textbf{Close-packed directions} As cube diagonals.
+    \item \textbf{Theortical Density} The theoretical density of HCP is derived from Equation (\ref{eq:theoretical-density}):
+    \begin{align}
+        \rho &= \frac{nM}{V_c N_A} \nonumber \\
+        \intertext{With $n = 6$ (12 corners $\times \frac{1}{6}$ atom each) and $V_c = a^3$:}
+        \rho_\text{HCP} &= \frac{6M}{a^3 N_A} 
+    \end{align}
+    \item \textbf{Atomic Packing Factor} The atomic packing factor of HCP is given by:
+    \begin{equation}
+        \text{APF}_\text{HCP} = \frac{\text{Volume of atoms in unit cell}}{\text{Volume of unit cell} } = \frac{6 \times \frac{4}{3}\pi r^3}{a^3} = \frac{6 \times \frac{4}{3}\pi r^3}{a^3} = \textbf{0.74}
+    \end{equation}
+    \item \textbf{Stacking} The HCP structure can be thought of as stacking close-packed planes. The stacking sequence is ABAB...
 \end{itemize}
 \begin{example}[Density of Aluminum]
     Given that the atomic radius of aluminum is $r = 143$ pm and the atomic mass is $M = 26.98$ g/mol, we can calculate the density of aluminum with FCC structure. We have:
@@ -269,7 +286,23 @@ The reduced section is the part of the sample where the cross-sectional area is 
         &= \frac{26.98}{4\sqrt{2} \times (143 \times 10^{-12})^3 \times 6.022 \times 10^{23}} = 2.7 \text{ g/cm}^3
     \end{align*}
 \end{example}
-\section{Geometric Descriptions of Crystals}
+\paragraph{Body-Centered Cubic (BCC)} The body-centered cubic structure has an atom at the centre of the cube. It has the following properties:
+\begin{enumerate}
+    \item \textbf{Coordination Number} Number of nearest neighbor: 8
+    \item \textbf{Atomic Packing Factor} The atomic packing factor of BCC is given by:
+    \begin{equation}
+        \text{APF}_\text{BCC} = \frac{\text{Volume of atoms in unit cell}}{\text{Volume of unit cell} } = \frac{2 \times \frac{4}{3}\pi r^3}{a^3} = \frac{2 \times \frac{4}{3}\pi r^3}{(4r/\sqrt{3})^3} = \textbf{0.68}
+    \end{equation}
+    \item \textbf{Close Packed Directions} As cube diagonals.
+    \item \textbf{Theortical Density} The theoretical density of BCC is derived from Equation (\ref{eq:theoretical-density}):
+    \begin{align}
+        \rho &= \frac{nM}{V_c N_A} \nonumber \\
+        \intertext{With $n = 2$ (8 corners $\times \frac{1}{8}$ atom each + 1 center atom) and $V_c = a^3$:}
+        \rho_\text{BCC} &= \frac{2M}{a^3 N_A} 
+    \end{align}
+    \item \textbf{Stacking} The BCC structure can be thought of as stacking close-packed planes. The stacking sequence is ABAB...
+\end{enumerate}
+\section{Geometric Properties of Crystals}
 \subsection{Crystallographic Directions and Planes}
 \paragraph{Point Coordinates} A lattice positon in a unit cell is determined as fractional multiples of the unit cell edge lengths $a$, $b$, and $c$. (Defining the origin at one corner of the unit cell and $a=b=c=\textbf{1}$)
 \paragraph{Crystallographic Directions} A crystallographic direction is a line between two points in a crystal. It is denoted by square brackets, $[uvw]$. The direction is determined from the ``tail'' to the ``head'' of the vector. Also:
@@ -298,5 +331,13 @@ The reduced section is the part of the sample where the cross-sectional area is 
     d = \frac{a}{\sqrt{h^2 + k^2 + l^2}}
 \end{equation}
 , where $a$ is the lattice parameter.
+\subsection{X-Ray Diffraction} The diffraction pattern is used to determine the crystal structure. By measuring the n$^\text{th}$ order peak angle $\theta_c$ and the wavelength of the X-ray, we can determine the distance between planes:
+\begin{align}
+    2d\sin \theta &= n\lambda \nonumber \\
+    d &= \frac{n\lambda}{2\sin \theta_c}
+    \intertext{Thus, we could determine the lattice parameter $a$ by the following equation:}
+    a &= \frac{n\lambda}{2\sin \theta_c} \sqrt{h^2 + k^2 + l^2}
+\end{align}
+
 \includepdf[pages=-, angle=90]{EquationSheet.pdf}
 \end{document}
