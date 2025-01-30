@@ -327,7 +327,7 @@ $$ \int_a^b f(x)\, dx = \lim_{t \to c^-} \int_a^t f(x) \, dx + \lim_{t \to c^+} 
 \end{align}
 \paragraph{Identities} The hyperbolic functions satisfy the following identities:
 \begin{align}
-    \cosh^2(x) + \sinh^2(x) &= 1, \\
+    \cosh^2(x) - \sinh^2(x) &= 1, \\
     \cosh(2x) &= \cosh^2(x) + \sinh^2(x), \\
     \sinh(2x) &= 2\sinh(x)\cosh(x).
 \end{align}
@@ -687,10 +687,81 @@ Similarly, the surface area of a parametric curve $C$ rotated about the $y$-axis
 \begin{enumerate}
     \item \textbf{Cardioid}: $r = a(1 + \cos \theta)$ (heart-shaped)
     \item \textbf{Circle}: $r = a\cos \theta$ 
-    \item \textbf{Limascons}: $r = a + b\sin \theta$ (heart with a hole)
+    \item \textbf{Limasçons}: $r = a + b\sin \theta$ (heart with a hole)
     \item \textbf{Lemniscate}: $r^2 = a^2\sin 2\theta$ (infinity symbol, diagonal) \vspace{1em} $\quad r^2 = a^2\cos 2\theta$ (infinity symbol, horizontal)
     \item \textbf{Petal Curves}: $r = a\cos n\theta$ ($mn$-petal flower) \vspace{1em} $\quad r = a\sin n\theta$ ($mn$-petal flower); $m=2$ if $n$ is even, $m=1$ if $n$ is odd.
 \end{enumerate}
+\paragraph{} Below are some examples of polar curves:
+\begin{figure}[h!]
+    \centering
+    \begin{minipage}{0.48\textwidth}
+        \centering
+        \begin{tikzpicture}[scale=1.5]
+            \draw[->] (-2.5,0) -- (2.5,0) node[right]{$x$};
+            \draw[->] (0,-2.5) -- (0,2.5) node[above]{$y$};
+            \draw[domain=0:360, smooth, samples=100, red] plot ({(1+cos(\x))*cos(\x)}, {(1+cos(\x))*sin(\x)});
+            \node at (0,-3) {Cardioid: $r = 1 + \cos \theta$};
+        \end{tikzpicture}
+    \end{minipage}
+    \hfill
+    \begin{minipage}{0.48\textwidth}
+        \centering
+        \begin{tikzpicture}[scale=1.5]
+            \draw[->] (-2.5,0) -- (2.5,0) node[right]{$x$};
+            \draw[->] (0,-2.5) -- (0,2.5) node[above]{$y$};
+            \draw[domain=0:360, smooth, samples=100, blue] plot ({cos(\x)*cos(\x)}, {cos(\x)*sin(\x)});
+            \node at (0,-3) {Circle: $r = \cos \theta$};
+        \end{tikzpicture}
+    \end{minipage}
+\end{figure}
+
+\begin{figure}[h!]
+    \centering
+    \begin{minipage}{0.48\textwidth}
+        \centering
+        \begin{tikzpicture}[scale=1.5]
+            \draw[->] (-2.5,0) -- (2.5,0) node[right]{$x$};
+            \draw[->] (0,-2.5) -- (0,2.5) node[above]{$y$};
+            \draw[domain=0:360, smooth, samples=100, green] plot ({(1+0.5*sin(\x))*cos(\x)}, {(1+0.5*sin(\x))*sin(\x)});
+            \node at (0,-3) {Limaçon: $r = 1 + 0.5\sin \theta$};
+        \end{tikzpicture}
+    \end{minipage}
+    \hfill
+    \begin{minipage}{0.48\textwidth}
+        \centering
+        \begin{tikzpicture}[scale=1.5]
+            \draw[->] (-2.5,0) -- (2.5,0) node[right]{$x$};
+            \draw[->] (0,-2.5) -- (0,2.5) node[above]{$y$};
+            \draw[domain=0:360, smooth, samples=100, orange] plot ({sqrt(abs(sin(2*\x)))*cos(\x)}, {sqrt(abs(sin(2*\x)))*sin(\x)});
+            \node at (0,-3) {Lemniscate: $r^2 = \sin 2\theta$};
+        \end{tikzpicture}
+    \end{minipage}
+\end{figure}
+
+\begin{figure}[h!]
+    \centering
+    \begin{minipage}{0.48\textwidth}
+        \centering
+        \begin{tikzpicture}[scale=1.5]
+            \draw[->] (-2.5,0) -- (2.5,0) node[right]{$x$};
+            \draw[->] (0,-2.5) -- (0,2.5) node[above]{$y$};
+            \draw[domain=0:360, smooth, samples=100, purple] plot ({cos(3*\x)*cos(\x)}, {cos(3*\x)*sin(\x)});
+            \node at (0,-3) {Petal Curve: $r = \cos 3\theta$};
+        \end{tikzpicture}
+    \end{minipage}
+    \hfill
+    \begin{minipage}{0.48\textwidth}
+        \centering
+        \begin{tikzpicture}[scale=1.5]
+            \draw[->] (-2.5,0) -- (2.5,0) node[right]{$x$};
+            \draw[->] (0,-2.5) -- (0,2.5) node[above]{$y$};
+            \draw[domain=0:360, smooth, samples=100, brown] plot ({sin(2*\x)*cos(\x)}, {sin(2*\x)*sin(\x)});
+            \node at (0,-3) {Petal Curve: $r = \sin 2\theta$};
+        \end{tikzpicture}
+    \end{minipage}
+\end{figure}
+\newpage
+\paragraph{} \label{sec:polar} A detailed list of polar curves and their properties could be found in Appendix \ref{app:polarCurves}. 
 \subsection{The intersection of Polar Curves}
 \begin{example}
     Let $r_1 = \sin \theta$, $r_2 = -\cos \theta$, we have:
