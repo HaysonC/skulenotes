@@ -852,7 +852,187 @@ Similarly, the surface area of a parametric curve $C$ rotated about the $y$-axis
     A sequence $\{a_n\}$ is said to be non decreasing if $a_{n+1} \ge a_n$ for all $n$. Similarly, a sequence is said to be non increasing if $a_{n+1} \le a_n$ for all $n$. A sequence is said to be increasing if $a_{n+1} > a_n$ for all $n$. Similarly, a sequence is said to be decreasing if $a_{n+1} < a_n$ for all $n$.
 \\ A sequence $\{a_n\}$ is said to be monotonic if it is either increasing, decreasing, non increasing, or non decreasing.
 \end{definition}
-\paragraph{Convergent Sequences} A sequence $\{a_n\}$ is said to be convergent if there exists a number $L$ such that for all $\epsilon > 0$, there exists an $N$ such that $|a_n - L| < \epsilon$ for all $n \ge N$.
+\begin{definition}[Unbounded Sequences]
+    A sequence $\{a_n\}$ is said to be unbounded if it is not bounded above or below. We can prove it using a epsilon-delta proof or considering the derivatives of the function that defines the sequence.
+\end{definition}
+\begin{example}
+    Proof that the sequence $\{a_n\} = 2^n$ is unbounded. Let $M$ be a number, we can find an $n$ such that $2^n > M$. We can find this $n$ by taking the logarithm of $M$ to the base $2$.
+\end{example}
+\begin{example}
+    Proof that the sequence $\{a_n\} = \frac{x^2}{e^x}$ is bounded above. We show that the derivative is negative after a certain point ($x = 2$), thus the sequence is bounded above.
+\end{example}
+\subsection{The Limit of a Sequence}
+\begin{definition}[Limit of a Sequence]
+    The limit of a sequence $\{a_n\}$ is given by:
+    \begin{equation*}
+        \lim_{n \to \infty} a_n = L
+    \end{equation*}
+    if for every $\epsilon > 0$, there exists an $N$ such that $|a_n - L| < \epsilon$ for all $n > N$. We denote this as $a_n \to L$ as $n \to \infty$.
+\end{definition}
+\paragraph{Convergence} A sequence $\{a_n\}$ is said to converge to $L$ if the limit of the sequence is $L$. And the following are true:
+\begin{enumerate}
+    \item If a sequence converges, then it is bounded.
+    \item If a sequence is unbounded, then it does not converge, i.e. it diverges.
+    \item However, if a sequence is bounded, it may or may not converge.
+\end{enumerate}
+\begin{example}
+    Prove that the sequence $\{a_n\} = \frac{n}{n+1}$ converges to $1$. We can show that $|a_n - 1| < \epsilon$ for all $n > N$ by taking $N = \frac{1}{\epsilon}$ by some algebraic manipulation. We have:\\
+    Given $\epsilon > 0$, let $N = \frac{1}{\epsilon}$, then for all $n > N$:
+    \begin{align*}
+        |a_n - 1| &= |\frac{n}{n+1} - 1| \\
+        &= |\frac{n - n - 1}{n+1}| \\
+        &= \frac{1}{n+1} < \frac{1}{n} < \epsilon
+    \end{align*}
+\end{example}
+\begin{theorem}[Uniqueness of Limits]
+    The limit of a sequence is unique. That is, of $\lim_{n \to \infty} a_n = L$ and $\lim_{n \to \infty} a_n = M$, then necessarily $L = M$.
+\end{theorem}
+\begin{theorem}[Monotone Convergence Theorem]
+    A monotonic sequence is convergent if and only if it is bounded. And necessarily the following are true if the sequence converges:
+    \begin{enumerate}
+        \item If the sequence is increasing or non decreasing, then the limit is the supremum of the sequence.
+        \item If the sequence is decreasing or non increasing, then the limit is the infimum of the sequence.
+    \end{enumerate}
+\end{theorem}
+\begin{theorem}[Limit Operations]
+    Given two sequences $\{a_n\}$ and $\{b_n\}$, and $c \in \mathbb{R}$, we have:
+    \begin{enumerate}
+        \item \textbf{Sum of Limits}: $\lim_{n \to \infty} (a_n + b_n) = \lim_{n \to \infty} a_n + \lim_{n \to \infty} b_n$
+        \item \textbf{Product of Limits}: $\lim_{n \to \infty} (a_n \cdot b_n) = \lim_{n \to \infty} a_n \cdot \lim_{n \to \infty} b_n$
+        \item \textbf{Scalar Multiple of Limits}: $\lim_{n \to \infty} c \cdot a_n = c \cdot \lim_{n \to \infty} a_n$
+        \item \textbf{reciprocal of Limits}: $\lim_{n \to \infty} \frac{1}{a_n} = \frac{1}{\lim_{n \to \infty} a_n}$
+        \item \textbf{Quotient of Limits}: $\lim_{n \to \infty} \frac{a_n}{b_n} = \frac{\lim_{n \to \infty} a_n}{\lim_{n \to \infty} b_n}$, provided $\lim_{n \to \infty} b_n \neq 0$
+    \end{enumerate}
+\end{theorem}
+\begin{theorem}[Squeeze Theorem\footnote{Also known as the Sandwich Theorem or the Pinching Theorem}]
+    Given three sequences $\{a_n\}$, $\{b_n\}$, and $\{c_n\}$, if $a_n \le b_n \le c_n$ for all $n$, and $\lim_{n \to \infty} a_n = \lim_{n \to \infty} c_n = L$, then necessarily $\lim_{n \to \infty} b_n = L$. This is useful for proving limits of sequences.
+\end{theorem}
+\begin{theorem}[Composite Function]
+    Given sequence $\{a_n\}$ covnerges to $L$ and continuous function $f$ at $L$, we have:
+    \begin{equation}
+        \lim_{n \to \infty} f(a_n) = f(\lim_{n \to \infty} a_n)
+    \end{equation}
+\end{theorem}
+\paragraph{Some Common Limits} Some common limits of sequences are:
+\begin{enumerate}
+    \item for $a > 0$, $\lim_{n \to \infty} a^{1/n} = 1$
+    \item for $|a| < 1$, $\lim_{n \to \infty} a^n = 0$
+    \item for $a > 0$, $\lim_{n \to \infty} \frac{1}{n^a} = 0$
+    \item for $a > 0$, $\lim_{n \to \infty} \frac{a^n}{n!} = 0$
+\end{enumerate}
+\subsection{Series}
+\begin{definition}[Infinite Series]
+    An infinite series is the sum of the terms of an infinite sequence. We denote the sum of the series as:
+    \begin{equation}
+        S = \sum_{n=1}^{\infty} a_n = a_1 + a_2 + a_3 + \ldots
+    \end{equation}
+    We also denote it as just $\sum a_n$.
+\end{definition}
+\begin{definition}[Partial Sum]
+    The partial sum of an infinite series is the sum of the first $n$ terms of the series. We denote the partial sum as:
+    \begin{equation}
+        S_n = \sum_{i=1}^{n} a_i = a_1 + a_2 + \ldots + a_n
+    \end{equation}
+    If the sequance $\{S_n\}$ converges to $S$, then the series is said to converge to $S$; otherwise, it is said to diverge.
+\end{definition}
+\paragraph{Geometric Series} A geometric series is a series of the form:
+\begin{equation}
+    \sum_{n=0}^{\infty} ar^n = a + ar + ar^2 + \ldots
+\end{equation}
+\begin{theorem}[Geometric Series]
+    A geometric series converges if $|r| < 1$, and the sum of the series is given by:
+    \begin{equation}
+        S = \frac{a}{1 - r}
+    \end{equation}
+    If $|r| \ge 1$, then the series diverges.
+\end{theorem}
+\begin{theorem}[Addition of Series]
+    Given two series $\sum a_n$ and $\sum b_n$, we have:
+    \begin{equation}
+        \sum a_n + \sum b_n = \sum (a_n + b_n)
+    \end{equation}
+\end{theorem}
+\begin{theorem}[Convergence]
+    $\sum a_n$ converges if and only if $\sum_{k=j}^{\infty} a_k$ converges for all $j$.
+\end{theorem}
+\begin{example}
+    Given $\sum \frac{3^{k-1}}{4^{3k+1}}$ converges. Then we have:
+    \begin{align*}
+        \sum \frac{3^{k-1}}{4^{3k+1}} = \frac{1}{12} + \frac{1}{64} + \frac{1}{4^7} + \ldots_n + \sum^{\infty}_{k=n} \frac{3^{k-1}}{4^{3k+1}}
+    \end{align*}
+    converges for all $n$.
+\end{example}
+\begin{theorem}[Zero Test, Divergence Test]
+    If $\lim_{n \to \infty} a_n \ne 0$, then $\sum a_n$ diverges. Note that the contrapositive is true, i.e. if $\sum a_n$ converges, then $\lim_{n \to \infty} a_n = 0$.
+\end{theorem}
+\subsection{The Integral Test and Estimates of Sums}
+\begin{theorem}[Integral Test]
+    Let $f$ be a continuous, positive, and decreasing function on $[1, \infty)$, and let $a_n = f(n)$. Then the series $\sum a_n$ converges if and only if the improper integral $\int_1^{\infty} f(x) \, dx$ converges.
+\end{theorem}
+\begin{example}[$p$=2-series]
+    Given $\sum \frac{1}{n^2}$, we can use the integral test to show that the series converges. We have:
+    \begin{align*}
+        \int_1^{\infty} \frac{1}{x^2} \, dx &= -\frac{1}{x} \Big|_1^{\infty} \\
+        &= 1
+    \end{align*}
+    Thus, the series converges.
+\end{example}
+Note that the ``iff'' statement allow us to determine the convergence of an integral.
+\begin{example}[Harmonic Series]
+    Given $\sum \frac{1}{n}$, we can use the integral test to show that the series diverges. We have:
+    \begin{align*}
+        \int_1^{\infty} \frac{1}{x} \, dx &= \ln x \Big|_1^{\infty} \\
+        &= \infty
+    \end{align*}
+    Thus, the series diverges. The harmonic series is a classic example of a divergent series.
+\end{example}
+\begin{definition}[Remainder]
+    The remainder of a series $\sum a_n$ is given by:
+    \begin{equation}
+        R_n = S - S_n = \sum_{k=n+1}^{\infty} a_k
+    \end{equation}
+    We can use the remainder to estimate the sum of a series.
+\end{definition}
+\paragraph{Estimating Sums} We can estimate the sum of a series by using the remainder of the series. We can use the remainder to estimate the sum of a series. Note that we always have:
+\begin{equation}
+    R_n \le \int_n^{\infty} f(x) \, dx /quad \text{and} \quad R_n \ge \int_{n+1}^{\infty} f(x) \, dx
+\end{equation}
+We can use it to estimate the sum of a series from a partial sum.
+\begin{equation}
+    S_n + \int_{n+1}^{\infty} f(x) \, dx \le S \le S_n + \int_n^{\infty} f(x) \, dx
+\end{equation}
+\begin{example}
+    Given $\sum \frac{1}{n^2}$, we can use the remainder to estimate the sum of the series. We have:
+    \begin{align*}
+        S_n + \int_{n+1}^{\infty} \frac{1}{x^2} \, dx &\le S \le S_n + \int_n^{\infty} \frac{1}{x^2} \, dx \\
+        \frac{1}{n} + \int_{n+1}^{\infty} \frac{1}{x^2} \, dx &\le S \le \frac{1}{n} + \int_n^{\infty} \frac{1}{x^2} \, dx
+    \end{align*}
+    We can then evaluate the integrals to obtain the value bounds.
+\end{example}
+\subsection{Comparison Tests}
+\begin{theorem}[Basic Comparison Test]
+    Let $\{a_n\}$ and $\{b_n\}$ be two sequences such that $0 \le a_n \le b_n$ for all $n$. Then:
+    \begin{enumerate}
+        \item If $\sum b_n$ converges, then $\sum a_n$ converges.
+        \item If $\sum a_n$ diverges, then $\sum b_n$ diverges.
+    \end{enumerate}
+\end{theorem}
+\begin{proof}
+    Assume, WLOG, that $a_k \le b_k$ for all $k$. Define $S_n = \sum_{k=1}^{n} a_k$ and $T_n = \sum_{k=1}^{n} b_k$. Also, $T = \sum b_k$ exists. We have:
+    \begin{align*}
+        S_{n+1} &= S_n + a_{n+1} > S_n
+        \intertext{Thus, $\{S_n\}$ is increasing. Also, we have:}
+        S_n &\le T_n < T
+        \intertext{Thus, $\{S_n\}$ is bounded above. Thus, $\{S_n\}$ converges by the Monotone Convergence Theorem.}
+    \end{align*}
+\end{proof}
+\begin{example}
+    Let $S = \sum \frac{7}{17n^2 + 3n^{1/3} + 5}$ We know that $17n^2 > 17n^{1/3} + 5$ for all $n$. Thus, we have:
+    \begin{align*}
+        \frac{7}{17n^2} &> \frac{7}{17n^2 + 3n^{1/3} + 5} \\
+        \intertext{We can then use the comparison test to show that the series converges.}
+    \end{align*}
+\end{example}
 \appendix
 \input{appendix.tex}
 \end{document}

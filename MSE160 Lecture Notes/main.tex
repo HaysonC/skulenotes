@@ -338,6 +338,45 @@ The reduced section is the part of the sample where the cross-sectional area is 
     \intertext{Thus, we could determine the lattice parameter $a$ by the following equation:}
     a &= \frac{n\lambda}{2\sin \theta_c} \sqrt{h^2 + k^2 + l^2}
 \end{align}
-
+\subsection{Geometrcally Ideal Crystal Structures}
+\paragraph{Coordination Number and Ratio} The coordination number increases with $\frac{r_{\text{cation}}}{r_{\text{anion}}}$ (The ionic radii ratio).  It relates to coordination number as follows:
+\begin{table}[h]
+    \centering
+    \begin{tabular}{|c|c|c|}
+        \hline
+        \textbf{Ionic Radii Ratio} & \textbf{Coord. Number} & \textbf{Name} \\
+        \hline
+        $<$ 0.155 & 2 & Linear \\
+        0.155 - 0.225 & 3 & Trigonal Planar \\
+        0.225 - 0.414 & 4 & Tetrahedral \\
+        0.414 - 0.732 & 6 & Octahedral \\
+        0.732 - 1.0 & 8 & Cubic \\
+        \hline
+    \end{tabular}
+    \caption{Coordination Number and Ionic Radii}
+    \label{tab:coordination-number}
+\end{table} 
+\begin{definition}[AX Type]
+    The AX type is a crystal structure where the cation and anion are of the same ratio. 
+\end{definition}
+\begin{example}[AX Type: $\ch{NaCl}$ rock salt]
+    The $\ch{NaCl}$ structure is an AX type structure. The cation and anion are of the same ratio. Soldium (Cation) has radius $r_{\text{Na}} = 0.102$ nm and Chlorine (Anion) has radius $r_{\text{Cl}} = 0.181$ nm. The ratio is:
+    $$ \frac{r_{\text{cation}}}{r_{\text{anion}}} = \frac{0.102}{0.181} = 0.56 $$
+    Thus, the coordination number is 6.\\
+    Additionally, we could calculate its theoretical density. It has 4 cation and 4 anion in the unit cell. The volume of the unit cell is $a^3$, and it follows a FCC structure. Thus, the density is: 
+    \begin{align*}
+        \rho &= \frac{4M_{\text{Na}} + 4M_{\text{Cl}}}{a^3 N_A} = \frac{4(22.99) + 4(35.45)}{a^3 N_A} \\
+        &= \frac{4(22.99) + 4(35.45)}{(2\sqrt{2}r_{\text{Na}})^3 N_A} = \frac{4(22.99) + 4(35.45)}{(2\sqrt{2} \times 0.102)^3 N_A} \\
+        &= \frac{4(22.99) + 4(35.45)}{(2\sqrt{2} \times 0.102)^3 N_A} = 2.16 \text{ g/cm}^3
+    \end{align*}
+\end{example}
+\begin{example}[AX Type: $\ch{ZnS}$, Zinc Blende]
+    The $\ch{ZnS}$ structure is an AX type structure. It has a FCC structure with CN = 4. The radius of Zinc (Cation) is $r_{\text{Zn}} = 0.074$ nm and the radius of Sulfur (Anion) is $r_{\text{S}} = 0.184$ nm. The ratio is:
+    $$ \frac{r_{\text{cation}}}{r_{\text{anion}}} = \frac{0.074}{0.184} = 0.40 $$
+\end{example}
+\begin{example}[AX$_2$ Type: $\ch{CaF2}$]
+    The $\ch{CaF2}$ structure is an AX$_2$ type structure. It has a FCC structure with CN = 8. The radius of Calcium (Cation) is $r_{\text{Ca}} = 0.099$ nm and the radius of Fluorine (Anion) is $r_{\text{F}} = 0.133$ nm. The ratio is:
+    $$ \frac{r_{\text{cation}}}{r_{\text{anion}}} = \frac{0.099}{0.133} = 0.74 $$
+\end{example}
 \includepdf[pages=-, angle=90]{EquationSheet.pdf}
 \end{document}

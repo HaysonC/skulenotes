@@ -9,7 +9,7 @@ Linear Algebra, Winter 2024 \hfill MAT 185\\
 The up-to-date version of this document can be found at \url{https://github.com/HaysonC/skulenotes}\\
 \section{Vector Space}
 \subsection{Foundamental Properties}
-\begin{definition}[Vector Space in $\mathbb{R}$]
+\begin{definition}[Vector Space in $\mathbb{R}$, Field]
     This course concerns with real vector spaces. A vectors space, ${V}$, over $\mathbb{R}$ is a collection of \textbf{object} $\textbf{v} \in V$ s.t. the follow axioms are followed
     \begin{enumerate}
         \item \textbf{Addition Axioms}
@@ -43,7 +43,7 @@ The up-to-date version of this document can be found at \url{https://github.com/
         \end{enumerate}
     \end{enumerate}
      
-    \paragraph{Note} It could be shown that the axiom imply the commutativity of in addition, namely $\forall \textbf{x} \implies \textbf{y} \in \mathbb{R}$, $\textbf{x} + \textbf{y} = \textbf{y} + \textbf{x}$
+    \paragraph{Note} It could be shown that the axiom imply the commutativity of in addition, namely $\forall \textbf{x}, \textbf{y} \in \mathbb{R}$, $\textbf{x} + \textbf{y} = \textbf{y} + \textbf{x}$
 \end{definition}
 \paragraph{Example} $\mathbb{R}^n$ is a vector space over $\mathbb{R}$, where $\textbf{x} = (x_1, x_2, \ldots, x_n)$ and $\textbf{y} = (y_1, y_2, \ldots, y_n)$, then $\textbf{x} + \textbf{y} = (x_1 + y_1, x_2 + y_2, \ldots, x_n + y_n)$ and $\alpha\textbf{x} = (\alpha x_1, \alpha x_2, \ldots, \alpha x_n)$
 \begin{theorem}[Cancelation, Part 1]
@@ -251,6 +251,9 @@ We can prove by contrapositive:
     \textbf{Growing} Let $V$ be a vector space and $\textbf{v}_1, \textbf{v}_2, \ldots, \textbf{v}_n \in V$ be linearly independent. If $\textbf{v}_{n+1} \in V$ and $\textbf{v}_{n+1} \notin \text{Span}(\textbf{v}_1, \textbf{v}_2, \ldots, \textbf{v}_n)$, then $\textbf{v}_1, \textbf{v}_2, \ldots, \textbf{v}_n, \textbf{v}_{n+1}$ are linearly independent. \\ \\
     \textbf{Pruning} Let $V$ be a vector space and $\textbf{v}_1, \textbf{v}_2, \ldots, \textbf{v}_n \in V$. If $\textbf{v}_1, \textbf{v}_2, \ldots, \textbf{v}_n$ are linearly dependent, then there exists a $\textbf{v}_i$ such that $\textbf{v}_i \in \text{Span}(\textbf{v}_1, \textbf{v}_2, \ldots, \textbf{v}_{i-1}, \textbf{v}_{i+1}, \ldots, \textbf{v}_n)$.
 \end{theorem}
+\begin{theorem}[Span and Linear Independence]
+    Let $V$ be a vector space and $\textbf{v}_1, \textbf{v}_2, \ldots, \textbf{v}_n \in V$. For every $\textbf{v}_k$ with $k = 1, 2, \ldots, n$, $\text{Span}(\textbf{v}_1, \textbf{v}_2, \ldots, \textbf{v}_{k-1}, \textbf{v}_{k+1}, \ldots, \textbf{v}_n) \subset \text{Span}(\textbf{v}_1, \ldots, \textbf{v}_n)$ if and only if $\textbf{v}_1, \textbf{v}_2, \ldots, \textbf{v}_n$ are linearly independent.
+\end{theorem}
 \begin{definition}[Basis]
     Let $V$ be a vector space and $\textbf{v}_1, \textbf{v}_2, \ldots, \textbf{v}_n \in V$. If $\textbf{v}_1, \textbf{v}_2, \ldots, \textbf{v}_n$ are linearly independent and $\text{Span}(\textbf{v}_1, \textbf{v}_2, \ldots, \textbf{v}_n) = V$, then $\textbf{v}_1, \textbf{v}_2, \ldots, \textbf{v}_n$ is a basis of $V$.
 \end{definition}
@@ -263,4 +266,23 @@ We can prove by contrapositive:
         \item Any spanning set of $V$ has at least $n$ elements.
     \end{enumerate}
 \end{theorem}
+\begin{example}[Dimension of Even 4-degree polynomial]
+    Given $W \subseteq \mathbb{P}_4$ where $W = \left\{ p(x) \, | \, p(x) = p(-x) \right\}$, then $W$ is a subspace of $\mathbb{P}_4$. Since $x^3, x \in P_4$ but $x^3, x \notin W$,  Span$(\{W, x, x^3\}) = \mathrm{dim}(W) + 2$ So $\mathrm{dim}(W) \le 3$; We can find 3 linearly independent vectors in $W$ such as $1, x^2, x^4$. Thus, $\mathrm{dim}(W) \ge 3$. Thus, $\mathrm{dim}(W) = 3$.
+\end{example}
+
+\begin{definition}[Column Space]
+    Let $a_1, a_2, \ldots, {a_n} \in {^m\mathbb{R}}$, then:   
+    \begin{equation}
+        \text{Col}(A) = \text{Span}({a_1}, {a_2}, \ldots, {a_n})
+    \end{equation}
+    is the column space of $A$.
+\end{definition}
+Note that the span of set is a subspace of the vector space. Thus, the column space of a matrix is a subspace of $^m\mathbb{R}$. This is also call the set of images of the transformation. We can also note that matrix multiplication is is commutative with scalar multiplication. We can conduct proofs using such properties.
+\begin{definition}[Rank]
+    Let $A \in {^m\mathbb{R}^n}$, then:
+    \begin{equation}
+        \text{rank}(A) = \text{dim}(\text{Col}(A))
+    \end{equation}
+    is the rank of $A$.
+\end{definition}
 \end{document}
