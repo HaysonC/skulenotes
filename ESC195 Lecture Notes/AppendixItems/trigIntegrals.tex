@@ -1,0 +1,48 @@
+\begin{table}[h]
+    \centering
+    \renewcommand{\arraystretch}{1.5}
+    \begin{tabular}{|c|c|}
+        \hline
+        \textbf{Category} & \textbf{Integral Formula} \\
+        \hline
+        \multicolumn{2}{|c|}{\textbf{Basic Trigonometric Integrals}} \\
+        \hline
+        $\int \sin x \,dx$ & $-\cos x + C$ \\
+        $\int \cos x \,dx$ & $\sin x + C$ \\
+        $\int \tan x \,dx$ & $\ln |\sec x| + C$ \\
+        $\int \cot x \,dx$ & $\ln |\sin x| + C$ \\
+        $\int \sec x \,dx$ & $\ln |\sec x + \tan x| + C$ \\
+        $\int \csc x \,dx$ & $\ln |\csc x - \cot x| + C$ \\
+        \hline
+        \multicolumn{2}{|c|}{\textbf{Inverse Trigonometric Integrals}} \\
+        \hline
+        $\int \text{arcsin} \,x \,dx$ & $x \text{arcsin} x + \sqrt{1 - x^2} + C$ \\
+        $\int \text{arccos} \,x \,dx$ & $x \text{arccos} x - \sqrt{1 - x^2} + C$ \\
+        $\int \text{arctan} \,x \,dx$ & $x \text{arctan} x - \frac{1}{2} \ln(1 + x^2) + C$ \\
+        $\int \text{arccot} \,x \,dx$ & $x \text{arccot} x + \frac{1}{2} \ln(1 + x^2) + C$ \\
+        $\int \text{arcsec} \,x \,dx$ & $x \text{arcsec} x - \ln |x + \sqrt{x^2 - 1}| + C$ \\
+        $\int \text{arccsc} \,x \,dx$ & $x \text{arccsc} x + \ln |x + \sqrt{x^2 - 1}| + C$ \\
+        \hline
+        \multicolumn{2}{|c|}{\textbf{Basic Hyperbolic Trigonometric Integrals}} \\
+        \hline
+        $\int \sinh x \,dx$ & $\cosh x + C$ \\
+        $\int \cosh x \,dx$ & $\sinh x + C$ \\
+        $\int \tanh x \,dx$ & $\ln |\cosh x| + C$ \\
+        $\int \coth x \,dx$ & $\ln |\sinh x| + C$ \\
+        $\int \text{sech}^2 x \,dx$ & $\tanh x + C$ \\
+        $\int \text{csch}^2 x \,dx$ & $-\coth x + C$ \\
+        \hline
+        \multicolumn{2}{|c|}{\textbf{Trigonometric Substitution Choices}} \\
+        \hline
+        $\sqrt{a^2 - x^2}$ & Set $x = a \sin \theta$, then $dx = a \cos \theta \, d\theta$ \\
+        $\sqrt{a^2 + x^2}$ & Set $x = a \sinh \theta$, then $dx = a \cosh \theta \, d\theta$ \\
+        $\sqrt{x^2 - a^2}$ & Set $x = a \cosh \theta$, then $dx = a \sinh \theta \, d\theta$ \\
+        \hline
+        \multicolumn{2}{|c|}{\textbf{Reduction Formulas}} \\
+        \hline
+        $\int \sin^n x \,dx$ & $\frac{-\sin^{n-1} x \cos x}{n} + \frac{n-1}{n} \int \sin^{n-2} x \,dx$ \\
+        $\int \cos^n x \,dx$ & $\frac{\cos^{n-1} x \sin x}{n} + \frac{n-1}{n} \int \cos^{n-2} x \,dx$ \\
+        \hline
+    \end{tabular}
+    \label{tab:integrals}
+\end{table}

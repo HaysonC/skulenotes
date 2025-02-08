@@ -277,6 +277,13 @@ We can prove by contrapositive:
     \end{equation}
     is the column space of $A$.
 \end{definition}
+\begin{definition}[Row Space]
+    Let $a_1, a_2, \ldots, {a_n} \in {^m\mathbb{R}}$, then:   
+    \begin{equation}
+        \text{Row}(A) = \text{Span}({a_1}, {a_2}, \ldots, {a_n})
+    \end{equation}
+    is the row space of $A$.
+\end{definition}
 Note that the span of set is a subspace of the vector space. Thus, the column space of a matrix is a subspace of $^m\mathbb{R}$. This is also call the set of images of the transformation. We can also note that matrix multiplication is is commutative with scalar multiplication. We can conduct proofs using such properties.
 \begin{definition}[Rank]
     Let $A \in {^m\mathbb{R}^n}$, then:
@@ -284,5 +291,58 @@ Note that the span of set is a subspace of the vector space. Thus, the column sp
         \text{rank}(A) = \text{dim}(\text{Col}(A))
     \end{equation}
     is the rank of $A$.
+\end{definition}
+\begin{theorem}[Rank of RREF]
+    Let $A \in {^m\mathbb{R}^n}$, then:
+    \begin{equation}
+        \text{rank}(A) = \text{rank}(\text{RREF}(A))
+    \end{equation}
+\end{theorem}
+\begin{theorem}[Dimension of Row and Column Space]
+    Let $A \in {^m\mathbb{R}^n}$, then:
+    \begin{align}
+        \text{dim}(\text{Row}(A)) &= \text{rank}(A) \\
+        \text{dim}(\text{Col}(A)) &= \text{rank}(A)
+    \end{align}
+\end{theorem}
+\begin{definition}[Matrix Multiplication]
+    Let $A \in {^m\mathbb{R}^n}$ and $B \in {^n\mathbb{R}^p}$, then:
+    \begin{equation}
+        (AB)_{ij} = \sum_{k=1}^{n} a_{ik}b_{kj}
+    \end{equation}
+\end{definition}
+\begin{definition}[Column View of Matrix Multiplication]
+    Let $A \in {^m\mathbb{R}^n}$ and $B \in {^n\mathbb{R}^p}$, then:
+    \begin{equation}
+        AB = \begin{bmatrix} A\textbf{b}_1 & A\textbf{b}_2 & \ldots & A\textbf{b}_p \end{bmatrix}
+    \end{equation}
+\end{definition}
+\begin{theorem}[Column Space of Matrix Multiplication]
+    Let $A \in {^m\mathbb{R}^n}$ and $B \in {^n\mathbb{R}^p}$, then:
+    \begin{equation}
+        \text{Col}(AB) \subseteq \text{Col}(A)
+    \end{equation}
+    If $B$ is a invertible matrix, then also $\text{Col}(A) \subseteq \text{Col}(AB)$
+\end{theorem}
+\begin{definition}[Invertible]
+    Let $A \in {^n\mathbb{R}^n}$, then $A$ is invertible if there exists a matrix $B \in {^n\mathbb{R}^n}$ such that:
+    \begin{align}
+        AB = BA = I
+    \end{align}
+    where $I$ is the identity matrix, and we denote $B = A^{-1}$, the inverse of $A$.
+\end{definition}
+\begin{proof}
+    Let $A$, $B$ be matrices, so $\text{col}(AB) = \text{Span}(\text{columns of }AB)$. In the column view, we have $AB = A(\text{columns of }B) = \begin{bmatrix}
+        A\textbf{b}_1 & A\textbf{b}_2 & \ldots & A\textbf{b}_p
+    \end{bmatrix}$
+    Each column of $AB$ is in $\text{Col}(A)$. So each column of $AB$ is a linear combination of the columns of $A$. Thus, $\text{Col}(AB) \subseteq \text{Col}(A)$.
+
+    Consider the case where $B$ is invertible. Let $C = AB$, Then $CB^{-1} = A$. Since it is proven that $\text{col}(CB^{-1}) \subseteq \text{col}(C)$, hence,  $\text{col}(A) \subseteq \text{col}(AB)$.
+\end{proof}
+\begin{definition}[Null Space of Matrix Multiplication]
+    Let $A \in {^m\mathbb{R}^n}$ and $B \in {^n\mathbb{R}^p}$, then:
+    \begin{equation}
+        \text{null}(AB) \supseteq \text{null}(B)
+    \end{equation}
 \end{definition}
 \end{document}

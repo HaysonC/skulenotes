@@ -1009,7 +1009,7 @@ We can use it to estimate the sum of a series from a partial sum.
     \end{align*}
     We can then evaluate the integrals to obtain the value bounds.
 \end{example}
-\subsection{Comparison Tests}
+\subsection{Other Comparison Tests}
 \begin{theorem}[Basic Comparison Test]
     Let $\{a_n\}$ and $\{b_n\}$ be two sequences such that $0 \le a_n \le b_n$ for all $n$. Then:
     \begin{enumerate}
@@ -1032,6 +1032,188 @@ We can use it to estimate the sum of a series from a partial sum.
         \frac{7}{17n^2} &> \frac{7}{17n^2 + 3n^{1/3} + 5} \\
         \intertext{We can then use the comparison test to show that the series converges.}
     \end{align*}
+\end{example}
+\begin{theorem}[Limit Comparison Test]
+    Let $\{a_n\}$ and $\{b_n\}$ be two sequences such that $a_n, b_n > 0$ for all $n$. Then:
+    \begin{enumerate}
+        \item If $\lim_{n \to \infty} \frac{a_n}{b_n} = c > 0$, then either both series $\sum a_n$ and $\sum b_n$ converge or both diverge.
+        \item If $\lim_{n \to \infty} \frac{a_n}{b_n} = 0$ and $\sum b_n$ converges, then $\sum a_n$ converges.
+        \item If $\lim_{n \to \infty} \frac{a_n}{b_n} = \infty$ and $\sum b_n$ diverges, then $\sum a_n$ diverges.
+    \end{enumerate}
+\end{theorem}
+\begin{proof}
+    We can prove the first part of the theorem by epsilon-delta proof. 
+    \\
+    Proof of part 1: Let $\lim_{n \to \infty} \frac{a_n}{b_n} = c > 0$. Then, for all $\epsilon > 0$, for all $n > N$, we have:
+    \begin{align*}
+        |\frac{a_n}{b_n} - c| &< \epsilon \\
+        \intertext{Choose $\epsilon = \frac{c}{2}$, then we have:}
+        |\frac{a_n}{b_n} - c| &< \frac{c}{2} \\
+        \frac{c}{2} < \frac{a_n}{b_n} &< \frac{3c}{2} \\
+    \end{align*}
+    We can then use the basic comparison test to show that the series converge or diverge.
+\end{proof}
+\begin{example}
+    Let $a_n = \frac{1}{n^3 - n}$ and choose $b_n = \frac{1}{n^3}$. We can use the limit comparison test to show that the series $\sum a_n$ converges. We have:
+    \begin{align*}
+        \lim_{n \to \infty} \frac{a_n}{b_n} &= \lim_{n \to \infty} \frac{n^3}{n^3 - n} \\
+        &= 1
+    \end{align*}
+    Since $\sum b_n$ converges, then $\sum a_n$ converges.
+\end{example}
+\begin{example}
+    Let $a_n = \frac{\ln(n/1000)}{n}$ and chooise $b_n = \frac{1}{n}$. We can use the limit comparison test to show that the series $\sum a_n$ converges. We have:
+    \begin{align*}
+        \lim_{n \to \infty} \frac{a_n}{b_n} &= \lim_{n \to \infty} \frac{\ln(n/1000)}{n} \\
+        &\to \infty
+    \end{align*}
+    Since $\sum b_n$ diverges, then $\sum a_n$ diverges.
+\end{example}
+\subsection{Alternating Series and Absolute Convergence}
+\begin{definition}[Alternating Series]
+    An alternating series is a series of the form:
+    \begin{equation}
+        \sum_{n=1}^{\infty} (-1)^{n-1} a_n = a_1 - a_2 + a_3 - a_4 + \ldots
+    \end{equation}
+    where $a_n > 0$ for all $n$.
+\end{definition}
+\begin{proof}
+    The proof for this is straight forward. We can show that the series converges by showing that the sequence $\{S_n\}$ is bounded above and below. Left as an exercise to the reader (Hint: Consider both the odd and even partial sums).
+\end{proof}
+\begin{example}
+    Let $a_n = \frac{1}{n}$, then the series $\sum (-1)^{n-1} \frac{1}{n}$ is an alternating series.
+\end{example}
+\paragraph{Note} $\sum \cos n$ is not an alternating series, though it alternates between positive and negative values, the negative and postive values are not necessarily next to each other.
+\begin{theorem}[Alternating Series Test]
+    Let $\{a_n\}$ be a sequence such that $a_n > 0$ for all $n$ and $\lim_{n \to \infty} a_n = 0$. Then the alternating series $\sum (-1)^{n-1} a_n$ converges if:
+    \begin{enumerate}
+        \item $a_{n+1} \le a_n$ for all $n$.
+        \item $\lim_{n \to \infty} a_n = 0$.
+    \end{enumerate}
+\end{theorem}
+\begin{theorem}[Value of Alternating Series]
+    The value of an alternating series is given by:
+    \begin{equation}
+        S = a_1 - a_2 + a_3 - a_4 + \ldots = \lim_{n \to \infty} S_n
+    \end{equation}
+    where $S_n$ is the $n$th partial sum of the series. Additionally, the limit would always be between two consecutive partial sums.
+\end{theorem}
+\begin{example}
+    Let $S = e^{-1} = \sum (-1)^{n-1} \frac{1}{n!}$, we can use the above to estimate the value of $e^{-1}$. For $n=5$ we have:
+    \begin{align*}
+        e^{-1} &= 0.366 \pm 0.0015
+    \end{align*}
+\end{example}
+\begin{definition}[Absolute Convergence]
+    A series $\sum a_n$ is said to be absolutely convergent if the series $\sum |a_n|$ converges. Conversely, a series is said to be conditionally convergent if the series converges but the absolute value of the series diverges.
+\end{definition}
+\begin{example}
+    Let $a_n = \frac{(-1)^{n-1}}{n}$, then the series $\sum \frac{(-1)^{n-1}}{n}$ is conditionally convergent (Hint: 1/2 $L$).
+\end{example}
+\begin{theorem}[Absolute Convergence Test]
+    If the series $\sum |a_n|$ converges, then the series $\sum a_n$ converges.
+\end{theorem}
+\begin{proof}
+    We can prove this by using the comparison test. We can show that $-|a_n| \le a_n \le |a_n|$ and $0 \le a_n + |a_n| \le 2|a_n|$. Thus, we can use the comparison test to show that the series converges. Since $\sum a_n + |a_n|$ converges, then $\sum a_n$ converges.
+\end{proof}
+\subsection{Ratio and Root Tests}
+\begin{theorem}[Root Test]
+    Let $\{a_n\}$ be a sequence, and let $L = \lim_{n \to \infty} \sqrt[n]{|a_n|}$. Then:
+    \begin{enumerate}
+        \item If $L < 1$, then the series $\sum a_n$ converges.
+        \item If $L > 1$, then the series $\sum a_n$ diverges.
+        \item If $L = 1$, then the test is inconclusive.
+    \end{enumerate}
+\end{theorem}
+\begin{proof}
+    Proof of part 1: Let $L < 1$. Then, choose $\mu$ such that $L < \mu < 1$. Then for some $N$, $\sqrt[n]{|a_n|} < \mu$ for all $n > N$, then $a_n < \mu^n$ for all $n > N$. We can then use the comparison test to show that the series converges since $\sum \mu^n$ converges for $|\mu| < 1$.
+\end{proof}
+\begin{example}
+    Let $a_n = \left ( \frac{n^2 + 1}{2n^2 + 1} \right )^n$. We can use the root test to show that the series $\sum a_n$ converges. We have:
+    \begin{align*}
+        \lim_{n \to \infty} \sqrt[n]{\left ( \frac{n^2 + 1}{2n^2 + 1} \right )^n} &= \lim_{n \to \infty} \frac{n^2 + 1}{2n^2 + 1} \\
+        &= \frac{1}{2}
+    \end{align*}
+    Thus, the series converges.
+\end{example}
+\begin{example}
+    Let $a_n = \frac{2^n}{n}$. So $\sqrt[n]{\frac{2^n}{n}} = \frac{2}{n^{1/n}}$. So the limit $2$ (denom. converges to 2), is greater than 1, thus the series diverges.
+\end{example}
+\begin{theorem}[Ratio Test]
+    Let $\{a_n\}$ be a sequence, and let $L = \lim_{n \to \infty} \left | \frac{a_{n+1}}{a_n} \right |$. Then:
+    \begin{enumerate}
+        \item If $L < 1$, then the series $\sum a_n$ converges.
+        \item If $L > 1$, then the series $\sum a_n$ diverges.
+        \item If $L = 1$, then the test is inconclusive.
+    \end{enumerate}
+\end{theorem}
+\begin{proof}
+    Proof of part 1: Let $L < 1$. Then, choose $\mu$ such that $L < \mu < 1$. Then for some $N$, $ \frac{a_{n+1}}{a_n}  < \mu$ for all $n > N$, then $a_{n} < \mu a_{n+1} < \mu^2 a_{n+2} < \ldots < \mu^j a_{n+j}$ for all $n > N$. So we have:
+    \begin{align*}
+        \sum a_n &< \sum \frac{a_k}{\mu^k} \mu^n \\
+        &= \frac{a_k}{\mu_k} \sum \mu^n
+    \end{align*}
+    Since $\sum \mu^n$ converges, then $\sum a_n$ converges.
+\end{proof}
+\begin{example}
+    Let $a_n = \frac{k^2}{e^k}$ for some $k$. We can use the ratio test to show that the series $\sum a_n$ converges. We have:
+    \begin{align*}
+        \lim_{n \to \infty} \left | \frac{a_{n+1}}{a_n} \right | &= \lim_{n \to \infty} \left | \frac{(k+1)^2}{e^{k+1}} \cdot \frac{e^k}{k^2} \right | \\
+        &= \lim_{n \to \infty} \left | \frac{(k+1)^2}{k^2} \cdot \frac{e^k}{e^{k+1}} \right | \\
+        &= \lim_{n \to \infty} \left | \frac{(k+1)^2}{k^2} \cdot \frac{1}{e} \right | \\
+        &= \frac{1}{e} < 1
+    \end{align*}
+    Thus, the series converges.
+\end{example}
+\subsection{Power Series}
+\begin{definition}[Power Series]
+    A power series is a series of the form:
+    \begin{equation}
+        \sum_{n=0}^{\infty} c_n x^n = c_0 + c_1x + c_2x^2 + \ldots
+    \end{equation}
+    where $c_n$ are constants and $x$ is a variable. 
+\end{definition}
+\begin{example}[Geometric Series]
+    Let $c_n = 1$ for all $n$, then the series $\sum x^n$ is a geometric series:
+    \begin{equation*}
+        \sum x^n = 1 + x + x^2 + \ldots = \frac{1}{1-x}
+    \end{equation*}
+\end{example}
+\begin{definition}[Power Series at a Point]
+    A power series at a point $a$ is a series of the form:
+    \begin{equation}
+        \sum_{n=0}^{\infty} c_n (x-a)^n = c_0 + c_1(x-a) + c_2(x-a)^2 + \ldots
+    \end{equation}
+    where $c_n$ are constants and $x$ is a variable.
+\end{definition}
+\paragraph{} A special convergent limit for the power series when $x = a$ is called the radius of convergence. This always converges to $c_0$.
+\begin{example}
+    Let $a_n = \frac{x^n}{n^2}$ for some $x$. We can use the ratio test to show that the series $\sum a_n$ converges. We have:
+    \begin{align*}
+        \lim_{n \to \infty} \left| \frac{a_{n+1}}{a_n} \right| &= \lim_{n \to \infty} \left| \frac{x^{n+1} \cdot n^2}{x^n \cdot (n+1)^2} \right| \\
+        &= \lim_{n \to \infty} \left| x \cdot \frac{n^2}{(n+1)^2} \right| \\
+        &= \left| x \right| \lim_{n \to \infty} \left( \frac{n}{n+1} \right)^2 \\
+        &= \left| x \right|
+    \end{align*}
+According to the ratio test, the series $\sum a_n$ converges if $\left| x \right| < 1$. And if $x=1$ it is a $p=2$ series which converges. And for $x=-1$ we can use the alternating series test to show that the series converges since $|a_{n+1}| \le |a_n|$ and $\lim_{n \to \infty} a_n = 0$.
+\end{example}
+\begin{example}
+    Let $a_n = \frac{x^n(1+5^n)}{n!}$  for some $x$. We can use the ratio test to show that the series $\sum a_n$ converges. We have:
+    \begin{align*}
+        \lim_{n \to \infty} \left| \frac{a_{n+1}}{a_n} \right| &= \lim_{n \to \infty} \left| \frac{x^{n+1}(1+5^{n+1})}{(n+1)!} \cdot \frac{n!}{x^n(1+5^n)} \right| \\
+        &= \lim_{n \to \infty} \left| \frac{x}{1+n} \cdot \frac{1+5^{n+1}}{1+5^n} \right| \\
+        \intertext{The fist part goes to 5, and the second part goes to 0. Thus, the limit is 0.}
+        &= 0
+    \end{align*}
+According to the ratio test, the series $\sum a_n$ converges.
+\end{example}
+\begin{example}
+    Let $a_n = x^n n!$ for some $x$. We can use the ratio test to show that the series $\sum a_n$ converges only when $x=0$. We have:
+    \begin{align*}
+        \lim_{n \to \infty} \left| \frac{a_{n+1}}{a_n} \right| &= \lim_{n \to \infty} \left| \frac{x^{n+1}(n+1)!}{x^n n!} \right| \\
+        &= \lim_{n \to \infty} \left| x(n+1) \right| 
+    \end{align*}
+    Thus, the series converges only when $x=0$.
 \end{example}
 \appendix
 \input{appendix.tex}
