@@ -386,15 +386,84 @@ The reduced section is the part of the sample where the cross-sectional area is 
 \paragraph{Necking} The material then necks, where the cross-sectional area decreases. The material is then strained until it breaks.
 \paragraph{True Stress} The true stress is given by:
 \begin{equation}
-    \sigma = \frac{F}{A}
+    \sigma_T = \frac{F}{A_i}
 \end{equation}
-, where $A$ is the instantaneous cross-sectional area.
+, where $A_i$ is the instantaneous cross-sectional area.
 \paragraph{Ultimate Tensile Strength} The ultimate tensile strength is the maximum stress on the stress-strain curve.
 \paragraph{Strengthening} Plastic deformation is made more difficult by the following mechanisms:
 \begin{enumerate}
     \item \textbf{Strain Hardening} Preloading beyond the elastic region - upon plastic deformation, the material will have a higher yield strength.
     \item \textbf{For Metals and Alloys} The following mechanisms are used:
 \end{enumerate}
-
+\paragraph{Strain Hardening Equation} The true stress-strain curve can be emprically described by the following equation:
+\begin{equation}
+    \sigma_T = K \epsilon^n_T
+\end{equation}
+, where $K$ is the Strain Hardening coefficient and $n$ is the strain hardening exponent. Both of these values are material properties.
+\paragraph{True Strain} Since $\epsilon_i = \frac{\Delta l_i}{l_0 + \Delta l_{i-1}}$ we can compute a Rieman sum to get the true strain:
+\begin{equation}
+    \epsilon_T = \int^{l_f}_{l_0} \frac{dl}{l} = \ln \left(\frac{l_f}{l_0}\right)
+\end{equation}
+\paragraph{Strain Rate} The strain rate is the rate at which the material is deformed. It is given by:
+\paragraph{} But, before necking, we can assume $V_0 = V_i$ and $A_i = \frac{A_0 l_0}{l_i}$. Thus, we have:
+\begin{align}
+    \sigma_T &= \frac{F}{A_i} = \frac{F}{\frac{A_0 l_0}{l_i}} = \frac{F l_i}{A_0 l_0} = \frac{F}{A_0} \cdot \frac{l_i}{l_0} = \sigma \cdot \frac{l_i}{l_0}  \nonumber \\
+    &= \sigma \cdot (1 + \epsilon)
+    \intertext{and,}
+    \epsilon_T &= \ln \left(1 + \epsilon\right)
+\end{align}
+\subsection{Imperfections}
+\paragraph{Dislocation} Recal that plastic deformation occurs by step-wise breaking of atomic bonds. This is done by the movement of dislocations. \textbf{Strengthening mechanisms in Metals} rely on inhibiting the movement of dislocations.
+\begin{definition}[Dislocation]
+    A dislocation is the breaking and reforming of bonds, one row at a time. It is a line defect in the crystal structure.
+\end{definition}
+\paragraph{Crystalline Imperfections} We use crystalline imperfections to inhibit the movement of dislocations. These imperfections include:
+\begin{itemize}
+    \item \textbf{Point Imperfections (Defects)} Vacancies, interstitials, and substitutional atoms.
+    (Example) Solid solution strengthening.
+    \item \textbf{Line Imperfections} Dislocations.
+    \item \textbf{Area Imperfections} Grain boundaries of the interface between two grains and free surfaces.
+    \item \textbf{Volume Imperfections} Second phase particles.
+\end{itemize}
+\paragraph{Solid Solution Strengthening} [Alloying] The addition of a solute to a solvent to inhibit the movement of dislocations. There is two types:
+\begin{enumerate}
+    \item \textbf{Interstitial Impurities} The solute atoms are smaller than the solvent atoms. This the impurites to be in the interstitial sites.
+    \item \textbf{Substitutional Impurities} The solute atoms are larger than or as large as the solvent atoms ($<10 \% \Delta \varnothing$, similar electornegativity.). This causes the impurities substitute the lattice sites.
+\end{enumerate}
+It slightly nudges nearby atoms, creating \textbf{lattice strain} that make it harder for dislocations to move.
+\paragraph{Machaism - Diffusion of Impurities} In positve edge dislcation, it has compession above disvlation line, and tension below. The impurities will `pin' the dislocation, making it harder to move.
+\paragraph{Plastic Deformation} We can also strengthen the material by increasing the number of dislocations. This is done by plastic deformation methods:
+\begin{enumerate}
+    \item Cold Work
+    \item Forging/Strain Hardening
+\end{enumerate}
+\paragraph{Mechanisms of Strengthening} Plastic deformation increases number of dislocations, which inhibits one another due to the strain fields.
+\begin{definition}[Grain Boundaries]
+    Grain boundaries are the interface between two grains. Grains are regions of the same crystal structure but with different orientations.
+\end{definition}
+\paragraph{Grain Size Reduction} Dislcations tend to move in the direction of the grain boundry (GB). Thus, reducing the grain size reduces the distance the dislocation can move. In addition, there are atomic strain due to the difference of bond lenght between grains, contributing to the strain field. It is given by:
+\begin{equation}
+    \sigma = \sigma_0 + \frac{K_y}{d}
+\end{equation}
+\paragraph{Second Phase Particles} Second phase particles are particles of a different phase in the material. They can be used to inhibit the movement of dislocations. They are often hard, brittke phases.
 \includepdf[pages=-, angle=90]{EquationSheet.pdf}
+\paragraph{Dislcations (Slips)} Occurs on the plane with the highest planar density. The slip direction is the direction with the highest linear density. The slip system is the combination of the slip plane and slip direction.
+\paragraph{} FCC has 4 unique planes, each with 3 unique directions. Thus, there are 12 unique slip systems. Compare this to HCP, which has only base plane.
+\paragraph{Resolved Stear Stress} Consider single crystal with a certain plane. Let $\phi$ be the angle between the normal of the plane and the direction of the applied stress, and $\lambda$ be the angle between the plane and the orthonal of the applied stress. The resolved shear stress is given by:
+\begin{equation}
+    \tau = \sigma \cos \phi \cos \lambda
+\end{equation}
+\paragraph{Critcal Resolved Shear Stress} The critical resolved shear stress is the minimum shear stress required to move a dislocation. When the resolved shear stress equal the critical resolved shear stress, the dislocation will move, and:
+\begin{equation}
+    \sigma = \sigma_{y}
+\end{equation}
+So,
+\begin{equation}
+   \tau_{\text{CRSS}} = \sigma_{y} \cos \phi \cos \lambda
+\end{equation}
+\paragraph{Note} Most crystals are polycrystalline, so dislocation must be able to move to the neibouring crystal.
+\paragraph{Burgers Vector} The Burgers vector is the vector that describes the dislocation. It is the vector that closes the loop of the dislocation. It is given by:
+\begin{equation}
+    \vec{b} = \vec{b}_1 + \vec{b}_2
+\end{equation}
 \end{document}

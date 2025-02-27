@@ -345,4 +345,65 @@ Note that the span of set is a subspace of the vector space. Thus, the column sp
         \text{null}(AB) \supseteq \text{null}(B)
     \end{equation}
 \end{definition}
+\begin{definition}[Rank-Nullity Theorem]
+    Let $A \in \mathbb{R}^{m \times n}$. Then:
+    \begin{equation}
+        \dim(\text{null}(A)) = n - \text{rank}(A)
+    \end{equation}
+    where $n$ is the number of columns of $A$.
+\end{definition}
+
+\begin{proof}
+    Consider $A \in {^m\mathbb{R}^n}$, Let $S = \{x_1, x_2, \ldots, x_k\}$ be a basis of $\text{null}(A)$, then $\{x_1, x_2, \ldots, x_k\}$ are linearly independent and that $\text{dim}(\text{null}(A)) = k$. We can extend $S$ to a basis of $^n\mathbb{R}$ by adding $n-k$ vectors, $\{x_{k+1}, x_{k+2}, \ldots, x_n\}$, then $\{x_1, x_2, \ldots, x_n\}$ is a basis of $^n\mathbb{R}$. Since $\{x_1, x_2, \ldots, x_n\}$ is a basis of $^n\mathbb{R}$, then $\text{rank}(A) = n - k$. Assert hat $n-k \ge 0$. If we can show that $\{Ax_1, Ax_2, \ldots, Ax_n\}$ is a basis of $\text{Col}(A)$, then we can show that $\text{rank}(A) = n - k$. We can show that $\{Ax_1, Ax_2, \ldots, Ax_n\}$ is a basis of $\text{Col}(A)$ by showing that $\{Ax_1, Ax_2, \ldots, Ax_n\}$ is linearly independent and that $\text{Span}(\{Ax_1, Ax_2, \ldots, Ax_n\}) = \text{Col}(A)$.
+    
+\end{proof}
+\begin{theorem}[Properties of Row and Column Space w.r.t RREF]
+    Let $A \in {^m\mathbb{R}^n}$ and $\tilde{A} = \text{RREF}(A)$, then:
+    \begin{align}
+        \text{dim}(\text{Row}(\tilde{A})) &= \text{dim}(\text{Row}(A)) \\
+        \text{dim}(\text{Col}(\tilde{A})) &= \text{dim}(\text{Col}(A)) \\
+        \text{Row}(\tilde{A}) &= \text{Row}(A) \\
+        \text{Col}(\tilde{A}) &\neq \text{Col}(A)
+    \end{align}
+\end{theorem}
+\section{Linear Transformations}
+\begin{definition}[Linear Transformation]
+    Let $V$ and $W$ be vector spaces, then $T: V \rightarrow W$ is a linear transformation if:
+    \begin{enumerate}
+        \item $T(\textbf{x} + \textbf{y}) = T(\textbf{x}) + T(\textbf{y})$
+        \item $T(\alpha \textbf{x}) = \alpha T(\textbf{x})$
+    \end{enumerate}
+\end{definition}
+\begin{example}[$Ax + b$ is not LT]
+    Let $A \in {^m\mathbb{R}^n}$ and $b \in \mathbb{R}^m$, then $T: \mathbb{R}^n \rightarrow \mathbb{R}^m$ defined by $T(\textbf{x}) = A\textbf{x} + b$ is not a linear transformation. It violates the first property of linear transformation:
+    \begin{align*}
+        T(\textbf{x} + \textbf{y}) &= A(\textbf{x} + \textbf{y}) + b \\
+        &= A\textbf{x} + A\textbf{y} + b \\
+        &= T(\textbf{x}) + T(\textbf{y}) + b
+    \end{align*}
+\end{example}
+\begin{example}[Rotate by $90^\circ$]
+    Let $T: \mathbb{R}^2 \rightarrow \mathbb{R}^2$ defined by $T(\textbf{x}) = \begin{bmatrix} 0 & -1 \\ 1 & 0 \end{bmatrix}\textbf{x}$, then $T$ is a linear transformation. It satisfies the properties of linear transformation.
+    \begin{align*}
+        T(\textbf{x} + \textbf{y}) &= \begin{bmatrix} 0 & -1 \\ 1 & 0 \end{bmatrix}(\textbf{x} + \textbf{y}) \\
+        &= \begin{bmatrix} 0 & -1 \\ 1 & 0 \end{bmatrix}\textbf{x} + \begin{bmatrix} 0 & -1 \\ 1 & 0 \end{bmatrix}\textbf{y} \\
+        &= T(\textbf{x}) + T(\textbf{y})
+    \end{align*}
+    \begin{align*}
+        T(\alpha \textbf{x}) &= \begin{bmatrix} 0 & -1 \\ 1 & 0 \end{bmatrix}(\alpha \textbf{x}) \\
+        &= \alpha \begin{bmatrix} 0 & -1 \\ 1 & 0 \end{bmatrix}\textbf{x} \\
+        &= \alpha T(\textbf{x})
+    \end{align*}
+    
+\end{example}
+\begin{theorem}[Properties of Linear Transformation]
+    Let $T: V \rightarrow W$ be a linear transformation, then:
+    \begin{enumerate}
+        \item $T(\textbf{0}) = \textbf{0}$
+        \item $T(\textbf{x} - \textbf{y}) = T(\textbf{x}) - T(\textbf{y})$
+    \end{enumerate}
+\end{theorem}
+\begin{proof}
+    We have $T(\textbf{0} + X) = T(X) = T(\textbf{0}) + T(X)$. Thus, $T(\textbf{0}) = \textbf{0}$, by the Cancelation Theorem. We also have $T(\textbf{x} - \textbf{y}) = T(\textbf{x} + (-\textbf{y})) = T(\textbf{x}) + T(-\textbf{y}) = T(\textbf{x}) - T(\textbf{y})$.
+\end{proof}
 \end{document}

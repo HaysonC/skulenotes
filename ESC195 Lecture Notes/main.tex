@@ -1062,9 +1062,9 @@ We can use it to estimate the sum of a series from a partial sum.
     Since $\sum b_n$ converges, then $\sum a_n$ converges.
 \end{example}
 \begin{example}
-    Let $a_n = \frac{\ln(n/1000)}{n}$ and chooise $b_n = \frac{1}{n}$. We can use the limit comparison test to show that the series $\sum a_n$ converges. We have:
+    Let $a_n = \frac{\ln(n/1000)}{n}$ and chooise $b_n = \frac{1}{n}$. We can use the limit comparison test to show that the series $\sum a_n$ diverges. We have:
     \begin{align*}
-        \lim_{n \to \infty} \frac{a_n}{b_n} &= \lim_{n \to \infty} \frac{\ln(n/1000)}{n} \\
+        \lim_{n \to \infty} \frac{a_n}{b_n} &= \lim_{n \to \infty} \ln(n/1000) \\
         &\to \infty
     \end{align*}
     Since $\sum b_n$ diverges, then $\sum a_n$ diverges.
@@ -1215,6 +1215,359 @@ According to the ratio test, the series $\sum a_n$ converges.
     \end{align*}
     Thus, the series converges only when $x=0$.
 \end{example}
+\begin{theorem}
+    For a power series $\sum c_n (x-a)^n$, there are three possibilities in respect to convergence:
+    \begin{enumerate}
+        \item The series converges only when $x=a$.
+        \item The series converges for all $x$.
+        \item There exists a radius of convergence $R$ such that the series converges for $|x-a| < R$ and diverges for $|x-a| > R$.
+    \end{enumerate}
+\end{theorem}
+\paragraph{Interval of Convergence} The interval of convergence could also have differnt types of convergence at the endpoints. It could be either open or closed on either side.
+\begin{example}
+    Let $a_n = \frac{(-2)^n (x-1)^n}{n+2}$, we can use the ratio test to show that the series $\sum a_n$ converges for $|x-1| < 2$. We have:
+    \begin{align*}
+        \lim_{n \to \infty} \left| \frac{a_{n+1}}{a_n} \right| &= \lim_{n \to \infty} \left| \frac{(-2)^{n+1} (x-1)^{n+1}}{n+3} \cdot \frac{n+2}{(-2)^n (x-1)^n} \right| \\
+        &= \lim_{n \to \infty} \left| \frac{2(x-1)}{n+3} \right| \\
+        \intertext{It would reqiroes $|x-1| < 2$ for the series to converge, so $R=1/2$ or $x \in (1/2, 3/2)$. However, we also need to check the endpoints. For $x=1/2$, we have:}
+        \sum \frac{(-2)^n (1/2-1)^n}{n+2} &= \sum \frac{(-2)^n (-1/2)^n}{n+2} \\
+        &= \sum \frac{1}{n+2}
+        \intertext{This is a $p=1$ series, thus it diverges. For $x=3/2$, we have:}
+        \sum \frac{(-2)^n (3/2-1)^n}{n+2} &= \sum \frac{(-2)^n (1/2)^n}{n+2} \\
+        &= \sum \frac{(-1)^n}{n+2}
+        \intertext{This is an alternating series, thus it converges. Thus, the interval of convergence is $(1/2, 3/2]$.}
+    \end{align*}
+\end{example}
+\subsection{Representing Functions as Power Series}
+\paragraph{Representing Functions} We can represent functions as power series. We have, for some analytic function $f(x)$:
+\begin{equation}
+    f(x) = \sum_{n=0}^{\infty} c_n x^n = c_0 + c_1x + c_2x^2 + \ldots 
+\end{equation}
+\begin{example}
+    Let $f(x) = \frac{1}{1-x}$, we can represent the function as a power series. We have:
+    \begin{align*}
+        \frac{1}{1-x} &= 1 + x + x^2 + x^3 + \ldots \\
+        &= \sum x^n
+    \end{align*}
+\end{example}
+\begin{example}
+    Let $f(x) = \frac{x}{x-3}$, we can represent the function as a power series. We have:
+    \begin{align*}
+        \frac{x}{x-3} &= x \cdot \frac{1}{x-3} = -x \cdot \frac{1}{3-x} \\
+        &= -x \cdot \frac{1}{-3(1-x/3)} \\
+        \intertext{Using the geometric series, we have:}
+        &= -x \cdot \sum \frac{1}{3} \left( \frac{x}{3} \right)^n \\
+        &= -\sum \frac{x^{n+1}}{3^{n+1}},\quad |x/3| < 1
+    \end{align*}
+\end{example}
+\begin{theorem}[Term-by-term Differentiation and Integration]
+    Consider the power series $\sum c_n x^n$ with radius of convergence $R$. Then:
+    \begin{enumerate}
+        \item The power series $\sum n c_n x^{n-1}$ has the same radius of convergence $R$.
+        \item The power series $\sum \frac{c_n}{n+1} x^{n+1}$ has the same radius of convergence $R$.
+    \end{enumerate}
+    However, the \textbf{interval endpoints may change}.
+\end{theorem}
+\paragraph{Order of Operation of Differentiation, Integration and Summation} The following are true:
+\begin{enumerate}
+    \item $\frac{d}{dx} \sum c_n x^n = \sum \frac{d}{dx} c_n x^n$
+    \item $\int \sum c_n x^n \, dx = \sum \int c_n x^n \, dx$
+\end{enumerate}
+However, note that the constnat of integration is important in the integration case.
+\begin{example}
+    Let $f(x) = \frac{1}{(1+x)^2}$, we can represent the function as a power series. Since:
+    \begin{align*}
+        \frac{d}{dx} \frac{-1}{1+x} &= \frac{1}{(1+x)^2} \\
+        \intertext{We can then use the power series of $\frac{-1}{1+x}$ to find the power series of $\frac{1}{(1+x)^2}$.}
+        \frac{d}{dx} \sum (-1)^n x^n &= \sum \frac{d}{dx} (-1)^n x^n \\
+        &= \sum (-1)^n n x^{n-1} \\
+    \end{align*}
+    Thus, the power series of $\frac{1}{(1+x)^2}$ is $\sum (-1)^n n x^{n-1}$. The radius of convergence is the same as the original power series (1).
+\end{example}
+\begin{example}
+    Let $f(x) = \ln(1-x)$, we can represent the function as a power series. Since:
+    \begin{align*}
+        \int \frac{1}{1-x} \, dx &= -\ln(1-x) \\
+        \ln(1-x) &= -\int \sum x^n \, dx \\
+        &= C - \sum \frac{x^{n+1}}{n+1} \\
+    \end{align*}
+    Let $x=0$, then $C = 0$. Thus, the power series of $\ln(1-x)$ is $\sum \frac{x^{n+1}}{n+1}$. The radius of convergence is the same as the original power series (1). Also, we can show that $x=1$ diverges and $x=-1$ conditionally converges.
+\end{example}
+\begin{example}[Estimation]
+    We would like to estimate the following definite integral:
+    $$
+    I = \int_0^0.1 \frac{dx}{1+x^4}
+    $$
+    We can use the power series of $\frac{1}{1-x}$ to estimate the integral. Take $-x= -(-x)^4$, then we have:
+    \begin{align*}
+        I = \int_0^0.1 \frac{dx}{1+x^4} &= \int_0^0.1 \sum (-x)^{4n} \, dx \\
+        &= \sum \int_0^0.1 (-x)^{4n} \, dx \\
+        &= \sum \frac{(-0.1)^{4n+1}}{4n+1}
+    \end{align*}
+    By alternate series estimation, we can show that that $I \approx 0.099998 \pm 1.1 \times 10^{-10}$.
+\end{example}
+\begin{example}\label{ex:arctan}
+    Let $f(x) = \arctan(x)$, we can represent the function as a power series. Since:
+    \begin{align*}
+        \frac{d}{dx} \arctan(x) &= \frac{1}{1+x^2} \\
+        \int \frac{1}{1+x^2} \, dx &= \arctan(x) \\
+        \arctan(x) &= \int \sum (-1)^n x^{2n} \, dx \\
+        &= C + \sum \frac{(-1)^n x^{2n+1}}{2n+1} \\
+    \end{align*}
+    Let $x=0$, then $C = 0$. Thus, the power series of $\arctan(x)$ is $\sum \frac{(-1)^n x^{2n+1}}{2n+1}$. The radius of convergence is the same as the original power series (1). 
+\end{example}
+\begin{example}[Leibniz Formula]
+    The result from Example \ref{ex:arctan} can be used estimate the value of $\pi$. Since $\arctan(1) = \frac{\pi}{4}$, we have:
+    \begin{align*}
+        \arctan(1) &= \sum \frac{(-1)^n}{2n+1} \\
+        &= 1 - \frac{1}{3} + \frac{1}{5} - \frac{1}{7} + \ldots \\
+        &= \frac{\pi}{4}
+    \end{align*}
+\end{example}
+\subsection{Taylor and Maclaurin Series}
+\begin{center}
+    ``\textit{The amazing thing about Taylor series is that they swiftly converges}" - Prof. J. Davis
+\end{center}
+\paragraph{} We begin by assuming all function discussed in this section has a power series representation (i.e. it is infinitely differentiable), and that there is a non zero radius of convergence.
+\begin{example}[n-th derivatives of power series]
+    Let $f(x) = \sum c_n x^n$, we can find the n-th derivative of the function. We have:
+    \begin{align*}
+        f(x) &= \sum c_n x^n \\
+        f'(x) &= \sum c_n n x^{n-1} \\
+        f''(x) &= \sum c_n n(n-1) x^{n-2} \\
+        &\vdots \\
+        f^{(n)}(x) &= \sum c_n n(n-1) \ldots (n-n+1) x^{n-n} \\
+        &= \sum c_n n!
+    \end{align*}
+    Thus, by taking $f^{(n)}(0)$, we can find the n-th coefficient of the power series, i.e. $c_n = \frac{f^{(n)}(0)}{n!}$.
+\end{example}
+\begin{theorem}
+    If $f$ has a power series representation about $a$, then the coefficients of the power series are given by:
+    \begin{equation}
+        c_n = \frac{f^{(n)}(a)}{n!}
+    \end{equation}
+\end{theorem}
+\begin{definition}[Taylor Series]
+    The Taylor series of a function $f$ about $a$ is given by:
+    \begin{equation}
+        f(x) = \sum \frac{f^{(n)}(a)}{n!} (x-a)^n 
+    \end{equation}
+\end{definition}
+\begin{definition}[Maclaurin Series]
+    The Maclaurin series of a function $f$ is the Taylor series of $f$ about $a=0$.
+    \begin{equation}
+        f(x) = \sum \frac{f^{(n)}(0)}{n!} x^n
+    \end{equation}
+\end{definition}
+\begin{definition}[Analytic Function]
+    A function $f$ is said to be analytic if can be represented as a power series about 0. In turn, it is infinitely differentiable and has a power series representation about any point.
+\end{definition}
+\begin{example}
+    Let $f(x) = e^x$, we can find the Maclaurin series of the function. We have:
+    \begin{align*}
+        f(x) &= e^x \\
+        f'(x) &= e^x \\
+        f''(x) &= e^x \\
+        &\vdots \\
+        f^{(n)}(x) &= e^x \\
+        f^{(n)}(0) &= 1
+    \end{align*}
+    Thus, the Maclaurin series of $e^x$ is $\sum \frac{x^n}{n!}$. Also, by the ratio test, we can show that the series converges for all $x$ (i.e. the radius of convergence is $\infty$).
+\end{example}
+\begin{center}
+    ``\textit{When is it that $f(x) = \sum f^{(n)}(a) (x-a)^n/n!$?}''
+\end{center}
+\begin{definition}[n-th Order Taylor Polynomial]
+    The n-th order Taylor polynomial of a function $f$ about $a$ is given by:
+    \begin{equation}
+        P_n(x) = \sum_{k=0}^{n} \frac{f^{(k)}(a)}{k!} (x-a)^k
+    \end{equation}
+\end{definition}
+\begin{definition}[Remainder]
+    The remainder of the n-th order Taylor polynomial is given by:
+    \begin{equation}
+        R_n(x) = f(x) - P_n(x) = \frac{f^{(n+1)}(c)}{(n+1)!} (x-a)^{n+1}
+    \end{equation}
+    for some $c$ between $a$ and $x$.
+\end{definition}
+\begin{theorem}[Remainder Convergence]
+    If $f(a) = P_n(x) + R_n(x)$ and $\lim_{n \to \infty} R_n(x) = 0$, then $f(x) = \sum \frac{f^{(n)}(a)}{n!} (x-a)^n$.
+\end{theorem}
+\begin{theorem}[Taylor Theorem]
+    Let $f$ be a function that is $n+1$ times differentiable on an interval $I$ containing $a$. If the $n$-th derivative of $f$ is continuous on $I$, then for all $x$ in $I$:
+    \begin{equation}
+        f(x) = f(a) + f'(a)(x-a) + \ldots + \frac{f^{(n)}(a)}{n!} (x-a)^n + R_n(x)
+    \end{equation}
+    where $R_n(x) = \int \frac{f^{(n+1)}(c)}{n!} (x-a)^{n+1} \, dx = \frac{f^{(n+1)}(c)}{(n+1)!} (x-a)^{n+1}$.
+\end{theorem}
+\paragraph{} And for bounded deriviites, i.e. $|f^{(n+1)}(x)| \le M$ for all $x$ in $I$, we have:
+\begin{equation}
+    |R_n(x)| \le \frac{M}{(n+1)!} |x-a|^{n+1}
+\end{equation}
+We can quickly obtain an error bound for the Taylor polynomial by using the above inequality.
+\paragraph{Taylor Series of Common Functions}
+\begin{align}
+    e^x &= \sum \frac{x^n}{n!} \\
+    \sin(x) &= \sum \frac{(-1)^n x^{2n+1}}{(2n+1)!} \\
+    \cos(x) &= \sum \frac{(-1)^n x^{2n}}{(2n)!} \\
+    \ln(1+x) &= \sum \frac{(-1)^{n+1} x^n}{n} \\
+    (1+x)^p &= \sum \binom{p}{n} x^n
+\end{align}
+\begin{example}
+    Let $f(x) = \cos(x)$, we want ro find the taylor series of the function about $a=17\frac{\pi}{4}$ The derivatives and their respective value at $a$ are:
+    \begin{align*}
+        f(x=a) &= \cos(a) = \frac{1}{\sqrt{2}} \\
+        f'(x=a) &= -\sin(a) = -\frac{1}{\sqrt{2}} \\    
+        f''(x=a) &= -\cos(a) = -\frac{1}{\sqrt{2}} \\
+        f'''(x=a) &= \sin(a) = \frac{1}{\sqrt{2}} \\
+    \end{align*}
+    We can see that the derivatives repeat every 4th derivative, and that we could seperate it into two alternating series, we have:
+    \begin{align*}
+        \cos(x) &= \sum \frac{1}{\sqrt{2}} (-1)^n \frac{(x-17\pi/4)^{2n}}{(2n)!} + \sum \frac{1}{\sqrt{2}} (-1)^n \frac{(x-17\pi/4)^{2n+1}}{(2n+1)!} \\
+    \end{align*}
+\end{example}
+\paragraph{Multiplication and Division of Power Series} We can multiply and divide power series as we would with polynomials. We can also represent functions as products of known power series. We have some examples below.
+\begin{example}
+    Let $f(x) = \frac{e^x}{1+x}$, we can represent the function as product of two known power series. We have:
+    \begin{align*}
+        f(x) &= e^x \cdot \frac{1}{1+x} \\
+        &= \sum \frac{x^n}{n!} \cdot \sum (-1)^n x^n \\
+        &= (1 + x + \frac{x^2}{2} + \ldots) \cdot (1 - x + x^2 - \ldots) \\
+        &= \sum \sum \frac{(-1)^n x^{2n}}{n!}
+    \end{align*}
+\end{example}
+\paragraph{} We shall just deduce it with powers of terms.
+\begin{example}
+    Let $f(x) = \tan(x) = \frac{\sin(x)}{\cos(x)}$, we can represent the function as division of two known power series. We have:
+    \begin{align*}
+        f(x) &= \frac{\sin(x)}{\cos(x)} \\
+        &= \frac{x - \frac{x^3}{3!} + \frac{x^5}{5!} - \ldots}{1 - \frac{x^2}{2!} + \frac{x^4}{4!} - \ldots} \\
+        &= x - \frac{x^3}{3} + \frac{2x^5}{15} - \ldots
+    \end{align*}
+\end{example}
+\paragraph{} We shall just deduce it with long division, note that the radius of covnergence is not the same as the original power series.
+\subsection{Applications of Taylor Series}
+\paragraph{Approximation} We can use the Taylor series to approximate functions. We can use the first few terms of the Taylor series to approximate the function. We can also use the remainder to find an error bound for the approximation.
+\paragraph{Error Estimation} We can summerize two ways:
+\begin{enumerate}
+    \item If we know that it is an alternating series, then $|R_n(x)| \le a_{n+1}$.
+    \item Otherwise, we can use the remainder formula to find an error bound. $|R_n(x)| \le \frac{M}{(n+1)!} |x-a|^{n+1}$.
+\end{enumerate}
+\begin{example}
+    Let $f(x) = \sqrt{x}$, we can use the Taylor series to approximate $\sqrt{1.25}$.
+    \begin{align*}
+        f(x) &= \sqrt{x} = 1\\
+        f'(x) &= \frac{1}{2\sqrt{x}} = \frac{1}{2} \\
+        f''(x) &= -\frac{1}{4x^{3/2}} = -\frac{1}{4} \\
+        f'''(x) &= \frac{3}{8x^{5/2}} = \frac{3}{8} \\
+        \intertext{We can then use the Taylor series to approximate $\sqrt{1.25}$.}
+        f(1.25) &\approx 1 + \frac{1}{2}(1.25-1) - \frac{1}{8}(1.25-1)^2 + \frac{1}{16}(1.25-1)^3 \\
+        &= 1 + \frac{1}{2}(0.25) - \frac{1}{8}(0.25)^2 + \frac{1}{16}(0.25)^3 \\
+        &= 1 + \frac{1}{8} - \frac{1}{32} + \frac{1}{128} \\
+        &= 1.1182
+    \end{align*}
+    Since it is a alternating series, we also have that the error is less than $\frac{3}{8} \cdot \frac{1}{16} (0.25)^4 = 0.00015$. Thus, the error is less than 0.00015.
+\end{example}
+\begin{example}
+    Let $f(x) = \ln(1-x)$, we would like to find a term such that the estimate of $\ln(1.4)$ is less than $10^{-3}$. Since the Maclaurin series of $\ln(1-x)$ is $\sum \frac{x^n}{n}$, we can use the remainder for alternating series to find the error bound. We have:
+    \begin{align*}
+        |R_1(1.4)| &\le \frac{1}{2} (0.4)^2 = 0.08 \\
+        \vdots \\
+        |R_4(1.4)| &\le \frac{1}{5} (0.4)^5 = 0.002\\
+        |R_5(1.4)| &\le \frac{1}{6} (0.4)^6 = 0.0007 \\
+    \end{align*}
+    Thus, we can use the first 5 terms of the Maclaurin series to approximate $\ln(1.4)$ to less than $10^{-3}$.
+\end{example}
+\subsection{Binomial Series}
+\begin{definition}[Binomial Series]
+    The binomial series is a power series of the form:
+    \begin{equation}
+        (1+x)^p = \sum \binom{p}{n} x^n
+    \end{equation}
+    , where $\binom{p}{n} = \frac{p(p-1)\ldots(p-n+1)}{n!}$ and $\binom{k}{0} = 1$.
+\end{definition}
+\begin{example}[$(1+x)^k$]
+    Let $f(x) = (1+x)^k$, we can find the binomial series of the function. We have:
+    $$
+    (1+x)^k = \sum \binom{k}{n} x^n
+    $$
+
+    This could be derived, also, via Maclaurin series, we have:
+    \begin{align*}
+        f(x) = (1+x)^k &\quad f(0) = 1 \\
+        f'(x) = k(1+x)^{k-1} &\quad f'(0) = k \\
+        f''(x) = k(k-1)(1+x)^{k-2} &\quad f''(0) = k(k-1) \\
+        \vdots \\
+        f^{(n)}(x) &= k(k-1)\ldots(k-n+1)(1+x)^{k-n} \\
+        f^{(n)}(0) &= k(k-1)\ldots(k-n+1) \\
+        \intertext{Thus, the binomial series of $(1+x)^k$ is $\sum \binom{k}{n} x^n$.}
+    \end{align*}
+
+    We can also show that the binomial series converges for $|x| < 1$. With the ratio test, we have:
+    \begin{align*}
+        \lim_{n \to \infty} \left| \frac{\binom{k}{n+1} x^{n+1}}{\binom{k}{n} x^n} \right| &= \lim_{n \to \infty} \left| \frac{k-n}{n+1} x \right| \\
+        &= |x|
+    \end{align*}
+    Thus, the series converges for $|x| < 1$. Also for the endpoints, Prof. J. Davis didn't show the process, but we have:
+    $$
+    I = \begin{cases}
+        (-1, 1) & k \le -1 \\
+        (-1, 1] & k \in (-1, 0) \\
+        [-1, 1] & k \ge 0
+    \end{cases}
+    $$
+\end{example}
+\subsection{Fourier Series}
+\begin{definition}[Periodic Function]
+    A function $f$ is said to be periodic if there exists a positive number $P$ such that $f(x+P) = f(x)$ for all $x$.
+\end{definition}
+\begin{example}
+    Let $f(x) = \cos(nt) + \frac{1}2{\sin(2\pi t)}$ for some $n$. We can show that the function is periodic. We have:
+    \begin{align*}
+        f(x+P) &= \cos(n(t+P)) + \frac{1}{2}\sin(2\pi(t+P)) \\
+        &= \cos(nt + nP) + \frac{1}{2}\sin(2\pi t + 2\pi P) \\
+        &= \cos(nt) + \frac{1}{2}\sin(2\pi t) \\
+        &= f(x)
+    \end{align*}
+    Thus, the function is periodic.
+\end{example}
+\begin{theorem}
+    For periodic function $f$, with period $P$, continuous and piecewise differentiable, then the Fourier series of the function converges to the function.
+\end{theorem}
+\begin{definition}[Fourier Series]
+    The Fourier series of a function $f$ is a series of the form:
+    \begin{equation}
+        f(x) = \frac{a_0}{2} + \sum_{n=1}^{\infty} a_n \cos(n\omega x) + b_n \sin(n \omega x)
+    \end{equation}
+    , where $a_0, a_n, b_n$ are the Fourier coefficients of the function, and $\omega = \frac{2\pi}{P}$.
+\end{definition}
+\paragraph{Integral Properties of Fourier Series} First, we have these integral properites of $\cos$ and $\sin$:
+\begin{align}
+    \int_{-P/2}^{P/2} \cos(n\omega x) \, dx &= \begin{cases}
+        0 & n \ne 0 \\
+        P & n = 0
+    \end{cases} \\
+    \int_{-P/2}^{P/2} \sin(n\omega x) \, dx &= 0
+\end{align}
+Also, we have the product of $\cos$ and $\sin$:
+\begin{align}
+    \int_{-P/2}^{P/2} \sin(m\omega x) \sin(n\omega x) \, dx &= \begin{cases}
+        0 & m \ne n \\
+        \frac{P}{2} & m = n
+    \end{cases} \\ 
+    \int_{-P/2}^{P/2} \cos(m\omega x) \cos(n\omega x) \, dx &= \begin{cases}
+        0 & m \ne n \\
+        \frac{P}{2} & m = n
+    \end{cases} 
+\end{align}
+\begin{theorem}[Fourier Coefficients]
+    The Fourier coefficients of a function $f$ are given by:
+    \begin{align}
+        a_0 &= \frac{1}{P} \int_{-P/2}^{P/2} f(x) \, dx \\
+        a_n &= \frac{2}{P} \int_{-P/2}^{P/2} f(x) \cos(n\omega x) \, dx \\
+        b_n &= \frac{2}{P} \int_{-P/2}^{P/2} f(x) \sin(n\omega x) \, dx
+    \end{align}
+\end{theorem}
 \appendix
 \input{appendix.tex}
 \end{document}
