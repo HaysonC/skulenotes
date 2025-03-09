@@ -406,4 +406,109 @@ Note that the span of set is a subspace of the vector space. Thus, the column sp
 \begin{proof}
     We have $T(\textbf{0} + X) = T(X) = T(\textbf{0}) + T(X)$. Thus, $T(\textbf{0}) = \textbf{0}$, by the Cancelation Theorem. We also have $T(\textbf{x} - \textbf{y}) = T(\textbf{x} + (-\textbf{y})) = T(\textbf{x}) + T(-\textbf{y}) = T(\textbf{x}) - T(\textbf{y})$.
 \end{proof}
+\begin{definition}[Kernel and Image]
+    Let $T: V \rightarrow W$ be a linear transformation, then: 
+    \begin{enumerate}
+        \item The \textbf{kernel} of $T$, denoted as $\ker(T)$, is the set of all vectors in $V$ that map to the zero vector in $W$. Formally,
+        \[
+        \ker(T) = \{ \textbf{v} \in V \mid T(\textbf{v}) = \textbf{0} \}
+        \]
+        \item The \textbf{image} of $T$, denoted as $\text{Im}(T)$, is the set of all vectors in $W$ that are images of vectors in $V$. Formally,
+        \[
+        \text{Im}(T) = \{ T(\textbf{v}) \mid \textbf{v} \in V \}
+        \]
+    \end{enumerate}
+\end{definition}
+\begin{theorem}[Rank-Nullity for LT]
+    Let $T: V \rightarrow W$ be a linear transformation, then:
+    \begin{equation}
+        \dim(\ker(T)) + \dim(\text{Im}(T)) = \dim(V)
+    \end{equation}
+\end{theorem}
+\begin{definition}[Injective LT]
+    Let $T: V \rightarrow W$ be a linear transformation, then $T$ is injective if $x_1 \neq x_2 \implies T(x_1) \implies T(x_2)$
+\end{definition}
+\begin{theorem}
+    If the nullity of $T$, $\text{dim ker} T$ is greater than zero, then $T$ is not injective.
+\end{theorem}
+\begin{definition}[Surjective]
+    Let $T: V \rightarrow W$ be a linear transformation, then $T$ is surjective if for every $y \in W$, there exist an $x \in V$ so that $T(x) = y$.
+\end{definition}
+\begin{definition}[Bijective]
+    Let $T: V \rightarrow W$ be a linear transformation, then $T$ is bijective if $T$ is both injective and surjective.
+\end{definition}
+\begin{theorem}[Basis function is LT]
+    Let $\alpha = \{\textbf{v}_1, \textbf{v}_2, \ldots, \textbf{v}_n\}$ be a basis for vector space $V$. The function $T: V \to \mathbb{R}^n$ defined by $T(v) = [v]_\alpha$ is a linear transformation.
+\end{theorem}
+\subsection{Change of Basis}
+\begin{definition}[Change of Basis]
+    Let $\alpha = \{\textbf{v}_1, \textbf{v}_2, \ldots, \textbf{v}_n\}$ and $\beta = \{\textbf{w}_1, \textbf{w}_2, \ldots, \textbf{w}_n\}$ be two bases for vector space $V$. The change of basis matrix $P$ is defined as:
+    \begin{equation}
+        P = [\textbf{w}_1, \textbf{w}_2, \ldots, \textbf{w}_n]_\alpha
+    \end{equation}
+\end{definition}
+\begin{theorem}[Change of Basis Matrix]
+    Let $\alpha = \{\textbf{v}_1, \textbf{v}_2, \ldots, \textbf{v}_n\}$ and $\beta = \{\textbf{w}_1, \textbf{w}_2, \ldots, \textbf{w}_n\}$ be two bases for vector space $V$. The change of basis matrix $P$ is defined as:
+    \begin{equation}
+        P = [\textbf{w}_1, \textbf{w}_2, \ldots, \textbf{w}_n]_\alpha
+    \end{equation}
+\end{theorem}
+\paragraph{Stacking Chnage of Basis Matrix} We can stack the change of basis matrix to form a matrix $P$, and also incoperate linear transformations in other bases to a vector.
+\section{Determinants}
+\begin{definition}[Determinant]
+    Let $A \in \mathbb{R}^{n \times n}$, then the determinant of $A$ is denoted as $\det(A)$.
+\end{definition}
+\begin{example}
+    Consider the following $2\times 2$ system:
+    \begin{align*}
+        ax + by &= 0 \\
+        cx + dy &= 0
+    \end{align*}
+    The the system has the general solution:
+    \begin{align*}
+        x &= \frac{dy}{ad - bc} \\
+        y &= \frac{-cx}{ad - bc}
+    \end{align*}
+    The denominator $ad - bc$ is the determinant of the matrix. Notice that if the determinant is zero, then the system has no unique solution.
+\end{example}
+\begin{theorem}[Propeties of $2 \times 2$ Determinant]
+    Let $A = \begin{bmatrix} a & b \\ c & d \end{bmatrix}$, then:
+    \begin{align}
+        \det(A) &= ad - bc \\
+        \det\left(\begin{bmatrix}
+            br_1 + cr_1^\prime \\ r_2
+        \end{bmatrix}\right) &= b\det\left(\begin{bmatrix}
+            r_1 \\ r_2
+        \end{bmatrix}\right) + c\det\left(\begin{bmatrix}
+            r_1^\prime \\ r_2 
+        \end{bmatrix}\right) \\
+        \det\left(\begin{bmatrix}
+            r_1 \\ r_2
+        \end{bmatrix}\right) &= -\det\left(\begin{bmatrix}
+            r_2 \\ r_1
+        \end{bmatrix}\right) \\ 
+        \det I &= 1
+\end{align}
+\begin{definition}[Determinant Functions]
+    Any function $f$ that satisfies the properties:
+    \begin{enumerate}
+        \item $f\left(\begin{bmatrix}
+            br_1 + cr_1^\prime \\ r_2 \\ \vdots \\ r_n
+        \end{bmatrix}\right) = bf\left(\begin{bmatrix}
+            r_1 \\ r_2 \\ \vdots \\ r_n
+        \end{bmatrix}\right) + cf\left(\begin{bmatrix}
+            r_1^\prime \\ r_2 \\ \vdots \\ r_n
+        \end{bmatrix}\right)$ (Multilinearity in rows)
+        
+        \item $f\left(\begin{bmatrix}
+            r_1 \\ r_2 \\ \vdots \\ r_i \\ \vdots \\ r_j \\ \vdots \\ r_n
+        \end{bmatrix}\right) = -f\left(\begin{bmatrix}
+            r_1 \\ r_2 \\ \vdots \\ r_j \\ \vdots \\ r_i \\ \vdots \\ r_n
+        \end{bmatrix}\right)$ (Alternating property)
+        
+        \item $f(A) = (\det A )f(I)$
+    \end{enumerate}
+    is called a determinant function.
+\end{definition}
+\end{theorem}
 \end{document}

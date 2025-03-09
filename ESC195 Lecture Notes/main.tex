@@ -1296,12 +1296,12 @@ However, note that the constnat of integration is important in the integration c
 \begin{example}[Estimation]
     We would like to estimate the following definite integral:
     $$
-    I = \int_0^0.1 \frac{dx}{1+x^4}
+    I = \int_0^{0.1} \frac{dx}{1+x^4}
     $$
     We can use the power series of $\frac{1}{1-x}$ to estimate the integral. Take $-x= -(-x)^4$, then we have:
     \begin{align*}
-        I = \int_0^0.1 \frac{dx}{1+x^4} &= \int_0^0.1 \sum (-x)^{4n} \, dx \\
-        &= \sum \int_0^0.1 (-x)^{4n} \, dx \\
+        I = \int_0^{0.1} \frac{dx}{1+x^4} &= \int_0^{0.1} \sum (-x)^{4n} \, dx \\
+        &= \sum \int_0^{0.1} (-x)^{4n} \, dx \\
         &= \sum \frac{(-0.1)^{4n+1}}{4n+1}
     \end{align*}
     By alternate series estimation, we can show that that $I \approx 0.099998 \pm 1.1 \times 10^{-10}$.
@@ -1568,6 +1568,434 @@ Also, we have the product of $\cos$ and $\sin$:
         b_n &= \frac{2}{P} \int_{-P/2}^{P/2} f(x) \sin(n\omega x) \, dx
     \end{align}
 \end{theorem}
+\section{Vector and the Geometry of Space}
+\subsection{Equations of Lines and Planes}
+\begin{definition}[Vector in $\mathbb{R}^3$]
+    A vector in $\mathbb{R}^3$ is an ordered triple of real numbers $(a, b, c)$. We also write $\vec{v} = ai + bj + ck$.
+\end{definition}
+\paragraph{Radius Vector} The radius vector of a point $P(x, y, z)$ is the vector $\vec{r} = xi + yj + zk$, it starts at the origin and ends at the point $P$.
+\begin{definition}[Planes]
+    A plane in $\mathbb{R}^3$ is a flat surface that extends infinitely in all directions. A plane is determined by a point $P(x_0, y_0, z_0)$ and a normal vector $\vec{n} = ai + bj + ck$. The equation of the plane is given by:
+    \begin{equation}
+        a(x-x_0) + b(y-y_0) + c(z-z_0) = 0
+    \end{equation}
+\end{definition}
+\begin{example}[Vector Form of a Plane]
+    Given the normal vector and two points on the plane, we can find the vector form of the plane. Let $P_1(x_1, y_1, z_1)$ and $P_2(x_2, y_2, z_2)$ be two points on the plane, and $\vec{n} = ai + bj + ck$ be the normal vector. We have:
+    \begin{align*}
+        \vec{r} \cdot \vec{n} &= \vec{r_1} \cdot \vec{n} \\
+        (x-x_1)a + (y-y_1)b + (z-z_1)c &= 0 \\
+        \vec{r} \cdot \vec{n} &= \vec{r_2} \cdot \vec{n} \\
+        (x-x_2)a + (y-y_2)b + (z-z_2)c &= 0
+    \end{align*}
+\end{example}
+Thus, the vector form of the plane is given by:
+\begin{equation}
+    \vec{r} \cdot \vec{n} = \vec{r_1} \cdot \vec{n}
+\end{equation}
+\begin{definition}[Lines]
+    A line in $\mathbb{R}^3$ is a straight path that extends infinitely in two directions. A line is determined by a point $P(x_0, y_0, z_0)$ and a direction vector $\vec{d} = ai + bj + ck$. The equation of the line is given by:
+    \begin{equation}
+        \vec{r} = \vec{r_0} + t\vec{d}
+    \end{equation}
+\end{definition}
+\begin{example}[Vector Form of a Line]
+    Given two points on the line, we can find the vector form of the line. Let $P_1(x_1, y_1, z_1)$ and $P_2(x_2, y_2, z_2)$ be two points on the line. We have:
+    \begin{align*}
+        \vec{r} &= \vec{r_1} + t(\vec{r_2} - \vec{r_1}) \\
+        &= \vec{r_1} + t(\vec{d})
+    \end{align*}
+\end{example}
+    Thus, the vector form of the line is given by:
+    \begin{equation}
+        \vec{r} = \vec{r_0} + t\vec{d}
+    \end{equation}
+    \paragraph{Parametric Form of a Line} We can also write the line in parametric form. Let $P(x, y, z)$ be a point on the line, we have:
+    \begin{align}
+        x &= x_0 + at \\
+        y &= y_0 + bt \\
+        z &= z_0 + ct
+    \end{align}
+    We can get $t$ by solving the equations:
+    \begin{align}
+        \frac{x-x_0}{a} &= \frac{y-y_0}{b} = \frac{z-z_0}{c} = t
+    \end{align}
+\subsection{Cyliner and Quadric Surfaces}
+\begin{definition}[Cylinder]
+    A cylinder is a surface formed by the straight lines parallel to a given line and lying on a given surface. The equation of a cylinder is given by:
+    \begin{equation}
+        F(x, y) = 0
+    \end{equation}
+\end{definition}
+\begin{definition}[Quadric Surface]
+    A quadric surface is a surface that can be represented by a second degree equation in $x, y, z$. The general form of a quadric surface is given by:
+    \begin{equation}
+        Ax^2 + By^2 + Cz^2 + Dxy + Exz + Fyz + Gx + Hy + Iz + J = 0
+    \end{equation}
+\end{definition}
+\paragraph{Sketching Surfaces} We can sketch surfaces by:
+\begin{enumerate}
+    \item Find the domain and range of the surface.
+    \item Find the intercepts of the surface.
+    \item Find the traces with the coordinate planes (i.e. $x=0$, $y=0$, $z=0$).
+    \item Find sections of the surface.
+    \item Find the centre of the surface.
+    \item Find the symmetry of the surface.
+    \item Find the boundries and boundedness of the surface.
+\end{enumerate}
+\begin{example}[Hyperboloid]
+    We can sketch the hyperboloid $\frac{x^2}{a^2} + \frac{y^2}{b^2} - \frac{z^2}{c^2} = 1$. We could rearragne it for $z$:
+    \begin{align*}
+        \frac{z^2}{c^2} &= \frac{x^2}{a^2} + \frac{y^2}{b^2} - 1 \\
+        z &= \pm c \sqrt{\frac{x^2}{a^2} + \frac{y^2}{b^2} - 1}
+    \end{align*}
+    Clearly, we have intercepts at $z = \pm c$. It has no trace with the $xy$ plane. On other, it has traces of hyperbola. Taking the section for some $z_0 > c$, we have a ellipse.\\
+    For symmetry, it is symmetric about the $z$ axis. It is unbounded for all directions.
+\end{example}
+\paragraph{Projections - Curve of Intersection} We can find the curve of intersection of two surfaces by setting the two equations equal to each other. We can then project the curve of intersection onto the coordinate planes.
+\begin{enumerate}
+    \item We have $C: (x, y, z)$ such that $z = f(x, y)$ and $z = g(x, y)$.
+    \item We can obtain a vertical cylinder by $f(x, y) = g(x, y)$.
+    \item We can obtain a projection by setting $z = 0$.
+\end{enumerate}
+\section{Vector Functions}
+\subsection{Vector Functions and Space Curves}
+\begin{definition}[Vector Function]
+    A vector function is a function that maps a real number to a vector. A vector function in $\mathbb{R}^3$ is given by:
+    \begin{equation}
+        \vec{r}(t) = f(t)i + g(t)j + h(t)k
+    \end{equation}
+\end{definition}
+\begin{definition}[Space Curve]
+    A space curve is a curve in $\mathbb{R}^3$ that is determined by a vector function. The space curve is given by:
+    \begin{equation}
+        \vec{r}(t) = f(t)i + g(t)j + h(t)k
+    \end{equation}
+\end{definition}
+\begin{definition}[Limit]
+    Let the vector function $\vec{r}(t) = f(t)i + g(t)j + h(t)k$ be defined on an open interval $I$ containing $t = a$, and let $\vec{L}$ be a vector. We say that the limit of $\vec{r}(t)$ as $t$ approaches $a$ is $\vec{L}$ if $\lim_{t \to t_0} \text{norm} (\vec{r}(t) - \vec{L}) = 0$. We write:
+    \begin{equation}
+        \lim_{t \to a} \vec{r}(t) = \vec{L}
+    \end{equation}
+\end{definition}
+\begin{theorem}[Vector Limit Rules] The following limit rules apply to vector functions:
+    \begin{enumerate}
+        \item \textbf{Norm Limit Rule}: $\lim_{t \to a} \text{norm} (\vec{r}(t)) = \text{norm} (\lim_{t \to a} \vec{r}(t))$.
+        \item \textbf{Sum Limit Rule}: $\lim_{t \to a} (\vec{r}(t) + \vec{s}(t)) = \lim_{t \to a} \vec{r}(t) + \lim_{t \to a} \vec{s}(t)$.
+        \item \textbf{Scalar Multiple Limit Rule}: $\lim_{t \to a} c\vec{r}(t) = c\lim_{t \to a} \vec{r}(t)$.
+        \item \textbf{Product Limit Rule}: $\lim_{t \to a} (\vec{r}(t) \cdot \vec{s}(t)) = \lim_{t \to a} \vec{r}(t) \cdot \lim_{t \to a} \vec{s}(t)$.
+        \item \textbf{Cross Product Limit Rule}: $\lim_{t \to a} (\vec{r}(t) \times \vec{s}(t)) = \lim_{t \to a} \vec{r}(t) \times \lim_{t \to a} \vec{s}(t)$.
+    \end{enumerate} 
+\end{theorem}
+\subsection{Derivatives and Integrals of Vector Functions}
+\begin{definition}[Derivative]
+    Let the vector function $\vec{r}(t) = f(t)i + g(t)j + h(t)k$ be defined on an open interval $I$ containing $t = a$. The derivative of $\vec{r}(t)$ is given by:
+    \begin{equation}
+        \vec{r'}(t) = \lim_{h \to 0} \frac{\vec{r}(t+h) - \vec{r}(t)}{h}
+    \end{equation}
+\end{definition}
+\begin{definition}[Integration]
+    Let the vector function $\vec{r}(t) = f(t)i + g(t)j + h(t)k$ be defined on an open interval $I$ containing $t = a$. The integral of $\vec{r}(t)$ is given by:
+    \begin{equation}
+        \int \vec{r}(t) \, dt = \int f(t) \, dt i + \int g(t) \, dt j + \int h(t) \, dt k
+    \end{equation}
+\end{definition}
+\begin{definition}[Triangle Inequality for Integrals]
+    Let the vector function $\vec{r}(t) = f(t)i + g(t)j + h(t)k$ be defined on an open interval $I$ containing $t = a$. The triangle inequality for integrals is given by:
+    \begin{equation}
+        \left| \int \vec{r}(t) \, dt \right| \le \int \left| \vec{r}(t) \right| \, dt
+    \end{equation}
+\end{definition}
+\begin{definition}[Composite Functions]
+    Let $\vec{r}(t) = f(t)i + g(t)j + h(t)k$ be a vector function and $u: \mathbb{R} \to \mathbb{R}$ be a scalar function. The composite function of $\vec{r}(t)$ and $u$ is given by:
+    \begin{equation}
+        (\vec{r}\circ u)(t) \vec{r}(u(t)) = f(u(t))i + g(u(t))j + h(u(t))k
+    \end{equation}
+\end{definition}
+\begin{theorem}[Differentiation Rules]
+    Below are the differentiation rules for vector functions:
+    \begin{enumerate}
+        \item \textbf{Sum Rule}: $(\vec{r} + \vec{s})' = \vec{r'} + \vec{s}'$.
+        \item \textbf{Scalar Multiple Rule}: $(c\vec{r})' = c\vec{r'}$.
+        \item \textbf{Product Rule}: $(\vec{r} \cdot \vec{s})' = \vec{r'} \cdot \vec{s} + \vec{r} \cdot \vec{s}'$.
+        \item \textbf{Cross Product Rule}: $(\vec{r} \times \vec{s})' = \vec{r'} \times \vec{s} + \vec{r} \times \vec{s}'$. (order matters)
+        \item \textbf{Chain Rule}: $(\vec{r}(u(t)))' = \vec{r'}(u(t)) \cdot u'(t)$.
+        \item \textbf{Quotient Rule}: $\left( \frac{\vec{r}}{\vec{s}} \right)' = \frac{\vec{r'} \vec{s} - \vec{r} \vec{s}'}{\vec{s}^2}$.
+    \end{enumerate}
+\end{theorem}
+\begin{example}[Dot Product]
+    Let $\vec{r}(t) = f(t)i + g(t)j + h(t)k$. Since we have $\vec{r} \dot \vec{r} = r^2$, differencating both sides, we have:
+    \begin{align*}
+        \frac{d\vec{r}}{dt} \cdot \vec{r} + \vec{r} \cdot \frac{d\vec{r}}{dt} &= 2r \frac{dr}{dt} \\
+        2\vec{r} \cdot \frac{d\vec{r}}{dt} &= 2r \frac{dr}{dt} \\
+        \vec{r} \cdot \frac{d\vec{r}}{dt} &= r \frac{dr}{dt}
+    \end{align*}
+\end{example}
+\begin{example}
+    Let $\vec{r}(t) = \frac{\vec{r}}{r}$ this would be a unit vector, so its derivative would be perpendicular to the vector. We have:
+    \begin{align*}
+       \frac{d}{dt}\frac{\vec{r}}{r} &= \frac{1}{r^3}\left[ r^2\frac{d\vec{r}}{dt} - \vec{r}\frac{dr}{dt} \right] \\
+         &= \frac{1}{r^3}\left[ (\vec{r} \cdot \vec{r})\frac{d\vec{r}}{dt} - \vec{r}(\vec{r} \cdot \frac{d\vec{r}}{dt}) \right] \\
+         \intertext{Since $\vec{a} \times \vec{b} \times \vec{c} = \vec{a}(\vec{b} \cdot \vec{c}) - \vec{b}(\vec{a} \cdot \vec{c})$, we have:}
+         &= \frac{1}{r^3}((\vec{r} \times \frac{d\vec{r}}{dt}) \times \vec{r}) 
+    \end{align*}
+\end{example}
+\begin{definition}[Tangent Vector]
+    Let $C$ be parameterized by $\vec{r}(t) = f(t)i + g(t)j + h(t)k$ and a differentiable curve. Then the nonzero vector $\vec{r'}$ is tangent to the curve at the point $\vec{r}(t)$ at the point $(f(t), g(t), h(t))$.
+\end{definition}
+\begin{definition}[Unit Tangent Vector]
+    The unit tangent vector is given by:
+    \begin{equation}
+        \vec{T} = \frac{\vec{r'}}{\text{norm}({\vec{r'}})}
+    \end{equation}
+\end{definition}
+\begin{theorem}[Properties of the Unit Tangent Vector]
+    The unit tangent vector $\vec{T}$ has the following properties:
+    \begin{enumerate}
+        \item $\vec{T} \cdot \vec{T} = 1$.
+        \item $\vec{T} \cdot \vec{r'} = \text{norm}({\vec{r'}})$.
+        \item $\vec{T} \cdot \vec{T'} = 0 = \vec{T} \cdot \vec{r''}$. (Since we are only changing direction)
+    \end{enumerate}
+\end{theorem}
+\subsection{Arc Length and Curvature}
+\begin{definition}[Arc Length]
+    The arc length of a curve $C$ parameterized by $\vec{r}(t) = f(t)i + g(t)j + h(t)k$ is given by:
+    \begin{align}
+        s &= \int_a^b \text{norm}(\vec{r'}(t)) \, dt \\
+        &= \int_a^b \sqrt{f'(t)^2 + g'(t)^2 + h'(t)^2} \, dt
+    \end{align}
+\end{definition}
+\begin{example}[Helix]
+    Consider the helix $C$ perametized by $r(t) = 3\cos(t)i - 3\sin(t)j + 4t$. We can find the arc length of the helix. We have:
+    \begin{align*}
+        s &= \int_0^{2\pi} \sqrt{9\cos ^2 t + 9\sin ^2 t + 16} \, dt \\
+        &= \int_0^{2\pi} \sqrt{9 + 16} \, dt \\
+        &= \int_0^{2\pi} 5 \, dt \\
+        &= 10\pi
+    \end{align*}
+\end{example}
+\begin{definition}[Speed]
+    The speed of a curve $C$ parameterized by $\vec{r}(t) = f(t)i + g(t)j + h(t)k$ is given by:
+    \begin{equation}
+        v = \text{norm}(\vec{r'}(t)) = \sqrt{f'(t)^2 + g'(t)^2 + h'(t)^2}
+    \end{equation}
+\end{definition}
+\begin{definition}[Curvature]
+    The curvature of a curve $C$ parameterized by $\vec{r}(t) = f(t)i + g(t)j + h(t)k$ is given by:
+    \begin{equation}
+        \kappa = \left| \frac{d\phi}{ds} \right|
+    \end{equation}
+    , where $\phi$ is the angle between the tangent vector and the $x$ axis.
+\end{definition}
+\begin{example}
+    Let $C$ be a curve defined by $y = y(x)$, we can find the curvature of the curve. We have:
+    \begin{align*}
+        \frac{dy}{dx} = y' &= \tan \phi \\
+        \phi &= \arctan(y') \\
+        \frac{d\phi}{dx} &= \frac{y''}{1 + y'^2} \\
+        \intertext{Also, for $ds$, we have:}
+        ds &= \sqrt{1 + y'^2} \, dx \\
+        \intertext{By chain rule, we have:}
+        \frac{d\phi}{dx} &= \frac{d\phi}{ds} \frac{ds}{dx} \\
+        \intertext{Solving for $\kappa$, we have:}
+        \kappa &= \frac{d\phi}{ds} = \frac{y''}{(1 + y'^2)^{3/2}}
+    \end{align*}
+\end{example}
+\begin{theorem}
+    For a curve $C$ parameterized by $y = y(x)$, the curvature of the curve is given by:
+    \begin{equation}
+        \kappa = \frac{y''}{(1 + y'^2)^{3/2}}
+    \end{equation}
+\end{theorem}
+\begin{example}[Straight Line]
+    Let $C$ be a straight line defined by $y = mx + b$, we can find the curvature of the curve. We have:
+    \begin{align*}
+        y' &= m \\
+        y'' &= 0 \\
+        \kappa &= \frac{0}{(1 + m^2)^{3/2}} = 0
+    \end{align*}
+\end{example}
+\paragraph{} For curves perametized by $\vec{r}(t) = x(t)i + y(t)j$, we have:
+\begin{equation}
+    \frac{dy}{dx} = \frac{dy/dt}{dx/dt} = \frac{y'(t)}{x'(t)}
+\end{equation}
+For $d^2y/dx^2$, we have, by quotient rule:
+\begin{align}
+    \frac{d^2y}{dx^2} &= \frac{d}{dx} \left( \frac{dy}{dx} \right) \nonumber  \\
+    &= \frac{dx'/dx \dot y' - dy'/dx \dot x'}{(dx/dt)^2} \nonumber  \\
+    \intertext{By chain rule, we have:}
+    \frac{dx'}{dx} &= \frac{dx'/dt}{dx/dt} = \frac{x''}{x'} \nonumber  \\
+    \frac{dy'}{dx} &= \frac{dy'/dt}{dx/dt} = \frac{y''}{x'} \nonumber 
+    \intertext{Substituting back, we have:} 
+    \frac{d^2y}{dx^2} &= \frac{x''y' - y''x'}{x'^3}
+\end{align}
+\begin{theorem}
+    For a curve $C$ parameterized by $\vec{r}(t) = x(t)i + y(t)j$, the curvature of the curve is given by:
+    \begin{equation}
+        \kappa = \frac{x''y' - y''x'}{(x'^2 + y'^2)^{3/2}}
+    \end{equation}
+\end{theorem}
+\begin{example}[Circle]
+    Let $C$ be a circle defined by $r\cos(t)i + r\sin(t)j$, we can find the curvature of the curve. We have:
+    \begin{align*}
+        x &= r\cos(t) \\
+        y &= r\sin(t) \\
+        x' &= -r\sin(t) \\
+        y' &= r\cos(t) \\
+        x'' &= -r\cos(t) \\
+        y'' &= -r\sin(t) \\
+        \kappa &= \frac{(-r\cos(t))(r\cos(t)) - (-r\sin(t))(r\sin(t))}{(r^2)^{3/2}} \\
+        &= \frac{r^2}{r^3} = \frac{1}{r}
+    \end{align*}
+\end{example}
+\begin{definition}[Radius of Curvature]
+    The radius of curvature of a curve $C$ is given by:
+    \begin{equation}
+        \rho = \frac{1}{\kappa}
+    \end{equation}
+\end{definition}
+\begin{example}[Ellipse]
+    Let $C$ be an ellipse defined by $a\cos(t)i + b\sin(t)j$, we can find the radius of curvature of the curve. We have:
+    \begin{align*}
+        x &= a\cos(t) \\
+        y &= b\sin(t) \\
+        x' &= -a\sin(t) \\
+        y' &= b\cos(t) \\
+        x'' &= -a\cos(t) \\
+        y'' &= -b\sin(t) \\
+        \kappa &= \frac{(-a\cos(t))(b\cos(t)) - (-b\sin(t))(-a\sin(t))}{(a^2\sin^2(t) + b^2\cos^2(t))^{3/2}} \\
+        &= \frac{ab}{(a^2\sin^2(t) + b^2\cos^2(t))^{3/2}}
+    \end{align*}
+\end{example}
+\paragraph{Relationship to $\vec{T}$} For an angle $\phi$ between the $x$ axis and the tangent vector $\vec{T}$, we have:
+\begin{align}
+    \vec{T} &= \cos(\phi)i + \sin(\phi)j \\
+    \intertext{Also, for $d\vec{T}/ds$, we have:}
+    \frac{d\vec{T}}{ds} &= -\sin(\phi)\frac{d\phi}{ds}i + \cos(\phi)\frac{d\phi}{ds}j \nonumber \\
+    \left|\frac{d T}{ds}\right| &= \frac{d\phi }{ds} \sqrt{\sin^2 (\phi) + \cos^2 (\phi)} = \kappa \\
+\end{align}
+\begin{definition}[Curvature for $n$-D curves]
+    For a curve $C$ parameterized by $\vec{r}(t) = f_1(t)i + f_2(t)j + \ldots + f_n(t)k$, the curvature of the curve is given by:
+    \begin{equation}
+        \kappa = \left| \frac{d\vec{T}}{ds} \frac{dt}{ds} \right| = \frac{|\vec{T'}|}{|\vec{r'}|} 
+    \end{equation}
+\end{definition}
+\begin{example}[Helix]
+    Let $C$ be a helix defined by $3\cos(t)i + 3\sin(t)j + 4tk$, we can find the curvature of the curve. We have:
+    \begin{align*}
+        \frac{d\vec{r}}{dt} &= -3\sin(t)i + 3\cos(t)j + 4k \\
+        |\frac{d\vec{r}}{dt}| &= \sqrt{9\sin^2(t) + 9\cos^2(t) + 16} = 5 \\
+        \vec{T} &= \frac{1}{5}(-3\sin(t)i + 3\cos(t)j + 4k) \\
+        \frac{d\vec{T}}{dt} &= \frac{1}{5}(-3\cos(t)i - 3\sin(t)j) \\
+        |\frac{d\vec{T}}{dt}| &= \frac{3}{5} \\
+        \kappa &= \frac{3}{5} \cdot \frac{1}{5} = \frac{3}{25} \\
+        \rho &= \frac{25}{3}
+    \end{align*}
+\end{example}
+\begin{definition}[Cross Product Defintion of Curvature]
+    For a curve $C$ parameterized by $\vec{r}(t) = f(t)i + g(t)j + h(t)k$, the curvature of the curve is given by:
+    \begin{equation}
+        \kappa = \frac{|\vec{r'} \times \vec{r''}|}{|\vec{r'}|^3}
+    \end{equation}
+\end{definition}
+\paragraph{The Normal and Binormal Vectors} We can use the tangent vector to find the normal and binormal vectors. We can then constuct the osculating plane.
+\begin{definition}[Normal Vector]
+    The normal vector of a curve $C$ is a vector that is perpendicular to the tangent vector $\vec{T}$ of the curve. The normal vector is given by:
+    \begin{equation}
+        \vec{N} = \frac{d\vec{T}}{ds}
+    \end{equation}
+\end{definition}
+\begin{definition}[Binormal Vector]
+    The binormal vector of a curve $C$ is a vector that is perpendicular to both the tangent vector $\vec{T}$ and the normal vector $\vec{N}$ of the curve. The binormal vector is given by:
+    \begin{equation}
+        \vec{B} = \vec{T} \times \vec{N} = \frac{\vec{T'}}{|\vec{T'}|}
+    \end{equation}
+\end{definition}
+\begin{definition}[Osculating Plane]
+    The osculating plane of a curve $C$ is a plane that is tangent to the curve at a point and contains the tangent vector $\vec{T}$ and the normal vector $\vec{N}$ of the curve.
+\end{definition}
+\subsection{Motion in Space: Velcity and Acceleration}
+\begin{definition}[Location, Velocity and Acceleration]
+    Let the position of an object be given by $\vec{r}(t) = f(t)i + g(t)j + h(t)k$. The velocity of the object is given by:
+    \begin{equation}
+        \vec{v} = \vec{r'}(t) = f'(t)i + g'(t)j + h'(t)k
+    \end{equation}
+    The acceleration of the object is given by:
+    \begin{equation}
+        \vec{a} = \vec{v'}(t) = f''(t)i + g''(t)j + h''(t)k
+    \end{equation}
+\end{definition}
+\paragraph{Circular Motion} For circular motion, we have:
+\begin{align}
+    \vec{r}(t) &= r\cos(\omega t)i + r\sin(\omega t)j \\
+    \vec{v}(t) &= -r\omega\sin(\omega t)i + r\omega\cos(\omega t)j \\
+    \vec{a}(t) &= -r\omega^2\cos(\omega t)i - r\omega^2\sin(\omega t)j
+\end{align}
+\paragraph{Clockwise Convention} Note that for $\theta$ increasing, the vector rotates counter-clockwise. For $\theta$ decreasing, the vector rotates clockwise.
+\begin{definition}[Angluar Velocity and Speed]
+    The angular velocity of a curve $C$ is given by:
+    \begin{equation}
+        \omega = \frac{d\theta}{dt}
+    \end{equation}
+    For angular speed, we have:
+    \begin{equation}
+        \omega = \left|\frac{d\theta}{dt}\right|
+    \end{equation}
+\end{definition}
+\subsection{Introduction to Vector Mechanics}
+\begin{definition}[Newton's Second Law]
+    Newton's second law states that the acceleration of an object is directly proportional to the net force acting on the object and inversely proportional to the mass of the object. The law is given by:
+    \begin{equation}
+        \vec{F} = m\vec{a}
+    \end{equation}
+\end{definition}
+\begin{definition}[Momentum]
+    The momentum of an object is the product of the mass of the object and the velocity of the object. The momentum is given by:
+    \begin{equation}
+        \vec{p} = m\vec{v}
+    \end{equation}
+\end{definition}
+\begin{definition}[Conservation of Momentum]
+    The conservation of momentum states that the total momentum of a system of objects is conserved if the net external force acting on the system is zero. The law is given by:
+    \begin{equation}
+        \vec{p}_{\text{initial}} = \vec{p}_{\text{final}}, \quad \vec{p^\prime} = \vec{F} = 0
+    \end{equation}
+\end{definition}
+\begin{definition}[Angualr Momentum]
+    The angular momentum of an object is the product of the moment of inertia of the object and the angular velocity of the object. The angular momentum is given by:
+    \begin{equation}
+        \vec{L} = \vec{r} \times \vec{p}
+    \end{equation}
+\end{definition}
+\begin{example}[Angular Momentum]
+    Let $C$ be a curve defined by $r\cos(t)i + r\sin(t)j$, we can find the angular momentum of the curve. We have:
+    \begin{align*}
+        \vec{r} &= r\cos(t)i + r\sin(t)j \\
+        \vec{v} &= -r\sin(t)i + r\cos(t)j \\
+        \vec{p} &= m(-r\sin(t)i + r\cos(t)j) \\
+        \vec{L} &= \vec{r} \times \vec{p} = mr^2\omega k \\
+        |\vec{L}| &= mr^2\omega
+    \end{align*}
+\end{example}
+\begin{definition}[Torque]
+    The torque of an object is the product of the moment arm of the object and the force acting on the object. The torque is given by:
+    \begin{equation}
+        \vec{\tau} = \vec{r} \times \vec{F}
+    \end{equation}
+\end{definition}
+For $\vec{\tau} = 0$, $\vec{L}$ is conserved.
+\begin{definition}[Acceleration]
+    For velocity, we can use the tagental vector to define a velociy vector. For acceleration, differenciate it and get a ccaletion with respect to the normal vector:
+    \begin{align}
+        \vec{v} &= \frac{ds}{dt}\vec{T} \\
+        \vec{a} &= \frac{d\vec{v}}{dt} = \frac{d^2s}{dt^2}\vec{T} + \frac{ds}{dt}\frac{d\vec{T}}{dt} \nonumber \\
+        \intertext{Recall that $\vec{T} = \left | \frac{d\vec{T}}{dt} | \right | \vec{N}$, we have:}
+        \vec{a} &= \frac{d^2s}{dt^2}\vec{T} + \frac{ds}{dt}\frac{d\vec{T}}{dt} \nonumber \\
+        &= \frac{d^2s}{dt^2}\vec{T} + \frac{ds}{dt}\frac{d\phi}{dt}\vec{N} \nonumber \\
+        &= \frac{d^2s}{dt^2}\vec{T} + \frac{ds}{dt}\kappa\vec{N}
+    \end{align}
+\end{definition}
+
 \appendix
 \input{appendix.tex}
 \end{document}
