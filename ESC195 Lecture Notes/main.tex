@@ -1989,13 +1989,108 @@ For $\vec{\tau} = 0$, $\vec{L}$ is conserved.
     \begin{align}
         \vec{v} &= \frac{ds}{dt}\vec{T} \\
         \vec{a} &= \frac{d\vec{v}}{dt} = \frac{d^2s}{dt^2}\vec{T} + \frac{ds}{dt}\frac{d\vec{T}}{dt} \nonumber \\
-        \intertext{Recall that $\vec{T} = \left | \frac{d\vec{T}}{dt} | \right | \vec{N}$, we have:}
+        \intertext{Recall that $\vec{T} = \left | \frac{d\vec{T}}{dt} \right | \vec{N}$, we have:}
         \vec{a} &= \frac{d^2s}{dt^2}\vec{T} + \frac{ds}{dt}\frac{d\vec{T}}{dt} \nonumber \\
-        &= \frac{d^2s}{dt^2}\vec{T} + \frac{ds}{dt}\frac{d\phi}{dt}\vec{N} \nonumber \\
-        &= \frac{d^2s}{dt^2}\vec{T} + \frac{ds}{dt}\kappa\vec{N}
+        &= \frac{d^2s}{dt^2}\vec{T} + \frac{d^2s}{dt^2}\kappa\vec{N}
     \end{align}
 \end{definition}
+\section{Partial Derivatives}
+\subsection{Functions of Several Variables}
+\begin{definition}[Functions of Several Variables]
+    A function of several variables is a function that maps a point in $\mathbb{R}^n$ to a real number. A function of two variables is given by:
+    \begin{equation}
+        f(x, y)
+    \end{equation}
+\end{definition}
+\begin{example}[Temperature]
+    We have been duelign with funciton that maps a line (like a rod) to a real number (temperature). We can extend this to a function that maps a plane to a real number (temperature of a surface):
+    $$
+    T(x, y)
+    $$
+    Similarly, we can extend this to a function that maps a volume to a real number (temperature of a room):
+    $$
+    T(x, y, z)
+    $$
 
+\end{example}
+\begin{example}[Confinement of Plasma in Magnetic Field in Fusion Reactors]
+    Plasma are matter so hot that it is ionized. Hence, they consist in a soup of particles. It is used in fusion reactors. The plasma is confined in a magnetic field. The magnetic force is given by:
+    \begin{align}
+        \vec{F} &= q\vec{E}
+        \vec{F} &= q\vec{v} \times \vec{B} 
+    \end{align}
+    Let $\vec{B} = B_0\vec{k}$, the trajectory of the particle is given by:
+    \begin{align}
+        \vec{F} &= m\vec{r''} \nonumber \\
+        \intertext{Let $\omega_L = \frac{qB_0}{m}$ (gyrofrequency), we have:} 
+        \vec{v'} = w_L\vec{v} \times \vec{k} \nonumber
+        \intertext{Thus, we have the following 3 coupled differential equations:}
+        v_x' &= -\omega_Lv_y \nonumber \\
+        v_y' &= \omega_Lv_x \nonumber \\
+        v_z' &= 0 \nonumber
+        \intertext{Differentiating the first equation, we have:}
+        v_x'' &= -w_Lv_y' = -w_L^2v_x \nonumber \\
+        v_x = A\sin(\omega _Lt) \hspace{0.4in} v_y &= A\cos(\omega _Lt) \hspace{0.4in} v_z = C \nonumber \\
+        \vec{v} &= A\sin(\omega_Lt)i + A\cos(\omega_Lt)j + Ck \\ 
+        \vec{r} &= \int \vec{v} \, dt = \frac{A}{\omega_L}\cos(\omega_Lt)i - \frac{A}{\omega_L}\sin(\omega_Lt)j + Ct\vec{k}
+    \end{align}
+    Which, we can see is a helix. The current state-of-the art uses a torus to confine the plasma. But this leads to a cicular magnetic field; the gradient of the magnetic field is not constant, this leads to and electric field that can cause the plasma to drift:
+\end{example}
+\subsection{Partial Derivatives}
+\begin{example}[Upper Hemishere]
+    Let $f(x, y) = \sqrt{25 - x^2 - y^2}$, we cut the shphere along the surface $y=2$. We can find the slope of the curve at $x=3$. We have:
+    \begin{align*}
+        f(x, 2) &= \sqrt{25 - x^2 - 4} \\
+        f'(x, 2) &= \frac{-x}{\sqrt{25 - x^2 - 4}} \\
+        f'(3, 2) &= \frac{-3}{\sqrt{25 - 9 - 4}} = -\frac{3}{\sqrt{12}}
+    \end{align*}
+\end{example}
+\begin{definition}
+    In general, we treat the other variable as a constant. We can find the partial derivative of $f(x, y)$ with respect to $x$ as:
+    \begin{subequations}
+        \begin{equation}
+        f_x = \frac{\partial f}{\partial x} = \lim_{h \to 0} \frac{f(x+h, y) - f(x, y)}{h}
+    \end{equation}
+    Similarly, we can find the partial derivative of $f(x, y)$ with respect to $y$ as:
+    \begin{equation}
+        f_y = \frac{\partial f}{\partial y} = \lim_{h \to 0} \frac{f(x, y+h) - f(x, y)}{h}
+    \end{equation}
+    \end{subequations}
+\end{definition}
+\paragraph{Notation} We can also write the partial derivative of $f(x, y)$ with respect to $x$ as:
+\begin{equation*}
+    f_x = \frac{\partial f}{\partial x} = \frac{\partial f}{\partial x} = \frac{\partial}{\partial x}f = D_x f
+\end{equation*}
+\paragraph{Note} \textit{We prnounce $\partial$ as `die'}
+\begin{example}
+    Let $f(x, y, z) = e^{xy}\sin(xz)$, we can find the partial derivative of $f(x, y, z)$ with respect to $x$. We have:
+    \begin{align*}
+        f_x &= \frac{\partial f}{\partial x} = y e^{xy}\sin(xz) + ze^{xy}\cos(xz) \\
+        f_y &= \frac{\partial f}{\partial y} = x e^{xy}\sin(xz) \\
+        f_z &= \frac{\partial f}{\partial z} = x e^{xy}\cos(xz)
+    \end{align*}
+\end{example}
+\paragraph{Mixed Partial Derivatives} We can also find the mixed partial derivatives of $f(x, y)$ with respect to $x$ and $y$ as:
+\begin{subequations}
+    \begin{equation}
+    f_{xy} = \frac{\partial^2 f}{\partial y \partial x} = \frac{\partial}{\partial y} \left( \frac{\partial f}{\partial x} \right)
+    \end{equation}
+    \begin{equation}
+    f_{yx} = \frac{\partial^2 f}{\partial x \partial y} = \frac{\partial}{\partial x} \left( \frac{\partial f}{\partial y} \right)
+    \end{equation}
+\end{subequations}
+\begin{theorem}[Clairaut's Theorem]
+    If $f(x, y)$ is defined on an open disk $D$ containing the point $(a, b)$ and if the partial derivatives $f_{xy}$ and $f_{yx}$ are continuous on $D$, then $f_{xy}(a, b) = f_{yx}(a, b)$.
+\end{theorem}
+\subsection{Directional Derivatives and the Gradient}
+\paragraph{Differentiability and Gradients} Using the first principle, we can find the directional derivative of $f(a_1, a_2, \dots, a_n)$ as $\vec{h} \to 0$:
+\begin{equation}
+    \lim_{\vec{h} \to 0} \frac{f(\vec{a} + \vec{h}) - f(\vec{a})}{\vec{h}}
+\end{equation}
+\paragraph{A note on $\Pi$ Notation} We can write the product of a series using $\Pi$ notation:
+\begin{equation}
+    \prod_{i=1}^n a_i = a_1 \cdot a_2 \cdot \ldots \cdot a_n
+\end{equation}
 \appendix
 \input{appendix.tex}
 \end{document}

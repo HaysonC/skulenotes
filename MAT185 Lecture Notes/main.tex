@@ -203,7 +203,7 @@ Now, to prove the part 2 of the Cancelation Theorem:
     \end{align}
 \end{definition}
 
-\section{Linear combinations}
+\section{Linear combinations and Bases}
 \begin{definition}[Linear Combination]
     Let $V$ be a vector space and $\textbf{v}_1, \textbf{v}_2, \ldots, \textbf{v}_n \in V$ and $\alpha_1, \alpha_2, \ldots, \alpha_n \in \mathbb{R}$, then:
     \begin{align*}
@@ -454,7 +454,8 @@ Note that the span of set is a subspace of the vector space. Thus, the column sp
     \end{equation}
 \end{theorem}
 \paragraph{Stacking Chnage of Basis Matrix} We can stack the change of basis matrix to form a matrix $P$, and also incoperate linear transformations in other bases to a vector.
-\section{Determinants}
+\section{Determinants and Inverses}
+\subsection{Determinants}
 \begin{definition}[Determinant]
     Let $A \in \mathbb{R}^{n \times n}$, then the determinant of $A$ is denoted as $\det(A)$.
 \end{definition}
@@ -489,6 +490,7 @@ Note that the span of set is a subspace of the vector space. Thus, the column sp
         \end{bmatrix}\right) \\ 
         \det I &= 1
 \end{align}
+\end{theorem}
 \begin{definition}[Determinant Functions]
     Any function $f$ that satisfies the properties:
     \begin{enumerate}
@@ -510,5 +512,157 @@ Note that the span of set is a subspace of the vector space. Thus, the column sp
     \end{enumerate}
     is called a determinant function.
 \end{definition}
+\begin{theorem}
+    If $f$ is alternating on rows and $A$ is a matrix that has two identical rows, then $f(A) = 0$.
+\end{theorem}
+\subsection{Constructing Determinants and Inverses}
+\begin{definition}[Minor Matrix]
+    Let $A \in \mathbb{R}^{n \times n}$, then the minor of $A$ is denoted as $A_{ij}$, which the matrix obtained by removing the $i$-th row and $j$-th column of $A$.
+\end{definition}
+\begin{example}
+    Let $A = \begin{bmatrix} 1 & 2 & 3 \\ 4 & 5 & 6 \\ 7 & 8 & 9 \end{bmatrix}$, then the minor of $A$ is:
+    $$ A_{11} = \begin{bmatrix} 5 & 6 \\ 8 & 9 \end{bmatrix} \quad A_{12} = \begin{bmatrix} 4 & 6 \\ 7 & 9 \end{bmatrix} \quad A_{13} = \begin{bmatrix} 4 & 5 \\ 7 & 8 \end{bmatrix} $$
+\end{example}
+\paragraph{Find the Determinant from a Row} We can find the determinant of a matrix by expanding along a row. We can expand along any row or column, but it is easier to expand along a row with zeros.
+\begin{definition}[Cofactor]
+    Let $A \in \mathbb{R}^{n \times n}$, then the cofactor of $A$ is denoted as $C_{ij}$, which is defined as:
+    \begin{equation}
+        C_{ij} = (-1)^{i+j}\det(A_{ij})
+    \end{equation}
+\end{definition}
+\paragraph{Checkerboard Pattern} We can use the checkerboard pattern to find the determinant of a matrix. We can expand along any row or column, but it is easier to expand along a row with zeros.
+\begin{definition}[Determinant]
+    Let $A \in \mathbb{R}^{n \times n}$, then the determinant of $A$ is denoted as $\det(A)$, which is defined as:
+    \begin{equation}
+        \det(A) = \sum_{j=1}^{n} a_{ij}C_{ij}
+    \end{equation}
+\end{definition}
+\begin{example}
+    Let $A = \begin{bmatrix} 1 & 2 & 3 \\ 4 & 5 & 6 \\ 7 & 8 & 9 \end{bmatrix}$, then the cofactor of $A$ is:
+    $$ C_{11} = \begin{bmatrix} 5 & 6 \\ 8 & 9 \end{bmatrix} \quad C_{12} = \begin{bmatrix} 4 & 6 \\ 7 & 9 \end{bmatrix} \quad C_{13} = \begin{bmatrix} 4 & 5 \\ 7 & 8 \end{bmatrix} $$
+\end{example}
+\paragraph{Find the Determinant from a Column} We can find the determinant of a matrix by expanding along a column. We can expand along any row or column, but it is easier to expand along a column with zeros.
+\paragraph{Using Elementary Row Operations} We can use elementary row operations to simplify the matrix on the row or column we are expanding along (by having zeros).
+\begin{theorem}[Determinant w.r.t Elementary Row Operations]
+    Consider the following elementary row operations:
+    \begin{enumerate}
+        \item \textbf{Swapping two rows}: The determinant of the matrix changes sign due to the alternating property.
+        \item \textbf{Multiplying a row by a scalar}: The determinant of the matrix is multiplied by the scalar. This is obvious.
+        \item \textbf{Adding a multiple of one row to another row}: The determinant of the matrix remains the same. This is due to the multilinearity property.
+    \end{enumerate}
+\end{theorem}
+\begin{theorem}[Determinant of a Transpose]
+    Let $A \in \mathbb{R}^{n \times n}$, then:
+    \begin{equation}
+        \det(A) = \det(A^T)
+    \end{equation}
+\end{theorem}
+\begin{example}[Determinant of a $5\times5$ Matrix]
+    Let $A = \begin{bmatrix} 3 & 2 & 1 & 4 & -1 \\ 5 & 4 & 3 & 2 & 1 \\ 2 & 1 & 2 & 3 & 1 \\ -3 & 4 & 1 & 6 & 7 \\ 1 & 2 & 3 & 4 & 5 \end{bmatrix}$. We have:
+    \begin{align*}
+        \intertext{Step 1: Swap row 1 and row 5}
+        \det A &= -\begin{vmatrix} 1 & 2 & 3 & 4 & 5 \\ 5 & 4 & 3 & 2 & 1 \\ 2 & 1 & 2 & 3 & 1 \\ -3 & 4 & 1 & 6 & 7 \\ 3 & 2 & 1 & 4 & -1 \end{vmatrix} \\
+        \intertext{Step 2: Get row 2 - 5 start with 0}
+        \det A &= -\begin{vmatrix} 1 & 2 & 3 & 4 & 5 \\ 0 & -6 &-12 & -18 & -24 \\ 0 & -3 & -4 & -5 & -9 \\ 0 & 10 & 10 & 18 & 22 \\ 0 & -4 & -8 & -8 & -16 \end{vmatrix} \\
+        \intertext{Step 3: Get it to a UTM}
+        \det A &= -\begin{vmatrix} 1 & 2 & 3 & 4 & 5 \\ 0 & -6 &-12 & -18 & -24 \\ 0 & 0 & 2 & 4 & 3 \\ 0 & 0 & 0 & 4 & 0 \\ 0 & 0 & 0 & 0 & -3 \end{vmatrix} \\
+        \intertext{We can see that each row expansion is just a multiple of the minor below it. Thus, the determinant is the product of the diagonal elements.}
+        \det A &= -1 \times -6 \times 2 \times 4 \times -3 = -144
+    \end{align*}
+\end{example}
+\begin{theorem}[The theorem of Determinants and Inverse]
+    Let $A \in \mathbb{R}^{n \times n}$, then the following properties hold:
+    \begin{enumerate}
+        \item $A$ is invertible.
+        \item $\det(A) \neq 0$.
+        \item $\text{RREF}(A) = I$.
+        \item $A$ is a product of elementary matrices.
+        \item $\det(A^{-1}) = \frac{1}{\det(A)}$.
+        \item $\text{rank}(A) = n$.
+    \end{enumerate}
+\end{theorem}
+\section{Eigen and Diagonalization}
+\subsection{Eigenvalues and Eigenvectors}
+\begin{definition}[Eigenvalues and Eigenvectors]
+    Let $A \in {^n\mathbb{R}^n}$, then $\lambda$ is an eigenvalue of $A$ if there exists a \textbf{non-zero} vector $\textbf{v}$ such that:
+    \begin{equation}
+        A\textbf{v} = \lambda \textbf{v}
+    \end{equation}
+    The vector $\textbf{v}$ is called an eigenvector of $A$.
+\end{definition}
+\begin{theorem}[Properties of Eigenvalues and Eigenvectors]
+    Let $A \in {^n\mathbb{R}^n}$, then the following properties hold:
+    \begin{enumerate}
+        \item The eigenvalues of $A$ are the roots of the characteristic equation:
+        \begin{equation}
+            \det(A - \lambda I) = 0
+        \end{equation}
+        \item The eigenvectors of $A$ are the solutions to the system of equations:
+        \begin{equation}
+            (A - \lambda I)\textbf{v} = \textbf{0}
+        \end{equation}
+    \end{enumerate}
+\end{theorem}
+\paragraph{Note} If $A\textbf{v} = \textbf{0}$, then $\textbf{v}$ is an eigenvector of $A$ with eigenvalue $\lambda = 0$.
+\begin{example}[Eigenvalues and Eigenvectors]
+    Let $A = \begin{bmatrix} 1 & 2 \\ 2 & 1 \end{bmatrix}$, then the characteristic equation is:
+    \begin{align*}
+        \det(A - \lambda I) &= \begin{vmatrix} 1-\lambda & 2 \\ 2 & 1-\lambda \end{vmatrix} \\
+        &= (1-\lambda)(1-\lambda) - 4 \\
+        &= \lambda^2 - 2\lambda - 3 = 0
+    \end{align*}
+    The roots of the characteristic equation are $\lambda = 3, -1$. The eigenvectors are:
+    \begin{align*}
+        \text{For } \lambda = 3: \begin{bmatrix} -2 & 2 \\ 2 & -2 \end{bmatrix}\textbf{v} &= \textbf{0} \implies \textbf{v} = \begin{bmatrix} 1 \\ 1 \end{bmatrix} \\
+        \text{For } \lambda = -1: \begin{bmatrix} 2 & 2 \\ 2 & 2 \end{bmatrix}\textbf{v} &= \textbf{0} \implies \textbf{v} = \begin{bmatrix} 1 \\ -1 \end{bmatrix}
+    \end{align*}
+\end{example}
+\begin{example}
+    Let $A \in {^n\mathbb{R}^n}$ and has eigen value 2 with multiplicity 2, and eigen value 3 with multiplicity 1. Let $x, y, z$ be eigenvectors of $A$ corresponding to the eigenvalues 2, 2, 3 respectively. Then:
+    \begin{enumerate}
+        \item \textbf{2x is an eigenvector of A}: Since $A(2x) = 2Ax = 2(2x)$, then $2x$ is an eigenvector of $A$ with eigenvalue 2.
+        \item \textbf{x + y is an eigenvector of A}: Since $A(x + y) = Ax + Ay = 2x + 2y = 2(x + y)$, then $x + y$ is an eigenvector of $A$ with eigenvalue 2.
+        \item \textbf{x + z is an not an eigenvector of A}: Since $A(x + z) = Ax + Az = 2x + 3z \neq \lambda(x + z)$, then $x + z$ is not an eigenvector of $A$.
+    \end{enumerate}
+\end{example}
+\subsection{Eigenspace and Multiplicity}
+\begin{definition}[Eigenspace]
+    Let $A \in {^n\mathbb{R}^n}$, then the eigenspace of $A$ corresponding to the eigenvalue $\lambda$ is denoted as $E_\lambda$, which is defined as:
+    \begin{equation}
+        E_\lambda = \{ \textbf{v} \in \mathbb{R}^n \mid A\textbf{v} = \lambda \textbf{v} \}
+    \end{equation}
+    , which is the union of all eigenvectors of $A$ corresponding to the eigenvalue $\lambda$ and ${\textbf{0}}$.
+\end{definition}
+\begin{theorem}[Eigenspace is a Subspace]
+    Let $A \in {^n\mathbb{R}^n}$, then the eigenspace of $A$ corresponding to the eigenvalue $\lambda$ is a subspace of $\mathbb{R}^n$ with dimension equal to the multiplicity of $\lambda$ ($\ge 1$).
+\end{theorem}
+\begin{proof}
+    This is obvious as eigenspace is a span of eigenvectors, and the span of eigenvectors is a subspace. To proof it, we use the subspace test:
+    \begin{enumerate}
+        \item \textbf{Non-emptiness}: Since $\textbf{0}$ satisfies $A\textbf{0} = \lambda \textbf{0}$, then $\textbf{0} \in E_\lambda$.
+        \item \textbf{Closure under addition}: Let $\textbf{v}_1, \textbf{v}_2 \in E_\lambda$, then $A(\textbf{v}_1 + \textbf{v}_2) = A\textbf{v}_1 + A\textbf{v}_2 = \lambda \textbf{v}_1 + \lambda \textbf{v}_2 = \lambda(\textbf{v}_1 + \textbf{v}_2)$, then $\textbf{v}_1 + \textbf{v}_2 \in E_\lambda$.
+        \item \textbf{Closure under scalar multiplication}: Let $\textbf{v} \in E_\lambda$, then $A(c\textbf{v}) = cA\textbf{v} = c\lambda \textbf{v} = \lambda(c\textbf{v})$, then $c\textbf{v} \in E_\lambda$.
+    \end{enumerate}
+\end{proof}
+\begin{theorem}[Intersection of Eigenspaces]
+    Let $A \in {^n\mathbb{R}^n}$, then the intersection of eigenspaces of $A$ corresponding to distinct eigenvalues is $\{\textbf{0}\}$, that is, for eigenvalues $\lambda_1, \lambda_2$, if $\lambda_1 \neq \lambda_2$, then $E_{\lambda_1} \cap E_{\lambda_2} = \{\textbf{0}\}$.
+\end{theorem}
+\begin{definition}[Algebraic Multiplicity (AM)]
+    Let $A \in {^n\mathbb{R}^n}$, then the algebraic multiplicity of an eigenvalue $\lambda$ is the number of times $\lambda$ appears as a root of the characteristic equation.
+\end{definition}
+\begin{definition}[Geometric Multiplicity (GM)]
+    Let $A \in {^n\mathbb{R}^n}$, then the geometric multiplicity of an eigenvalue $\lambda$ is the dimension of the eigenspace of $\lambda$.
+\end{definition}
+\begin{theorem}[Multiplicity of Eigenvalues]
+    Let $A \in {^n\mathbb{R}^n}$, then the algebraic multiplicity of an eigenvalue is greater than or equal to the geometric multiplicity of the eigenvalue, that is:
+    \begin{equation}
+        \text{AM}(\lambda) \ge \text{GM}(\lambda) \ge 1
+    \end{equation}
+\end{theorem}
+\begin{theorem}[Product of Eigenvalues]
+    Let $A \in \mathbb{R}^{n \times n}$, then the product of the eigenvalues of $A$ is equal to the determinant of $A$:
+    \begin{equation}
+        \prod_{i=1}^{n} \lambda_i = \det(A)
+    \end{equation}
 \end{theorem}
 \end{document}
