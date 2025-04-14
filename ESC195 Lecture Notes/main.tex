@@ -2091,6 +2091,412 @@ For $\vec{\tau} = 0$, $\vec{L}$ is conserved.
 \begin{equation}
     \prod_{i=1}^n a_i = a_1 \cdot a_2 \cdot \ldots \cdot a_n
 \end{equation}
+\begin{definition}[Differentiability]
+    We say that $f$ is differentiable at $\vec{x}$ if there exists a vector $\nabla f$ such that:
+    \begin{equation}
+        \lim_{\vec{h} \to 0} \frac{f(\vec{x} + \vec{h}) - f(\vec{x}) - \nabla f \cdot \vec{h}}{\text{norm}(\vec{h})} = 0
+    \end{equation}
+    Thus,
+    \begin{equation}
+        f(\vec{x} + \vec{h}) - f(\vec{x}) = \nabla f \cdot \vec{h} + o(\vec{h})
+    \end{equation}
+    , where if $\lim_{\vec{h} \to 0} \frac{g(\vec{h})}{\text{norm}(\vec{h})} = 0$, then $g(\vec{h}) = o(\vec{h})$.
+\end{definition}
+\begin{definition}[Gradient]
+    The gradient of a function $f(x, y)$ is a vector that points in the direction of the greatest increase of the function. The gradient is given by:
+    \begin{equation}
+        \nabla f = \frac{\partial f}{\partial x}i + \frac{\partial f}{\partial y}j
+    \end{equation}
+\end{definition}
+\begin{example}
+    Let $f(x, y) = xyz$, we can find the gradient of the function from first principles with $h = h_1i + h_2j + h_3k$. We have:
+    \begin{align*}
+        f(x+h_1, y+h_2, z+h_3) - f(x, y, z) &= (x+h_1)(y+h_2)(z+h_3) - xyz \\
+        &= yzh_1 + xzh_2 + xyh_3 + h_1h_2z + h_1h_3y + h_2h_3x + h_1h_2h_3 - xyz \\
+        &= \vec{h} \cdot (yz i + xz j + xy k) + xh_1h_2 + yh_1h_3 + zh_2h_3 + h_1h_2h_3 \\
+    \end{align*}
+    Now, we consider the term $o(\vec{h})$, WLOG, consider $g(x) =xh_1x_3 = xh_2k\cdot \vec{h}$. We have:
+    \begin{align*}
+        \lim_{\vec{h} \to 0} \frac{|g(\vec{h})|}{\text{norm}(\vec{h})} &= \lim_{\vec{h} \to 0} \frac{|xh_2|\text{norm}(\vec{h})|\cos \theta|}{\text{norm}(\vec{h})} \le |xh_2| \\ 
+        \intertext{Since we have:}
+        \lim_{\vec{h} \to 0} |xh_2| &= 0\\
+        \intertext{So $o(\vec{h}) = 0$, and we have:}
+        \nabla f &= yz i + xz j + xy k
+    \end{align*}
+\end{example}
+\begin{theorem}[Gradient is Partial Derivative]
+    The gradient of a function $f(x, y)$ is given by:
+    \begin{equation}
+        \nabla f = \frac{\partial f}{\partial x}i + \frac{\partial f}{\partial y}j
+    \end{equation}
+    And in general, the gradient of a function $f(x_1, x_2, \dots, x_n)$ is given by:
+    \begin{equation}
+        \nabla f = \frac{\partial f}{\partial x_1}b_1 + \frac{\partial f}{\partial x_2}b_2 + \dots + \frac{\partial f}{\partial x_n}b_n
+    \end{equation}
+\end{theorem}
+\begin{example}
+    Given $T_x = 3$ and $T_y = 4$ at some point $(x_0, y_0)$, we can find the gradient of $T$ at that point. We have:
+    \begin{align*}
+        \nabla T &= 3i + 4j
+    \end{align*}
+    Also, the magnitude of the gradient is 5.
+\end{example}
+\begin{example}
+    Let $f(x, y, z) = xy^2z^3$, we can find the gradient of the function. We have:
+    \begin{align*}
+        f_x &= y^2z^3 \\
+        f_y &= 2xyz^3 \\
+        f_z &= 3xy^2z^2 \\
+        \intertext{Thus, we have:}
+        \nabla f &= y^2z^3i + 2xyz^3j + 3xy^2z^2k
+    \end{align*}
+\end{example}
+\begin{example}
+    Let $\vec{r} = x^2i + y^2j + z^2k$, we can find the gradient of the function radius funciton $r = \sqrt{x^2 + y^2 + z^2}$. We have:
+    \begin{align*}
+        r &= \sqrt{x^2 + y^2 + z^2} \\
+        r_x &= \frac{2x}{2r} = \frac{x}{r} \\
+        r_y &= \frac{y}{r} \\
+        r_z &= \frac{z}{r} \\
+        \intertext{Thus, we have:}
+        \nabla r &= \frac{x}{r}i + \frac{y}{r}j + \frac{z}{r}k = \frac{\vec{r}}{r}
+    \end{align*}
+\end{example}
+\begin{definition}[Directional Derivative]
+    The directional derivative of a function $f(x_1, x_2, \dots, x_n)$ in the direction of a unit vector $\hat{u}$ is given by:
+    \begin{equation}
+        D_{\hat{u}} = f_{\hat{u}} = \lim_{h \to 0} \frac{f(\vec{x} + h\hat{u}) - f(\vec{x})}{h}
+    \end{equation}
+\end{definition}
+\paragraph{Dot Product} We can write the directional derivative of $f(x, y)$ in the direction of a unit vector $\hat{u}$ as:
+\begin{equation}
+    f_{\hat{u}} = \nabla f \cdot \hat{u}
+\end{equation}
+\begin{example}
+    Let $f(x, y) = x^2 + y^2$, we can find the directional derivative of the function in the direction of the unit vector $\hat{u} = \frac{1}{\sqrt{2}}i + \frac{1}{\sqrt{2}}j$. We have:
+    \begin{align*}
+        \nabla f &= 2xi + 2yj \\
+        \hat{u} &= \frac{1}{\sqrt{2}}i + \frac{1}{\sqrt{2}}j \\
+        f_{\hat{u}} &= \nabla f \cdot \hat{u} = 2x\frac{1}{\sqrt{2}} + 2y\frac{1}{\sqrt{2}} = \frac{2x + 2y}{\sqrt{2}} = \sqrt{2}(x + y)
+    \end{align*}
+\end{example}
+\begin{example}[Path of Steepest Descent]
+    Let $f(x, y) = A + x + 2y - x^2 - 3y^2$, we can find the direction of the path of steepest descent from $(0, 0 , A)$. We have:
+    \begin{align*}
+        \nabla f &= (1-2x)i + (2-6y)j \\
+        \intertext{Let $C: \vec{r}(t) = x(t)i + y(t)j$ be the path of steepest descent, we have:}
+        \vec{r'}(t) &= -\nabla f \\
+        x'(t) &= 2x - 1 \\
+        y'(t) &= 3y - 2 \\
+        \intertext{Thus, we have:}
+        \frac{dy}{dx} &= \frac{dy/dt}{dx/dt} = \frac{3y - 2}{2x - 1}
+        \intertext{Solving for $y$ in terms of $x$, we have:}
+        3y &= (2s - 1)^3 + 1
+    \end{align*}
+\end{example}
+\begin{example}[Quadric Surface]
+    Let $z(x, y) = 20 - x^2 - y^2$, we can find the gradient of the function. We have:
+    \begin{align*}
+        z_x &= -2x \\
+        z_y &= -2y \\
+        \intertext{Thus, we have:}
+        \nabla z &= -2xi - 2yj
+    \end{align*}
+    Now, we can find the directional derivative of the function at (1, 2) along the direction of (-1, 1). We have:
+    \begin{align*}
+        \intertext{We first find the unit vector in the direction of (-1, 1):}
+        \hat{u} &= \frac{-1}{\sqrt{2}}i + \frac{1}{\sqrt{2}}j \\
+        z_{\hat{u}}(1, 2) &= \nabla z \cdot \hat{u} = \frac{2(1) + 2(2)}{\sqrt{2}} = 3\sqrt{2}
+    \end{align*}
+\end{example}
+\begin{definition}[Level Curves]
+    The level curves of a function $f(x, y)$ are the curves in the $xy$ plane where $f(x, y) = c$ for some constant $c$.
+\end{definition}
+\begin{example}
+    Let $f(x, y) = x^2 + y^2$, we can find the level curves of the function. We have:
+    \begin{align*}
+        x^2 + y^2 &= c \\
+        \intertext{Thus, we have:}
+        y &= \pm \sqrt{c - x^2}
+    \end{align*}
+\end{example}
+\subsection{The Chain Rule}
+\begin{theorem}[Chain Rule along a Curve]
+    Let $f(x, y, z)$ be a function of three variables and let $\vec{r}(t) = x(t)i + y(t)j + z(t)k$ be a curve in the $xy$ plane. The chain rule states that the derivative of $f$ with respect to $t$ is given by:
+    \begin{align}
+        \frac{d}{dt}[f(\vec{r}(t))] &= \nabla f (\vec{r}(t)) \cdot \vec{r'}(t)
+        &= \frac{\partial f}{\partial x} \frac{dx}{dt} + \frac{\partial f}{\partial y} \frac{dy}{dt} + \frac{\partial f}{\partial z} \frac{dz}{dt} 
+        &= ()\nabla f \cdot T)\frac{ds}{dt}
+    \end{align}
+\end{theorem}
+\begin{example}
+    Let $\vec{r}(t) = t^3 i + \cos t j$ and $T(x, y) = xy^2$, we can find the derivative of $T$ with respect to $t$. We have:
+    \begin{align*}
+        T(x, y) &= xy^2 \\
+        x(t) &= t^3 \\
+        y(t) &= \cos t \\
+        \frac{dT}{dt} &= \frac{\partial T}{\partial x} \frac{dx}{dt} + \frac{\partial T}{\partial y} \frac{dy}{dt} \\
+        &= y^2 \cdot 3t^2 + 2xy \cdot -\sin t \\
+        &= 3t^2\cos^2 t - 2t^3\cos t \sin t
+    \end{align*}
+\end{example}
+\begin{theorem}[Implicit Differentiation]
+    Let $F(x, y) = 0$ be an equation that defines $y$ as a function of $x$. The derivative of $y$ with respect to $x$ is given by:
+    \begin{equation}
+        \frac{dy}{dx} = -\frac{f_x}{f_y}
+    \end{equation}
+\end{theorem}
+\paragraph{Parametrization} We can also parametrize the curve $F(x, y) = 0$ as $x=t$, $y=g(t)$, and then use the chain rule to find the derivative of $y$ with respect to $x$.
+\subsection{Tangent Planes and Linear Approximations}
+\begin{example}[Gradient is Normal to Level Curves]
+    Let $C: 20 - x^2 - y^2 = z$. At $\vec{r} = (1,2)$, we have $z = 15$ and a level curve of $x^2 + y^2 = 5$. Also, let $\vec{t} = t_1i + t_2j$ be a tangent vector to the level curve at (1, 2). We have:
+    \begin{align*}
+        \vec{t}\cdot \vec{r} &= 0 \\
+        t_1(1) + t_2(2) &= 0 \\
+        \intertext{We choose $t_1 = 2$, then:}
+        2(1) + t_2(2) &= 0 \\
+        t_2 &= -1 \\
+        \intertext{Thus, the tangent vector is $2i - j$. We can find the gradient of the function at (1, 2):}
+        2(1) + 2(2) &= 0 \\
+        \nabla z = -2xi - 2yj \\
+        \nabla z \cdot \vec{t} &= -4x + 2y = -4 + 4 = 0
+    \end{align*}
+\end{example}
+\begin{definition}[Tangent Plane]
+    The tangent plane to a surface $z = f(x, y)$ at a point $(x_0, y_0, z_0)$ is a plane that is tangent to the surface at that point.
+\end{definition}
+\begin{definition}[Linear Approximation]
+    The linear approximation of a function $f(x, y)$ at a point $(x_0, y_0)$ is a linear function that approximates the function at that point.
+\end{definition}
+\begin{theorem}[Tangent Plane]
+    The tangent plane to a surface $z = f(x, y)$ at a point $(x_0, y_0, z_0)$ is given by:
+    \begin{equation}
+        z = f(x_0, y_0) + f_x(x_0, y_0)(x - x_0) + f_y(x_0, y_0)(y - y_0)
+    \end{equation}
+\end{theorem}
+\subsection{Maximum and Minimum Values}
+\begin{definition}[Local Maximum and Minimum]
+    A function $f(x, y)$ has a local maximum at a point $(x_0, y_0)$ if $f(x, y) \le f(x_0, y_0)$ for all points $(x, y)$ in a small disk around $(x_0, y_0)$. A function $f(x, y)$ has a local minimum at a point $(x_0, y_0)$ if $f(x, y) \ge f(x_0, y_0)$ for all points $(x, y)$ in a small disk around $(x_0, y_0)$.
+\end{definition}
+\begin{theorem}
+    If $f(x, y)$ has a local maximum or minimum at a point $(x_0, y_0)$ and the partial derivatives $f_x(x_0, y_0)$ and $f_y(x_0, y_0)$ exist, then $f_x(x_0, y_0) = 0$ and $f_y(x_0, y_0) = 0$. Otherwise, the gradient DNE.
+\end{theorem}
+\begin{definition}[Critical Point]
+    A point $(x_0, y_0)$ is a critical point of a function $f(x, y)$ if $\nabla f(x_0, y_0) = 0$ or the gradient DNE.
+\end{definition}
+\begin{definition}[Stationary Point]
+    A point $(x_0, y_0)$ is a stationary point of a function $f(x, y)$ if $f_x(x_0, y_0) = 0$ and $f_y(x_0, y_0) = 0$.
+\end{definition}
+\begin{definition}[Saddle Point]
+    A point $(x_0, y_0)$ is a saddle point of a function if it is neither a local maximum nor a local minimum, but the gradient is zero.
+\end{definition}
+\begin{theorem}[Second Derivative Test]
+    Let $f(x, y)$ be a function of two variables and let $(x_0, y_0)$ be a critical point of $f$. We have the following cases depending on $\det{J} = f_{xx}f_{yy} - f_{xy}^2$, where $J$ is the Hessian matrix of $f$:
+    \begin{enumerate}
+        \item If $\det{J} > 0$ and $f_{xx} > 0$, then $f$ has a local minimum at $(x_0, y_0)$.
+        \item If $\det{J} > 0$ and $f_{xx} < 0$, then $f$ has a local maximum at $(x_0, y_0)$.
+        \item If $\det{J} < 0$, then $f$ has a saddle point at $(x_0, y_0)$.
+        \item If $\det{J} = 0$, then the test is inconclusive.
+    \end{enumerate} 
+\end{theorem}
+\paragraph{Tips/Tricks}
+\begin{enumerate}
+    \item Check if the gradient is DNE. If it is, then the point is a critical point.
+    \item Check if the gradient is zero. If it is, then the point is a stationary point.
+    \item Check the boundry if we are dealing with a closed interval.
+    \item Check the endpoints of the boundry if we are dealing with a closed interval.
+\end{enumerate}
+\subsection{Lagrange Multipliers}
+\begin{theorem}[Lagrange Multipliers]
+    Let $f(x, y)$ be a function of two variables and let $g(x, y) = 0$ be a constraint. The method of Lagrange multipliers states that the maximum or minimum of $f(x, y)$ subject to the constraint $g(x, y) = 0$ occurs at a point $(x_0, y_0)$ where:
+    \begin{equation}
+        \nabla f(x_0, y_0) = \lambda \nabla g(x_0, y_0)
+    \end{equation}
+    where $\lambda$ is a Lagrange multiplier. Thus we can set up a system of equations:
+    \begin{align}
+        f_x(x_0, y_0) &= \lambda g_x(x_0, y_0) \\
+        f_y(x_0, y_0) &= \lambda g_y(x_0, y_0) \\
+        g(x_0, y_0) &= k
+    \end{align}
+
+\end{theorem}
+\subsection{Reconstructing a Function from its Gradient}
+\begin{theorem}[Reconstructing a Function from its Gradient]
+    Let $f(x, y)$ be a function of two variables and let $\nabla f(x, y) = g(x, y)$. The function $f(x, y)$ can be reconstructed from its gradient by integrating the gradient:
+    \begin{equation}
+        f(x, y) = \int g_x(x, y) \, dx + \int g_y(x, y) \, dy
+    \end{equation}
+    where the integrals are taken with respect to $x$ and $y$ respectively.
+    The function $f(x, y)$ is unique up to a constant of integration.
+    \begin{equation}
+        f(x, y) = \int g_x(x, y) \, dx + \int g_y(x, y) \, dy + C
+    \end{equation}
+    where $C$ is a constant of integration.
+\end{theorem}
+\subsection{Rocket Science}
+\paragraph{Tsiovsky Rocket Equation} The Tsiovsky rocket equation is given by:
+\begin{equation}
+    \Delta v = I_{sp} \ln \left( \frac{m_0}{m_f} \right)
+\end{equation}
+, where $\Delta v$ is the change in velocity, $I_{sp}$ is the specific impulse of the fuel, $m_0$ is the initial mass of the rocket, and $m_f$ is the final mass of the rocket.
+\paragraph{Escape Velocity} The escape velocity of a rocket is given by:
+\begin{equation}
+    v_e = \sqrt{2g_0R}
+\end{equation}
+, on earth, $v_e = 11.2 km/s$.
+\paragraph{Specific Impulse} The specific impulse of a rocket is given by:
+\begin{equation}
+    I_{sp} = \frac{F}{\dot{m}g_0}
+\end{equation}
+\begin{example}[Liquuid Oxygen Kerosene Rocket]
+    The specific impulse of a liquid oxygen kerosene rocket is given by:
+    $$
+        I_{sp} = 3.2 km/s
+    $$
+    Thus, we have:
+    $$
+    \frac{m_i}{m_f} = e^{\frac{v_e}{I_{sp}}} = 31.1
+    $$
+    The mass of the paylod have to be 1/31.1 of the mass of the rocket. Which means that the rocket is $97\%$ fuel. Which is not good. Let's try to optimize that. First, we have the initial mass:
+    $$
+    m_i = A + m_{fuel} + m_s
+    $$
+    , where $A$ is the mass of the payload, $m_{fuel}$ is the mass of the fuel, and $m_s$ is the mass of the structure.\\
+    We define $S$, the structure mass fraction as:
+    $$
+    S = \frac{m_s}{m_i + m_s}
+    $$
+    And define rocket mass as:
+    $$
+    m_r = m_s + m_{fuel}
+    $$
+    So we have:
+    $$
+        \frac{m_i}{m_f} = \frac{A + m_r}{A + Sm_r} = \frac{1 + \frac{m_r}{A}}{1 + S}
+    $$
+    We then have the $\Delta V$ equation:
+    $$
+    \Delta V = I_{sp} \ln(1/0.2) = 5.15 km/s
+    $$
+    which is not enough to get to orbit. We could stage the rocket:
+    \begin{align*}
+        \Delta V_{total} &= \Delta V_1 + \Delta V_2 + \Delta V_3 \\
+        &= I_{sp} \ln \left( \frac{A + m_1 + m_2 + m_3}{A + Sm_1 + m_2 + m_3} \right) + I_{sp} \ln \left( \frac{A + m_2 + m_3}{A + Sm_2 + m_3} \right) + I_{sp} \ln \left( \frac{A + m_3}{A + Sm_3} \right) \\
+        &= I_{sp} (\ln \left( \frac{A + m_1 + m_2 + m_3}{A + Sm_1 + m_2 + m_3} \right) + \ln \left( \frac{A + m_2 + m_3}{A + Sm_2 + m_3} \right) + \ln \left( \frac{A + m_3}{A + Sm_3} \right) ) \\
+    \end{align*}
+    Thus we have the constraint $\Delta V_{total} = 11.2 / 3.2 = 3.5$. And we minimize:
+    $$
+    f(m_1, m_2, m_3) = m_1 + m_2 + m_3
+    $$
+    So $\nabla f = (1, 1, 1)$ and we have the following system of equations be setting $\lambda \nabla f = \nabla g$:
+    \begin{align*}
+       \lambda &= \frac{1}{A + m_1 + m_2 + m_3} - \frac{S}{A + Sm_1 + m_2 + m_3} \\
+        \lambda &= \frac{1}{A + m_1 + m_2 + m_3} - \frac{1}{A + Sm_1 + m_2 + m_3} + \frac{1}{A + m_3} - \frac{S}{A + Sm_3} \\ 
+        \lambda &= \frac{1}{A + m_1 + m_2 + m_3} - \frac{1}{A + Sm_1 + m_2 + m_3} + \frac{1}{A + m_2 + m_3} - \frac{1}{A + Sm_2 + m_3} + \frac{1}{A + m_3} - \frac{S}{A + Sm_3} \\
+        \end{align*}
+    We can also, with rearranging:
+    $$
+    0 = \frac{1}{A + Sm_1 + m_2 + m_3} - \frac{S}{A + Sm_2 + m_3} + \frac{S}{A + Sm_3} - \frac{1}{A + Sm_3}
+    $$ 
+    We evantullaly find that the arguments in the logarithm are equal. Thus, we have:
+    $$
+    \frac{A + m_1 + m_2 + m_3}{A + Sm_1 + m_2 + m_3} = \frac{A + m_2 + m_3}{A + Sm_2 + m_3} = \frac{A + m_3}{A + Sm_3}
+    $$
+    Thus, we can use the following equation:
+    \begin{equation}
+        N = e^{\Delta V / (kI_{sp})}
+    \end{equation}
+    , where $k=3$ is the number of stage and $N$ is the terms in the logarithm. we can now solve for the masses of each stage:
+    \begin{align*}
+        m_3 &= A\left(\frac{N-1}{1-SN}\right)
+        m_2 &= (A + m_3)\left(\frac{N-1}{1-SN}\right)
+        m_1 &= (A + m_2 + m_3)\left(\frac{N-1}{1-SN}\right)
+    \end{align*}
+    Solving for $m_1$, $m_2$, and $m_3$ to $A=10000$kg into orbit, and $S=0.2$:
+    \begin{align*}
+        m_3 &= 24,100kg \\
+        m_2 &= 82,100kg \\
+        m_1 &= 280,000kg \\
+        m_{total} &= 386,200kg \\
+        \Delta V &= 11.2km/s
+    \end{align*}
+\end{example}
+\subsection{Differentiability with respect to a parameter}
+\begin{theorem}
+    Let $f(x, y)$ be a function of two variables in close rectangle $\{(x,y) \in \mathbb{R}^2: a \leq x \leq b, c \leq y \leq d\}$, then $f(x, y)$ have contious deritivcece with respect to $x$, then:
+    $$ \frac{dF}{dx} = \frac{d}{dx}\int^d_c f(x, y) dy = \int^d_c \frac{\partial f}{\partial x} dy$$
+    and:
+    $$ \frac{dF}{dy} = \frac{d}{dy}\int^b_a f(x, y) dx = \int^b_a \frac{\partial f}{\partial y} dx$$
+    where $F(x,y) = \int^d_c f(x, y) dy$ and $F(x,y) = \int^b_a f(x, y) dx$.
+\end{theorem}
+\begin{example}
+    Let $A(t) = \int_{x_1(t)}^{x_2(t)} f(x) dx$. To obtain $A'(t)$, we first have $\Delta A$ for some $\Delta t$:
+    \begin{align*}
+        A(t + \Delta t) - A(t) &= \int_{x_1(t + \Delta t)}^{x_2(t) + \Delta t} f(x) dx - \int_{x_1(t)}^{x_2(t+ \Delta t)} f(x) dx \\
+    \end{align*}
+    Recall, the MVT for integrals:
+    \begin{align*}
+        \int b_ a f(x) dx &= f(c)(b-a) \\
+    \end{align*}
+    So we would be arriving at the chauin rule:
+    \begin{align*}
+        A'(t) &= \frac{d}{dt} \int_{x_1(t)}^{x_2(t)} f(x) dx \\
+        &= f(x_2(t))\frac{dx_2}{dt} - f(x_1(t))\frac{dx_1}{dt} + \int_{x_1(t)}^{x_2(t)} f'(x) dx
+        &= f(x_2(t))\frac{dx_2}{dt} - f(x_1(t))\frac{dx_1}{dt} + \int_{x_1(t)}^{x_2(t)} \frac{\partial f}{\partial x} dx
+    \end{align*}
+\end{example}
+\begin{theorem}[Leibniz's Rule]
+    Given a reigion $R$ in the $xy$ plane, and a functions $\phi_1(x)$ and $\phi_2(x)$ have continuous derivatives with $x$ in $R$, and that we have continuous differentiable functions $f(x, y)$ in $R$, if:
+    \begin{align*}
+       F(x) &= \int_{\phi_1(x)}^{\phi_2(x)} f(x, y) dy \\
+    \end{align*}
+    Then:
+    \begin{align*}
+        F'(x) &= f(x, \phi_1(x))\frac{d\phi_1}{dx} - f(x, \phi_2(x))\frac{d\phi_2}{dx} + \int_{\phi_1(x)}^{\phi_2(x)} \frac{\partial f}{\partial x} dy
+    \end{align*}
+\end{theorem}
+\begin{example}[Integral Equations]
+    Let:
+    $$ f(x) = x - 2\int_0^x e^{2(x-t)} f(t) dt $$
+    We can solve this by turing it into a differential equation:
+    \begin{align*}
+        f'(x) &= 1 - 2e^{2(x-x)}f(x) + 2\int_0^x e^{2(x-t)}f'(t) dt \\
+        &= 1 - 2\left[2\int_{x}^{0} e^{2(x-t)}f(t) dt\right] - 2f(x) \\ 
+        &= 1 - 2x + 2f(x) - 2f(x) \\
+        &= 1 - 2x \\
+        \intertext{Thus, we have:}
+        f(x) &= \int_0^x (1 - 2t) dt \\
+        &= x - x^2 \\
+        \intertext{Thus, we have:}
+        f(x) &= \frac{1}{2}x^2 - \frac{1}{3}x^3 + C \\
+        \intertext{We can find the constant $C$ by substituting $x=a$ into the original equation:}
+        f(a) &= a - 2\int_0aa e^{2(a-t)} f(t) dt = a
+        So we have:
+        c &= a^2
+        \end{align*}
+\end{example}
+\begin{example}[Feynman's Trick]
+    Let:
+    $$ F(x) = \int_0^1 \frac{y^x -1}{\ln y} dy $$
+    We can find the derivative of $F(x)$ with respect to $x$:
+    \begin{align*}
+        F'(x) &= \int_0^1 \frac{\partial}{\partial x} \left( \frac{y^x - 1}{\ln y} \right) dy \\
+        &= \int_0^1 \frac{y^x \ln y}{\ln y} dy \\
+        &= \int_0^1 y^x dy \\
+        &= \left[ \frac{y^{x+1}}{x+1} \right]_0^1 \\
+        &= \frac{1}{x+1} - 0 \\
+        &= \frac{1}{x+1} \\
+        \intertext{Thus, we have:}
+        F'(x) &= \frac{1}{x+1} \\
+        F(x) &= \ln(x+1) + C \\
+        \intertext{We can find the constant $C$ by substituting $x=0$ into the original equation:}
+        F(0) &= \int_0^1 \frac{y^0 - 1}{\ln y} dy = 0
+        \intertext{Thus, we have:}
+        C &= 0 \\
+        \intertext{Thus, we have:}
+        F(x) &= \ln(x+1) \\
+        \end{align*}
+\end{example}
 \appendix
 \input{appendix.tex}
 \end{document}

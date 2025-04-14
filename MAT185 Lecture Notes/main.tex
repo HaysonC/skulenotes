@@ -517,7 +517,7 @@ Note that the span of set is a subspace of the vector space. Thus, the column sp
 \end{theorem}
 \subsection{Constructing Determinants and Inverses}
 \begin{definition}[Minor Matrix]
-    Let $A \in \mathbb{R}^{n \times n}$, then the minor of $A$ is denoted as $A_{ij}$, which the matrix obtained by removing the $i$-th row and $j$-th column of $A$.
+    Let $A \in {^n\mathbb{R}^n}$, then the minor of $A$ is denoted as $A_{ij}$, which the matrix obtained by removing the $i$-th row and $j$-th column of $A$.
 \end{definition}
 \begin{example}
     Let $A = \begin{bmatrix} 1 & 2 & 3 \\ 4 & 5 & 6 \\ 7 & 8 & 9 \end{bmatrix}$, then the minor of $A$ is:
@@ -525,14 +525,14 @@ Note that the span of set is a subspace of the vector space. Thus, the column sp
 \end{example}
 \paragraph{Find the Determinant from a Row} We can find the determinant of a matrix by expanding along a row. We can expand along any row or column, but it is easier to expand along a row with zeros.
 \begin{definition}[Cofactor]
-    Let $A \in \mathbb{R}^{n \times n}$, then the cofactor of $A$ is denoted as $C_{ij}$, which is defined as:
+    Let $A \in  {^n\mathbb{R}^n}$, then the cofactor of $A$ is denoted as $C_{ij}$, which is defined as:
     \begin{equation}
         C_{ij} = (-1)^{i+j}\det(A_{ij})
     \end{equation}
 \end{definition}
 \paragraph{Checkerboard Pattern} We can use the checkerboard pattern to find the determinant of a matrix. We can expand along any row or column, but it is easier to expand along a row with zeros.
 \begin{definition}[Determinant]
-    Let $A \in \mathbb{R}^{n \times n}$, then the determinant of $A$ is denoted as $\det(A)$, which is defined as:
+    Let $A \in  {^n\mathbb{R}^n}$, then the determinant of $A$ is denoted as $\det(A)$, which is defined as:
     \begin{equation}
         \det(A) = \sum_{j=1}^{n} a_{ij}C_{ij}
     \end{equation}
@@ -552,7 +552,7 @@ Note that the span of set is a subspace of the vector space. Thus, the column sp
     \end{enumerate}
 \end{theorem}
 \begin{theorem}[Determinant of a Transpose]
-    Let $A \in \mathbb{R}^{n \times n}$, then:
+    Let $A \in  {^n\mathbb{R}^n}$, then:
     \begin{equation}
         \det(A) = \det(A^T)
     \end{equation}
@@ -570,8 +570,62 @@ Note that the span of set is a subspace of the vector space. Thus, the column sp
         \det A &= -1 \times -6 \times 2 \times 4 \times -3 = -144
     \end{align*}
 \end{example}
+\begin{definition}[Singular Matrix]
+    Let $A \in  {^n\mathbb{R}^n}$, then $A$ is singular if $\det(A) = 0$.
+\end{definition}
+\begin{definition}[Adjugate Matrix]
+    Let $A \in  {^n\mathbb{R}^n}$, then the adjugate of $A$ is denoted as $\text{adj}(A)$, which is defined as:
+    \begin{equation}
+        \text{adj}(A) = \begin{bmatrix} C_{11} & -C_{12} & C_{13} & \ldots \\ -C_{21} & C_{22} & -C_{23} & \ldots \\ C_{31} & -C_{32} & C_{33} & \ldots \\ \vdots & \vdots & \vdots & \ddots \end{bmatrix}^T
+    \end{equation}
+\end{definition}
+\begin{theorem}[Determinant and Inverse]
+    Let $A \in  {^n\mathbb{R}^n}$, then the following properties hold:
+    \begin{enumerate}
+        \item $A$ is invertible if and only if $\det(A) \neq 0$.
+        \item $A^{-1} = \frac{1}{\det(A)}\text{adj}(A)$.
+    \end{enumerate}
+\end{theorem}
+\subsection{Determinants and Inverses of Elementary Matrices}
+\begin{definition}[Elementary Matrices]
+    Let $E \in  {^n\mathbb{R}^n}$, then $E$ is an elementary matrix if $E$ is obtained by performing a single elementary row operation on $I$.
+\end{definition}
+\begin{theorem}[Determinants and Inverses of Elementary Matrices]
+    Let $E \in  {^n\mathbb{R}^n}$ be an elementary matrix, then the following properties hold:
+    \begin{enumerate}
+        \item $\det(E) = 1$.
+        \item $E^{-1} = E^T$.
+    \end{enumerate}
+\end{theorem}
+\begin{example}[Determinants and Inverses of Elementary Matrices]
+    Let $E_1 = \begin{bmatrix} 1 & 0 \\ 0 & 2 \end{bmatrix}$, then:
+    \begin{align*}
+        \det(E_1) &= 1 \times 2 = 2 \\
+        E_1^{-1} &= E_1^T = \begin{bmatrix} 1 & 0 \\ 0 & \frac{1}{2} \end{bmatrix}
+    \end{align*}
+\end{example}
+\begin{theorem}[Determinants and Inverses of Product of Matrices]
+    Let $A, B \in  {^n\mathbb{R}^n}$, then the following properties hold:
+    \begin{enumerate}
+        \item $\det(AB) = \det(A)\det(B)$.
+        \item $(AB)^{-1} = B^{-1}A^{-1}$.
+    \end{enumerate}
+\end{theorem}
+\begin{theorem}[Derminants and Inverse w.r.t. RREF]
+    Let $A \in  {^n\mathbb{R}^n}$, then the following properties hold:
+    \begin{enumerate}
+        \item $\det(A) = \det(\text{RREF}(A))$.
+        \item $A^{-1} = \text{RREF}(A)^{-1}$.
+    \end{enumerate}
+    However:
+    \begin{enumerate}
+        \item $\det(\text{RREF}(A)) = \det(A)$.
+        \item $\text{RREF}(A)^{-1} \neq A^{-1}$.
+    \end{enumerate} 
+    
+\end{theorem}
 \begin{theorem}[The theorem of Determinants and Inverse]
-    Let $A \in \mathbb{R}^{n \times n}$, then the following properties hold:
+    Let $A \in  {^n\mathbb{R}^n}$, then the following properties hold:
     \begin{enumerate}
         \item $A$ is invertible.
         \item $\det(A) \neq 0$.
@@ -625,6 +679,7 @@ Note that the span of set is a subspace of the vector space. Thus, the column sp
         \item \textbf{x + z is an not an eigenvector of A}: Since $A(x + z) = Ax + Az = 2x + 3z \neq \lambda(x + z)$, then $x + z$ is not an eigenvector of $A$.
     \end{enumerate}
 \end{example}
+\paragraph{0 can be an Eigenvalue} If there exist $\textbf{x} \neq 0$ such that $A\textbf{x} = 0$, then 0 is an eigenvalue of $A$. This require the nullity of $A$ to be greater than 0.
 \subsection{Eigenspace and Multiplicity}
 \begin{definition}[Eigenspace]
     Let $A \in {^n\mathbb{R}^n}$, then the eigenspace of $A$ corresponding to the eigenvalue $\lambda$ is denoted as $E_\lambda$, which is defined as:
@@ -647,6 +702,17 @@ Note that the span of set is a subspace of the vector space. Thus, the column sp
 \begin{theorem}[Intersection of Eigenspaces]
     Let $A \in {^n\mathbb{R}^n}$, then the intersection of eigenspaces of $A$ corresponding to distinct eigenvalues is $\{\textbf{0}\}$, that is, for eigenvalues $\lambda_1, \lambda_2$, if $\lambda_1 \neq \lambda_2$, then $E_{\lambda_1} \cap E_{\lambda_2} = \{\textbf{0}\}$.
 \end{theorem}
+\begin{theorem}[Theorem of Eigenvalues]
+    The following statements are equivalent:
+    \begin{enumerate}
+        \item $\lambda$ is an eigenvalue of $A$.
+        \item $Ax = \lambda x$ for some non-zero vector $x$.
+        \item $\det(A - \lambda I) = 0$.
+        \item $A - \lambda I$ is singular.
+        \item $A - \lambda I$ has a non-trivial null space.
+    \end{enumerate}
+    
+\end{theorem}
 \begin{definition}[Algebraic Multiplicity (AM)]
     Let $A \in {^n\mathbb{R}^n}$, then the algebraic multiplicity of an eigenvalue $\lambda$ is the number of times $\lambda$ appears as a root of the characteristic equation.
 \end{definition}
@@ -665,4 +731,136 @@ Note that the span of set is a subspace of the vector space. Thus, the column sp
         \prod_{i=1}^{n} \lambda_i = \det(A)
     \end{equation}
 \end{theorem}
+\begin{theorem}
+    Given $A\in {^n\mathbb{R}^n}$, we can find $P {^n\mathbb{R}^n}$ and $\Lambda \in {^n\mathbb{R}^n}$ where $\Lambda$ is a diagonal matrix so that $A = P\Lambda P^{-1}$ if and only if $A$ has $n$ linearly independent eigenvectors.
+\end{theorem}
+\begin{theorem}
+    $A \in {^n\mathbb{R}^n}$ is diagonalizable if and only if there is a basis for the eigenvectors of $A$ in $\mathbb{R}^n$.
+\end{theorem}
+
+\begin{theorem}
+    If $\Lambda$ is a diagonal matrix with the eigenvalues of $A$ on the diagonal, then $A$ is similar to $\Lambda$.
+\end{theorem}
+\begin{lemma}[Linear Independence of Eigenvectors]
+    Let $A \in {^n\mathbb{R}^n}$ and $v_1, v_2, \dots v_j$ be eigenvector assocated with distinct eigenvalues, then they are linearly independent.
+\end{lemma}
+\begin{theorem}
+    Let $A \in {^n\mathbb{R}^n}$ and $A$ has $n$ distict eigenvalues, then $A$ is diagonalizable.
+\end{theorem}
+\begin{theorem}[AM, GM, and Diagonalization]
+    Let $A \in {^n\mathbb{R}^n}$, then the following statements are equivalent:
+    \begin{enumerate}
+        \item $A$ is diagonalizable.
+        \item The algebraic multiplicity of each eigenvalue is equal to its geometric multiplicity.
+        \item The number of linearly independent eigenvectors of $A$ is equal to the dimension of the eigenspace of $A$.
+    \end{enumerate}
+\end{theorem}
+\paragraph{Similar Matrices} Two matrices $A$ and $B$ are similar if there exists an invertible matrix $P$ such that $A = PBP^{-1}$. This means that $A$ and $B$ have the same eigenvalues and the same characteristic polynomial.
+\begin{theorem}[Similar Matrices]
+    Let $A, B \in {^n\mathbb{R}^n}$, then the following statements are equivalent:
+    \begin{enumerate}
+        \item $A$ and $B$ are similar.
+        \item $A$ and $B$ have the same eigenvalues.
+        \item $A$ and $B$ have the same characteristic polynomial.
+    \end{enumerate}
+\end{theorem}
+\begin{theorem}[Similarity of Charistic Polynomial]
+    Let $A, B \in {^n\mathbb{R}^n}$ be similar matrices, then:
+    \begin{enumerate}
+        \item $\lambda I - A$ and $\lambda I - B$ are similar matrices.
+        \item $\det(\lambda I - A) = \det(\lambda I - B)$ (by product of determinants).
+        \item $\dim \null (\lambda I - A) = \dim \null (\lambda I - B)$ (by rank-nullity), but not necessarily the same null space. 
+    \end{enumerate}
+    , thus the characteristic polynomial of $A$ and $B$ are the same and they have the same eigenvalues, which also means that they have the same AM.
+\end{theorem}
+\begin{theorem}
+    If $A$ is a diagonalizable matrix, then $A$ is has equal AM and GM.
+\end{theorem}
+\begin{proof}
+    $A$ is similar to the diagonal matrix $D$, so $\dim null D = \dim null A$. Thus, the AM and GM of $A$ are equal since AM and GM are equal for diagonal matrices.
+\end{proof}
+\begin{theorem}[Distinct Eigenvalues]
+    Let $A \in {^n\mathbb{R}^n}$, then the following statements are equivalent:
+    \begin{enumerate}
+        \item $A$ has $n$ distinct eigenvalues.
+        \item $A$ is diagonalizable.
+        \item The algebraic multiplicity of each eigenvalue is equal to its geometric multiplicity.
+        \item The number of linearly independent eigenvectors of $A$ is equal to the dimension of the eigenspace of $A$.
+    \end{enumerate}
+\end{theorem}
+\section{Differential Equations}
+\begin{definition}
+    A system of the form:
+    \begin{align*}
+        x_1^\prime &= a_{11}x_1 + a_{12}x_2 + \ldots + a_{1n}x_n \\
+        x_2^\prime &= a_{21}x_1 + a_{22}x_2 + \ldots + a_{2n}x_n \\
+        \vdots \\
+        x_n^\prime &= a_{n1}x_1 + a_{n2}x_2 + \ldots + a_{nn}x_n
+    \end{align*}
+    , wherer $a_{ij} \in \mathbb{R}$ is a $n \times n$ system of homogeneous linear differential equations with constant coefficients. For $A = \{a_{ij}\}$, we can write the system as:
+    \begin{equation}
+       X^\prime = AX
+    \end{equation}
+\end{definition}
+\begin{example}[Two Wafers in Breeze]
+    Let $\alpha = ha/mc$, $\beta = ka/mcd$, $T = [\hat{T}_1, \hat{T}_2]^T$, wher $h, a, m, c, k, d$ are constants. The system of equations is:
+    \begin{align*}
+        \frac{d\hat{T}_1}{dt} &= -(\alpha+\beta)\hat{T}_1 + \beta\hat{T}_2 \\
+        \frac{d\hat{T}_2}{dt} &= \beta\hat{T}_1 - (\alpha+\beta)\hat{T}_2
+    \end{align*}
+    Then the coefficients matrix is:
+    $$
+        A = \begin{bmatrix}
+            -(\alpha+\beta) & \beta \\
+            \beta & -(\alpha+\beta)
+        \end{bmatrix} = \begin{bmatrix} 
+            -(ha/mc + ka/mcd) & ka/mcd \\
+            ka/mcd & -(ha/mc + ka/mcd)
+        \end{bmatrix}
+    $$
+\end{example}
+\begin{example}
+    Let:
+    $$
+    A = \begin{bmatrix}
+        17 & -30 \\
+        10 & -18 
+    \end{bmatrix}
+    $$
+    , then particular solutions are
+    \begin{align*}
+        y_1 &= \begin{bmatrix}
+            2 \\ 1
+        \end{bmatrix}e^{2 t} \\
+        y_2 &= \begin{bmatrix}
+            3 \\ 2
+        \end{bmatrix}e^{3 t}
+    \end{align*}
+    Our initial conditions for two solutions are:
+    \begin{align*}
+        y_1(0) &= \begin{bmatrix}
+            2 \\ 1
+        \end{bmatrix} \\
+        y_2(0) &= \begin{bmatrix}
+            3 \\ 2
+        \end{bmatrix}
+    \end{align*}
+    , which are the eigenvectors of $A$ corresponding to the eigenvalues $2$ and $3$ respectively. Thus, the intial solution of the system:
+    \begin{align*}
+        y(0) &= c_1\begin{bmatrix}
+            2 \\ 1
+        \end{bmatrix} + c_2\begin{bmatrix}
+            3 \\ 2
+        \end{bmatrix} 
+    \end{align*}
+    is the span of the eigenvectors of $A$ corresponding to the eigenvalues $2$ and $3$ respectively.
+\end{example}
+\begin{theorem}
+    If $A$ is diagonalizable, then the system of DEs.
+    \begin{equation}
+        X^\prime = AX
+    \end{equation}
+    has a basis of solution and we can solve any IVP w.r.t. the system of DEs.
+\end{theorem}
+\subs
 \end{document}

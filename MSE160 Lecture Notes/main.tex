@@ -569,5 +569,145 @@ For silicon, at room temperature, the charge carrier concentration is $10^{16}$ 
     \item \textbf{N-Type Doping} N-type doping is the addition of impurities that increase the number of electrons. The extra electron is in the higher end of the band gap. The impurities are called donor impurities. The donor impurities are typically group 15 elements. The donor impurities are negatively charged.
     \item \textbf{P-Type Doping} P-type doping is the addition of impurities that increase the number of holes. The impurities are called acceptor impurities. The acceptor impurities are typically group 13 elements. The acceptor impurities are positively charge the the hole is on the higher end of the valence band and to be promoted to the lower end of the band gap.
 \end{enumerate}
-
+\section{Thermaldynamics}
+\begin{center}
+    ``Free Time, Free Money, Free Energy?''
+\end{center}
+\paragraph{Thermaldynamics} Thermaldynamics is the study of heat and work. It is the study of the relationship between heat, work, and energy.
+\subsection{System, Surroundings, Universe and Boundary}
+\paragraph{System} The system is the part of the universe that we are interested in. It is the part of the universe that we are studying.
+\paragraph{Surroundings} The surroundings are the part of the universe that is not the system. It is the part of the universe that interacts with the system.   
+\paragraph{Universe} The universe is the system and the surroundings. It is the entire system that we are studying.
+\paragraph{Boundary} The boundary is the interface between the system and the surroundings. It is the interface that allows the system and the surroundings to interact.
+\paragraph{Open System} An open system is a system that can exchange both matter and energy with the surroundings.
+\paragraph{Closed System} A closed system is a system that can exchange energy but not matter with the surroundings.
+\paragraph{Isolated System} An isolated system is a system that cannot exchange matter or energy with the surroundings.
+\subsection{Thermaldynamics Variables}
+\paragraph{State Function} A state function is a function that depends only on the state of the system. It does not depend on the path taken to reach the state. \\
+(Example) Any energy is a state function: enthalpy, internal energy, Gibbs free energy, Helmholtz free energy, temperature, pressure, volume, entropy, etc.
+\paragraph{Path Function (Process Variable)} A path function is a function that depends on the path taken to reach the state. Examples of path functions include heat and work.
+(Example) Heat and work are path functions.
+\paragraph{Heat} Heat is the transfer of energy between a system and its surroundings due to a temperature difference. It is denoted by $q$.
+\paragraph{Work} Work is the transfer of energy between a system and its surroundings due to a force acting through a distance. It is denoted by $w$.
+\section{First Law of Thermaldynamics}
+\paragraph{Internal Energy} The internal energy of a system is the sum of the kinetic and potential energies of the particles in the system. It is denoted by $U$.
+\paragraph{First Law of Thermaldynamics} The first law of thermaldynamics is the law of conservation of energy. It states that the change in internal energy of a system is equal to the heat added to the system plus the work done on the system. It is given by:
+\begin{equation}
+    \Delta U = Q + W + W_{\text{other}}
+\end{equation}
+, where $Q$ is the heat added to the system, $W$ is the work done on the system, and $W_{\text{other}}$ are all other kinds of work done on the system. $W$ is given by:
+\begin{equation}
+    W = -P\Delta V
+\end{equation}
+\paragraph{} Thus, the energy in the universe is conserved, and the energy of a isolated system is constant. 
+\paragraph{Infinitesimal Change} For an infinitesimal change in the system, the first law of thermaldynamics is given by:
+\begin{equation}
+    dU = \delta Q + \delta W + \delta W_{\text{other}} 
+\end{equation}
+\paragraph{Sign Convention} The sign convention for heat and work is as follows:
+\begin{itemize}
+    \item \textbf{Heat} Heat added to the system is positive. Heat removed from the system is negative.
+    \item \textbf{Work} Work done on the system is positive. Work done by the system is negative.
+\end{itemize}
+\subsection{Second Law of Thermaldynamics}
+\paragraph{Second Law of Thermaldynamics} The entropy of an isolated system always increases in the course of a spontaneous process. It is given by:
+\begin{equation}
+    \Delta S \ge 0
+\end{equation}3
+\paragraph{Spontaneous Process} A spontaneous process is a process that occurs without any external intervention. It is a process that occurs naturally.
+\paragraph{Entropy} Entropy is defined by the change in heat transfer divided by the temperature. It is given by:
+\begin{equation}
+    dS = \frac{\delta Q}{T}
+\end{equation}
+\paragraph{Change in Entropy} The change in entropy of a system is given by:
+\begin{equation}
+    \Delta S_{\text{system}} = \Delta S_t + \Delta S_{p}
+\end{equation}
+\begin{example}[Cooling Coffee]
+    When you put a cup of hot coffee in a room, the coffee cools down and the room heats up. The entropy of the coffee decreases, and the entropy of the room increases:
+    \begin{align*}
+        \Delta S_{\text{coffee}} &= -\frac{\delta Q}{T_{\text{coffee}}} \\
+        \Delta S_{\text{room}} &= \frac{\delta Q}{T_{\text{room}}}
+    \end{align*}
+    The entropy of the universe increases:
+    $$
+    \Delta S_{\text{universe}} = \Delta S_{\text{coffee}} + \Delta S_{\text{room}} = \delta Q(\frac{1}{T_{\text{room}}} - \frac{1}{T_{\text{coffee}}}) > 0
+    $$
+\end{example}
+\subsection{Revrsibility and Irreversibility}
+\paragraph{Note} This concerns with the process variable, not the state variable.
+\paragraph{Reversible Process} A reversible process is a process that can be reversed without any change in the system or the surroundings. It is a process that occurs without any loss of energy.
+\paragraph{Irreversible Process} An irreversible process is a process that cannot be reversed without any change in the system or the surroundings. When reverese tue external influence on the system, the complciated sequence of events will not be the same as the original. Reversible is only an idealization.
+\paragraph{Spontaneous Process} A spontaneous process is an irreversible process. It is a process that occurs without any external intervention.
+\subsection{Enthaly and Gibb's Energy}
+\paragraph{Enthalpy} Enthalpy is the heat content of a system. It is given by:
+\begin{equation}
+    H = U + PV
+\end{equation}
+\paragraph{Infinitesimal Change in Enthalpy} The infinitesimal change in enthalpy is given by:
+\begin{equation}
+    dH = TdS + VdP + \delta W'
+\end{equation}
+\begin{Gibb's Energy} Gibb's energy is the energy of a system that is available to do work. It is given by:
+\begin{equation}
+    \Delta G = \Delta H - T\Delta S
+\end{equation}
+\subsection{Thermaldynamics in Standard Chemical Reactions}
+\paragraph{Standard State} The standard state is the state of a material at 1 atm and 25$^\circ$C. It is denoted by a circle above the variable.
+\paragraph{Standard Enthalpy of Formation} The standard enthalpy of formation is the enthalpy change when one mole of a compound is formed from its elements in their standard states. It is denoted by $\Delta H_f^\circ$.\\
+\begin{example}
+    For element $\ch{A}$ and $\ch{B}$, the standard enthalpy of formation for $\ch{A}_a\ch{B}_b$ is denoted as:
+    \begin{equation}
+        \Delta H_f^\circ(\ch{A}_a\ch{B}_b) = a\Delta H_f^\circ(\ch{A}) + b\Delta H_f^\circ(\ch{B})
+    \end{equation}
+\end{example}
+\paragraph{Enthalpy of Reaction} The enthalpy of reaction is the enthalpy change when a reaction occurs. It is denoted by $\Delta H_r$. It is given by:
+\begin{equation}
+    \Delta H_r = \sum \Delta H_f^\circ(\text{products}) - \sum \Delta H_f^\circ(\text{reactants})
+\end{equation}
+\begin{example}[Carbon Dionixe]
+    We have the reacittion, in standard state:
+    \begin{align*}
+        \ch{CO} + \frac{1}{2}\ch{O2} &\rightarrow \ch{CO2} \\
+        \Delta H_f^\circ(\ch{CO2}) &= \Delta H_f^\circ(\ch{CO}) + \frac{1}{2}\Delta H_f^\circ(\ch{O2})
+        \intertext{And for $\ch{CO}$:}
+        \Delta H_f^\circ(\ch{CO}) &= -110.5 \text{ kJ/mol}
+        \intertext{And for $\ch{O2}$:}
+        
+    \end{align*}
+\end{example}
+\subsection{Change of Entropy for Chemical Reactions}
+\paragraph{Single Phase} Recall the chagne of entropy as a function of pressure and temperature:
+\begin{equation}
+    dS = \frac{\delta Q}{T} = \frac{C_p}{T}dT
+\end{equation}
+, wehre $C_p$ is the heat capacity at constant pressure, which is energy for a mole of substance to raise the temperature by 1 K.\\
+Like enthalpy, the change of entropy is a state function. Thus, we can integrate it:
+\begin{equation}
+    \Delta S = \int_{T_1}^{T_2} \frac{C_p}{T}dT
+\end{equation}
+\paragraph{Entropy of Melting and Vaporization} The entropy of melting and vaporization is the change in entropy when a substance melts or vaporizes. It is given by:
+\begin{equation}
+    \Delta S_{melt} = \frac{\Delta H_{melt}}{T_{melt}}
+\end{equation}
+\begin{equation}
+    \Delta S_{vap} = \frac{\Delta H_{vap}}{T_{vap}}
+\end{equation}
+\paragraph{Entropy of Reaction} The entropy of reaction is the change in entropy when a reaction occurs. It is given by:    
+\paragraph{Hess's Law} Hess's law states that the change in enthalpy for a reaction is the same regardless of the number of steps in the reaction. It is given by:
+\section{Phase Diagram}
+\paragraph{Phase Diagram} A phase diagram is a graph that shows the relationship between temperature on the vertical axis, and compositon of the right component on the horizontal axis. The phase diagram shows the different phases of a material at different temperatures and compositions. 
+\paragraph{Isotherm} An isotherm is a line on the phase diagram that is a constant temperature. 
+\paragraph{Solutbiliy Limit} The solubility limit is the maximum amount of solute that can be dissolved in a solvent at a given temperature. It is the line on the phase diagram that separates the single phase region from the two phase region.
+\paragraph{Eutetic Point} The eutectic point is the point on the phase diagram where the solubility limit is reached and some temperture, in which a liquid solution form two solid phases. 
+\paragraph{Eutetic Reaction} The eutectic reaction is the reaction that occurs at the eutectic point. It is given by:
+\begin{equation}
+    L \rightarrow S_1 + S_2
+\end{equation}
+, for example, Syrup to Ice and Sugar Crystal.
+\paragraph{Single Phase Region} The single phase region is the region on the phase diagram that is a single phase
+\paragraph{Two Phase Region} The two phase region is the region on the phase diagram that is a two phase region. 
+\paragraph{Tie Line} A tie line is a horizontal line drawn in two phase region. It is used to determine the composition of the two phases in the two phase region.
+\paragraph{After the Eutectic Point} After the eutectic point, the liquid phase is no longer stable. The liquid phase will solidify into two solid phases. The composition of the two solid phases can be determined by the tie line.
+\paragraph{Liquidus Line} The liquidus line is the line on the phase diagram that separates the single phase region from the two phase region. It is the line that indicates the temperature at which a liquid solution forms two solid phases.
 \end{document}
