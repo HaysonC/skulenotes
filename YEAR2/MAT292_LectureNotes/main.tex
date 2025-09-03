@@ -1,4 +1,4 @@
-\documentclass[11pt]{report}
+\documentclass[11pt]{article}
 \input{preamble}
 \begin{document}
 \thispagestyle{empty}
@@ -7,4 +7,205 @@
 Ordinary Differential Equations, Fall 2025 \hfill MAT292\\
 \\
 The up-to-date version of this document can be found at \url{https://github.com/HaysonC/skulenotes}\\
+
+\begin{center}
+    ``\textit{ODEs are the bread and butter of engineering. }''
+\end{center}
+\begin{shaded}
+    \textbf{Key Concepts:}
+    \begin{itemize}
+        \item \textbf{Conflicting Definitions. } This course has multiple definitions for key terms, which may vary between different texts and contexts.
+        \item \textbf{Practice Derivatives. } Regular practice with derivatives is essential for mastering ODEs.
+        \begin{example}
+            The following is a good example of good intuition:
+
+            \textit{What is the antiderivative of $f(x) = \frac{\ln x}{x}$?}
+
+            We know that this is of the form $g \cdot g'$, where $g(x) = \ln x$ and $g'(x) = \frac{1}{x}$. Thus, by the rule that:
+
+            $$
+            \frac{1}{2} \frac{d}{dx} [g(x)]^2 = g(x) g'(x)
+            $$ 
+            we can deduce that"
+            $$
+            \frac{1}{2} \frac{d}{dx} [(\ln x)^2] = \ln x \cdot \frac{1}{x}
+            $$
+        \end{example}
+        \item \textbf{Practice Linear Algebra. } Familiarity with linear algebra concepts is crucial for understanding ODEs.
+    \end{itemize}
+\end{shaded}
+\section{Examples and Review}
+\subsection{What is a Differential Equation?}
+\begin{definition}[Differential Equation]
+     Any relationship between a variable and its derivatives is called a differential equation. 
+\end{definition}
+
+\begin{example}[Newton Second Law]
+    Newton's second law states that the force acting on an object is equal to the mass of the object multiplied by its acceleration. Mathematically, this can be expressed as:
+    $$
+    F = m \frac{d^2x}{dt^2}
+    $$
+    where \( F \) is the force, \( m \) is the mass, and \( \frac{d^2x}{dt^2} \) is the acceleration (the second derivative of position with respect to time). This is a second-order ordinary differential equation.
+
+    If force is constant, this is a simple form of a differential equation, which we simply rearrange and integrate it (twice), which gives, simply:
+    $$
+    x(t) = \frac{F}{2m} t^2 + C_1 t + C_0
+    $$
+    where \( C_1 \) and \( C_0 \) are constants determined by initial conditions.
+\end{example}
+
+\begin{example}
+    Consider the following ODE:
+    $$
+    x' = f(t)
+    $$
+    So we have:
+    $$
+    \frac{dx}{dt} = f(t)
+    $$
+    Integrating both sides with respect to \( t \) gives:
+    $$
+    \int_0^t dx = \int_0^t f(t) \, dt
+    $$
+    So we have:
+    $$
+    x(t) = \int_0^t f(t) \, dt + C
+    $$
+    where \( C \) is a constant of integration. In which initial conditions can be used to determine the value of \( C \).  
+\end{example}
+
+\begin{example}[Standard Trick: Turning Higher Order into a System]
+    Consider Hooke's Law:
+    $$
+    F = m\ddot{x} = -kx
+    $$
+    Then, we let:
+    $$
+    \begin{cases}
+        x_1 = x \\
+        x_2 = \dot{x} \\
+        \dot{x}_1 = x_2 \\
+        \dot{x}_2 = -\frac{k}{m} x_1
+    \end{cases}
+    $$
+    This system can be solved using the techniques for first-order ODEs, as a system by its eigenvalues and eigenvectors:
+    $$
+    \begin{pmatrix}
+        \dot{x}_1 \\
+        \dot{x}_2
+    \end{pmatrix}
+    =
+    \begin{pmatrix}
+        0 & 1 \\
+        -\frac{k}{m} & 0
+    \end{pmatrix}
+    \begin{pmatrix}
+        x_1 \\
+        x_2
+    \end{pmatrix}
+    $$
+\end{example}
+
+The above idea scales:
+
+\begin{example}
+    Take $F(t, x, \dot{x}, \ddot{x}, \ldots, x^{(n)}) = 0$. Then, we can let:
+   \begin{equation}
+    \begin{cases}
+        x_1 = x \\
+        x_2 = \dot{x} \\
+        x_3 = \ddot{x} \\
+        \vdots \\
+        x_n = x^{(n)}
+    \end{cases}
+    $$
+    This allows us to rewrite the original equation as a system of first-order equations:
+    $$ 
+    \begin{bmatrix}
+        \dot{x}_1 \\
+        \dot{x}_2 \\
+        \vdots \\
+        \dot{x}_n
+    \end{bmatrix}
+    =
+    A
+    \begin{bmatrix}
+        x_1 \\
+        x_2 \\
+        \vdots \\
+        x_n
+    \end{bmatrix}
+\end{equation}
+
+Where we take $A$ to be the appropriate matrix.
+\end{example}
+
+\begin{example}[Exponential Growth]
+    You should have already know, that:
+    $$
+    \frac{dx}{dt} = kx
+    $$
+    is a first-order linear ODE. The solution to this equation is given by:
+    $$
+    x(t) = Ce^{kt}
+    $$
+    where \( C \) is a constant determined by initial conditions.
+
+We could understand the eigenproblems associated with systems of ODEs as an extension of the above, where we look for solutions of the form:
+\begin{equation}
+\begin{bmatrix}
+x_1(t) \\
+x_2(t) \\
+\vdots \\
+x_n(t)
+\end{bmatrix}
+=
+e^{At}
+\begin{bmatrix}
+x_1(0) \\
+x_2(0) \\
+\vdots \\
+x_n(0)
+\end{bmatrix}
+\end{equation}
+where \( A \) is the matrix associated with the system of ODEs. $\exp(At)$ is the matrix exponential of \( At \), which can be computed using various methods, including power series or diagonalization.
+\end{example}
+
+\begin{example}[Superposition]
+    You should also have already known that the solution to:
+    $$ \ddot{x} = -x $$
+    is given by:
+    $$ x(t) = A \cos(t) + B \sin(t) $$
+    where \( A \) and \( B \) are constants determined by initial conditions. The solutions $x_1 = A \cos(t)$ and $x_2 = B \sin(t)$ can be combined to form the general solution. Thus, additional conditions must be satisfied to determine the values of \( A \) and \( B \).
+\end{example}
+You might have observed that:
+\begin{theorem}[Number of Initial Conditions]
+    You need as many initial conditions as the order of the ODE to uniquely determine a solution.
+\end{theorem}
+
+\begin{example}[Newton's Law of Cooling]
+    Let $u(t)$ be the temperature of the object at time $t$. Then, according to Newton's Law of Cooling, we have:
+    $$
+    \frac{du}{dt} = -k(u - T_a)
+    $$
+    where \( T_a \) is the ambient temperature, and \( k \) is a positive constant (the transmission coefficient). This is a first-order linear ODE that can be solved using the techniques discussed earlier.
+
+    \textbf{Fixed-Point Solution} We denote the trivial case where \( u(0) = T_a \) as the fixed-point solution, where the temperature of the object is equal to the ambient temperature at time \( t = 0 \). It is easy to see that \( u' = 0 \) in this case so \( u(t) = T_a \) for all \( t \).
+
+    One way of solving the general solution is:
+
+    \begin{align*}
+        \frac{du}{dt} &= -k(u - T_a) \\
+        \int_0^t \frac{du}{u - T_a} &= -k \int_0^t dt \\
+        \ln|u - T_a| &= -kt + C \\
+        u - T_a &= e^C e^{-kt} \\
+        u &= Be^{-kt} + T_a
+    \end{align*}
+
+\end{example}
+
+\begin{definition}[Phase Portraits]
+    A phase portrait is a graphical representation of the trajectories of a dynamical system in the phase plane. Each point in the phase plane corresponds to a unique state of the system, and the trajectories represent the evolution of the system over time. Phase portraits are useful for visualizing the behavior of systems of ODEs, particularly in understanding stability and equilibrium points.
+\end{definition}
+
 \end{document}
