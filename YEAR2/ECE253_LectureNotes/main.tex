@@ -8,7 +8,43 @@ Digital and Computer Systems, Fall 2025 \hfill ECE253\\
 \\
 The up-to-date version of this document can be found at \url{https://github.com/HaysonC/skulenotes}\\
 
+\begin{shaded}
+\section*{Introduction}
+\paragraph{Layers of Computation} In hardware, we have the following layers of abstraction:
+\begin{itemize}
+    \item Computation
+    \item Adders 
+    \item Logic Gates
+    \item Transistors
+    \item Silicon
+\end{itemize}
+In this course, we will focus on the first three layers, on top of the logic gate level.
+
+
+\paragraph{Layer of abstraction} At this course, for the digital systems part, we would start from understanding logic gates, all the way to understanding computer architecture, with each level of abstraction hiding the details of the lower level.
+\end{shaded}
+
 \section{Introduction to Digital Logic}
+
+\subsection{Hierarchy, Modularity, and Regularity}
+
+\begin{definition}[Hierarchy]
+    The division of system into a set of modules, then further subdividing each module into smaller modules, and so on, until pieces are \textit{easy} to understand.    
+\end{definition}
+
+\begin{definition}[Modularity]
+    The design principle that modules have well-defined functions and interfaces so they connect easily without unintended side effects.
+\end{definition}
+
+\begin{definition}[Regularity]
+    The uniformality of modules, such that the reusability of common modules reduces the number of distinct modules to be designed.
+\end{definition}
+
+\subsection{Digital Logic Gates}
+Logic gates are made out of transistors:
+\begin{definition}[Transistor]
+    A transistor is a 3-terminal device behaving as a switch. When the voltage on the terminal is HI, the switch is closed, and when the voltage is LO, the switch is open.
+\end{definition}
 
 \section{Digital Storage Elements}
 
