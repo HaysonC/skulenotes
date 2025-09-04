@@ -40,5 +40,8 @@
 \newtheorem{example}[theorem]{Example}
 \newtheorem{corollary}[theorem]{Corollary}
 \newtheorem{lemma}[theorem]{Lemma}
+\usepackage{etoolbox}
+\makeatletter
 \patchcmd{\chapter}{\if@openright\cleardoublepage\else\clearpage\fi}{}{}{}
+\makeatother
 \title{PHY 293 Lecture Notes}

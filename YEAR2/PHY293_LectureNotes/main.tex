@@ -7,4 +7,48 @@
 Waves and Modern Physics, Fall 2025 \hfill PHY293\\
 \\
 The up-to-date version of this document can be found at \url{https://github.com/HaysonC/skulenotes}\\
+
+\chapter{Waves}
+\section{Harmonic Oscillators}
+
+\subsection{Governing Equations of Harmonic Oscillators}
+
+\paragraph{Types of Harmonic Oscillators} There are three types of harmonic oscillators: simple, damped, and driven harmonic oscillators. Consider a simple one dimensional harmonic oscillator, they are defined by the following differential equations:
+
+\begin{definition}[Simple Harmonic Oscillator]
+    A simple harmonic oscillator is described by Hooke's law:
+
+    \begin{equation}
+        m \frac{d^2 x}{dt^2} + kx = 0
+    \end{equation}
+    where \( k \) is the spring constant, \( m \) is the mass, and \( x \) is the displacement from equilibrium.
+\end{definition}
+
+\begin{definition}[Damped Harmonic Oscillator]
+    A damped harmonic oscillator is described by the following differential equation, by adding a damping term proportional to $\dot{x}$ to the simple harmonic oscillator equation:
+    \begin{equation}
+        m \frac{d^2 x}{dt^2} + \gamma \frac{dx}{dt} + kx = 0   
+    \end{equation}
+    where \( \gamma \) is the damping coefficient.
+\end{definition}
+
+\begin{definition}[Driven Harmonic Oscillator]
+    A driven harmonic oscillator is described by the following differential equation, which includes an external driving force $F(t)$:
+    \begin{equation}
+        m \frac{d^2 x}{dt^2} + \gamma \frac{dx}{dt} + kx = F(t)   
+    \end{equation}
+\end{definition}
+\subsection{The Wave Equation}
+
+\begin{definition}[The Wave Equation]
+    The wave equation is a second-order linear partial differential equation that describes the propagation of waves, such as sound waves, light waves, and water waves, through a medium. In one dimension, it is given by the following PDE:
+    \begin{equation}
+        \frac{\partial^2 u}{\partial t^2} - c^2 \frac{\partial^2 u}{\partial x^2} = 0
+    \end{equation}
+    where \( u(x,t) \) is the wave function, \( c \) is the speed of the wave in the medium, \( x \) is the spatial coordinate, and \( t \) is time.
+\end{definition}
+ 
+
+\chapter{Modern Physics}
 \end{document}
+
