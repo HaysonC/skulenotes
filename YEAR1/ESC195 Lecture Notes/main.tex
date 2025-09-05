@@ -1,4 +1,4 @@
-\documentclass[11pt]{report}
+\documentclass[11pt]{article}
 \input{preamble}
 \begin{document}
 \thispagestyle{empty}
@@ -2430,50 +2430,54 @@ For $\vec{\tau} = 0$, $\vec{L}$ is conserved.
     where $F(x,y) = \int^d_c f(x, y) dy$ and $F(x,y) = \int^b_a f(x, y) dx$.
 \end{theorem}
 \begin{example}
-    Let $A(t) = \int_{x_1(t)}^{x_2(t)} f(x) dx$. To obtain $A'(t)$, we first have $\Delta A$ for some $\Delta t$:
+    Let $A(t) = \int_{x_1(t)}^{x_2(t)} f(x) \, dx$. To obtain $A'(t)$, we first have $\Delta A$ for some $\Delta t$:
     \begin{align*}
-        A(t + \Delta t) - A(t) &= \int_{x_1(t + \Delta t)}^{x_2(t) + \Delta t} f(x) dx - \int_{x_1(t)}^{x_2(t+ \Delta t)} f(x) dx \\
+        A(t + \Delta t) - A(t) &= \int_{x_1(t + \Delta t)}^{x_2(t + \Delta t)} f(x) \, dx - \int_{x_1(t)}^{x_2(t + \Delta t)} f(x) \, dx
     \end{align*}
     Recall, the MVT for integrals:
     \begin{align*}
-        \int b_ a f(x) dx &= f(c)(b-a) \\
+        \int_a^b f(x) \, dx &= f(c)(b - a)
     \end{align*}
-    So we would be arriving at the chauin rule:
+    So we would be arriving at the chain rule:
     \begin{align*}
-        A'(t) &= \frac{d}{dt} \int_{x_1(t)}^{x_2(t)} f(x) dx \\
-        &= f(x_2(t))\frac{dx_2}{dt} - f(x_1(t))\frac{dx_1}{dt} + \int_{x_1(t)}^{x_2(t)} f'(x) dx
-        &= f(x_2(t))\frac{dx_2}{dt} - f(x_1(t))\frac{dx_1}{dt} + \int_{x_1(t)}^{x_2(t)} \frac{\partial f}{\partial x} dx
+        A'(t) &= \frac{d}{dt} \int_{x_1(t)}^{x_2(t)} f(x) \, dx \\
+        &= f(x_2(t)) \frac{d x_2}{dt} - f(x_1(t)) \frac{d x_1}{dt} + \int_{x_1(t)}^{x_2(t)} f'(x) \, dx \\
+        &= f(x_2(t)) \frac{d x_2}{dt} - f(x_1(t)) \frac{d x_1}{dt} + \int_{x_1(t)}^{x_2(t)} \frac{\partial f}{\partial x} \, dx
     \end{align*}
 \end{example}
 \begin{theorem}[Leibniz's Rule]
-    Given a reigion $R$ in the $xy$ plane, and a functions $\phi_1(x)$ and $\phi_2(x)$ have continuous derivatives with $x$ in $R$, and that we have continuous differentiable functions $f(x, y)$ in $R$, if:
+    Given a region $R$ in the $xy$-plane, and functions $\phi_1(x)$ and $\phi_2(x)$ have continuous derivatives with $x$ in $R$, and that we have continuous differentiable functions $f(x, y)$ in $R$, if:
     \begin{align*}
-       F(x) &= \int_{\phi_1(x)}^{\phi_2(x)} f(x, y) dy \\
+       F(x) &= \int_{\phi_1(x)}^{\phi_2(x)} f(x, y) \, dy
     \end{align*}
     Then:
     \begin{align*}
-        F'(x) &= f(x, \phi_1(x))\frac{d\phi_1}{dx} - f(x, \phi_2(x))\frac{d\phi_2}{dx} + \int_{\phi_1(x)}^{\phi_2(x)} \frac{\partial f}{\partial x} dy
+        F'(x) &= f(x, \phi_1(x)) \frac{d \phi_1}{dx} - f(x, \phi_2(x)) \frac{d \phi_2}{dx} + \int_{\phi_1(x)}^{\phi_2(x)} \frac{\partial f}{\partial x} \, dy
     \end{align*}
 \end{theorem}
 \begin{example}[Integral Equations]
     Let:
-    $$ f(x) = x - 2\int_0^x e^{2(x-t)} f(t) dt $$
-    We can solve this by turing it into a differential equation:
+    $$ f(x) = x - 2 \int_0^x e^{2(x - t)} f(t) \, dt $$
+    We can solve this by turning it into a differential equation:
     \begin{align*}
-        f'(x) &= 1 - 2e^{2(x-x)}f(x) + 2\int_0^x e^{2(x-t)}f'(t) dt \\
-        &= 1 - 2\left[2\int_{x}^{0} e^{2(x-t)}f(t) dt\right] - 2f(x) \\ 
-        &= 1 - 2x + 2f(x) - 2f(x) \\
-        &= 1 - 2x \\
-        \intertext{Thus, we have:}
-        f(x) &= \int_0^x (1 - 2t) dt \\
-        &= x - x^2 \\
-        \intertext{Thus, we have:}
-        f(x) &= \frac{1}{2}x^2 - \frac{1}{3}x^3 + C \\
-        \intertext{We can find the constant $C$ by substituting $x=a$ into the original equation:}
-        f(a) &= a - 2\int_0aa e^{2(a-t)} f(t) dt = a
-        So we have:
-        c &= a^2
-        \end{align*}
+        f'(x) &= 1 - 2 e^{2(x - x)} f(x) + 2 \int_0^x e^{2(x - t)} f'(t) \, dt \\
+        &= 1 - 2 f(x) + 2 \int_0^x e^{2(x - t)} f'(t) \, dt \\
+        &= 1 - 2 f(x) + 2 \int_x^0 e^{2(x - t)} f'(t) \, dt \\
+        &= 1 - 2 f(x) - 2 f(x) \\
+        &= 1 - 4 f(x)
+    \end{align*}
+    Thus, we have:
+    \begin{align*}
+        f'(x) + 4 f(x) &= 1 \\
+        \intertext{Integrating factor: $e^{4x}$, so:}
+        \frac{d}{dx} (e^{4x} f) &= e^{4x} \\
+        e^{4x} f &= \frac{1}{4} e^{4x} + C \\
+        f(x) &= \frac{1}{4} + C e^{-4x} \\
+        \intertext{At $x=0$, $f(0) = 0$:}
+        0 &= \frac{1}{4} + C \\
+        C &= -\frac{1}{4} \\
+        f(x) &= \frac{1}{4} - \frac{1}{4} e^{-4x}
+    \end{align*}
 \end{example}
 \begin{example}[Feynman's Trick]
     Let:

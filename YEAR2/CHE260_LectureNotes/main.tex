@@ -157,7 +157,68 @@ The second law formalizes the concept of the directionality of thermodynamic pro
     Any piece of matter or a region of space.
 \end{definition}
 
+\begin{definition}[Boundary]
+    The boundary is the surface that separates the system from its surroundings. It can be real or imaginary, fixed or movable, and can allow or prevent the transfer of mass and energy.
+\end{definition}
 
+\textbf{Types of Systems} There are three main types of systems: closed, open, and isolated. Defined as the following:
+\begin{definition}[Closed System/Control Mass]
+    A closed system is one where mass cannot cross the boundary, but energy can. An example of a closed system is a sealed container of liquid, or a bag of gas, where we can do work on it.
+\end{definition}
+\begin{definition}[Open System/Control Volume]
+    An open system is one where both mass and energy can cross the boundary. An example of an open system is a flowing pipe, or a car engine, where mass (water, air) and energy (heat, work) can enter and leave the system.
+\end{definition}
+\begin{definition}[Isolated System]
+    An isolated system is one where neither mass nor energy can cross the boundary. An example of an isolated system is a thermos bottle that is perfectly insulated from its surroundings.
+\end{definition}
+\begin{definition}[Property]
+    A property is any attribute of a system that can be measured without knowing the history of the system. \\
+    (Example) Position, Temperature, Mass, Energy \\
+    (Non-example) Work, Transfer of energy (heat), Mass outside the system (denote $\delta m$)
+    \begin{equation}
+        W = \int dW \quad (\text{depends on path})
+    \end{equation}
+    Hence, to remind ourselves, we denote infinitesimal work as $\delta W$ instead of $dW$. Then, we can compute the work done on a system as:
+    \begin{equation}
+        \delta W = \int_C F \, dx 
+    \end{equation}
+\end{definition}
+
+\paragraph{Intensive and Extensive Properties} Properties can be classified into two categories: intensive and extensive.
+\begin{definition}[Extensive Property]
+    An extensive property is one that depends on the size or extent of the system. \\
+    (Example) Mass, Volume, Energy
+\end{definition}    
+\begin{definition}[Intensive Property]
+    An intensive property is one that does not depend on the size or extent of the system. \\ 
+    (Example) Temperature, Pressure, Density 
+
+    We can convert any extensive property to an intensive property by dividing it by mass or volume. For example, specific volume $v$ or specific energy $u$:
+    $$
+        v = \frac{V}{m}, \quad u = \frac{U}{m}
+    $$
+\end{definition}
+
+\begin{definition}[State]
+    The state of a system is defined by its properties at a specific moment in time. A state is a condition of the system that can be described by a set of properties. For example, the state of an ideal gas can be described by its pressure, volume, and temperature.
+    
+\end{definition}
+
+\begin{definition}[Steady State]
+    A system is in steady state if its properties do not change with time. In other words, the system is in a state of equilibrium, and there are no net changes in mass or energy within the system. \\
+    (Example) An overflowing bucket of water, in which case the system is unchanging but interacting with its surroundings.
+\end{definition}
+
+\begin{definition}[Equilibrium]
+    An \textbf{ISOLATED} system is in equilibrium if its properties are uniform throughout the system and do not change with time (constant). \\
+    (Example) A gas in a closed container that has been left undisturbed for a long time.
+\end{definition}
+\begin{example}
+    Consider a gas in a cylinder with a movable piston. If the piston is held in place, the gas is in a steady state, as its properties (pressure, volume, temperature) do not change with time. However, if the piston is allowed to move, the gas will expand or compress, and its properties will change with time, indicating that it is not in a steady state. 
+\end{example}
+\begin{definition}[Process]
+    A process is a transformation from one state to another. A process can be described by the path taken by the system in the property space. For example, a gas can undergo a process of compression or expansion, which changes its pressure, volume, and temperature.
+\end{definition}
 \chapter{Heat Transfer}
 
 \end{document}

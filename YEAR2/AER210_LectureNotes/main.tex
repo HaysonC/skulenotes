@@ -193,13 +193,13 @@ The up-to-date version of this document can be found at \url{https://github.com/
 \begin{example}
     Integrate the surface given by $z = e^{x^2}$ over the triangular region with vertices at $(0,0)$, $(1,0)$, and $(1,1)$. We can describe the region as either a Type I or Type II region:
 
-    (Incorrect) Here, we will describe it as a Type II regionwhere $0 \le y \le 1$, and $y \le x \le 1$. Thus, we can set up the double integral as follows:
+    (\xmark) Here, we will describe it as a Type II regionwhere $0 \le y \le 1$, and $y \le x \le 1$. Thus, we can set up the double integral as follows:
     $$
         \iint_R e^{x^2} \, dA = \int_0^1 \int_y^1 e^{x^2} \, dx \, dy
     $$
     We can tell that $e^{x^2}$ does not have an elementary antiderivative, so we cannot integrate with respect to $x$ directly. 
     
-    (Correct) However, we can change the order of integration to make it a Type I regionwhere $0 \le x \le 1$, and $0 \le y \le x$. Thus, we can set up the double integral as follows:
+    (\cmark) However, we can change the order of integration to make it a Type I regionwhere $0 \le x \le 1$, and $0 \le y \le x$. Thus, we can set up the double integral as follows:
     $$
         \iint_R e^{x^2} \, dA = \int_0^1 \int_0^x e^{x^2} \, dy \, dx
     $$
@@ -279,6 +279,8 @@ There is two definitions of double integrals in this course, due to the discrepa
 
     The Riemann definition and grid formulation are similar.
 \end{definition}
+
+
 
 \chapter{Fluid Mechanics}
 \end{document}
