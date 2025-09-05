@@ -13,6 +13,11 @@
 \usepackage{hyperref}
 \usepackage{calc}
 \usepackage{multicol}
+\usepackage{pgfplots}
+\pgfplotsset{compat=1.18}
+\usepgfplotslibrary{fillbetween}
+\usetikzlibrary{fillbetween}
+
 \usepackage{cancel}
 \usepackage[retainorgcmds]{IEEEtrantools}
 \usepackage[margin=3cm]{geometry}
@@ -40,5 +45,7 @@
 \newtheorem{example}[theorem]{Example}
 \newtheorem{corollary}[theorem]{Corollary}
 \newtheorem{lemma}[theorem]{Lemma}
+\makeatletter
 \patchcmd{\chapter}{\if@openright\cleardoublepage\else\clearpage\fi}{}{}{}
+\makeatother
 \title{Chapter 9 Review Notes}

@@ -18,7 +18,7 @@ The up-to-date version of this document can be found at \url{https://github.com/
 \begin{definition}[Simple Harmonic Oscillator]
     A simple harmonic oscillator is described by Hooke's law:
 
-    \begin{equation}
+    \begin{equation} \label{eq:hooke}
         m \frac{d^2 x}{dt^2} + kx = 0
     \end{equation}
     where \( k \) is the spring constant, \( m \) is the mass, and \( x \) is the displacement from equilibrium.
@@ -47,7 +47,95 @@ The up-to-date version of this document can be found at \url{https://github.com/
     \end{equation}
     where \( u(x,t) \) is the wave function, \( c \) is the speed of the wave in the medium, \( x \) is the spatial coordinate, and \( t \) is time.
 \end{definition}
- 
+
+\subsection{Simple Harmonic Motion}
+\begin{definition}[Simple Harmonic Motion]
+    You should have leaned the Hooke's law and Newton's second law, which gives us the equation of motion for a simple harmonic oscillator. The same with the equation (\ref{eq:hooke}), which can be rewritten as:
+    \begin{equation}
+        F = m\ddot{x} = -kx
+    \end{equation}
+    By setting $\omega^2 = \frac{k}{m}$, ageneral solution can be written as:
+    \begin{equation}
+        x(t) = x_0 + A_1 \cos(\omega t) + A_2 \sin(\omega t)
+    \end{equation}
+    where \( A \) are the constants determined by the IVP, \( \omega \) is the angular frequency, and \( \phi \) is the phase constant. $x_0$ is the equilibrium position where we generally set it to be 0. The unknown constant can be determined by knowing $x, \dot{x}$ at specific times.
+\end{definition}
+
+\begin{definition}[Period, Frequency, and Angular Frequency]
+    The period \( T \) is the time it takes for one complete cycle of the motion, given by:
+    \begin{equation}
+        T = 2\pi \sqrt{\frac{m}{k}}
+    \end{equation}
+    The frequency \( f \) is the number of cycles per unit time, given by:
+    \begin{equation}
+        f = \frac{1}{T} = \frac{1}{2\pi} \sqrt{\frac{k}{m}}
+    \end{equation}
+    The angular frequency \( \omega \) is related to the frequency by:
+    \begin{equation}
+        \omega = 2\pi f = \sqrt{\frac{k}{m}}
+    \end{equation}
+    
+\end{definition}
+
+\begin{example}
+    A simple harmonic oscillator consisting of mass \(m = 11.0\ \mathrm{kg}\) attached to a spring with spring constant \(k = 201\ \mathrm{N\,m^{-1}}\). At time \(t=0\ \mathrm{s}\) the oscillator is at position \(x(0) = -0.207\ \mathrm{m}\) and has velocity \(v(0) = -1.33\ \mathrm{m\,s^{-1}}\). Determine all coefficients of the equation describing the position \(x(t)\) of the oscillator as a function of time, assuming the offset is zero. 
+
+    To solve for $A_1$ and $A_2$, while we assume $x_0 = 0$, we can use the initial conditions:
+    \begin{align*}
+        x(0) &= A_1 \cos(0) + A_2 \sin(0) = A_1 = -0.207\ \mathrm{m} \\
+        v(0) &= -A_1 \omega \sin(0) + A_2 \omega \cos(0) = A_2 \omega = -1.33\ \mathrm{m\,s^{-1}}
+    \end{align*}
+
+    We can find $\omega$ from the given $m$ and $k$:
+    $$
+    \omega = \sqrt{\frac{k}{m}} = \sqrt{\frac{201\ \mathrm{N\,m^{-1}}}{11.0\ \mathrm{kg}}} \approx 4.28\ \mathrm{rad\,s^{-1}}
+    $$
+    Therefore, we can solve for $A_2$:
+    $$
+    A_2 = \frac{v(0)}{\omega} = \frac{-1.33\ \mathrm{m\,s^{-1}}}{4.28\ \mathrm{rad\,s^{-1}}} \approx -0.311\ \mathrm{m}
+    $$
+    Thus, the equation describing the position \(x(t)\) of the oscillator as a function of time is:
+    $$
+    x(t) = -0.207 \cos(4.28 t) - 0.311 \sin(4.28 t)
+    $$
+\end{example}
+
+\begin{theorem}[A Trigonometric Identity] We can also express the solution in a more compact form using a single cosine function with a phase shift:
+\begin{equation}
+    x(t) = A \cos(\omega t + \phi)
+\end{equation}
+where:
+\begin{subequations}
+    \begin{equation}
+        A = \sqrt{A_1^2 + A_2^2}
+    \end{equation}
+    \begin{equation}
+        \phi = \tan^{-1}\left(\frac{A_2}{A_1}\right) = \tan^{-1}\left(\frac{-v(0)/\omega}{x(0)}\right)
+    \end{equation}
+\end{subequations}
+\end{theorem}
+\begin{proof}
+    Let $A = \sqrt{A_1^2 + A_2^2}$ and some $\phi$ such that $\cos(\phi) = \frac{A_1}{A}$ and $\sin(\phi) = \frac{A_2}{A}$. Then, we can rewrite our original solution as:
+    \begin{align*}
+        x(t) &= A_1 \cos(\omega t) + A_2 \sin(\omega t) \\
+        &= A \cos(\phi) \cos(\omega t) + A \sin(\phi) \sin(\omega t) \\
+        &= A [\cos(\phi) \cos(\omega t) + \sin(\phi) \sin(\omega t)] \\ 
+        &= A \cos(\omega t - (-\phi)) \qquad \text{(by the cosine addition formula)} \\
+        &= A \cos(\omega t + \phi)
+    \end{align*}
+\end{proof}
+\begin{example}
+    To determine the amplitude \(A\) and phase constant \(\phi\) for the oscillator in the previous example, we can use the values of \(A_1\) and \(A_2\) we found:
+    \begin{align*}
+        A &= \sqrt{(-0.207)^2 + (-0.311)^2} \approx 0.374\ \mathrm{m} \\
+        \phi &= \tan^{-1}\left(\frac{-0.311}{-0.207}\right) \approx 0.982 \pm n\pi \approx 4.12\ \mathrm{rad} \quad (n=1, \text{since both } A_1, A_2 < 0)
+    \end{align*}
+    Therefore, the equation describing the position \(x(t)\) of the oscillator as a function of time can also be written as:
+    $$
+    x(t) = 0.374 \cos(4.28 t + 4.12)
+    $$
+\end{example}
+
 
 \chapter{Modern Physics}
 \end{document}

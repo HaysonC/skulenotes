@@ -10,5 +10,275 @@ The up-to-date version of this document can be found at \url{https://github.com/
 
 \chapter{Vector Calculus}
 
+% set section counter from 15 
+\setcounter{section}{14}
+\paragraph{Note} the section numbering is based on Stewart's book.
+\section{Double and Triple Integrals}
+\begin{definition}[Double Integral]
+    Let $f(x,y)$ be a function defined on a closed and bounded region $R$ in the $xy$-plane. The double integral of $f$ over $R$ is denoted by
+    \begin{equation}
+        \iint_R f(x,y) \, dA = \iint_R f(x,y) \, dA
+    \end{equation}
+    where $dA$ represents an infinitesimal area element in the region $R$. The double integral can be interpreted as the volume under the surface defined by $z = f(x,y)$ over the region $R$.
+\end{definition}
+
+\subsection{Double Integrals in a Rectangular Region}
+
+ By the point of seeing this note, you should be familiar with the simple case of rectangular, simple cases are provided as examples:
+
+\begin{example}
+    Find the area under the quadric surface $z = 16 - x^2 - y^2$ over the square region $R = \{ (x,y) \mid 0 \le x \le 2, 0 \le y \le 2\}$.
+
+    \textbf{Note} We would have to ensure that the surface is above the $xy$-plane in the region of interest, which is true in this case.
+
+    We can set up the double integral as follows:
+    $$
+        \iint_R (16 - x^2 - y^2) \, dA = \int_0^2 \int_0^2 (16 - x^2
+        - y^2) \, dy \, dx
+    $$
+    First, we integrate with respect to $y$:
+    $$
+        \int_0^2 (16 - x^2 - y^2) \, dy = \left[ 16y - x^2y - \frac{y^3}{3} \right]_0^2 = 32 - 2x^2 - \frac{8}{3} = \frac{88}{3} - 2x^2
+    $$
+    Next, we integrate with respect to $x$:
+    $$
+        \int_0^2 \left( \frac{88}{3} - 2x^2 \right) \, dx = \left[ \frac{88}{3}x - \frac{2x^3}{3} \right]_0^2 = \frac{176}{3} - \frac{16}{3} = \frac{160}{3}
+    $$
+    Therefore, the area under the surface is $\frac{160}{3}$.
+
+\end{example}
+
+\begin{example}
+    Evaluate the double integral of $f(x,y) = x - 3y^2$ over the rectangular region $R = \{ (x,y) \mid 0 \le x \le 2, 1 \le y \le 2\}$.
+
+    We can set up the double integral as follows:
+    $$
+        \iint_R (x - 3y^2) \, dA = \int_0^2 \int_1^2 (x - 3y^2) \, dy \, dx
+    $$
+    First, we integrate with respect to $y$:
+    $$
+        \int_1^2 (x - 3y^2) \, dy = \left[ xy - y^3 \right]_1^2 = 2x - 8 - (x - 1) = x - 7
+    $$
+    Next, we integrate with respect to $x$:
+    $$
+        \int_0^2 (x - 7) \, dx = \left[ \frac{x^2}{2} - 7x \right]_0^2 = \left( 2 - 14 \right) - 0 = -12
+    $$
+    Therefore, the value of the double integral is $-12$.
+\end{example}
+
+\begin{theorem}
+    If the integrand function $f(x,y)$ is seperable, i.e., $f(x,y) = g(x)h(y)$, then the double integral can be computed as follows:
+    \begin{equation}
+        \iint_R f(x,y) \, dA = \left( \int_a^b g(x) \, dx \right) \left( \int_c^d h(y) \, dy \right)
+    \end{equation}
+    where $R = \{ (x,y) \mid a \le x \le b, c \le y \le d \}$.
+\end{theorem}
+\begin{proof}
+    \textbf{Sketch:} $h(y)$ is a constant when integrating with respect to $x$, and vice versa.
+\end{proof}
+
+\begin{example}
+    Let $f(x,y) = \sin{x} \cos{y}$ and $R = \{ (x,y) \mid 0 \le x \le \frac{\pi}{2}, 0 \le y \le \frac{\pi}{2} \}$. Evaluate the double integral $\iint_R f(x,y) \, dA$.
+
+    Since $f(x,y)$ is seperable, we can write:
+    $$
+        \iint_R f(x,y) \, dA = \left( \int_0^{\frac{\pi}{2}} \sin{x} \, dx \right) \left( \int_0^{\frac{\pi}{2}} \cos{y} \, dy \right)
+    $$
+    Evaluating each integral separately gives 1 for both, so the final result is: $1 \times 1 = 1$.
+\end{example}
+\subsection{Double Integrals in General Regions}
+\paragraph{Types of Regions} When the region $R$ is not rectangular, we can still compute the double integral by expressing the region in terms of inequalities. There are three common types of regions:
+\begin{definition}[Type I Region]
+    A region $R$ is called a Type I region if it can be described by the inequalities:
+    $$
+        a \le x \le b, \quad g_1(x) \le y \le g_2(x)
+    $$
+    where $g_1(x)$ and $g_2(x)$ are continuous functions on the interval $[a,b]$. Then, to evaluate the double integral over a Type I region for a continuous function $f(x,y)$, we set up the integral as follows:
+
+    \begin{equation}
+        \iint_R f(x,y) \, dA = \int_a^b \int_{g_1(x)}^{g_2(x)} f(x,y) \, dy \, dx
+    \end{equation}
+
+    \textbf{Integral Order:} Integrate with respect to $y$ first, then $x$.
+
+    \textbf{Intuition:} As we traverse the outer part ($x$), we are summing up vertical slices (in $y$), and the bounds of those slices depend on $x$ and changes.
+\end{definition}
+
+\begin{definition}[Type II Region]
+    Type II reigion is similar to Type I, but the roles of $x$ and $y$ are swapped. A region $R$ is called a Type II region if it can be described by the inequalities:
+    $$
+        c \le y \le d, \quad h_1(y) \le x \le h_2(y)
+    $$
+    where $h_1(y)$ and $h_2(y)$ are continuous functions on the interval $[c,d]$. Then, to evaluate the double integral over a Type II region for a continuous function $f(x,y)$, we set up the integral as follows: 
+    \begin{equation}
+        \iint_R f(x,y) \, dA = \int_c^d \int_{h_1(y)}^{h_2(y)} f(x,y) \, dx \, dy
+    \end{equation}
+
+    The integral order and intuition is mirrored from Type I, but we are summing up horizontal slices (in $x$), and the bounds of those slices depend on $y$ and changes.
+\end{definition}
+
+\begin{definition}[Type III Region]
+    A region $R$ is called a Type III region if it can be described as the union of a finite number of Type I and Type II regions. To evaluate the double integral over a Type III region for a continuous function $f(x,y)$, we can break down the integral into separate integrals over each Type I or Type II subregion and sum them up:
+    \begin{equation}
+        \iint_R f(x,y) \, dA = \sum_{i=1}^n \iint_{R_i} f(x,y) \, dA
+    \end{equation}
+    where each $R_i$ is either a Type I or Type II region. And that:
+    $$
+        \bigcup_{i=1}^n R_i = R \quad \text{and} \quad R_i \cap R_j = \emptyset \text{ for } i \neq j
+    $$
+    This approach allows us to handle more complex regions by breaking them down into simpler parts.
+\end{definition}
+
+\begin{example}
+    Find the volume of the solid that lies under the paraboloid $z = f(x,y) = x^2 + y^2$ and above the region $R$ bounded
+     by $y = 2x$ and $y = x^2$.
+
+     First, you would sketch the region to understand its shape and boundaries at Figure \ref{fig:region}.
+
+    \begin{figure}[h]
+        \centering
+        \begin{tikzpicture}
+            \begin{axis}[
+                axis lines = middle,
+                xlabel = $x$,
+                ylabel = $y$,
+                xmin = -1, xmax = 3,
+                ymin = -1, ymax = 5,
+                xtick = {0,1,2,3},
+                ytick = {0,1,2,3,4},
+                grid = both,
+                minor tick num = 1,
+                domain = -1:3,
+            ]
+            \addplot[blue, thick, name path=twox, name path global=twox] {2*x};
+            \addplot[red, thick, name path=xsq, name path global=xsq] {x^2};
+            \addplot[fill=gray, opacity=0.5] fill between[of=twox and xsq, soft clip={domain=0:2}];          \end{axis}
+        \end{tikzpicture}
+        \caption{Region bounded by $y = 2x$ and $y = x^2$} \label{fig:region}
+    \end{figure}
+
+    We can tell that this is a Type I regionwhere $0 \le x \le 2$, and $x^2 \le y \le 2x$. Thus, we can set up the double integral as follows:
+    $$
+        \iint_R (x^2 + y^2) \, dA = \int_0^2 \int_{x^2}^{2x} (x^2 + y^2) \, dy \, dx
+    $$
+    First, we integrate with respect to $y$:
+    $$
+        \int_{x^2}^{2x} (x^2 + y^2) \, dy = \left[ x^2y + \frac{y^3}{3} \right]_{y=x^2}^{y=2x} = 2x^3 + \frac{8x^3}{3} - x^4 - \frac{x^6}{3} = \frac{14x^3}{3} - x^4 - \frac{x^6}{3}
+    $$
+    Next, we integrate with respect to $x$:
+    $$
+        \int_0^2 \left( \frac{14x^3}{3} - x^4 - \frac{x^6}{3} \right) \, dx = \left[ \frac{14x^4}{12} - \frac{x^5}{5} - \frac{x^7}{21} \right]_0^2 = \frac{216}{35}
+    $$
+    Therefore, the volume of the solid is $\frac{216}{35}$.
+
+\end{example}
+
+\begin{example}
+    Consider the above example, but we want to set it up as a Type II region. The region $R$ can be described by $0 \le y \le 4$, and $\frac{y}{2} \le x \le \sqrt{y}$. Thus, we can set up the double integral as follows:
+    $$
+        \iint_R (x^2 + y^2) \, dA = \int_0^4 \int_{\frac{y}{2}}^{\sqrt{y}} (x^2 + y^2) \, dx \, dy
+    $$
+    First, we integrate with respect to $x$:
+    $$
+        \int_{\frac{y}{2}}^{\sqrt{y}} (x^2 + y^2) \, dx = \left[ \frac{x^3}{3} + y^2x \right]_{x=\frac{y}{2}}^{x=\sqrt{y}} = \frac{y^{\frac{3}{2}}}{3
+        } + y^{\frac{5}{2}} - \frac{y^3}{24} - \frac{y^3}{2} = \frac{y^{\frac{3}{2}}}{3} + y^{\frac{5}{2}} - \frac{13y^3}{24}
+    $$
+    Next, we integrate with respect to $y$:
+    $$
+        \int_0^4 \left( \frac{y^{\frac{3}{2}}}{3} + y^{\frac{5}{2}} - \frac{13y^3}{24} \right) \, dy = \left[ \frac{2y^{\frac{5}{2}}}{15} + \frac{2y^{\frac{7}{2}}}{7} - \frac{13y^4}{96} \right]_0^4 = \frac{216}{35}
+    $$
+    Therefore, the volume of the solid is $\frac{216}{35}$, which is consistent with the previous result. This is also consistent with Fubini's Theorem.
+\end{example}
+
+\begin{example}
+    Integrate the surface given by $z = e^{x^2}$ over the triangular region with vertices at $(0,0)$, $(1,0)$, and $(1,1)$. We can describe the region as either a Type I or Type II region:
+
+    (Incorrect) Here, we will describe it as a Type II regionwhere $0 \le y \le 1$, and $y \le x \le 1$. Thus, we can set up the double integral as follows:
+    $$
+        \iint_R e^{x^2} \, dA = \int_0^1 \int_y^1 e^{x^2} \, dx \, dy
+    $$
+    We can tell that $e^{x^2}$ does not have an elementary antiderivative, so we cannot integrate with respect to $x$ directly. 
+    
+    (Correct) However, we can change the order of integration to make it a Type I regionwhere $0 \le x \le 1$, and $0 \le y \le x$. Thus, we can set up the double integral as follows:
+    $$
+        \iint_R e^{x^2} \, dA = \int_0^1 \int_0^x e^{x^2} \, dy \, dx
+    $$
+    First, we integrate with respect to $y$:
+    $$
+        \int_0^x e^{x^2} \, dy = \left[ y e^{x^2} \right]_0^x = xe^{x^2}
+    $$
+    Next, we integrate with respect to $x$:
+    $$
+        \int_0^1 xe^{x^2} \, dx
+    $$
+    This is now obvious, a simple $u$-substitution with $u = x^2$, $du = 2x \, dx$:
+    $$
+        \int_0^1 xe^{x^2} \, dx = \frac{1}{2} \int_0^1 e^u \, du = \frac{1}{2} \left[ e^u \right]_0^1 = \frac{e - 1}{2}
+    $$
+    Therefore, the value of the double integral is $\frac{e - 1}{2}$. 
+
+    \textbf{Intuition} When the integrand is difficult to integrate with respect to one variable, consider changing the order of integration. You should be able to tell that $e^{x^2}$ has no elementary antiderivative, so you would have ruled out integrating with respect to $x$ first.
+\end{example}
+
+\subsection{Formal Definition of Double Integrals}
+There is two definitions of double integrals in this course, due to the discrepancy between Stewart's book and the lectures. 
+
+\begin{shaded}
+    \subsubsection*{\textbf{Review.  } Formal Definition of Definite Integral (Single Variable)}
+
+    Consider $y = f(x) \ge 0$ on the interval $x \in [a,b]$. We divide the interval into $n$ subintervals of equal width $\Delta x = \frac{b-a}{n}$, and let $x_i^*$ be a sample point in the $i$-th subinterval. The Riemann sum is given by:
+    $$
+        S_n = \sum_{i=1}^n f(x_i^*) \Delta x
+    $$
+    Now, for any $x_i^*$, we consider the minimum and maximum values of $f(x_i^*)$ in the $i$-th subinterval, denoted as $m_i$ and $M_i$ respectively. We can then define the lower sum $L_n$ and upper sum $U_n$ as follows:
+    $$
+        L_n = \sum_{i=1}^n m_i \Delta x \quad \text{and} \quad U_n = \sum_{i=1}^n M_i \Delta x
+    $$
+    To satisfy the squeeze theorem, for all $i$, we would need:
+    $$
+        \lim_{n \to \infty} M_i - m_i = \lim_{\delta x \to 0} M_i - m_i = 0
+    $$
+    If $f(x)$ is continuous on $[a,b]$. Then, we have:
+    $$
+        \lim_{n \to \infty} L_n = \lim_{n \to \infty} U_n = \int_a^b f(x) \, dx
+    $$
+
+    For the case of discontinuous functions, if the set of discontinuities has measure zero, then the function is still integrable.
+\end{shaded}
+
+\begin{definition}[Definition of Double Integral]
+    Let $R$ be a rectangular region in the $xy$-plane given by $R = [a,b] \times [c,d]$. The double integral of a function $f(x,y)$ over the region $R$ is defined as:
+    \begin{subequations}
+    \begin{equation}
+        \iint_R f(x,y) \, dA = \lim_{n \to \infty} \sum_{i=1}^n f(x_i^*,y_i^*) \Delta A_i \quad (\text{Riemann Definition})
+    \end{equation}
+    where $\Delta A_i$ is the area of the $i$-th subrectangle, and $(x_i^*,y_i^*)$ is a sample point in it. The limit is taken as the maximum diameter of the subrectangles approaches zero.
+    \begin{equation}
+        \iint_R f(x,y) \, dA = \lim_{n,m \to \infty} \sum_{i=1}^n \sum_{j=1}^m f(x_i^*,y_j^*) \Delta A_{ij} \quad (\text{Grid Formulation})
+    \end{equation}
+    where $\Delta A_{ij}$ is the area of the $ij$-th subrectangle, and $(x_i^*,y_j^*)$ is a sample point in it. Note that the $\Delta A_{ij}$ may be non-uniform. The limit is taken as the maximum diameter of the subrectangles approaches zero.
+    \end{subequations}
+
+    Similarly, the lower and upper sums for double integrals are:
+    \begin{subequations}
+    \begin{equation}
+        L_n = \sum_{i=1}^n m_i \Delta A_i \quad \text{and} \quad U_n = \sum_{i=1}^n M_i \Delta A_i \quad (\text{Riemann Definition})
+    \end{equation}
+    \begin{equation}
+        L_{n,m} = \sum_{i=1}^n \sum_{j=1}^m m_{ij} \Delta A_{ij} \quad \text{and} \quad U_{n,m} = \sum_{i=1}^n \sum_{j=1}^m M_{ij} \Delta A_{ij} \quad (\text{Grid Formulation})
+    \end{equation}
+    \end{subequations}
+    Here, $m_{ij}$ and $M_{ij}$ are the minimum and maximum values of $f(x,y)$ in the $ij$-th subrectangle. Define $||P|| = \max ||(\Delta x_i, \Delta y_j)||$ as the maximum diameter of the subrectangles. For the squeeze theorem, we require:
+    $$
+        \lim_{n,m \to \infty} (M_{ij} - m_{ij}) = \lim_{||P|| \to 0} (M_{ij} - m_{ij}) = 0
+    $$
+    If $f(x,y)$ is continuous on $R$, then:
+    $$
+        \lim_{n,m \to \infty} L_{n,m} = \lim_{n,m \to \infty} U_{n,m} = \iint_R f(x,y) \, dA
+    $$
+
+    The Riemann definition and grid formulation are similar.
+\end{definition}
+
 \chapter{Fluid Mechanics}
 \end{document}

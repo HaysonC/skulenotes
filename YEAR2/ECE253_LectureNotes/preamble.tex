@@ -40,5 +40,7 @@
 \newtheorem{example}[theorem]{Example}
 \newtheorem{corollary}[theorem]{Corollary}
 \newtheorem{lemma}[theorem]{Lemma}
+\makeatletter
 \patchcmd{\chapter}{\if@openright\cleardoublepage\else\clearpage\fi}{}{}{}
+\makeatother
 \title{ECE 253 Lecture Notes}
