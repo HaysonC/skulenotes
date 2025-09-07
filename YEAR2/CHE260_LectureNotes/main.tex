@@ -12,7 +12,27 @@ The up-to-date version of this document can be found at \url{https://github.com/
     \textit{``If there is one word that describes this class it would be \textbf{energy}.''}
 \end{center}
 \chapter{Thermodynamics}
+\begin{shaded}
+    \section*{Systematic Approach to Problem Solving in Thermodynamics}
+    You should adopt a systematic approach when tackling problems to avoid getting confused by a lot
+    of information. The following steps are helpful:
 
+    \begin{enumerate}
+        \item \textbf{Find.} Read the problem and state what you are asked to find in your own words. This step
+        may seem obvious, but it is surprising how often people misunderstand the question or
+        miss essential information.
+        \item \textbf{Known.} List all the information and properties provided, as well as information about properties that remain constant (e.g. the volume in a isochoric process or the temperature in an isothermal process).
+        \item \textbf{Diagrams.} Draw a schematic diagram of the system. Mark the system boundary and decide whether the system is a control mass or volume. Show energy and mass transfers between the system and surroundings by arrows. Draw a process diagram if necessary.
+        \item \textbf{Assumptions.} Decide how you are going to model the system. List all assumptions that you make.
+        \item \textbf{Governing Equations.} Which conservation law are you going to apply? Depending on what you are trying to find, you may use principles of conservation of mass or energy. Write down the governing equations.
+        \item \textbf{Properties.} List all property values that are not given in the problem statement. This includes information extracted from tables or other sources.
+        \item \textbf{Solution.} Substitute known values of variables in the governing equations and solve them to find unknowns.
+        \item \textbf{Answer.} State the answer and confirm that it is what was asked for.
+        \item \textbf{Discussion.} Are your results reasonable? Can you draw any conclusions from them?
+    \end{enumerate}
+
+
+\end{shaded}
 \section{Systems and Properties in Thermodynamics}
 \begin{definition}[Energy]
     You should have learned that energy is the ability to do work.
@@ -137,9 +157,9 @@ The second law formalizes the concept of the directionality of thermodynamic pro
     \end{equation}
     In the above example, we can see that entropy increases as heat is transferred from the hot reservoir to the cold reservoir:
 
-    $$
+    \begin{equation}
         \Delta S = S_{\text{final}} - S_{\text{initial}} = \frac{Q_C}{T_C} - \frac{Q_H}{T_H} > 0
-    $$
+    \end{equation}
 
     Since $Q_C = Q_H$ in a closed system and $T_H > T_C$, we have $\Delta S > 0$.
 \end{definition}
@@ -178,12 +198,31 @@ The second law formalizes the concept of the directionality of thermodynamic pro
     \begin{equation}
         W = \int dW \quad (\text{depends on path})
     \end{equation}
-    Hence, to remind ourselves, we denote infinitesimal work as $\delta W$ instead of $dW$. Then, we can compute the work done on a system as:
+    Hence, to remind ourselves, we denote infinitesimal work as $\delta W$ instead of $dW$. Then, we can compute the work done by the force field $\textbf{F}$ along a curve $C$ as:
     \begin{equation}
-        \delta W = \int_C F \, dx 
+        \delta W = \int_C \textbf{F} \cdot ds
     \end{equation}
 \end{definition}
+\begin{shaded}
+Here's a quick refresher on line integrals and basic math:
+\begin{example}[Computing work]
+    \textit{The force acting on a 5 kg object varies with time as F = $(50 + 10t)\,N$, where t is the time in seconds. If the body starts from rest, how much work is done on it in 10 s?}
 
+    The object is travelling for a straight line, so we can simply parametrize the curve as $ds = v dt = r' dt$. We can compute the velocity $v$ by integrating the acceleration $a = F/m$. Firstly the work is given by:
+    $$
+        W = \int_{C} F \cdot ds = \int_0^{10} F \cdot v dt
+    $$
+    Since they are in the same direction, we can treat them as scalars. Now, we compute $v$:
+    $$
+        v = \int_0^t a dt = \int_0^t \frac{F}{m} dt = \int_0^t \frac{50 + 10t}{5} dt = 10t + t^2 + (\text{$C$ = 0 $\because$ object starts from rest})
+    $$
+    Hence, we have:
+    $$
+        W = \int_0^{10} (50 + 10t)(10t + t^2) dt = 100\,000 \text{ J}
+    $$
+\end{example}
+
+\end{shaded}
 \paragraph{Intensive and Extensive Properties} Properties can be classified into two categories: intensive and extensive.
 \begin{definition}[Extensive Property]
     An extensive property is one that depends on the size or extent of the system. \\

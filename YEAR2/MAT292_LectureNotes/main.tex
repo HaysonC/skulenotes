@@ -439,31 +439,48 @@ Conisder the non-homogeneous case:
 \end{definition}
 
 \paragraph{Remarks} If $g$ and $h$ are continuous, then there need not exist solution in a neighbourhood (open $\epsilon$-ball) of any point $(x_0, y_0)$ so long as $h(y_0) \neq 0$.
+\begin{example}[Proof of Uniqueness by Integrating Factor Method]
+Consider the IVP
+\[
+\frac{dx}{dt} = ax, \qquad x(0) = x_0.
+\]
+Although we know the solution is \( x(t) = x_0 e^{at} \), we will prove that this solution is unique.
 
-\begin{example}
-    Consider the IVP:
-    $$
-    \begin{cases}
-        \frac{dx}{dt} = ax \\
-        x(0) = x_0
-    \end{cases}
-    $$
-    then the solution is given by:
-    $$
-    x(t) = x_0e^{at}
-    $$
-    Is the solution unique? Suppose $x$ is any solution, then we check if $y = e^{-at}x$ is constant:
-    \begin{align*}
-        \frac{dy}{dt} &= \frac{d}{dt}(e^{-at}x) \\
-        &= -ae^{-at}x + e^{-at}\frac{dx}{dt} \\
-        &= -ae^{-at}x + e^{-at}(ax) \\
-        &= 0
-    \end{align*}
-    Thus, $y$ is constant, and since $y(0) = x_0$, we have $y(t) = x_0$ for all $t$. Thus,
-    $$x(t) = x_0 e^{at}
-    $$
-    which is the unique solution.
+Suppose $w(t)$ is any solution of this IVP. Define a change of variables:
+$$
+y(t) = e^{-at} w(t).
+$$
+Then, by the product rule,
+$$
+\frac{dy}{dt} = \frac{d}{dt}\!\left( e^{-at} w(t) \right) 
+= -a e^{-at} w(t) + e^{-at} \frac{dw}{dt}.
+$$
+Since $\tfrac{dw}{dt} = aw(t)$, this becomes
+$$
+\frac{dy}{dt} = -a e^{-at} w(t) + e^{-at} (a w(t)) = 0.
+$$
+Thus, $y(t)$ is constant for all $t$. Evaluating at $t=0$ gives
+$$
+y(0) = e^{-a \cdot 0} w(0) = x_0,
+$$
+so $y(t) \equiv x_0$. Therefore,
+$$
+e^{-at} w(t) = x_0 \quad \implies \quad w(t) = x_0 e^{at}.
+$$
+Hence, the only possible solution of the IVP is
+$$
+x(t) = x_0 e^{at}.
+$$
+This shows the solution is unique.
 \end{example}
+
+\paragraph{Remark} 
+The change of variable 
+\[
+y(t) = e^{-at} x(t)
+\]
+allows us to prove the uniqueness of the solution. 
+This is essentially the same idea as the integrating factor method.
 
 \begin{example}[Logistic Equation]
     The logistic equation is a first-order nonlinear separable autonomous ODE that models population growth with a carrying capacity. It is given by:
@@ -507,4 +524,6 @@ Conisder the non-homogeneous case:
     \end{itemize}
     Thus, the fixed point at \( x = 0 \) is unstable, while the fixed point at \( x = 1 \) is stable.
 \end{example}
+
+
 \end{document}

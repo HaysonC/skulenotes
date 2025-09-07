@@ -1,4 +1,4 @@
-*Irish & Romkey, “What is Technology”*
+## *Irish & Romkey, “What is Technology”*
 
 
 | **Key Term / Idea**                                    | **Explanation**                                                                                                               | **Critiques / Ethical Implications**                                                                                         |
