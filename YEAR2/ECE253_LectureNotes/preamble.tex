@@ -27,13 +27,21 @@
 \colorlet{shadecolor}{orange!15}
 \parindent 0in
 \parskip 12pt
+
 \geometry{margin=1in, headsep=0.25in}
 \theoremstyle{definition}
+
 \newtheorem{defn}{Definition}
 \newtheorem{reg}{Rule}
 \newtheorem{exer}{Exercise}
 \newtheorem{note}{Note}
 \usepackage{fancyhdr}\usepackage{xcolor}\usepackage{amsmath}\usepackage{amssymb}\pagestyle{fancy}\rhead{}
+\usepackage{tikz}
+\usetikzlibrary{positioning}
+% Load logic gate shapes so anchors like "in 1" / "input 1" are defined
+% This prevents PGF from mis-parsing the token "in" as a math function.
+\usetikzlibrary{shapes.gates.logic,shapes.gates.logic.US}
+\usepackage{circuitikz}
 \newtheorem{theorem}{Theorem}[subsection]
 \theoremstyle{definition}
 \newtheorem{definition}[theorem]{Definiton}

@@ -121,8 +121,350 @@ In computer systems, we use binary to represent information, and we would often 
 \end{example}
 
 \paragraph{Note} An alternative method is to devide by powers of 2.
+\begin{shaded}
+    \textbf{Fractional Numbers. } To represent fractional numbers in binary, we can use the method of successive multiplication by 2 (fixed point representation). Or we can use floating point representation, which is similar to scientific notation in decimal. 
+\end{shaded}
+\subsection{Binary Arithmetic and Logic}
+\paragraph{Binary Arithmetic} Binary arithmetic is similar to decimal arithmetic, but it only uses two digits (0 and 1). Addition is associated with a sum and carry.
 
-\paragraph{Binary Arithmetic} Binary arithmetic is similar to decimal arithmetic, but it only uses two digits (0 and 1). The 0 and 1 could be associated with a xor logic.
+\paragraph{Binary Addition} The rules for binary addition are as follows: \\
+\begin{table}[h!]
+    \centering
+    \begin{tabular}{|c|c|c|}
+        \hline
+        A & B & Sum, Carry \\
+        \hline
+        0 & 0 & 0, 0 \\
+        0 & 1 & 1, 0 \\
+        1 & 0 & 1, 0 \\
+        1 & 1 & 0, 1 \\
+        \hline
+    \end{tabular}
+    \caption{Binary Addition}
+\end{table}
+
+This could be summerize as the following logic:
+\begin{equation}
+    \text{Sum} = A \oplus B, \quad \text{Carry} = A \cdot B
+\end{equation}
+\paragraph{Binary Subtraction} The rules for binary subtraction are defined using the addition of negative numbers (2's complement):
+
+\begin{definition}[Least Significant Bit (LSB) and Most Significant Bit (MSB)]
+    The least significant bit (LSB) is the rightmost bit in a binary number, while the most significant bit (MSB) is the leftmost bit.`'
+    
+\end{definition}
+\begin{definition}[2's Complement]
+    The 2's complement of a binary number is obtained by inverting all the bits (1's complement) and adding 1 to the least significant bit (LSB).
+\end{definition}
+
+\begin{example}[Number Inversion]
+    To find the 2's complement of the binary number (10110010)$_2$:
+    \begin{enumerate}
+        \item Invert all the bits: (01001101)$_2$
+        \item Add 1 to the LSB: 
+        \[
+        \begin{array}{c}
+        \quad 01001101 \\
+        +\, 00000001 \\
+        \hline
+        \quad 01001110 \\
+        \end{array}
+        \]
+    \end{enumerate}
+    Therefore, the 2's complement of (10110010)$_2$ is (01001110)$_2$.
+\end{example}
+
+\section{Logic Circuits}
+\begin{definition}[Logic Function]
+    A logic function $L: \{0,1\}^n \rightarrow \{0,1\}$ is a mathematical function that takes $n$ binary inputs and produces a single binary output based on a set of rules.
+\end{definition}
+
+\begin{definition}[Truth Table]
+    A truth table is a tabular representation of a logic function that lists all possible combinations of input values and their corresponding output values.
+    
+\end{definition}
+
+\begin{definition}[Boolean Algebra]
+    Boolean algebra is a branch of algebra that deals with binary variables and logical operations. It provides a set of rules and properties for manipulating and simplifying logic functions. The specific rules and properties would be covered in later lectures.
+\end{definition}
+\subsection{Transistors as Switches}
+\begin{definition}[Transistor]
+    Transistor operates as a switch. The switch is open only when the gate is high. We denote the state of the gate as $x \in \{0,1\}$, where 0 is LO and 1 is HI. If input end of the swtich is HI, the output end could be modeled by the logic function:
+    $$
+        L(x) = x
+    $$
+\end{definition}
+
+\begin{example}[Serial Transistors]
+    Consdier two transistors connected in series, with the input end of the first transistor connected to HI. The output end of the second transistor can be modeled by the following truth table:
+    \begin{table}[h!]
+        \centering
+        \begin{tabular}{|c|c|c|}
+            \hline
+            $x_1$ & $x_2$ & $L(x_1, x_2)$ \\
+            \hline
+            0 & 0 & 0 \\
+            0 & 1 & 0 \\
+            1 & 0 & 0 \\
+            1 & 1 & 1 \\
+            \hline
+        \end{tabular}
+        \caption{Truth Table for Two Transistors in Series}
+        \label{tab:and_gate}
+    \end{table}
+    \\
+    The logic function can be expressed as:
+    $$
+        L(x_1, x_2) = x_1 \cdot x_2
+    $$
+    where $\cdot$ denotes the AND operation.
+\end{example}
+
+\begin{example}[Parallel Transistors]
+    Consider two transistors connected in parallel, with the input end of both transistors connected to HI. The output end can be modeled by the following truth table:
+    \begin{table}[h!]
+        \centering
+        \begin{tabular}{|c|c|c|}
+            \hline
+            $x_1$ & $x_2$ & $L(x_1, x_2)$ \\
+            \hline  
+            0 & 0 & 0 \\
+            0 & 1 & 1 \\
+            1 & 0 & 1 \\
+            1 & 1 & 1 \\
+            \hline
+        \end{tabular}
+        \caption{Truth Table for Two Transistors in Parallel}
+        \label{tab:or_gate}
+    \end{table}
+    \\
+    The logic function can be expressed as:
+    $$
+        L(x_1, x_2) = x_1 + x_2
+    $$
+    where $+$ denotes the OR operation.
+\end{example}
+
+\begin{example}
+    Consider a circuit with a transistor connected to LO and the output end connected to LO, The other ends of the output and the transistor are connected together to a HI (and a resistor). The output end of the circuit can be modeled by the following truth table:
+    \begin{table}[h!]
+        \centering
+        \begin{tabular}{|c|c|}
+            \hline
+            $x$ & $L(x)$ \\
+            \hline
+            0 & 1 \\
+            1 & 0 \\
+            \hline
+        \end{tabular}
+        \caption{Truth Table for a Transistor Connected to LO}
+        \label{tab:not_gate}
+    \end{table}
+    \\
+    The logic function can be expressed as:
+    $$
+        L(x) = \overline{x}
+    $$
+    where $\overline{x}$ denotes the NOT operation.
+\end{example}
+
+\subsection{Basic Logic Gates}
+
+\begin{definition}[AND Gate]
+    An AND gate outputs 1 only if all inputs are 1. The truth table for a 2-input AND gate is shown in Table \ref{tab:and_gate}.
+    \\
+    The logic function for an AND gate with inputs $A$ and $B$ can be expressed as:
+    $$
+        L(A, B) = A \cdot B = AB 
+    $$
+    \textbf{Note} when no operator is present, it is assumed to be AND.
+
+    The digital logic symbol for an AND gate is shown below:
+    \begin{center}
+        \begin{tikzpicture}[scale=1]
+            % Simple custom AND gate to avoid reliance on gate shape anchors
+            % Input nodes
+            \node (A) at (-1,0.3) {$A$};
+            \node (B) at (-1,-0.3) {$B$};
+            % Wires to gate
+            \draw (A.east) -- (-0.2,0.3);
+            \draw (B.east) -- (-0.2,-0.3);
+            % Gate body: rectangle on the left and semicircle on the right
+            \draw (-0.2,0.6) -- (-0.2,-0.6) -- (0.2,-0.6) arc (-90:90:0.6) -- cycle;
+            % Output
+            \node (Y) at (0.9,0) {$Y$};
+            \draw (0.6,0) -- (Y.west);
+            \draw (0.2,0) -- (0.6,0);
+        \end{tikzpicture}
+    \end{center}    
+\end{definition}
+
+\begin{definition}[OR Gate]
+    An OR gate outputs 1 if at least one input is 1. The truth table for a 2-input OR gate is shown in Table \ref{tab:or_gate}.
+    \\
+    The logic function for an OR gate with inputs $A$ and $B$ can be expressed as:
+    $$
+        L(A, B) = A + B
+    $$
+    The digital logic symbol for an OR gate is shown below:
+    \begin{center}
+        \begin{tikzpicture}[scale=1]
+            % Simple custom OR gate to avoid reliance on gate shape anchors
+            % Input nodes
+            \node (A) at (-1,0.3) {$A$};
+            \node (B) at (-1,-0.3) {$B$};
+            % Wires to gate
+            \draw (A.east) -- (-0.2,0.3);
+            \draw (B.east) -- (-0.2,-0.3);
+            % Gate body: curved shape
+            \draw (-0.2,0.6) .. controls (0,0.6) and (0.4,0.3) .. (0.6,0) .. controls (0.4,-0.3) and (0,-0.6) .. (-0.2,-0.6) -- cycle;
+            % Output
+            \node (Y) at (0.9,0) {$Y$};
+            \draw (0.6,0) -- (Y.west);
+        \end{tikzpicture}
+    \end{center}
+\end{definition}    
+
+\begin{definition}[NOT Gate]
+    A NOT gate outputs the inverse of the input. The truth table for a NOT gate is shown in Table \ref{tab:not_gate}.
+    \\
+    The logic function for a NOT gate with input $A$ can be expressed as:
+    $$
+        L(A) = \overline{A}
+    $$
+    The digital logic symbol for a NOT gate is shown below:
+    \begin{center}
+        \begin{tikzpicture}[scale=1]
+            % Input node
+            \node (A) at (-1,0) {$A$};
+            % Wire to gate
+            \draw (A.east) -- (-0.2,0);
+            % Gate body: triangle with circle at output
+            \draw (-0.2,0.5) -- (0.2,0) -- (-0.2,-0.5) -- cycle;
+            \draw (0.2,0) circle (0.1);
+            % Output
+            \node (Y) at (0.6,0) {$Y$};
+            \draw (0.3,0) -- (Y.west);
+        \end{tikzpicture}
+    \end{center}
+\end{definition}
+
+
+\subsection{Additional Logic Gates}
+\begin{example}[XOR Operation]
+    We have two swtiches, when both switches are in the same state (both open or both closed), the output is 0. When the switches are in different states (one open and one closed), the output is 1. The truth table for this operation is shown below:
+    \begin{table}[h!]
+        \centering
+        \begin{tabular}{|c|c|c|}      
+            \hline
+            $x_1$ & $x_2$ & $L(x_1, x_2)$ \\
+            \hline
+            0 & 0 & 0 \\
+            0 & 1 & 1 \\
+            1 & 0 & 1 \\
+            1 & 1 & 0 \\
+            \hline
+        \end{tabular}
+        \caption{Truth Table for XOR Operation}
+        \label{tab:xor_gate}
+    \end{table}
+    \\
+    The logic function can be expressed as:
+    $$
+        L(x_1, x_2) = x_1 \oplus x_2 = \overline{x_1}x_2 + x_1\overline{x_2}
+    $$
+    where $\oplus$ denotes the XOR operation.
+\end{example}
+
+\begin{definition}[XOR Gate]
+    An XOR gate outputs 1 if the inputs are different. The truth table for a 2-input XOR gate is shown in Table \ref{tab:xor_gate}.
+    \\
+    The logic function for an XOR gate with inputs $A$ and $B$ can be expressed as:
+    $$
+        L(A, B) = A \oplus B = \overline{A}B + A\overline{B}
+    $$
+    where $\oplus$ denotes the XOR operation.
+    The digital logic symbol for an XOR gate is shown below:
+    \begin{center}
+        \begin{tikzpicture}[scale=1]
+            % Input nodes
+            \node (A) at (-1,0.3) {$A$};
+            \node (B) at (-1,-0.3) {$B$};
+            % Wires to gate
+            \draw (A.east) -- (-0.2,0.3);
+            \draw (B.east) -- (-0.2,-0.3);
+            % Gate body: curved shape with extra curve on input side
+            \draw (-0.4,0.6) .. controls (-0.2,0.6) and (0.2,0.3) .. (0.4,0) .. controls (0.2,-0.3) and (-0.2,-0.6) .. (-0.4,-0.6) -- cycle;
+            \draw (-0.5,0.6) .. controls (-0.3,0.6) and (0.1,0.3) .. (0.3,0) .. controls (0.1,-0.3) and (-0.3,-0.6) .. (-0.5,-0.6);
+            % Output
+            \node (Y) at (0.9,0) {$Y$};
+            \draw (0.4,0) -- (Y.west);
+        \end{tikzpicture}
+    \end{center}
+\end{definition}
+
+
+In addition, we have the following gates:
+\begin{definition}[NAND Gate]
+    A NAND gate outputs 0 only if all inputs are 1. The truth table for a 2-input NAND gate is shown in Table \ref{tab:nand_nor_gates}.
+    \\
+    The logic function for a NAND gate with inputs $A$ and $B$ can be expressed as:
+    $$
+        L(A, B) = \overline{A \cdot B} = \overline{A} + \overline{B}
+    $$
+    The digital logic symbol for a NAND gate is shown below:
+    \begin{center}
+        \begin{tikzpicture}[scale=1]
+            % Input nodes
+            \node (A) at (-1,0.3) {$A$};
+            \node (B) at (-1,-0.3) {$B$};
+            % Wires to gate
+            \draw (A.east) -- (-0.2,0.3);
+            \draw (B.east) -- (-0.2,-0.3);
+            % Gate body: rectangle on the left and semicircle on the right with circle at output
+            \draw (-0.2,0.6) -- (-0.2,-0.6) -- (0.2,-0.6) arc (-90:90:0.6) -- cycle;
+            \draw (0.2,0) circle (0.1);
+            % Output
+            \node (Y) at (0.9,0) {$Y$};
+            \draw (0.6,0) -- (Y.west);
+            \draw (0.2,0) -- (0.6,0);
+        \end{tikzpicture}
+    \end{center}
+\end{definition}
+
+\begin{definition}
+    
+\end{definition}
+
+\begin{shaded}
+    \paragraph{NAND and NOR Gates are Cheaper} NAND gates and NOR gates are cheaper than AND and OR gates because they require fewer transistors to implement. A 2-input NAND gate can be implemented using 4 transistors, while a 2-input AND gate requires 6 transistors (4 for the NAND gate and 2 for the NOT gate). The same applies to NOR and OR gates.
+
+    \paragraph{NAND and NOR Gates are Universal (Functionally Complete)} Additionally, NAND and NOR gates are universal gates, meaning that any logic function can be implemented using only NAND or NOR gates. 
+    
+    This makes them more versatile and cost-effective for building complex digital circuits.
+\end{shaded}
+
+
+\paragraph{Commonly Used Logic Operators} Below is a table summarizing the commonly used logic operators:
+\begin{table}[h!]
+    \centering
+    \begin{tabular}{|c|c|c|}
+        \hline
+        Operator & Symbol & Description \\
+        \hline
+        AND & $\cdot$ or no symbol & Outputs 1 if all inputs are 1 \\
+        OR & $+$ & Outputs 1 if at least one input is 1 \\
+        NOT & $\overline{x}$ & Outputs the inverse of the input \\
+        inverse & $'$ or $\sim$ & Outputs the 2's complement of the input \\
+        XOR & $\oplus$ & Outputs 1 if inputs are different \\
+        NAND & $\overline{\cdot}$ & Outputs 0 if all inputs are 1 \\
+        NOR & $\overline{+}$ & Outputs 0 if at least one input is 1 \\
+        XNOR & $\overline{\oplus}$ & Outputs 1 if inputs are the same \\
+        \hline
+    \end{tabular}
+    \caption{Commonly Used Logic Operators}
+\end{table}
+
 \section{Digital Storage Elements}
 
 \section{Finite State Machines (FSM)}
@@ -135,9 +477,8 @@ In computer systems, we use binary to represent information, and we would often 
     \item \textbf{Front-end Parser:} The front-end parser would parse the C/C++ code into an intermediate representation (IR), which is a low-level representation of the code that is easier to optimize. The front-end parser would also perform optimizations on the IR, such as loop unrolling, inlining, and dead code elimination.
     \item \textbf{Back-end Parser:} The back-end parser would take the optimized IR and generate assembly code for a specific architectures.
 \end{enumerate}
-
-The assembly code is then assembled into machine code, which is a series of 0s and 1s that the computer can understand. The assembly would be specific to the architecture of the computer (machine dependent), which is why we have different assembly languages for different architectures (e.g., x86, RISC-V, ARM).
 \end{shaded}
+The assembly code is then assembled into machine code, which is a series of 0s and 1s that the computer can understand. The assembly would be specific to the architecture of the computer (machine dependent), which is why we have different assembly languages for different architectures (e.g., x86, RISC-V, ARM).
 \section{Computer Organization}
 
 \section{Assembly Language}
