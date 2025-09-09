@@ -524,6 +524,167 @@ This is essentially the same idea as the integrating factor method.
     \end{itemize}
     Thus, the fixed point at \( x = 0 \) is unstable, while the fixed point at \( x = 1 \) is stable.
 \end{example}
+\subsubsection{Integrating Factor Method for First-Order Linear ODEs}
+\begin{definition}[First-Order Linear ODE]
+    A first-order linear ordinary differential equation (ODE) is an equation of the form:
+    \begin{equation}
+        \frac{dy}{dx} + P(x)y = Q(x)
+    \end{equation}
+    where \( P(x) \) and \( Q(x) \) are functions of the independent variable \( x \).
+\end{definition}
+
+
+\begin{definition}[Integrating Factor Method]
+    To solve a first-order linear ODE of the form:
+    $$
+        \frac{dy}{dx} + P(x)y = Q(x)
+    $$
+    we can use the integrating factor method. The steps are as follows:
+    \begin{enumerate}
+        \begin{subequations}
+    
+        \item Compute the integrating factor \( \mu(x) \):
+        \begin{equation}
+            \mu(x) = \exp\left( \int P(x) \, dx \right)
+        \end{equation}
+        \begin{shaded}
+            This is from the fact that:
+        \begin{align*}
+            \frac{d\mu}{dx} &= P(x) \mu(x) \quad \text{(by requirement of step \ref{step:integrating-factor-multiplication})} \\
+            \Rightarrow \frac{1}{\mu} \frac{d\mu}{dx} &= P(x) \\
+            \Rightarrow \int \frac{1}{\mu} \frac{d\mu}{dx} \, dx &= \int P(x) \, dx \\
+            \Rightarrow \ln|\mu| &= \int P(x) \, dx \\
+            \Rightarrow \mu(x) &= \exp\left( \int P(x) \, dx \right)
+        \end{align*}
+        \end{shaded}
+        \item Multiply both sides of the original ODE by the integrating factor: 
+        \begin{equation}
+            \mu(x) \frac{dy}{dx} + \mu(x) P(x)y = \mu(x) Q(x)
+        \end{equation}
+        \item Recognize that the left-hand side is the derivative of \( \mu(x)y \) \label{step:integrating-factor-multiplication}:
+        \begin{equation}
+            \frac{d}{dx}[\mu(x)y] = \mu(x) Q(x)
+        \end{equation}
+        \item Integrate both sides with respect to \( x \):
+        \begin{equation}
+            \mu(x)y = \int \mu(x) Q(x) \, dx + C
+        \end{equation}
+        where \( C \) is the constant of integration.
+        \item Finally, solve for \( y(x) \):
+        \begin{equation}
+            y(x) = \frac{1}{\mu(x)}\left( \int \mu(x) Q(x) \, dx + C \right)
+        \end{equation}
+        \end{subequations}
+    \end{enumerate}
+\end{definition}
+
+\begin{example}
+    Consider the IVP involving a first-order linear ODE:
+    $$
+    y' + \frac{2}{t} y = \frac{\sin t}{t^2}, \quad y(\pi) = 1
+    $$
+
+    To solve this IVP using the integrating factor method, we first identify \( P(t) = \frac{2}{t} \) and \( Q(t) = \frac{\sin t}{t^2} \).
+
+    Next, we compute the integrating factor:
+    \begin{align*}
+        \mu(t) &= \exp\left( \int \frac{2}{t} \, dt \right) \\
+        &= \exp\left( 2 \ln |t| \right) \\
+        &= |t|^2 = t^2
+    \end{align*}
+
+    Multiplying both sides of the original ODE by the integrating factor:
+    $$
+        t^2 y' + 2ty = \sin t
+    $$
+
+    Recognizing the left-hand side as the derivative of \( |t|^2 y \):
+    \begin{align*}
+        \frac{d}{dt}[t^2 y] &= \sin t \\
+        t^2 y &= -\cos t + C \\
+        y &= \frac{-\cos t + C}{t^2}
+    \end{align*}
+
+    To determine the constant \( C \), we use the initial condition \( y(\pi) = 1 \):
+    \begin{align*}
+        1 &= \frac{-\cos(\pi) + C}{\pi^2} \\
+        \Rightarrow C &= \pi^2 - 1
+    \end{align*}
+
+    Thus, the solution to the IVP is:
+    \begin{align*}
+        y(t) &= \frac{-\cos t + \pi^2 - 1}{t^2}
+    \end{align*}
+\end{example}
+
+\subsubsection{Exact ODEs}
+\begin{definition}[Exact ODE]
+    An ordinary differential equation (ODE) of the form:
+    \begin{subequations}
+    \begin{equation}
+        M(x, y) + N(x, y) \frac{dy}{dx} = 0 \quad \text{or equivalently} \quad M(x, y) dx + N(x, y) dy = 0
+    \end{equation}
+    is said to be exact iff there exists a function \( \psi(x, y) \) such that:
+    \begin{equation}
+        M_y = \frac{\partial M}{\partial y} = N_x = \frac{\partial N}{\partial x}
+    \end{equation}
+
+    This implies a potential function \( \psi(x, y) \) exists such that:
+    \begin{equation}
+        M_y = \psi_{xy} = \psi_{yx} = N_x
+    \end{equation}
+    The general solution to the exact ODE is given by:
+    \begin{equation}
+        d\psi(x, y) = 0 \implies \psi(x, y) = C \quad (\text{By chain rule of $\psi$})
+    \end{equation}
+    \end{subequations}
+    In this case, we can solve the ODE by finding the potential function \( \psi(x, y) \):
+    \begin{equation}
+        \psi(x, y) = \int M(x, y) \, dx + g(y)
+    \end{equation}
+    to find \( g(y) \), we can use the fact that:
+    \begin{equation}
+        \frac{\partial \psi}{\partial y} = \frac{\partial}{\partial y} \left( \int M(x, y) \, dx \right) = \int M_y \, dx = \int N_x \, dx = N(x, y)
+    \end{equation}
+    We can also solve this from the other direction. Or verify your answer this way.
+\end{definition}
+
+\begin{example}
+    Consider the exact ODE:
+    $$
+    (3x^2y^2 + x + \cos{y}) \frac{dy}{dx} = -(2xy^3 + y)
+    $$
+    We identify \( N(x, y) = 3x^2y^2 + x + \cos{y} \) and \( M(x, y) = 2xy^3 + y \). So \( M_y = N_x = 6x^2y + 1 \), thus the ODE is exact. Then we compute the potential function:
+    \begin{align*}
+        \psi(x, y) &= \int M(x, y) \, dx \\
+        &= \int (2xy^3 + y) \, dx \\
+        &= x^2 y^3 + xy + g(y)
+        \intertext{To find \( g(y) \), we compute:}
+        \frac{\partial \psi}{\partial y} &= 3x^2 y^2 + x + g'(y) \\
+        &= N(x, y) = 3x^2 y^2 + x + \cos{y} \\
+        \Rightarrow g'(y) &= \cos{y} \\
+        \Rightarrow g(y) &= \sin{y}
+        \intertext{Thus, the potential function is:}
+        \psi(x, y) &= x^2 y^3 + xy + \sin{y}
+        \intertext{The general solution to the ODE is then:}
+        \psi(x, y) &= C \\
+        \Rightarrow x^2 y^3 + xy + \sin{y} &= C
+    \end{align*}
+
+    We can verify our answer by computing from the other direction:
+    \begin{align*}
+        \psi(x, y) &= \int N(x, y) \, dy \\
+        &= \int (3x^2 y^2 + x + \cos{y}) \, dy \\
+        &= x^2 y^3 + xy + \sin{y} + h(x)
+        \intertext{To find \( h(x) \), we compute:}
+        \frac{\partial \psi}{\partial x} &= 2x y^3 + y + h'(x) \\
+        &= M(x, y) = 2xy^3 + y \\
+        \Rightarrow h'(x) &= 0 \\
+        \Rightarrow h(x) &= C'
+        \intertext{Thus, we obtain the same potential function:}
+        \psi(x, y) &= x^2 y^3 + xy + \sin{y} + C'
+    \end{align*}
+\end{example}
 
 
 \end{document}

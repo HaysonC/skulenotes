@@ -220,11 +220,11 @@ The up-to-date version of this document can be found at \url{https://github.com/
     \textbf{Intuition} When the integrand is difficult to integrate with respect to one variable, consider changing the order of integration. You should be able to tell that $e^{x^2}$ has no elementary antiderivative, so you would have ruled out integrating with respect to $x$ first.
 \end{example}
 
-\subsection{Formal Definition of Double Integrals}
+\subsubsection{Formal Definition of Double Integrals}
 There is two definitions of double integrals in this course, due to the discrepancy between Stewart's book and the lectures. 
 
 \begin{shaded}
-    \subsubsection*{\textbf{Review.  } Formal Definition of Definite Integral (Single Variable)}
+    \textbf{Review.  Formal Definition of Definite Integral (Single Variable)}
 
     Consider $y = f(x) \ge 0$ on the interval $x \in [a,b]$. We divide the interval into $n$ subintervals of equal width $\Delta x = \frac{b-a}{n}$, and let $x_i^*$ be a sample point in the $i$-th subinterval. The Riemann sum is given by:
     $$
@@ -280,7 +280,122 @@ There is two definitions of double integrals in this course, due to the discrepa
     The Riemann definition and grid formulation are similar.
 \end{definition}
 
+\begin{shaded}
+The following is the analogue of the squeeze theorem for double integrals:
+\begin{definition}[Squeeze Theorem for Double Integrals]
+    For the first defintion Consider region $R$ subdivided into $N$ subregions $R_1, R_2, \ldots, R_N$, such that all subregions $\bigcup_{i=1}^N R_i \subset R$ (They are all inside). For both cases, we require that $R_i \cap R_j = \emptyset$ for $i \neq j$, and then some of the area would be omited and the following would be garanteed:
+    $$
+        \sum_{i=1}^N \Delta A \le \text{Area}(R), \quad \sum_{i=1}^N m_i \Delta A_i \le \iint_R f(x,y) \, dA 
+    $$ 
+    where $m_i$ and $M_i$ are the minimum and maximum values of $f(x,y)$ in the $i$-th subregion. Similarly, if $\bigcup_{i=1}^N R_i \supset R$ (They all cover $R$), and that we garantee that $R_i \cap R \neq \emptyset$ for all $i$. Then, some of the area would be double counted and the following would be garanteed:
+    $$
+        \sum_{i=1}^N \Delta A \ge \text{Area}(R), \quad \sum_{i=1}^N M_i \Delta A_i \ge \iint_R f(x,y) \, dA
+    $$ 
+    For the second definition, the same logic applies, but we consider subrectangles that creates grid that is either inside or covering $R$.
+\end{definition}
+
+\end{shaded}
+\begin{example}
+    Estimate the volume that lies above the square $R = [0,2] \times [0,2]$ and below the surface $z = f(x,y) = 16 - x^2 - 2y^2$ by dividing the $R$ into four subrectangles of equal area and using the value of the function at the upper right corner of each subrectangle to form a Riemann sum. Choose the upper right corner of each subrectangle as the sample point.
+
+    We divide the square $R$ into four subrectangles, each with an area of 1. We obtain the sum:
+    $$
+        V \approx \sum_{i=1}^2 \sum_{j=1}^2 f(x_i^*,y_j^*) \Delta A = \sum_{i=1}^2 \sum_{j=1}^2 f(i,j) \cdot 1
+    $$
+    where the sample points are $(1,1)$, $(1,2)$, $(2,1)$, and $(2,2)$. Evaluating the function at these points gives:
+    $$
+        V \approx f(1,1) + f(1,2) + f(2,1) + f(2,2) = 34
+    $$
+    Therefore, the estimated volume is approximately 34.
+\end{example}
 
 
+\subsection{Double Integrals in Non-Rectangular Regions}
+
+\begin{theorem}[Change of Variable to Polar Coordinates]
+    Consider the double integral of a function $f(x,y)$ over a region $R$ in the $xy$-plane. If we change the variables from Cartesian coordinates $(x,y)$ to polar coordinates $(r,\theta)$ using the transformations:
+    $$
+        x = r \cos{\theta}, \quad y = r \sin{\theta} \implies r = \sqrt{x^2 + y^2}
+    $$
+    then the double integral can be expressed in polar coordinates as follows:
+    \begin{equation}
+        \iint_R f(x,y) \, dA = \iint_{R'} f(r \cos{\theta}, r \sin{\theta}) \, r \, dr \, d\theta
+    \end{equation}
+    where $R'$ is the corresponding region in the $r\theta$-plane, and the term $r$ arises from the Jacobian determinant of the transformation from Cartesian to polar coordinates.
+\end{theorem}
+\begin{proof}
+   \textbf{Note. } \textit{This change of variable can be derived using the Jacobian determinant of the transformation from Cartesian to polar coordinates, which will be covered in Section \ref{sec:change_of_variables}, which can fully prove this theorem in the case where $g < 0$ for some input.}
+
+   \textbf{Geometric Sketch: } Assume $f(r \cos{\theta}, r \sin{\theta}) = g(r, \theta) \ge 0$. Consider a small rectangle $\Delta A_i$ in the $xy$-plane with dimensions $\Delta x_i$ and $\Delta y_i$. When we transform this rectangle into polar coordinates, it becomes a small sector of a circle with radius $r_i$ and angle $\Delta \theta_i$. The area of this sector is given by:
+    $$
+          \Delta A_i = r_i \Delta r_i \Delta \theta_i  \left( 1 + \frac{\Delta r_i}{2r_i} \right)
+    $$
+    this is derived from the geormetric formula of the area of a sector of a circle. Then, as $\Delta r_i \to 0$, the term $\frac{\Delta r_i}{2r_i} \to 0$, and we have:
+    $$
+        \Delta A_i \approx r_i \Delta r_i \Delta \theta_i
+    $$
+    Therefore, the double integral in polar coordinates can be approximated as:
+    $$
+        \iint_R f(x,y) \, dA \approx \sum_{i=1}^n f(r_i \cos{\theta_i}, r_i \sin{\theta_i}) r_i \Delta r_i \Delta \theta_i
+    $$
+    Taking the limit as the maximum diameter of the subrectangles approaches zero, we obtain the exact double integral in polar coordinates.
+\end{proof}
+
+\begin{definition}[Reigion Defined by Varying $r$ with $\theta$]
+    Consider a region $R$ in the $xy$-plane that can be described in polar coordinates by the inequalities:
+    $$
+        \alpha \le \theta \le \beta, \quad g_1(\theta) \le r \le g_2(\theta)
+    $$
+    where $g_1(\theta)$ and $g_2(\theta)$ are continuous functions on the interval $[\alpha, \beta]$. Then, to evaluate the double integral over this region for a continuous function $f(x,y)$, we set up the integral as follows:
+    \begin{equation}
+        \iint_R f(x,y) \, dA = \int_\alpha^\beta \int_{g_1(\theta)}^{g_2(\theta)} f(r \cos{\theta}, r \sin{\theta}) \, r \, dr \, d\theta
+    \end{equation}
+\end{definition}
+
+\begin{definition}[Reigion Defined by Varying $\theta$ with $r$]
+    Similarly, consider a region $R$ in the $xy$-plane that can be described in polar coordinates by the inequalities:
+    $$
+        a \le r \le b, \quad h_1(r) \le \theta \le h_2(r)
+    $$
+    where $h_1(r)$ and $h_2(r)$ are continuous functions on the interval $[a, b]$. Then, to evaluate the double integral over this region for a continuous function $f(x,y)$, we set up the integral as follows:
+    \begin{equation}
+        \iint_R f(x,y) \, dA = \int_a^b \int_{h_1(r)}^{h_2(r)} f(r \cos{\theta}, r \sin{\theta}) \, r \, d\theta \, dr
+    \end{equation}
+\end{definition}
+
+\begin{shaded}
+    \textbf{When to Use Polar Coordinates}
+    
+    Polar coordinates are particularly useful for regions with circular or radial symmetry, as they simplify integration by transforming variables into a more natural form. They are also advantageous for integrands that are difficult in Cartesian coordinates, especially those involving terms like $x^2 + y^2$.
+\end{shaded}
+
+\begin{example}
+    Evaluate $\iint_R (3x + 4y^2) \, dA$, where $R$ is the region in the upper half-plane bounded by the circles $x^2 + y^2 = 4$ and $x^2 + y^2 = 1$ (Donut region).
+    We can describe the region $R$ in polar coordinates as $1 \le r \le 2$ and $0 \le \theta \le \pi$. Thus, we can set up the double integral as follows:
+    \begin{align*}
+        \iint_R (3x + 4y^2) \, dA &= \int_0^\pi \int_1^2 (3(r \cos{\theta}) + 4(r \sin{\theta})^2) \, r \, dr \, d\theta \\
+        &= \int_0^\pi \int_1^2 (3r^2 \cos{\theta} + 4r^3 \sin^2{\theta}) \, dr \, d\theta \\
+        &= \int_0^\pi (r^3\cos \theta + r^4 \sin^2 \theta) \Big|_{r=1}^{r=2} \, d\theta \\
+        &= \int_0^\pi (7\cos \theta + 15 \sin^2 \theta) \, d\theta = \frac{15}{2} \pi \quad \left(\text{Using } \sin^2 \theta = \frac{1 - \cos 2\theta}{2}\right)
+    \end{align*}
+\end{example}
+
+\begin{example}
+    Find the volume of the solid bounded by the $z=0$ plane and the paraboloid $z = 1 - x^2 - y^2$. We first consider the projection of the paraboloid onto the $xy$-plane, which is the circle $1 - x^2 - y^2 = 0$. We can describe the region $R$ in polar coordinates as $0 \le r \le 1$ and $0 \le \theta \le 2\pi$. Thus, we can set up the double integral as follows:
+    \begin{align*}
+        V &= \iint_R (1 - x^2 - y^2) \, dA \\
+        &= \int_0^{2\pi} \int_0^1 (1 - r^2) \, r \, dr \, d\theta \\
+        &= \int_0^{2\pi} \left( \int_0^1 (r - r^3) \, dr \right) d\theta \\
+        &= \int_0^{2\pi} \left( \frac{1}{2} - \frac{1}{4} \right) d\theta  = \frac{\pi}{2}
+    \end{align*}
+\end{example}
+
+\subsection{Applications of Double Integrals}
+\subsection{Surface Area}
+
+\subsection{Triple Integrals in Rectangular Coordinates}
+\subsection{Triple Integrals in Cylindrical Coordinates}
+\subsection{Triple Integrals in Spherical Coordinates}
+\subsection{Change of Variables in Multiple Integrals} \label{sec:change_of_variables}
 \chapter{Fluid Mechanics}
 \end{document}

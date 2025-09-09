@@ -142,7 +142,7 @@ This begs the question, can we create a heat engine with 100\% efficiency (i.e.,
 \paragraph{Irreversibility and Spontaneity} The process of losing heat is spontaneous and irreversible. Once heat is lost to the cooler surroundings, it cannot be completely recovered and converted back into work, however, the process of bringing heat from a cooler body to a hotter body is non-spontaneous and requires external work (e.g., a refrigerator). These give rise to the concept of irreversibility in thermodynamic processes, from the laws of thermodynamics.
 
 The first law of thermodynamics is simple and easy to understand:
-\begin{definition}[First Law of Thermodynamics]
+\begin{definition}[First Law of Thermodynamics] \label{def:firstlaw}
     The first law of thermodynamics states that energy cannot be created or destroyed, only transformed from one form to another. In the context of a heat engine, this means that the work output ($W$) is equal to the heat input ($Q_H$) minus the heat rejected ($Q_C$):
     \begin{equation}
         W = Q_H - Q_C
@@ -164,13 +164,7 @@ The second law formalizes the concept of the directionality of thermodynamic pro
     Since $Q_C = Q_H$ in a closed system and $T_H > T_C$, we have $\Delta S > 0$.
 \end{definition}
 
-\subsection{Modeling Ideal Gas}
-\begin{definition}[Ideal Gas]
-    We consider ideal gas conditions as those where the gas particles do not interact with each other except during elastic collisions, and the volume of the gas particles themselves is negligible compared to the volume of the container. In this course, we consider 1 atm as the threshold for ideal gas behavior. Of course, ideal gas obey the ideal gas law:
-    \begin{equation}
-        PV = nRT
-    \end{equation}
-\end{definition}
+
 
 \subsection{Systems and States}
 \begin{definition}[System]
@@ -258,6 +252,227 @@ Here's a quick refresher on line integrals and basic math:
 \begin{definition}[Process]
     A process is a transformation from one state to another. A process can be described by the path taken by the system in the property space. For example, a gas can undergo a process of compression or expansion, which changes its pressure, volume, and temperature.
 \end{definition}
+
+\subsection{Modeling Ideal Gas}
+\begin{definition}[Quasi-Equilibrium Process (Reversible Path)]
+    A quasi-equilibrium process is a process that occurs slowly enough that the system remains in a state of equilibrium at all times. In other words, the properties of the system change so (infinitely) slowly that they can be considered constant during the process. In this case, this path is reversible. \\
+    (Example) A gas in a cylinder with a movable piston that is compressed or expanded very slowly, allowing the gas to remain in equilibrium throughout the process.
+\end{definition}
+
+\begin{definition}[Real Process (Irreversible Path)]
+    A real process is a process that occurs at a finite rate, and the system may not remain in a state of equilibrium at all times. In other words, the properties of the system may change rapidly during the process, and the system may not be able to adjust to these changes quickly enough to maintain equilibrium. In this case, this path is irreversible. \\
+    (Example) A gas in a cylinder with a movable piston that is compressed or expanded quickly, causing the gas to deviate from equilibrium during the process. In that process, the work done is more than that of a quasi-equilibrium process.
+\end{definition}
+
+\begin{shaded}
+\paragraph{Motivation} We care about this because this is the process in which we ignite an engine, allowing gas to expand rapidly, pushing the piston down and doing work.
+\end{shaded}
+
+\begin{definition}[Ideal Gas Model]
+    Consider an isolated system with molecules that:
+    \begin{itemize}
+        \item Have negligible volume compared to the volume of the container. (point mass)
+        \item Do not interact with each other except during elastic collisions.
+        \item Are in constant random motion without spin or vibration.
+    \end{itemize}
+    The best example of this is a noble gas (e.g., helium, neon, argon). Since they are inert and monoatomic. For all we care about in this course all gas are ideal unless:
+    \begin{itemize}
+        \item They are at very high pressure (Condier more then 1 atm).
+        \item They are at very low temperature (Consider close to 0 K).
+    \end{itemize}
+\end{definition}
+
+Such a system is called an ideal gas. The macroscopic observation of pressure is the average force per unit area exerted by the gas molecules colliding with the walls of the container, so if we increase the number of molecules or decrease the volume, the pressure increases proportionally, this is Boyle's law:
+
+\begin{definition}[Boyle's Law]
+    For a given amount of gas at constant temperature, the pressure of the gas is inversely proportional to its volume:
+    \begin{equation}
+        P \propto \frac{1}{V} \quad \Rightarrow \quad PV = \text{constant}
+    \end{equation}
+    where $N$ is the number of molecules. We can proof the $PV$ inverse relationship a momentum conservation argument. Consider linear path with lenght $L$, since collisions are elastic, the change in momentum for each collision is $\Delta p = 2mv_x$. The time between collisions is $\Delta t = \frac{2L}{v_x}$, so the force exerted on the wall is:
+    $$
+        F = \frac{\Delta p}{\Delta t} = \frac{2mv_x}{\frac{2L}{v_x}} = \frac{mv_x^2}{L}
+    $$
+    The pressure is then given by:
+    $$
+        P = \frac{F}{A} = \frac{mv_x^2}{AL} = \frac{mv_x^2}{V}
+    $$
+    Thus, we have $PV \propto mv_x^2$. Now, define the RMS velocity as $v_{rms} = \sqrt{\frac{1}{N} \sum_{i=1}^N v_i^2}$, and consider random motion, we have $\overline{v_x^2} = \overline{v_y^2} = \overline{v_z^2} = \frac{1}{3} v_{rms}^2$. Hence, we have:
+    $$
+        PV \propto Nm \overline{v_x^2} = \frac{1}{3} Nm v_{rms}^2
+    $$
+    where $Nm$ is the total mass of the gas. Then, we complete the arguement of the gas moving in all direction.
+\end{definition}
+
+\begin{example}[Boyle's Law]
+    Consider a gas in a cylinder with a movable piston. If we compress the gas by pushing the piston down, the volume of the gas decreases, and the pressure increases. This relationship is described by Boyle's law, which states that for a given amount of gas at constant temperature, the pressure of the gas is inversely proportional to its volume:
+\end{example}
+
+We can also observe that increasing the temperature increases the average kinetic energy of the molecules, which increases the frequency and force of collisions with the walls of the container, leading to an increase in pressure, this is Charles's law:
+\begin{definition}[Charles's Law, Total Internal Energy]
+    For a given amount of gas at constant volume, the pressure of the gas is directly proportional to its absolute temperature:
+    \begin{equation}
+        P \propto T
+    \end{equation}
+    And the total internal energy of an ideal gas is the sum of the kinetic energies of all the gas molecules, which is also directly proportional to its absolute temperature:
+    \begin{equation}
+        U = \frac{3}{2} N k_B T = \frac{3}{2} n R_u T
+    \end{equation}
+    $U$ is a extensive property, so it is proportional to the number of molecules $N$ (or moles $n$). The intensive property is the specific internal energy:
+    \begin{equation}
+        u = \frac{U}{m} = \frac{3}{2} \frac{R_u}{M} T = \frac{3}{2} R T
+    \end{equation}
+    where $M$ is the molar mass of the gas, and
+    \begin{equation}
+        R = \frac{R_u}{M}
+    \end{equation}
+    is the specific gas constant.
+
+    This is a consequence of the kinetic theory of gases, which model temperature as the average kinetic energy of the gas molecules, so we have:
+    \begin{align*}
+        \frac{1}{2} mv_{rms}^2 &= \frac{3}{2} R_u T \\
+        \intertext{Dividing by $N_A$ (Avogadro's number), and define the boltzmann constant $k_B = \frac{R_u}{N_A}$, we have:}
+        \frac{1}{2} m_e v_{rms}^2 &= \frac{3}{2} k_B T 
+        \intertext{We multiply both sides by $N$ (number of molecules), and substitute into the previous equation, we have:}
+        \frac{1}{2} m_e v_{rms}^2 N &= \frac{3}{2} k_B T N \\
+    \end{align*}
+    The above is the internal energy of the gas. Thus, we can deduce the following Ideal Gas Law, which matches macroscopic observations:
+\end{definition}
+
+\begin{definition}[Ideal Gas Law]
+    Consider the combination of Boyle's and Charles's law, we have the ideal gas law:
+    \begin{equation}
+        PV = nR_uT = mRT
+    \end{equation}
+    where $R_u = 8.314\, \text{J/(mol K)}$ (or, equivalently, $R_u = 8 \times 10^3 \, \text{J/(kmol K)}$) is the universal gas constant, and $n$ is the number of moles of gas. $R = \frac{R_u}{M}$ is the specific gas constant, where $M$ is the molar mass of the gas.
+\end{definition}
+
+\begin{example}
+    \textit{A spherical balloon with $d = 6\, m$ is filled with helium gas at $P = 200$ kPa and $T = 20^\circ C$. Calculate the mass and number of moles of helium in the balloon. (Assume ideal gas behavior).}
+
+    We can use the ideal gas law to solve this problem. First, we need to calculate the volume of the balloon:
+    $$        
+    V = \frac{4}{3} \pi r^3 = \frac{4}{3} \pi (3)^3 = 113.1\, \text{m}^3
+    $$
+    Next, we can use the ideal gas law to calculate the number of moles of helium in the balloon:
+    $$
+        n = \frac{PV}{R_uT} = \frac{200 \times 10^3 \times 113.1}{8.314 \times (20 + 273)} = 9\,280\, \text{mol}
+    $$
+    Finally, we can calculate the mass of helium in the balloon using the molar mass of helium ($M = 4\, \text{g/mol}$):
+    $$
+        m = nM = 9\,280 \times 4  = 37\,120\, \text{g} = 37.12\, \text{kg}
+    $$
+\end{example}
+
+\begin{example}[Adiabatic Compression]
+    Consider an ideal gas undergoing adiabatic compression\footnote{This differs from \textbf{isothermal} compression, where the temperature remains constant.}. 
+    Since no heat is exchanged with the surroundings ($Q=0$), the work done on the gas increases its internal energy, which raises the temperature. 
+    Using the adiabatic relations,
+    $$
+        P V^{\gamma} = \text{constant}, 
+        \quad T V^{\gamma - 1} = \text{constant},
+    $$
+    we see that a decrease in $V$ leads to an increase in both $P$ and $T$.
+\end{example}
+
+\begin{example}[Isothermal Expansion]
+    Consider an ideal gas undergoing isothermal expansion\footnote{This differs from \textbf{adiabatic} expansion, where no heat is exchanged.}. 
+    Since the temperature remains constant ($\Delta T = 0$), the internal energy of the gas does not change ($\Delta U = 0$). 
+    The work done by the gas during expansion is equal to the heat absorbed from the surroundings ($Q = W$). 
+    Using the ideal gas law, we can see that as $V$ increases, $P$ decreases, while $T$ remains constant.
+    
+\end{example}
+
+\paragraph{Note} For all ideal gas processes, the internal energy $U$ depends only on temperature $T$, not on pressure $P$ or volume $V$. This is a key property of ideal gases and simplifies the analysis of thermodynamic processes involving them.
+
+\begin{definition}[Change in Internal Energy]
+    The change in internal energy of an ideal gas can be calculated using the specific heat capacity at constant volume ($c_v$):
+    \begin{equation}
+        \Delta U = \frac{3}{2} mk_B \Delta T = m c_v \Delta T
+    \end{equation}
+    where $c_v$ [J kg$^{-1}$ K$^{-1}$] is the specific heat capacity at constant volume. For a monoatomic ideal gas, we have:
+    \begin{equation}
+        c_v = \frac{3}{2} R
+    \end{equation}
+    where $R$ is the specific gas constant.
+\end{definition}
+
+\begin{example}
+    \textit{How much energy is required to heat 10kg of air with 20$^\circ$C at 1 bar to 120$^\circ$ at constant volume? What is the final pressure? (Assume ideal gas behavior, and $c_{v, \text{air}} = 0.717$ kJ/kg K)}
+
+    Consider the change of internal energy:
+    $$
+        \Delta U = m c_v \Delta T = 10 \times 100 \times c_{v, \text{air}} = 1\,000 \times 0.717 = 717\, \text{kJ}
+    $$
+
+    Now consider the change of pressure, we first isolate for the control:
+    $$
+        \frac{mR}{V} = \frac{P}{T}
+    $$
+    So we can compute the final pressure:
+    $$
+        \frac{P_1}{T_1} = \frac{P_2}{T_2} \Rightarrow P_2 = P_1 \frac{T_2}{T_1} = 1 \times \frac{393}{293} = 1.34\, \text{bar}
+    $$
+\end{example}
+
+\section{First Law of Thermodynamics}
+\begin{shaded}
+\paragraph{Motivation} We want to understand how energy is conserved in a system, and how energy is transferred between a system and its surroundings. This is important for understanding how engines work, how to design efficient systems, and how to analyze thermodynamic processes.
+\end{shaded}  
+The same definition as before \ref{def:firstlaw}.
+
+\begin{definition}[First Law of Thermodynamics for a Closed or Isolated System]
+    For a closed system, the energy balance can be expressed as:
+    \begin{equation}
+        \Delta E_{in} - \Delta E_{out} = \Delta E_{system}
+    \end{equation}
+    where $\Delta E_{in}$ is the energy entering the system, $\Delta E_{out}$ is the energy leaving the system, and $\Delta E_{system}$ is the change in energy of the system. The total energy of the system can be expressed as:
+    \begin{equation}
+        E_{system} = U + KE + PE
+    \end{equation}
+    where $U$ is the internal energy, $KE$ is the kinetic energy, and $PE$ is the potential energy.
+\end{definition}
+
+\paragraph{Sign Convention} Relative to a system, we adopt the following sign convention:
+\begin{itemize}
+    \item Energy transfer to the system is positive.
+    \item Energy transfer from the system is negative.
+\end{itemize}
+
+\begin{definition}[Energy Transfer from a System]
+    The energy transfer from a system can occur in two ways: heat transfer ($Q$) and work transfer ($W$). The first law of thermodynamics can be expressed as:
+    \begin{equation}
+        dE = \delta Q + \delta W
+    \end{equation}
+\end{definition}
+
+Dividing by $dt$, we have the rate form of the first law:
+\begin{definition}[Rate Equation of the First Law of Thermodynamics]
+    \begin{equation}
+        \frac{dE}{dt} = \dot{Q} + \dot{W}
+    \end{equation}
+    where $\dot{Q}$ is the rate of heat transfer, and $\dot{W}$ is the rate of work transfer.
+\end{definition}
+
+\subsection{Work Modes}
+\begin{definition}[Boundry Work]
+    Force acts on the boundries of a systems and deformes them. \\
+    (Example) Expansion and compression of a gas 
+
+    Assuming for a Quaso-equilibrium process, and no friction, we can compute the boundary work as:
+    \begin{equation}
+        \delta W = F dx  = P A dx = - P dV
+    \end{equation}
+    where $P$ is the pressure of the gas, $A$ is the area of the piston, and $dx$ is the displacement of the piston. The negative sign is because when the gas expands, it does work on the surroundings, so the work done by the system is negative. Also, we can consider the total work by:
+    \begin{equation}
+        w_{12} = -\int_{V_1}^{V_2} P dV
+    \end{equation}
+    \text{Note} Connecting that to the $PV$ diagram, the work done by the system is the area under the curve in the $PV$ diagram.
+\end{definition}
+
+
+
+
 \chapter{Heat Transfer}
 
 \end{document}

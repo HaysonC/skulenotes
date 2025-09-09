@@ -26,16 +26,16 @@ The up-to-date version of this document can be found at \url{https://github.com/
 
 \begin{definition}[Damped Harmonic Oscillator]
     A damped harmonic oscillator is described by the following differential equation, by adding a damping term proportional to $\dot{x}$ to the simple harmonic oscillator equation:
-    \begin{equation}
-        m \frac{d^2 x}{dt^2} + \gamma \frac{dx}{dt} + kx = 0   
+    \begin{equation} \label{eq:damped_ho}
+        m \frac{d^2 x}{dt^2} + b \frac{dx}{dt} + kx = 0   
     \end{equation}
-    where \( \gamma \) is the damping coefficient.
+    where \( b \) is the damping coefficient.
 \end{definition}
 
 \begin{definition}[Driven Harmonic Oscillator]
     A driven harmonic oscillator is described by the following differential equation, which includes an external driving force $F(t)$:
     \begin{equation}
-        m \frac{d^2 x}{dt^2} + \gamma \frac{dx}{dt} + kx = F(t)   
+        m \frac{d^2 x}{dt^2} + b \frac{dx}{dt} + kx = F(t)   
     \end{equation}
 \end{definition}
 \subsection{The Wave Equation}
@@ -99,36 +99,41 @@ The up-to-date version of this document can be found at \url{https://github.com/
     x(t) = -0.207 \cos(4.28 t) - 0.311 \sin(4.28 t)
     $$
 \end{example}
-
-\begin{theorem}[A Trigonometric Identity] We can also express the solution in a more compact form using a single cosine function with a phase shift:
+\begin{theorem}[A Trigonometric Identity]
+We can also express the solution in a more compact form using a single cosine function with a phase shift:
 \begin{equation}
     x(t) = A \cos(\omega t + \phi)
 \end{equation}
-where:
+where
 \begin{subequations}
-    \begin{equation}
-        A = \sqrt{A_1^2 + A_2^2}
-    \end{equation}
-    \begin{equation}
-        \phi = \tan^{-1}\left(\frac{A_2}{A_1}\right) = \tan^{-1}\left(\frac{-v(0)/\omega}{x(0)}\right)
-    \end{equation}
+    \begin{align}
+        A &= \sqrt{A_1^2 + A_2^2}, \\
+        \phi &= \arctan\!\left(\frac{-A_2}{A_1}\right) 
+              = \arctan\!\left(\frac{-v(0)/\omega}{x(0)}\right).
+    \end{align}
 \end{subequations}
 \end{theorem}
+
 \begin{proof}
-    Let $A = \sqrt{A_1^2 + A_2^2}$ and some $\phi$ such that $\cos(\phi) = \frac{A_1}{A}$ and $\sin(\phi) = \frac{A_2}{A}$. Then, we can rewrite our original solution as:
-    \begin{align*}
-        x(t) &= A_1 \cos(\omega t) + A_2 \sin(\omega t) \\
-        &= A \cos(\phi) \cos(\omega t) + A \sin(\phi) \sin(\omega t) \\
-        &= A [\cos(\phi) \cos(\omega t) + \sin(\phi) \sin(\omega t)] \\ 
-        &= A \cos(\omega t - (-\phi)) \qquad \text{(by the cosine addition formula)} \\
-        &= A \cos(\omega t + \phi)
-    \end{align*}
+Let $A = \sqrt{A_1^2 + A_2^2}$ and choose $\phi$ such that 
+\[
+\cos(\phi) = \frac{A_1}{A}, \qquad \sin(\phi) = -\frac{A_2}{A}.
+\]
+Then, we can rewrite our original solution as
+\begin{align*}
+    x(t) &= A_1 \cos(\omega t) - A_2 \sin(\omega t) \\
+         &= A \cos(\phi) \cos(\omega t) - A \sin(\phi) \sin(\omega t) \\
+         &= A \big[\cos(\phi)\cos(\omega t) - \sin(\phi)\sin(\omega t)\big] \\ 
+         &= A \cos(\omega t + \phi),
+\end{align*}
+by the cosine addition formula.
 \end{proof}
+
 \begin{example}
     To determine the amplitude \(A\) and phase constant \(\phi\) for the oscillator in the previous example, we can use the values of \(A_1\) and \(A_2\) we found:
     \begin{align*}
         A &= \sqrt{(-0.207)^2 + (-0.311)^2} \approx 0.374\ \mathrm{m} \\
-        \phi &= \tan^{-1}\left(\frac{-0.311}{-0.207}\right) \approx 0.982 \pm n\pi \approx 4.12\ \mathrm{rad} \quad (n=1, \text{since both } A_1, A_2 < 0)
+        \phi &= \arctan\!\left(\frac{-(-0.311)}{-0.207}\right) \approx 4.12\ \mathrm{rad} \quad (\text{since } A_1 < 0 \text{ and } A_2 < 0)
     \end{align*}
     Therefore, the equation describing the position \(x(t)\) of the oscillator as a function of time can also be written as:
     $$
@@ -136,7 +141,91 @@ where:
     $$
 \end{example}
 
+\begin{definition}[The Energy of a Simple Harmonic Oscillator]
+    The total mechanical energy \(E\) of a simple harmonic oscillator is the sum of its kinetic energy \(K\) and potential energy \(U\). 
+    \begin{equation}
+        E = K + U
+    \end{equation}
+    First we consider the change of potential energy from a position $x_i$ to $x_f$, assuming the path is along the spring or the curve $C$ of the oscillator. The force exerted by the spring is given by Hooke's law, \( F = -kx \). The change in potential energy can be simply parametized and calculated as follows:
+    \begin{equation}
+        \Delta U = \int_C F\cdot ds = -\int_{x_i}^{x_f} F\,dx = \int_{x_i}^{x_f} kx\,dx = \left[\frac{1}{2}kx^2\right]_{x_i}^{x_f} = \frac{1}{2}k(x_f^2 - x_i^2)
+    \end{equation}
 
+    Therefore, the potential energy \(U\) at a position \(x\) (taking the reference point at \(x=0\)) is given by:
+    \begin{equation}
+        U(x) = \frac{1}{2}kx^2
+    \end{equation}
+
+    The kinetic energy \(K\) of the oscillator is given by:
+    \begin{equation}
+        K = \frac{1}{2}m\dot{x}^2
+    \end{equation}
+    Therefore, the total mechanical energy \(E\) of the simple harmonic oscillator is:
+    \begin{equation}
+        E = K + U = \frac{1}{2}m\dot{x}^2 + \frac{1}{2}kx^2
+    \end{equation}
+    The total mechanical energy \(E\) remains constant over time, as energy is conserved in the absence of non-conservative forces (like friction or air resistance).
+
+\end{definition}
+
+\subsection{Damped Harmonic Motion}
+\begin{definition}[Damped Harmonic Motion]
+    For small velocities, the drag force is approximately proportional to the velocity and acts in the opposite direction. This drag force can be modeled as \( F_d = -\gamma \dot{x} \), where \( \gamma \) is the damping coefficient. Including this drag force in the equation of motion for a harmonic oscillator leads to the damped harmonic oscillator equation (\ref{eq:damped_ho}). Which could be rewritten as:
+    \begin{equation}
+        \ddot{x} + \gamma \dot{x} + \omega_0^2 x = 0
+    \end{equation}
+    where \( \omega_0 = \sqrt{\frac{k}{m}} \) is the natural angular frequency of the undamped oscillator, and \( \gamma = \frac{b}{m} \) is the damping coefficient per unit mass.
+    
+    To skip the math, lets assume a solution of the form \( x(t) = e^{i\omega t} \), substituting into the differential equation gives us a formulation for \( \omega \):
+    \begin{align}
+        -\omega^2 - i\gamma\omega + \omega_0^2 &= 0 \nonumber \\
+        \omega &= -i\frac{\gamma}{2} \pm \sqrt{\omega_0^2 - \frac{\gamma^2}{4}} \label{eq:omega_damped}
+    \end{align}
+    Also, we can characterize the real and imaginary parts of \( \omega \) as:
+    \begin{subequations}
+        \begin{equation}
+            \omega_r = \mathrm{Re}(\omega) = \pm \sqrt{\omega_0^2 - \frac{\gamma^2}{4}}
+        \end{equation}
+        \begin{equation}
+            \omega_i = \mathrm{Im}(\omega) = -\frac{\gamma}{2}
+        \end{equation}
+    \end{subequations}
+    The general solution for the damped harmonic oscillator can be written as:
+    \begin{equation}
+        x(t) = \exp(\omega_i t) \exp(-i \omega_r t) = \exp\left(-\frac{\gamma}{2}t\right) \exp(\mp i \sqrt{\omega_0^2 - \frac{\gamma^2}{4}} t)
+    \end{equation}
+    \begin{subequations}
+    \begin{itemize}
+        \item \textbf{No Damping} (\( \gamma = 0 \)): The system behaves like a simple harmonic oscillator with angular frequency \( \omega_0 \). Given by:
+        \begin{equation}
+            z = \exp(-i\omega_0 t)
+        \end{equation}
+        \item \textbf{Underdamping} (\( 0 < \gamma < 2\omega_0 \)): The system oscillates with a gradually decreasing amplitude. The angular frequency of oscillation is given by \( \omega_r = \sqrt{\omega_0^2 - \frac{\gamma^2}{4}} \). Given by:
+        \begin{equation}
+            z = \exp\left(-\frac{\gamma}{2}t\right) \exp(-i \omega_r t)
+        \end{equation}
+        The trigonometric form of the solution is:
+        \begin{equation}
+            x(t) = A_0 \exp\left(-\frac{\gamma}{2}t\right) \cos(\omega_r t + \phi)
+        \end{equation}
+        where \( A_0 \) and \( \phi \) are constants determined by the initial conditions
+        From this, we can derive the following cases:
+        \item \textbf{Critical Damping} (\( \gamma = 2\omega_0 \)): The system returns to equilibrium as quickly as possible without oscillating. The solution is given by:
+        \begin{equation}
+            z = \exp(-\omega_0 t)
+        \end{equation}\
+        \item \textbf{Overdamping} (\( \gamma > 2\omega_0 \)): The system returns to equilibrium without oscillating, but more slowly than in the critically damped case. The solution is given by:
+        \begin{equation}
+            z = \exp\left(-\frac{\gamma}{2}t\right) \exp\left(\sqrt{\frac{\gamma^2}{4} - \omega_0^2} t\right)
+        \end{equation}
+        So the general solution is (the solution is via a substitution of $x(t) = e^{-\gamma t/2} f(t)$ into the differential equation, which resolves the ODE to a simple form):
+        \begin{equation}
+            x(t) = A_1 \exp\left[\left(-\frac{\gamma}{2} + \sqrt{\frac{\gamma^2}{4} - \omega_0^2}\right) t\right] + A_2 \exp\left[\left(-\frac{\gamma}{2} - \sqrt{\frac{\gamma^2}{4} - \omega_0^2}\right) t\right]
+        \end{equation}
+        where \( A_1 \) and \( A_2 \) are constants determined by the initial conditions.
+    \end{itemize}
+    \end{subequations}
+\end{definition}
 \chapter{Modern Physics}
 \end{document}
 
