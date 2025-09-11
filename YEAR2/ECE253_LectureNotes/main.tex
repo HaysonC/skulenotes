@@ -53,8 +53,7 @@ Logic gates are made out of transistors:
 
 \end{shaded}
 
-\section{Information Representation}
-
+\section{Logic Circuits}
 \subsection{Number Systems}
 \begin{definition}[Number System]
     A number system is a way of representing numbers using a set of symbols (digits) and a base (radix). The base determines the number of unique digits that can be used in the number system.
@@ -174,7 +173,6 @@ This could be summerize as the following logic:
     Therefore, the 2's complement of (10110010)$_2$ is (01001110)$_2$.
 \end{example}
 
-\section{Logic Circuits}
 \begin{definition}[Logic Function]
     A logic function $L: \{0,1\}^n \rightarrow \{0,1\}$ is a mathematical function that takes $n$ binary inputs and produces a single binary output based on a set of rules.
 \end{definition}
@@ -464,6 +462,113 @@ In addition, we have the following gates:
     \end{tabular}
     \caption{Commonly Used Logic Operators}
 \end{table}
+
+\subsection{Combinational Logic Circuits}
+
+\subsection{Sum of Products (SOP) Form}
+\begin{definition}[Literal]
+    A literal is a variable or its negation. For example, $A$ and $\overline{A}$ are literals.  A literal can be either true or false, and it represents a single value in a logical expression.
+
+\end{definition}
+
+\begin{definition}[Product Term]
+    A product term is a logical synonym for AND.
+\end{definition}
+
+\begin{definition}[Sum Term]
+    A sum term is a logical synonym for OR.
+\end{definition}
+
+\begin{definition}[Sum of Products (SOP) Form]
+    A logical expression is in sum of products (SOP) form if it is a sum of product terms. For example, the expression $AB + \overline{A}C + BC$ is in SOP form.
+\end{definition}
+
+\begin{definition}[Minterm]
+    A product term that evaluates to one for exactly one row of the truth table is called a minterm.
+\end{definition}
+\begin{example}[Minterm]
+    For a given truth table for $x_1, x_2, x_3$, the minterms are:
+    \begin{table}[h!]
+        \centering
+        \begin{tabular}{|c|c|c|c|}
+            \hline
+            $x_1$ & $x_2$ & $x_3$ & Minterm \\
+            \hline
+            0 & 0 & 0 & $m_0 = \overline{x_1}\overline{x_2}\overline{x_3}$ \\
+            0 & 0 & 1 & $m_1 = \overline{x_1}\overline{x_2}x_3$ \\
+            0 & 1 & 0 & $m_2 = \overline{x_1}x_2\overline{x_3}$ \\
+            0 & 1 & 1 & $m_3 = \overline{x_1}x_2x_3$ \\
+            1 & 0 & 0 & $m_4 = x_1\overline{x_2}\overline{x_3}$ \\
+            1 & 0 & 1 & $m_5 = x_1\overline{x_2}x_3$ \\
+            1 & 1 & 0 & $m_6 = x_1x_2\overline{x_3}$ \\
+            1 & 1 & 1 & $m_7 = x_1x_2x_3$ \\
+            \hline
+        \end{tabular}
+        \caption{Minterms for 3 Variables}
+        \label{tab:minterms}
+
+    \end{table}
+    \\
+    Note that each minterm corresponds to a unique combination of input values that produces an output of 1. To create the minterm, you would try to make every literal one.
+
+\end{example}
+
+\begin{definition}[Canonical SOP Form]
+    A logical expression is in canonical SOP form if it is a sum of minterms. 
+\end{definition}
+
+\subsection{Product of Sums (POS) Form}
+
+\begin{definition}[Product of Sums (POS) Form]
+    A logical expression is in product of sums (POS) form if it is a product of sum terms. For example, the expression $(A + B)(\overline{A} + C)(B + C)$ is in POS form.
+\end{definition}
+
+
+\begin{definition}[Maxterm]
+    A sum term that evaluates to zero for exactly one row of the truth table is called a maxterm.
+\end{definition}
+
+\begin{example}[Maxterm]
+    For a given truth table for $x_1, x_2, x_3$, the maxterms are:
+    \begin{table}[h!]
+        \centering
+        \begin{tabular}{|c|c|c|c|}
+            \hline
+            $x_1$ & $x_2$ & $x_3$ & Maxterm \\
+            \hline
+            0 & 0 & 0 & $M_0 = (x_1 + x_2 + x_3)$ \\
+            0 & 0 & 1 & $M_1 = (x_1 + x_2 + \overline{x_3})$ \\
+            0 & 1 & 0 & $M_2 = (x_1 + \overline{x_2} + x_3)$ \\
+            0 & 1 & 1 & $M_3 = (x_1 + \overline{x_2} + \overline{x_3})$ \\
+            1 & 0 & 0 & $M_4 = (\overline{x_1} + x_2 + x_3)$ \\
+            1 & 0 & 1 & $M_5 = (\overline{x_1} + x_2 + \overline{x_3})$ \\
+            1 & 1 & 0 & $M_6 = (\overline{x_1} + \overline{x_2} + x_3)$ \\
+            1 & 1 & 1 & $M_7 = (\overline{x_1} + \overline{x_2} + \overline{x_3})$ \\
+            \hline
+        \end{tabular}
+        \caption{Maxterms for 3 Variables}
+        \label{tab:maxterms}
+    \end{table}
+    \\
+    Note that each maxterm corresponds to a unique combination of input values that produces an output of 0. To create the maxterm, you would try to make every literal zero.
+\end{example}
+
+\begin{definition}[Canonical POS Form]
+    A logical expression is in canonical POS form if it is a product of maxterms.
+\end{definition}
+
+\begin{theorem}[Converting between Canonical Forms]
+    Any logical expression can be converted from canonical SOP form to canonical POS form and vice versa. For $i \in \{0, 1, \ldots, 2^n - 1\}$ and $S \subseteq \{0, 1, \ldots, 2^n - 1\}$, we have:
+    \[
+        f(x_1, x_2, \ldots, x_n) = \sum_{i \in S} m_i = \prod_{i \notin S} M_i
+    \]
+\end{theorem}
+\begin{example}
+    We have the following converison:
+    $$
+        f(x_1, x_2, x_3) = m_1 + m_3 + m_5 + m_7 = M_0 M_2 M_4 M_6
+    $$
+\end{example}
 
 \section{Digital Storage Elements}
 

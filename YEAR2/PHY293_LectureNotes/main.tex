@@ -121,7 +121,7 @@ Let $A = \sqrt{A_1^2 + A_2^2}$ and choose $\phi$ such that
 \]
 Then, we can rewrite our original solution as
 \begin{align*}
-    x(t) &= A_1 \cos(\omega t) - A_2 \sin(\omega t) \\
+    x(t) &= A_1 \cos(\omega t) + A_2 \sin(\omega t) \\
          &= A \cos(\phi) \cos(\omega t) - A \sin(\phi) \sin(\omega t) \\
          &= A \big[\cos(\phi)\cos(\omega t) - \sin(\phi)\sin(\omega t)\big] \\ 
          &= A \cos(\omega t + \phi),
@@ -210,10 +210,23 @@ by the cosine addition formula.
         \end{equation}
         where \( A_0 \) and \( \phi \) are constants determined by the initial conditions
         From this, we can derive the following cases:
-        \item \textbf{Critical Damping} (\( \gamma = 2\omega_0 \)): The system returns to equilibrium as quickly as possible without oscillating. The solution is given by:
+        \item \textbf{Critical Damping} (\( \gamma = 2\omega_0 \)): The system returns to equilibrium as quickly as possible without oscillating. Consider:
+        $$
+            x(t) = e^{-\frac{\gamma}{2}t}f(t)
+        $$
+        Inserting into the differential equation, we get:
+        $$
+            \ddot{f} + \left(\omega_0^2 - \frac{\gamma^2}{4}\right)f = 0
+        $$
+        Since \( \gamma = 2\omega_0 \), we have \( \omega_0^2 - \frac{\gamma^2}{4} = 0 \), leading to:
+        $$
+            \ddot{f} = 0 \implies f(t) = A_1 t + A_2
+        $$
+        Therefore, the general solution for the critically damped case is:
         \begin{equation}
-            z = \exp(-\omega_0 t)
-        \end{equation}\
+            x(t) = (A_1 t + A_2) \exp\left(-\frac{\gamma}{2}t\right)
+        \end{equation}
+        where \( A_1 \) and \( A_2 \) are constants determined by
         \item \textbf{Overdamping} (\( \gamma > 2\omega_0 \)): The system returns to equilibrium without oscillating, but more slowly than in the critically damped case. The solution is given by:
         \begin{equation}
             z = \exp\left(-\frac{\gamma}{2}t\right) \exp\left(\sqrt{\frac{\gamma^2}{4} - \omega_0^2} t\right)
@@ -225,6 +238,74 @@ by the cosine addition formula.
         where \( A_1 \) and \( A_2 \) are constants determined by the initial conditions.
     \end{itemize}
     \end{subequations}
+\end{definition}
+
+\subsection{Energy and Quality Factor}
+\begin{definition}[Energy of a Very Light Damping]
+    Consider a very lightly damped harmonic oscillator, where \( \gamma \ll \omega_0 \). In this case, the angular frequency of oscillation \( \omega_r \) can be approximated as:
+    $$
+    \omega_r \approx \omega_0 \left(1 - \frac{\gamma^2}{8\omega_0^2}\right) \approx \omega_0
+    $$
+    So the motion of the lightly damped oscillator can be approximated as:
+    $$
+    x(t) \approx A_0 e^{-\frac{\gamma}{2}t} \cos(\omega_0 t + \phi)
+    $$
+    Then, we can calculate the velocity of the oscillator:
+    \begin{align*}
+        \dot{x}(t) &= -\frac{\gamma}{2} A_0 e^{-\frac{\gamma}{2}t} \cos(\omega_0 t + \phi) - A_0 \omega_0 e^{-\frac{\gamma}{2}t} \sin(\omega_0 t + \phi) \\
+        &= A_0 \omega_0 e^{-\frac{\gamma}{2}t} \left(-\frac{\gamma}{2\omega_0} \cos(\omega_0 t + \phi) - \sin(\omega_0 t + \phi)\right)
+    \end{align*}
+    The total mechanical energy \( E(t) \) of the lightly damped oscillator is given by:
+    \begin{align*}
+        E(t) &= \frac{1}{2}m\dot{x}^2 + \frac{1}{2}kx^2 \\
+             &= \frac{1}{2}m \left[A_0 \omega_0 e^{-\frac{\gamma}{2}t} \left(-\frac{\gamma}{2\omega_0} \cos(\omega_0 t + \phi) - \sin(\omega_0 t + \phi)\right)\right]^2 + \frac{1}{2}k \left[A_0 e^{-\frac{\gamma}{2}t} \cos(\omega_0 t + \phi)\right]^2 \\
+             &= \frac{1}{2}m A_0^2 \omega_0^2 e^{-\gamma t} \left[\left(-\frac{\gamma}{2\omega_0} \cos(\omega_0 t + \phi) - \sin(\omega_0 t + \phi)\right)^2 + \cos^2(\omega_0 t + \phi)\right] \\
+             &= \frac{1}{2}m A_0^2 \omega_0^2 e^{-\gamma t} \left[\sin^2(\omega_0 t + \phi) + \cos^2(\omega_0 t + \phi) + \frac{\gamma^2}{4\omega_0^2} \cos^2(\omega_0 t + \phi) + \frac{\gamma}{\omega_0} \sin(\omega_0 t + \phi) \cos(\omega_0 t + \phi)\right] \\
+             &\approx \frac{1}{2}m A_0^2 \omega_0^2 e^{-\gamma t} \left[1 + \frac{\gamma^2}{4\omega_0^2} \cos^2(\omega_0 t + \phi)\right] \quad (\text{neglecting the small term } \frac{\gamma}{\omega_0} \sin(\omega_0 t + \phi) \cos(\omega_0 t + \phi)) \\
+             &\approx \frac{1}{2}m A_0^2 \omega_0^2 e^{-\gamma t} \quad (\text{since } \frac{\gamma^2}{4\omega_0^2} \text{ is very small}) \\
+             &= E_0 e^{-\gamma t} \quad \text{where } E_0 = \frac{1}{2}m A_0^2 \omega_0^2 \text{ is the initial energy at } t=0
+    \end{align*}
+    We can also define the time constant \( \tau \) as the time it takes for the energy to decrease to \( \frac{1}{e} \) of its initial value:
+    \begin{equation}
+        \tau = \frac{1}{\gamma}
+    \end{equation}
+    So we have, for very light damping:
+    \begin{equation}
+        E(t) = E_0 e^{-\frac{t}{\tau}}
+    \end{equation}
+\end{definition}
+
+\begin{definition}[Rate of Energy Loss]
+    Taking the time derivative of the total mechanical energy \( E(t) \):
+    \begin{align*}
+        \frac{dE}{dt} &= \frac{d}{dt} \left(\frac{1}{2}m\dot{x}^2 + \frac{1}{2}kx^2 \right) \\
+                      &= (ma + kx)\dot{x} \\
+    \end{align*}
+    For a undamped harmonic oscillator, \( ma + kx = 0 \), so \( \frac{dE}{dt} = 0 \), indicating that the total mechanical energy is conserved and obeys Hooke's law completely. However, for a damped harmonic oscillator, \( ma + kx = -b\dot{x} \), leading to:
+    \begin{equation}
+        \frac{dE}{dt} = -b\dot{x}^2
+    \end{equation}
+\end{definition}
+
+\begin{definition}[Quality Factor (Q-Factor)]
+    The quality factor \( Q \) is a dimensionless parameter that characterizes the damping of a harmonic oscillator. It is defined as:
+    \begin{subequations}
+    \begin{equation}
+        Q = \frac{\omega}{\gamma} = \omega \tau
+    \end{equation}
+    And for very light damping, we can approximate \( \omega \approx \omega_0 \), leading to:
+    \begin{equation}
+        Q \approx \frac{\omega_0}{\gamma} = \omega_0 \tau
+    \end{equation}
+    \end{subequations}
+    This allows us to rewrite the equation of a damped harmonic oscillator as:
+    \begin{equation}
+        \ddot{x} + \frac{\omega_0}{Q} \dot{x} + \omega_0^2 x = 0
+    \end{equation}
+    and:
+    \begin{equation}
+        \omega = \omega_0 \sqrt{1 - \frac{1}{4Q^2}}
+    \end{equation}
 \end{definition}
 \chapter{Modern Physics}
 \end{document}
