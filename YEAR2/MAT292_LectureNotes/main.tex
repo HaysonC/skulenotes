@@ -208,6 +208,7 @@ You might have observed that:
     A phase portrait is a graphical representation of the trajectories of a dynamical system in the phase plane. Each point in the phase plane corresponds to a unique state of the system, and the trajectories represent the evolution of the system over time. Phase portraits are useful for visualizing the behavior of systems of ODEs, particularly in understanding stability and equilibrium points.
 \end{definition}
 
+\section{Qualitative Analysis of ODEs}
 \subsection{Fixed Points}
 
 We first consider the autonomous system:
@@ -524,7 +525,7 @@ This is essentially the same idea as the integrating factor method.
     \end{itemize}
     Thus, the fixed point at \( x = 0 \) is unstable, while the fixed point at \( x = 1 \) is stable.
 \end{example}
-\subsubsection{Integrating Factor Method for First-Order Linear ODEs}
+\subsubsection{First-Order Linear ODEs - Integrating Factor Method}
 \begin{definition}[First-Order Linear ODE]
     A first-order linear ordinary differential equation (ODE) is an equation of the form:
     \begin{equation}
@@ -685,6 +686,303 @@ This is essentially the same idea as the integrating factor method.
         \psi(x, y) &= x^2 y^3 + xy + \sin{y} + C'
     \end{align*}
 \end{example}
+
+\subsection{Bifurcations}
+\begin{definition}[Bifurcation]
+    A bifurcation in a dynamical system occurs when a small change in the system's parameters causes a sudden qualitative change in its behavior.
+
+    This can lead to the emergence or disappearance of fixed points, changes in stability, or the onset of periodic or chaotic behavior.
+\end{definition}
+
+\begin{definition}[Bifurcation Point]
+    A bifurcation point is a specific value of a parameter in a dynamical system at which the qualitative behavior of the system changes. At this point, the system may undergo a bifurcation, leading to changes in the number or stability of fixed points, periodic orbits, or other dynamical features.
+    
+\end{definition}
+
+\paragraph{Types of Bifurcations} There are several common types of bifurcations in dynamical systems, including:
+    \begin{itemize}
+        \item Saddle-Node Bifurcation: Two fixed points (one stable and one unstable) collide and annihilate each other as a parameter is varied.
+        \item Transcritical Bifurcation: Two fixed points exchange their stability as a parameter is varied.
+        \item Pitchfork Bifurcation: A single fixed point splits into three fixed points (one stable and two unstable, or vice versa) as a parameter is varied.
+        \item Hopf Bifurcation: A fixed point loses stability and a small amplitude limit cycle (periodic orbit) emerges as a parameter is varied.
+    \end{itemize}
+
+\begin{example}
+    Consider the ODE:
+    $$
+    x' = ax(1 - x)
+    $$
+    This is a classic example of a bifurcation scenario, where the behavior of the system changes qualitatively as the parameter \(a\) is varied. Consider the fix points of the system:
+    $$
+    x^* = 0, \quad x^* = 1
+    $$
+    So, we have:
+    \begin{itemize}
+        \item For \( a < 0 \):
+        \begin{itemize}
+            \item \( x^* = 0 \) is stable (since \( f'(0) = a < 0 \))
+            \item \( x^* = 1 \) is unstable (since \( f'(1) = -a > 0 \))
+        \end{itemize}
+        \item For \( a > 0 \):
+        \begin{itemize}
+            \item \( x^* = 0 \) is unstable (since \( f'(0) = a > 0 \))
+            \item \( x^* = 1 \) is stable (since \( f'(1) = -a < 0 \))
+        \end{itemize}
+        \item For \( a = 0 \):
+        \begin{itemize}
+            \item Both \( x^* = 0 \) and \( x^* = 1 \) are semi-stable (since \( f'(0) = 0 \) and \( f'(1) = 0 \))
+        \end{itemize}
+        This indicates a bifurcation at \( a = 0 \), where the stability of the fixed points changes.
+    \end{itemize}
+\end{example}
+
+
+\begin{example}[Saddle-Node Bifurcation] \label{ex:bifurcation-saddle-node}
+    Consider the ODE:
+    $$
+    x' = x^2 + a
+    $$
+    This equation has a family of fixed points given by:
+    $$
+    x^* = \pm\sqrt{-a}
+    $$
+    For \( a < 0 \), we have two real fixed points, while for \( a > 0 \), there are no real fixed points. At \( a = 0 \), the fixed points collide and disappear, indicating a bifurcation point at \( a = 0 \).
+\end{example}
+
+\begin{definition}[Bifurcation Diagram]
+    A bifurcation diagram is a visual representation that illustrates how the fixed points of a dynamical system change as a parameter is varied.
+
+    It is a plot of the fixed points against the parameter, showing regions of stability and instability, and we denote stable fixed points with solid lines and unstable fixed points with dashed lines. A bifurcation diagram of Example \ref{ex:bifurcation-saddle-node} is shown below:
+    \begin{figure}[h!]
+        \centering
+        \begin{tikzpicture}
+            \begin{axis}[
+                axis lines = middle,
+                xlabel = \( a \),
+                ylabel = \( x^* \),
+                ymin = -2, ymax = 2,
+                xmin = -2, xmax = 2,
+                domain=-2:2,
+                samples=100,
+                width=10cm,
+                height=6cm,
+                grid=both,
+                minor tick num=1,
+                major grid style={line width=.2pt,draw=gray!50},
+                minor grid style={line width=.1pt,draw=gray!20},
+            ]
+            % Stable fixed points
+            \addplot[blue, thick] {-sqrt(-x)}; % Stable branch
+            \addplot[red, dashed, thick] {sqrt(-x)}; % Stable branch
+            
+            % Bifurcation point
+            \node at (axis cs:0,0) [circle,fill,inner sep=1.5pt]{};
+            \node at (axis cs:0.3,0.3) {\( (0,0) \)};
+
+            % Labels
+            \node at (axis cs:-1,1) [anchor=south west] {unstable};
+            \node at (axis cs:-1,-1) [anchor=north west] {stable};
+            \end{axis}
+        \end{tikzpicture}
+        \caption{Bifurcation Diagram for \( x' = x^2 + a \)}
+        \label{fig:bifurcation-diagram}
+    \end{figure}
+
+\end{definition}
+
+\begin{example}[Pitchfork Bifurcation]
+    Consider the ODE:
+    $$
+    x' = ax - x^3
+    $$
+    This equation has a family of fixed points given by:
+    $$
+    x^* = 0, \quad x^* = \pm\sqrt{a}
+    $$
+    For \( a \le 0 \), there is one real fixed point at \( x^* = 0 \). For \( a > 0 \), there are three real fixed points: \( x^* = 0 \) (unstable) and \( x^* = \pm\sqrt{a} \) (stable). At \( a = 0 \), the fixed point at \( x^* = 0 \) changes stability, indicating a bifurcation point at \( a = 0 \).
+
+    We can plot the bifurcation diagram for this system as follows:
+
+    \begin{figure}[h!]
+        \centering
+        \begin{tikzpicture}
+            \begin{axis}[
+                axis lines = middle,
+                xlabel = \( a \),
+                ylabel = \( x^* \),
+                ymin = -2, ymax = 2,
+                xmin = -2, xmax = 2,
+                domain=-2:2,
+                samples=100,
+                width=10cm,
+                height=6cm,
+                grid=both,
+                minor tick num=1,
+                major grid style={line width=.2pt,draw=gray!50},
+                minor grid style={line width=.1pt,draw=gray!20},
+            ]
+            % Stable fixed point for a <= 0
+            \addplot[blue, thick, domain=-2:0] {0}; % Stable branch for a <= 0
+            % Unstable fixed point for a > 0
+            \addplot[red, dashed, thick, domain=0:2] {0}; % Unstable branch for a > 0
+            % Stable fixed points for a > 0
+            \addplot[blue, thick] {sqrt(x)}; % Stable branch for a > 0
+            \addplot[blue, thick] {-sqrt(x)}; % Stable
+            % Bifurcation point
+            \node at (axis cs:0,0) [circle,fill,inner sep=1.5pt]{};
+            \node at (axis cs:0.3,0.3) {\( (0,0) \)};
+            % Labels
+            \node at (axis cs:-1,0.2) [anchor=south west] {stable};
+            \node at (axis cs:0.9,1.1) [anchor=south west] {stable};
+            \node at (axis cs:0.9,-1.1) [anchor=north west] {stable};
+            \node at (axis cs:0.5,0.1) [anchor=south west] {unstable};
+            \end{axis}
+        \end{tikzpicture}
+        \caption{Bifurcation Diagram for \( x' = ax - x^3 \)}
+        \label{fig:pitchfork-bifurcation-diagram}
+    \end{figure}
+\end{example}
+
+\begin{example}[Transcritical Bifurcation] \label{ex:bifurcation-transcritical}
+    Consider the ODE:
+    $$
+    x' = x(r - x)
+    $$
+    This equation has a family of fixed points given by:
+    $$
+    x^* = 0, \quad x^* = r
+    $$
+    For $r < 0$, \( x^* = 0 \) is stable. For $r > 0$, \( x^* = 0 \) is unstable and \( x^* = r \) is stable. At \( r = 0 \), the stability of the fixed point at \( x^* = 0 \) changes, indicating a bifurcation point at \( r = 0 \). The bifurcation diagram is as follows:
+    \begin{figure}[h!]
+        \centering
+        \begin{tikzpicture}
+            \begin{axis}[
+                axis lines = middle,
+                xlabel = \( r \),
+                ylabel = \( x^* \),
+                ymin = -2, ymax = 2,
+                xmin = -2, xmax = 2,
+                domain=-2:2,
+                samples=100,
+                width=10cm,
+                height=6cm,
+                grid=both,
+                minor tick num=1,
+                major grid style={line width=.2pt,draw=gray!50},
+                minor grid style={line width=.1pt,draw=gray!20},
+            ]
+            % Stable fixed point for r < 0
+            \addplot[blue, thick, domain=-2:0] {0}; % Stable branch for r < 0
+            % Unstable fixed point for r < 0
+            \addplot[red, dashed, thick, domain=-2:0] {x}; % Unstable branch for r < 0
+            % Unstable fixed point for r > 0
+            \addplot[red, dashed, thick, domain=0:2] {0}; % Unstable branch for r > 0
+            % Stable fixed point for r > 0
+            \addplot[blue, thick, domain=0:2] {x}; % Stable branch for r > 0
+            % Bifurcation point
+            \node at (axis cs:0,0) [circle,fill,inner sep=1.5pt]{};
+            \node at (axis cs:0.3,0.3) {\( (0,0) \)};
+            % Labels
+            \node at (axis cs:-1,0.2) [anchor=south west] {stable};
+            \node at (axis cs:1,1) [anchor=south west] {stable};
+            \node at (axis cs:0.5,0.1) [anchor=south west] {unstable};
+            \end{axis}
+        \end{tikzpicture}
+        \caption{Bifurcation Diagram for \( x' = x(r - x) \)}
+        \label{fig:bifurcation-diagram-2}
+    \end{figure}
+\end{example}
+
+\paragraph{Linear Stability Analysis and Normal Forms} Consider the ODE in the above example \ref{ex:bifurcation-transcritical}:
+We can verify the stability of the fixed points by performing linear stability analysis. Consider $x \sim x^*$ and $r \sim r^*$, such that $|x - x^*| = \epsilon$ and $|r - r^*| = \delta$ for small $\epsilon, \delta > 0$. Then,
+\begin{align*}
+    f(x, r) &= f(x^*, r^*) + (x-x^*) f_x(x^*, r^*) + (r-r^*) f_r(x^*, r^*) + \\
+    &\quad \frac{(x-x^*)^2}{2} f_{xx}(x^*, r^*) + O(\epsilon^3, \delta^2, \epsilon\delta) \\
+    &\approx a(x - x^*)^2 + b(r - r^*)
+\end{align*}
+which we refer to as the normal form of the system. Here, \( a = \frac{1}{2} f_{xx}(x^*, r^*) \) and \( b = f_r(x^*, r^*) \). And that $f_x(x^*, r^*) = 0$ is called a saddle node.
+
+
+\begin{example}
+    Consider the ODE:
+    $$
+    x' = rx + x^3 - x^5
+    $$
+    We can find the fixed points by setting \( x' = 0 \), and we have
+    $$
+    x^\star = 0 \quad \text{or} \quad x^\star = \pm\sqrt{\frac{1 \pm \sqrt{1 + 4r}}{2}}
+    $$
+    Now, we see the bifurcation points are at \( r = -\frac{1}{4} \) and \( r = 0 \). We have:
+    \begin{itemize}
+        \item For \( r < -\frac{1}{4} \):
+        \begin{itemize}
+            \item \( x^* = 0 \) is stable (since \( f'(0) = r < 0 \))
+        \end{itemize}
+        \item For \( r = -\frac{1}{4} \):
+        \begin{itemize}
+            \item \( x^* = 0 \) is stable (since \( f'(0) = r < 0 \))
+            \item \( x^* = \pm\frac{1}{2} \) are semi-stable (since \( f'(\pm\frac{1}{2}) = 0 \))
+        \end{itemize}
+        \item For \( -\frac{1}{4} < r < 0 \):
+        \begin{itemize}
+            \item \( x^* = 0 \) is stable (since \( f'(0) = r < 0 \))
+            \item \( x^* = -\sqrt{\frac{1 + \sqrt{1 + 4r}}{2}} \) is stable (since \( f'(-\sqrt{\frac{1 + \sqrt{1 + 4r}}{2}}) < 0 \))
+            \item \( x^* = \sqrt{\frac{1 + \sqrt{1 + 4r}}{2}} \) is unstable (since \( f'(\sqrt{\frac{1 + \sqrt{1 + 4r}}{2}}) > 0 \))
+        \end{itemize}
+        \item For \( r = 0 \):
+        \begin{itemize}
+            \item \( x^* = 0 \) is semi-stable (since \( f'(0) = 0 \))
+            \item \( x^* = -1 \) is stable (since \( f'(-1) < 0 \))
+            \item \( x^* = 1 \) is stable (since \( f'(1) < 0 \))
+        \end{itemize}
+        \item For \( r > 0 \):
+        \begin{itemize}
+            \item \( x^* = 0 \) is unstable (since \( f'(0) = r > 0 \))
+            \item \( x^* = -\sqrt{\frac{1 + \sqrt{1 + 4r}}{2}} \) is stable (since \( f'(-\sqrt{\frac{1 + \sqrt{1 + 4r}}{2}}) < 0 \))
+            \item \( x^* = \sqrt{\frac{1 + \sqrt{1 + 4r}}{2}} \) is stable (since \( f'(\sqrt{\frac{1 + \sqrt{1 + 4r}}{2}}) < 0 \))
+        \end{itemize}
+    \end{itemize}
+    The bifurcation diagram is as follows:
+    \begin{figure}[h!]
+    \centering
+    \begin{tikzpicture}
+        \begin{axis}[
+            axis lines = middle,
+            xlabel = {$r$},
+            ylabel = {$x^\star$},
+            ymin = -2, ymax = 2,
+            xmin = -1, xmax = 1,
+            samples=200,
+            domain=-0.25:1,
+            legend style={at={(1.05,1)}, anchor=north west}
+        ]
+        % Stable and unstable branches from formula
+        \addplot[blue, thick, domain=-0.25:1] {sqrt((1 + sqrt(1+4*x))/2)};
+        \addplot[red, dashed, domain=-0.25:1] {sqrt((1 - sqrt(1+4*x))/2)};
+        \addplot[blue, thick, domain=-0.25:1] {-sqrt((1 + sqrt(1+4*x))/2)};
+        \addplot[red, dashed, domain=-0.25:1] {-sqrt((1 - sqrt(1+4*x))/2)};
+
+        % vertical black dashed line at r = -1/4
+        \draw[dashed] (axis cs:-0.25,-2) -- (axis cs:-0.25,2);
+        \node at (axis cs:-0.25,2.2) {\( r = -\frac{1}{4} \)};  
+        % The trivial equilibrium at x=0
+        \addplot[blue, thick, domain=-1:-0.0001] {0}; % stable for r<0
+        \addplot[red, dashed, domain=0:1] {0};        % unstable for r>0
+        
+        % Mark bifurcation points
+        \node at (axis cs:-0.25,0.75) [circle,fill,inner sep=1.5pt]{};
+        \node at (axis cs:-0.25,-0.75) [circle,fill,inner sep=1.5pt]{};
+        \node at (axis cs:0,0) [circle,fill,inner sep=1.5pt]{};
+        
+        \legend{stable, unstable}
+        \end{axis}
+    \end{tikzpicture}
+    \caption{Bifurcation diagram for $x' = rx + x^3 - x^5$. 
+    Blue = stable equilibria, red dashed = unstable equilibria.}
+\end{figure}
+
+\end{example}
+
 
 
 \end{document}
