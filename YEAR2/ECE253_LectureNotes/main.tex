@@ -435,9 +435,9 @@ In addition, we have the following gates:
 \end{definition}
 
 \begin{shaded}
-    \paragraph{NAND and NOR Gates are Cheaper} NAND gates and NOR gates are cheaper than AND and OR gates because they require fewer transistors to implement. A 2-input NAND gate can be implemented using 4 transistors, while a 2-input AND gate requires 6 transistors (4 for the NAND gate and 2 for the NOT gate). The same applies to NOR and OR gates.
+    \textbf{NAND and NOR Gates are Cheaper} NAND gates and NOR gates are cheaper than AND and OR gates because they require fewer transistors to implement. A 2-input NAND gate can be implemented using 4 transistors, while a 2-input AND gate requires 6 transistors (4 for the NAND gate and 2 for the NOT gate). The same applies to NOR and OR gates.
 
-    \paragraph{NAND and NOR Gates are Universal (Functionally Complete)} Additionally, NAND and NOR gates are universal gates, meaning that any logic function can be implemented using only NAND or NOR gates. 
+    \textbf{NAND and NOR Gates are Universal (Functionally Complete)} Additionally, NAND and NOR gates are universal gates, meaning that any logic function can be implemented using only NAND or NOR gates. 
     
     This makes them more versatile and cost-effective for building complex digital circuits.
 \end{shaded}
@@ -462,8 +462,6 @@ In addition, we have the following gates:
     \end{tabular}
     \caption{Commonly Used Logic Operators}
 \end{table}
-
-\subsection{Combinational Logic Circuits}
 
 \subsection{Sum of Products (SOP) Form}
 \begin{definition}[Literal]
@@ -570,6 +568,164 @@ In addition, we have the following gates:
     $$
 \end{example}
 
+\subsection{Boolean Algebra and Logic Minimization}
+\begin{definition}[Boolean Algebra]
+    Boolean algebra is a branch of algebra that deals with binary variables and logical operations. It is a effective means to describe logic circuits with a set of rules derived from the axioms of Boolean algebra.
+\end{definition}
+
+\begin{definition}[Axioms of Boolean Algebra]
+    The axioms of Boolean algebra are a set of fundamental rules that govern the behavior of binary variables and logical operations. The number stems consist only of the set $\{0, 1\}$, with the following axioms:
+    \begin{itemize}
+        \item $0 \cdot 0 = 0$
+        \item $1 \cdot 1 = 1$
+        \item $0 \cdot A = 0 \cdot 1 = 1 \cdot 0 = 0$ for any $A$
+        \item if $x=0$ then $\overline{x} = 1$
+    \end{itemize}
+
+    \textbf{Dual Form} We can also derive the following logical equivalences from the axioms:
+    \begin{itemize}
+        \item $A + 0 = A$
+        \item $A + 1 = 1$
+        \item $0 + 1 = 1 + 0 = 1$
+        \item $A + \overline{A} = 1$
+    \end{itemize}
+
+    where $1$ is the multiplicative identity and $0$ is the additive identity.
+\end{definition}
+
+\paragraph{Rules derived from the Axioms of Boolean Algebra} The following rules can be derived from the axioms of Boolean algebra:
+\begin{theorem}
+\begin{itemize}
+    \item $x \cdot 0 = 0$ (Annihilation)
+    \item $x \cdot 1 = 1 \cdot x = x$ (Identity)
+    \item $x \cdot \overline{x} = 0$ (Complementation)
+    \item $x \cdot x = x$ (Idempotent)
+    \item $x + 0 = 0 + x = x$ (Identity)
+    \item $x + 1 = 1 + x = 1$ (Annihilation)
+    \item $x + \overline{x} = 1$ (Complementation)
+\end{itemize}
+\end{theorem}
+
+\begin{theorem}
+The following identities can be derived from the axioms of Boolean algebra:
+\begin{itemize}
+    \item Commutative Laws:
+    \begin{itemize}
+        \item $A + B = B + A$
+        \item $A \cdot B = B \cdot A$
+    \end{itemize}
+    \item Associative Laws:
+    \begin{itemize}
+        \item $A + (B + C) = (A + B) + C$
+        \item $A \cdot (B \cdot C) = (A \cdot B) \cdot C$
+    \end{itemize}
+    \item Distributive Laws:
+    \begin{itemize}
+        \item $A \cdot (B + C) = A \cdot B + A \cdot C$
+        \item $A + (B \cdot C) = (A + B) \cdot (A + C)$
+    \end{itemize}
+\end{itemize}
+\end{theorem}
+\begin{proof}
+    By perfect induction. We can exhaustively check all possible values of $A$, $B$, and $C$ (0 or 1) to verify that both sides of each identity yield the same result.
+\end{proof}
+
+\begin{theorem}[Covering Theorem]
+     The following is true:
+    $$    
+    x + xy = x
+    $$
+    and its dual:
+    $$
+    x(x + y) = x
+    $$
+\end{theorem}
+
+\begin{theorem}[Combining Theorem]
+    The following is true:
+    $$
+    xy + x\overline{y} = x
+    $$
+    and its dual:
+    $$
+    (x + y)(x + \overline{y}) = x
+    $$
+    
+\end{theorem}
+
+\begin{theorem}[De Morgan's Theorem]
+    The following is true:
+    $$
+    \overline{xy} = \overline{x} + \overline{y}
+    $$
+    and its dual:
+    $$
+    \overline{x + y} = \overline{x} \cdot \overline{y}
+    $$
+\end{theorem}
+\begin{proof}
+    By direct proof. We have:
+    \begin{align*}
+        \overline{xy} &= \overline{x}\overline{y} + \overline{x}y + x\overline{y} \quad (\text{In Canonical SOP Form}) \\
+        &= \overline{x}\overline{y} + \overline{x}y + x\overline{y} + x\overline{y} \quad (\text{Adding } x\overline{y} \text{ using $x + x = x$}) \\
+        &= \overline{x}(\overline{y} + y) + \overline{y}(x + \overline{x}) \quad (\text{Using Distributive Law}) \\
+        &= \overline{x} \cdot 1 + \overline{y} \cdot 1 \quad (\text{Using Complementation}) \\
+        &= \overline{x} + \overline{y} \quad (\text{Using Identity})
+    \end{align*}
+\end{proof}
+
+\begin{theorem}[Absorption / Redundancy Theorem]
+    The following is true:
+    $$
+    x + \overline{x}y = x + y
+    $$
+    and its dual:
+    $$
+    x(\overline{x} + y) = xy
+    $$
+\end{theorem}
+\begin{proof}
+    By direct proof. We have:
+    \begin{align*}
+        x + \overline{x}y &= x + \overline{x}y + xy \quad (\text{Adding } xy \text{ using } x + xy = x) \\
+        &= x(1 + y) + \overline{x}y \quad (\text{Using Distributive Law}) \\
+        &= x \cdot 1 + \overline{x}y \quad (\text{Using Identity}) \\
+        &= x + y \quad (\text{Using Combining Theorem})
+    \end{align*}
+\end{proof}
+
+\begin{shaded}
+    \textbf{Logic Minimization} The goal of logic minimization is to reduce the number of logic gates and inputs in a digital circuit while maintaining its functionality. This is important because it can lead to cost savings, improved performance, and reduced power consumption. Logic minimization can be achieved through various techniques, including Boolean algebra simplification, Karnaugh maps, and the Quine-McCluskey algorithm.
+\end{shaded}
+
+\begin{theorem}[Nand as SOP]
+    And SOP circuit can be implemented using only NAND gates.
+\end{theorem}
+
+\begin{theorem}[Nor as POS]
+    A POS circuit can be implemented using only NOR gates.
+\end{theorem}
+
+\begin{example}[Gumball Fact]
+    Consider three sensors $s_0, s_1, s_2$ that detect defects in Gumballs. Those sensors are normally 0, but would be 1 if a defect is detected as follows:
+    $$
+        \begin{cases}
+            s_0 = 1 & \text{if the Gumball is too small} \\
+            s_1 = 1 & \text{if the Gumball is too big} \\
+            s_2 = 1 & \text{if the Gumball is too light}
+        \end{cases}
+    $$
+    We are to design a circuit that would output 1 if the Gumball is either too large or too small and too light. We can express canonical SOP form as:
+    \begin{align*}
+        L(s_0, s_1, s_2) &= m_3 + m_4 + m_5 + m_6 + m_7 = \overline{s_0}s_1s_2 + s_2\overline{s_0}\overline{s_2} + s_0\overline{s_1}s_2 + s_0s_1\overline{s_2} + s_0s_1s_2 \\
+        \intertext{Using the Combining Theorem}
+        &= \overline{s_0}s_1s_2 + s_2\overline{s_0}\overline{s_2} + s_0s_2 + s_0s_1 \\
+        \intertext{Using the Absorption Theorem}
+        &= s_2\overline{s_0} + s_0s_2 + s_0s_1 \\
+        \intertext{Using the Covering Theorem}
+        &= s_2 + s_0s_1 
+    \end{align*}
+\end{example}
 \section{Digital Storage Elements}
 
 \section{Finite State Machines (FSM)}

@@ -390,8 +390,224 @@ The following is the analogue of the squeeze theorem for double integrals:
     \end{align*}
 \end{example}
 
+\begin{example}
+    \textit{Find the area of the region $R$ enclosed by one petal of the rose given by $r = \cos{3\theta}$.}
+
+    We know that the petal has upper bound at $\theta = \pm \frac{\pi}{6}$. We can describe the region $R$ in polar coordinates as $0 \le r \le \cos{3\theta}$ and $-\frac{\pi}{6} \le \theta \le \frac{\pi}{6}$. Thus, we can set up the double integral as follows:
+    \begin{align*}
+        \text{Area}(R) &= \iint_R 1 \, dA \\
+        &= \int_{-\frac{\pi}{6}}^{\frac{\pi}{6}} \int_0^{\cos{3\theta}} r \, dr \, d\theta \\
+        &= \int_{-\frac{\pi}{6}}^{\frac{\pi}{6}} \left( \frac{r^2}{2} \Big|_{r=0}^{r=\cos{3\theta}} \right) d\theta \\
+        &= \int_{-\frac{\pi}{6}}^{\frac{\pi}{6}} \frac{\cos^2{3\theta}}{2} \, d\theta = \frac{\pi}{12} \quad \left(\text{Using } \cos^2{x} = \frac{1 + \cos{2x}}{2}\right)
+    \end{align*}
+\end{example}
+
+\begin{example}
+    \textit{Find the volume trapped between the cone $z = \sqrt{x^2 + y^2}$ and the sphere $x^2 + y^2 + z^2 = 1$.}
+
+    First, we find the intersection of the cone and the sphere:
+    $$
+        z = \sqrt{x^2 + y^2} \implies z^2 = x^2 + y^2
+    $$
+    Substituting into the sphere equation:
+    \begin{align*}
+        x^2 + y^2 + z^2 = 1 &\implies z^2 + z^2 = 1 \\ 
+        &\implies 2z^2 = 1 \implies z = \frac{1}{\sqrt{2}} \quad x^2 + y^2 = \frac{1}{2}
+    \end{align*}
+    Thus, we have the region $R = \{(r, \theta) \mid 0 \le r \le \frac{1}{\sqrt{2}}, 0 \le \theta \le 2\pi\}$. We can set up the double integral as follows:
+    \begin{align*}
+        V &= \iint_R (\sqrt{1 - x^2 - y^2} - \sqrt{x^2 + y^2} ) \, dA \\ % the shpere - cone
+        &= \int_0^{2\pi} \int_0^{\frac{1}{\sqrt{2}}} (\sqrt{1 - r^2} - r) \, r \, dr \, d\theta \\
+        &= 2\pi \left[ \int_0^{\frac{1}{\sqrt{2}}} r\sqrt{1 - r^2} \, dr - \int_0^{\frac{1}{\sqrt{2}}} r^2 dr \right] \\
+        &= 2\pi \left[ -\frac{1}{3} (1 - r^2)^{\frac{3}{2}} \Big|_0^{\frac{1}{\sqrt{2}}} - \frac{r^3}{3} \Big|_0^{\frac{1}{\sqrt{2}}} \right] = \frac{2\pi}{3} (1- \frac{1}{\sqrt{2}})
+    \end{align*}
+\end{example}
+
 \subsection{Applications of Double Integrals}
+\begin{shaded}
+    \subsubsection*{Review: Moment of Inertia using Single Integral}
+
+    Consider a thin rod of length $L$ with a linear mass density $\rho(x)$, where $x$ is the distance from one end of the rod. We can use the following formula to find the moment of inertia $I$ of the rod about an axis perpendicular to the rod and passing through one end:
+
+    \begin{equation}
+        I = \int_0^L x^2 \rho(x) \, dx
+    \end{equation}
+    where $x^2$ is the square of the distance from the axis of rotation, and $\rho(x) \, dx$ represents the mass element of the rod at position $x$. This comes from the definition of moment of inertia, which is the following sum with point masses:
+    $$        
+    I = \sum m_i r_i^2 \quad \text{s.t. } \quad \text{KE}= \frac{1}{2} I \omega^2
+    $$
+\end{shaded}
+
+\begin{definition}[Mass of a Lamina]
+    Consider a lamina occupying the region $R$ in the $xy$-plane with a surface mass density $\sigma(x,y)$, where $\sigma(x,y)$ is the mass per unit area at the point $(x,y)$. The mass $M$ of the lamina can be found using the following double integral:
+    \begin{equation}
+        M = \iint_R \sigma(x,y) \, dA
+    \end{equation}
+    where $dA$ represents an infinitesimal area element in the region $R$.
+    
+\end{definition}
+
+\begin{definition}[Moment of a Lamina]
+    The moment of the lamina about the $x$-axis ($M_x$) and $y$-axis ($M_y$) can be found using the following formulas:
+    \begin{equation}
+        M_x = \iint_R y \sigma(x,y) \, dA, \quad M_y = \iint_R x \sigma(x,y) \, dA
+    \end{equation}
+    where $y$ and $x$ are the distances from the respective axes of rotation, and $\sigma(x,y) \, dA$ represents the mass element of the lamina at the point $(x,y)$.
+\end{definition}
+
+\begin{definition}[Center of Mass of a Lamina]
+    The center of mass $(\bar{x}, \bar{y})$ of the lamina can be found using the following formulas:
+    \begin{equation}
+        \bar{x} = \frac{1}{M} M_y = \frac{1}{M} \iint_R x \sigma(x,y) \, dA, \quad \bar{y} = \frac{1}{M} M_x = \frac{1}{M} \iint_R y \sigma(x,y) \, dA
+    \end{equation}
+    where $M$ is the total mass of the lamina as calculated in the previous example.
+\end{definition}
+
+\begin{example}
+    \textit{Find the cnetre of mass of the following plate with density funciton $\sigma(x,y) = x + y$ over the reigion bounded by the axis and $y = \sqrt{x}$ and $x = 1$.}
+
+    First, we find the mass of the lamina:
+    \begin{align*}
+        M &= \iint_R (x + y) \, dA \\
+        &= \int_0^1 \int_0^{\sqrt{x}} (x + y) \, dy \, dx \\
+        &= \int_0^1 \left[ xy + \frac{y^2}{2} \right]_{y=0}^{y=\sqrt{x}} \, dx \\
+        &= \int_0^1 \left( x\sqrt{x} + \frac{x}{2} \right) dx = \left[ \frac{2}{5} x^{\frac{5}{2}} + \frac{1}{4} x^2 \right]_{0}^{1} = \frac{13}{20}
+    \end{align*}
+    Now, we find the moments about the $x$-axis and $y$-axis:
+    \begin{align*}
+        M_x &= \iint_R y(x + y) \, dA \\
+        &= \int_0^1 \int_0^{\sqrt{x}} y(x + y) \, dy \, dx \\
+        &= \int_0^1 \left[ \frac{xy^2}{2} + \frac{y^3}{3} \right]_{y=0}^{y=\sqrt{x}} \, dx \\
+        &= \int_0^1 \left( \frac{x^2}{2} + \frac{x^{\frac{3}{2}}}{3} \right) dx = \left[ \frac{x^3}{6} + \frac{2}{15} x^{\frac{5}{2}} \right]_{0}^{1} = \frac{3}{10}
+    \end{align*}
+    and,
+    \begin{align*}
+        M_y &= \iint_R x(x + y) \, dA \\
+        &= \int_0^1 \int_0^{\sqrt{x}} x(x + y) \, dy \, dx \\
+        &= \int_0^1 \left[ x^2y + \frac{xy^2}{2} \right]_{y=0}^{y=\sqrt{x}} \, dx \\
+        &= \int_0^1 \left( x^2\sqrt{x} + \frac{x^{\frac{3}{2}}}{2} \right) dx = \left[ \frac{2}{7} x^{\frac{7}{2}} + \frac{1}{6} x^3 \right]_{0}^{1} = \frac{19}{42}
+    \end{align*}
+    Finally, we can find the center of mass:
+    $$        
+    \bar{x} = \frac{M_y}{M} = \frac{190}{273}, \quad \bar{y} = \frac{M_x}{M} = \frac{6}{13}
+    $$
+\end{example}
+
+\begin{definition}[Geometric Center of a Lamina]
+    If the surface mass density $\sigma(x,y)$ is constant, then the center of mass is also known as the geometric center (or centroid) of the lamina. The formulas for the geometric center are:
+    \begin{equation}
+        x_c = \frac{1}{\text{Area}(R)} \iint_R x \, dA, \quad y_c = \frac{1}{\text{Area}(R)} \iint_R y \, dA
+    \end{equation}
+    where $\text{Area}(R)$ is the area of the region $R$.
+    
+\end{definition}
+
+\begin{definition}[Moment of Inertia of a Lamina]
+    The moment of inertia of the lamina about the $x$-axis ($I_x$) and $y$-axis ($I_y$) can be found using the following formulas:
+    \begin{equation}
+        I_x = \iint_R y^2 \sigma(x,y) \, dA, \quad I_y = \iint_R x^2 \sigma(x,y) \, dA
+    \end{equation}
+    where $y^2$ and $x^2$ are the squares of the distances from the respective axes of rotation, and $\sigma(x,y) \, dA$ represents the mass element of the lamina at the point $(x,y)$. Also for the moment of inertia about the origin ($I_o$):
+    \begin{equation}
+        I_o = \iint_R (x^2 + y^2) \sigma(x,y) \, dA
+    \end{equation}
+    In general, for an axis defined by a line $ax + by + c = 0$, the moment of inertia about that axis ($I_l$) can be found using the following formula:
+    \begin{equation}
+        I_l = \iint_R \left( \frac{ax + by + c}{\sqrt{a^2 + b^2}} \right)^2 \sigma(x,y) \, dA
+    \end{equation}
+\end{definition}
+
+\begin{example}
+    A rectangular plate of mass $m$, length $L$ and width $W$ is rotated about a vertical line on its left side with width $W$. Find the moment of inertia of the plate about this line in two cases:
+    \begin{enumerate}
+        \item The plate has uniform density $\sigma(x,y) = \frac{m}{LW}$.
+        \item The density varies at a point proportional to the square of the distance from the right most side.
+        \item It has uniform density, but rotated its center.
+    \end{enumerate}
+
+   \textbf{Solution. 1. Uniform Density} We can describe the region $R$ in Cartesian coordinates as $0 \le x \le L$ and $0 \le y \le W$. The surface mass density is $\sigma(x,y) = \frac{m}{LW}$. Thus, we can set up the double integral as it rotates around the $y$-axis:
+    \begin{align*}
+        I_y &= \iint_R x^2 \sigma(x,y) \, dA \\
+        &= \int_0^W \int_0^L x^2 \cdot \frac{m}{LW} \, dx \, dy \\
+        &= \int_0^W \left[ \frac{m}{LW} \cdot \frac{x^3}{3} \right]_{x=0}^{x=L} dy = \int_0^W \frac{mL^2}{3W} dy = \left[ \frac{mL^2}{3W} y \right]_{y=0}^{y=W} = \frac{mL^2}{3}
+    \end{align*}
+    \textbf{Solution. 2. Varying Density} We can describe the region $R$ in Cartesian coordinates as $0 \le x \le L$ and $0 \le y \le W$. The surface mass density is $\sigma(x,y) = k(L - x)^2$. To find the constant $k$, we have:
+    \begin{align*}
+        I_y &= \iint_R x^2 \sigma(x,y) \, dA  \\
+        &= \int_0^W \int_0^L x^2 \cdot k(L - x)^2 \, dx \, dy \\
+        &= \int_0^W \left[ k \int_0^L (x^2L^2 - 2Lx^3 + x^4) \, dx \right] dy \\
+        &= \int_0^W \left[ k \left( \frac{L^5}{3} - \frac{L^5}{2} + \frac{L^5}{5} \right) \right] dy = \int_0^W \left[ k \cdot \frac{L^5}{30} \right] dy = k \cdot \frac{L^5}{30} W
+    \end{align*}
+
+    \textbf{Solution. 3. Rotated Center} We can describe the region $R$ in Cartesian coordinates as $-\frac{L}{2} \le x \le \frac{L}{2}$ and $-W \le y \le W$. The surface mass density is $\sigma(x,y) = \frac{m}{LW}$. Thus, we can set up the double integral as it rotates around the origin:
+    \begin{equation*}
+    \begin{split}
+        I_o &= \iint_R (x^2 + y^2) \sigma(x,y) \, dA \\
+        &= \int_{-W}^W \int_{-L/2}^{L/2} (x^2 + y^2) \cdot \frac{m}{LW} \, dx \, dy \\
+        &= \int_{-W}^W \left[ \frac{m}{LW} \left( \frac{x^3}{3} + y^2 x \right)_{x=-L/2}^{x=L/2} \right] dy \\
+        &= \int_{-W}^W \left[ \frac{mL^2}{12W} + \frac{my^2}{W} \right] dy \\
+        &= \left[ \frac{mL^2}{12W} y + \frac{my^3}{3W} \right]_{y=-W}^{y=W} = \frac{mL^2}{6} + \frac{2mW^2}{3}
+    \end{split}
+    \end{equation*}
+\end{example}
+
 \subsection{Surface Area}
+\begin{theorem}[Surface Area]
+    Given $z=f(x,y)$, where $f$ is a differentiable function over the region $R$ in the $xy$-plane, the surface area $S$ of the surface above the region $R$ is given by:
+    \begin{equation}
+        S = \iint_R \sqrt{1 + \left( \frac{\partial f}{\partial x} \right)^2 + \left( \frac{\partial f}{\partial y} \right)^2} \, dA
+    \end{equation}
+\end{theorem}
+\begin{proof}
+    Consider a small rectangle $\Delta A_i$ in the $xy$-plane with dimensions $\Delta x_i$ and $\Delta y_i$. When we project this rectangle onto the surface $z = f(x,y)$, it becomes a parallelogram $T_i$ tangent to the surface. Using the partial derivatives of the surface, we can deduce the two vectors that define the parallelogram:
+    $$
+        \vec{u} = \left( \Delta x_i, 0, f_x(x_i^*, y_i^*) \Delta x_i \right), \quad \vec{v} = \left( 0, \Delta y_i, f_y(x_i^*, y_i^*) \Delta y_i \right)
+    $$
+    The area of this parallelogram is given by the magnitude of the cross product of these two vectors:
+    \begin{align*}
+        \Delta T_i = ||\vec{u} \times \vec{v}|| &= \left|\begin{vmatrix}
+        \hat{i} & \hat{j} & \hat{k} \\
+        \Delta x_i & 0 & f_x(x_i^*, y_i^*) \Delta x_i \\
+        0 & \Delta y_i & f_y(x_i^*, y_i^*) \Delta y_i
+        \end{vmatrix}\right| \\
+        &= \sqrt{( -f_x(x_i^*, y_i^*) \Delta x_i \Delta y_i )^2 + ( -f_y(x_i^*, y_i^*) \Delta x_i \Delta y_i )^2 + (\Delta x_i \Delta y_i)^2} \\
+        &= \sqrt{1 + (f_x(x_i^*, y_i^*))^2 + (f_y(x_i^*, y_i^*))^2} \, \Delta x_i \Delta y_i
+    \end{align*}
+    Therefore, the surface area can be approximated as:
+    $$
+        S \approx S_n = \sum_{i=1}^n \Delta T_i = \sum_{i=1}^n \sqrt{1 + (f_x(x_i^*, y_i^*))^2 + (f_y(x_i^*, y_i^*))^2} \, \Delta A_i
+    $$
+    Taking the limit as the maximum diameter of the subrectangles approaches zero, we obtain the exact surface area:
+    $$
+        S = \lim_{|P| \to 0} S_n =\iint_R \sqrt{1 + \left( \frac{\partial f}{\partial x} \right)^2 + \left( \frac{\partial f}{\partial y} \right)^2} \, dA
+    $$
+    which completes our derivation.
+\end{proof}
+
+\begin{example}
+    \textit{Find the surface of the sphere $x^2 + y^2 + z^2 = a^2$. }
+
+    We first consider the first octant, where $x, y, z \ge 0$. Then the total volumn would be eight times the volumn of the first octant. We first express it in polar coordinates:
+    $$
+        x^2 + y^2 = r^2 \implies z = \sqrt{a^2 - r^2}
+    $$
+    taking the partial derivatives:
+    $$
+        \frac{\partial z}{\partial r} = \frac{-r}{\sqrt{a^2 - r^2}}, \quad \frac{\partial z}{\partial \theta} = 0
+    $$
+    Thus, we can set up the double integral as follows:
+    \begin{align*}
+        S_{\text{1st octant}} &= \iint_R \sqrt{1 + \left( \frac{\partial z}{\partial r} \right)^2 + \left( \frac{\partial z}{\partial \theta} \right)^2} \, dA \\
+        &= \int_0^{\frac{\pi}{2}} \int_0^a \sqrt{1 + \left( \frac{-r}{\sqrt{a^2 - r^2}} \right)^2 + 0^2} \, r \, dr \, d\theta \\
+        &= \int_0^{\frac{\pi}{2}} \int_0^a \sqrt{1 + \frac{r^2}{a^2 - r^2}} \, r \, dr \, d\theta \\
+        &= \int_0^{\frac{\pi}{2}} \int_0^a \frac{a}{\sqrt{a^2 - r^2}} \, r \, dr \, d\theta \\
+        &= \int_0^{\frac{\pi}{2}} \left[ -a \sqrt{a^2 - r^2} \right]_{r=0}^{r=a} d\theta = \int_0^{\frac{\pi}{2}} a^2 \, d\theta = \frac{\pi a^2}{2}
+    \end{align*}
+    Therefore, the total surface area of the sphere is:
+    $$        S = 8 \cdot S_{\text{1st octant}} = 4\pi a^2 $$   
+
+\end{example}
+
 
 \subsection{Triple Integrals in Rectangular Coordinates}
 \subsection{Triple Integrals in Cylindrical Coordinates}

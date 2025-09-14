@@ -271,9 +271,11 @@ by the cosine addition formula.
     \end{equation}
     So we have, for very light damping:
     \begin{equation}
-        E(t) = E_0 e^{-\frac{t}{\tau}}
+        E(t) = E_0 e^{-\gamma t} = E_0 e^{-\frac{t}{\tau}}
     \end{equation}
 \end{definition}
+
+
 
 \begin{definition}[Rate of Energy Loss]
     Taking the time derivative of the total mechanical energy \( E(t) \):
@@ -306,7 +308,96 @@ by the cosine addition formula.
     \begin{equation}
         \omega = \omega_0 \sqrt{1 - \frac{1}{4Q^2}}
     \end{equation}
+
+We can also consider the ratio between the energy at one time and the energy one period later:
+\begin{align*}
+    \frac{E(t + T)}{E(t)} &= \frac{E_0 e^{-\gamma (t + T)}}{E_0 e^{-\gamma t}} \\
+    &= e^{-\gamma T} \approx 1 - \gamma T \\
+    \frac{E(t + T) - E(t)}{E(t)} & \approx -\gamma T = -\frac{2\pi}{\omega_0} \gamma = -\frac{2\pi}{Q}
+\end{align*}
 \end{definition}
+
+\begin{example}
+    \textit{What is the number of radians through which the damped system oscillates as its energy decreases to $1/e$ of its initial value?}
+
+    We have
+    $$
+    \frac{E}{E_0} = e^{-\gamma t} = \frac{1}{e} \implies \gamma t = 1 \implies t = \frac{1}{\gamma} = \tau
+    $$
+    So the number of radians is
+    $$
+    \theta = \omega \tau = \frac{\omega}{\gamma} = Q
+    $$
+    
+\end{example}
+
+\subsection{Undamped Forced Oscillations}
+\begin{definition}[Undamped Forced Oscillations]
+    Consider a driver porves on the left side of the sping, we have the following differential equation:
+    \begin{equation}
+        m\ddot{x} + kx = \eta
+    \end{equation}
+    where \( \eta = F_0 \cos(\omega t) \) is the driving force with amplitude \( F_0 \) and angular frequency \( \omega \). The general solution to this non-homogeneous differential equation given by:
+    \begin{equation}
+        x(t) = A(\omega)\cos(\omega t - \delta) 
+    \end{equation}
+    to derive $A(\omega)$ and $\delta$, we can use the equation of motion:
+    \begin{align*}
+        A(\omega)(-\omega^2 + \omega_0^2) \cos(\delta) = \omega_0^2 a
+    \end{align*}
+    where \( a = \frac{F_0}{k} \) is the static displacement of the mass when the driving force is constant. We also haev:
+    \begin{align*}
+        A(\omega)(-\omega^2 + \omega_0^2) \sin(\delta) = 0
+    \end{align*}
+    Now, consider the case when $\delta = 0$, we have:
+    \begin{equation}
+        A(\omega) = \frac{\omega_0^2 a}{\omega_0^2 - \omega^2}
+    \end{equation}
+    and the case where \( \delta = \pi \), we have:
+    \begin{equation}
+        A(\omega) = -\frac{\omega_0^2 a}{\omega_0^2 - \omega^2}
+    \end{equation}
+    Observe, when $\omega \approx \omega_0$, the amplitude \( A(\omega) \) becomes very large, indicating resonance. At resonance, the system oscillates with maximum amplitude, which can lead to significant energy transfer from the driving force to the oscillator.
+\end{definition}
+
+\subsection{Damped Forced Oscillations}
+\begin{definition}[Damped Forced Oscillations]
+    Consider a damped harmonic oscillator subjected to an external driving force. It is described by the following differential equation:
+    \begin{equation}
+        m\ddot{x} + b\dot{x} + kx = F_0 \cos(\omega t)
+    \end{equation}
+    where \( F_0 \) is the amplitude of the driving force, \( \omega \) is the angular frequency of the driving force, \( b \) is the damping coefficient, \( m \) is the mass, and \( k \) is the spring constant. The general solution to this non-homogeneous differential equation is given by:
+    \begin{equation}
+        x(t) = A(\omega)\cos(\omega t - \delta)
+    \end{equation}
+    and the amplitude \( A(\omega) \) is given by:
+    \begin{equation}
+        A(\omega) = \frac{\omega_0^2 a}{\sqrt{\omega^2 \gamma^2 + (\omega^2 - \omega_0^2)^2}}
+    \end{equation}
+    We can derive the following 4 cases:
+    \begin{enumerate}
+        \item \textbf{No Damping} (\( \gamma = 0 \)): In this case, the amplitude \( A(\omega) \) simplifies to the undamped case we discussed earlier.
+        \item \textbf{Low-Frequency Limit} (\( \omega \ll \omega_0 \)): In this limit, the amplitude \( A(\omega) \) approaches the static displacement \( a = \frac{F_0}{k} \). This means that at very low frequencies, the system behaves like a static spring, and the mass is displaced by an amount proportional to the applied force.
+        \item \textbf{High-Frequency Limit} (\( \omega \gg \omega_0 \)): In this limit, the amplitude \( A(\omega) \) decreases with increasing frequency, following the relation \( A(\omega) \approx \frac{\omega_0^2 a}{\omega^2} \). This indicates that at very high frequencies, the mass cannot respond quickly enough to the rapidly oscillating driving force, resulting in a smaller amplitude of oscillation.
+        \item \textbf{Resonance} (\( \omega \approx \omega_0 \)): At resonance, the amplitude \( A(\omega) \) reaches its maximum value but it does not become infinite due to the presence of damping: 
+        \begin{equation}
+            A_{\text{max}} = \frac{\omega_0^2 a}{\omega_0 \gamma} = \frac{\omega_0 a}{\gamma} = Q a
+        \end{equation}
+    \end{enumerate}
+    We also have the phase shift \( \delta \) given by:
+    \begin{equation}
+        \tan(\delta) = \frac{\omega \gamma}{\omega_0^2 - \omega^2}
+    \end{equation}
+    The phase shift \( \delta \) indicates how much the oscillation of the mass lags behind the driving force. The behavior of \( \delta \) can be summarized as follows:
+    \begin{itemize}
+        \item At low frequencies (\( \omega \ll \omega_0 \)), \( \delta \) approaches 0, meaning the mass oscillates in phase with the driving force.
+        \item At resonance (\( \omega = \omega_0 \)), \( \delta = \frac{\pi}{2} \), indicating that the mass oscillates a quarter cycle behind the driving force.
+        \item At high frequencies (\( \omega \gg \omega_0 \)), \( \delta \) approaches \( \pi \), meaning the mass oscillates out of phase with the driving force.
+    \end{itemize}
+\end{definition}
+
+
+
 \chapter{Modern Physics}
 \end{document}
 

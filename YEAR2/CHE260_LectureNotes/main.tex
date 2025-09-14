@@ -467,7 +467,116 @@ Dividing by $dt$, we have the rate form of the first law:
     \begin{equation}
         w_{12} = -\int_{V_1}^{V_2} P dV
     \end{equation}
-    \text{Note} Connecting that to the $PV$ diagram, the work done by the system is the area under the curve in the $PV$ diagram.
+    \text{Note} Connecting that to the $PV$ diagram, the work done by the system is the area under the curve in the $PV$ diagram:
+
+\begin{figure}[h!]
+    \centering
+    \begin{tikzpicture}
+        \draw[->] (0,0) -- (5,0) node[right] {Volume (V)};
+        \draw[->] (0,0) -- (0,5) node[above] {Pressure (P)};
+        \draw[thick, domain=1:4, samples=100] plot (\x, {4/\x}) node[right] {$P V = \text{constant}$};
+        \fill[blue!20, opacity=0.5] (1,4) -- plot[domain=1:3] (\x, {4/\x}) -- (3, 0) -- (1, 0) -- cycle;
+        \node at (2,1) {$w_{12}$};
+        \node at (1,4.5) {State 1};
+        \node at (3,1.5) {State 2};
+    \end{tikzpicture}
+    \caption{Work done by the system during expansion from State 1 to State 2 is the area under the curve in the $PV$ diagram.}
+\end{figure}
+
+\end{definition}
+\newpage
+\begin{example}[Isochoric Process]
+    Consider a gas in a cylinder with a fixed piston. If we heat the gas, its temperature and pressure increase, but its volume remains constant. In this case, there is no boundary work done by the system, as the volume does not change ($dV = 0$). However, there may be other forms of work done on or by the system, such as electrical work if the gas is heated using an electric heater. We can demosrate by the below diagram:
+    \begin{figure}[h!]
+        \centering
+        \begin{tikzpicture}
+            \draw[->] (0,0) -- (5,0) node[right] {Volume (V)};
+            \draw[->] (0,0) -- (0,5) node[above] {Pressure (P)};
+            \draw[thick] (2,0.5) -- (2,4) node[above] {};    
+            \node at (2.25,2) {$w_{12} = 0$};
+            \node at (2,4.5) {State 2};
+            \node at (2,0.5) {State 1};
+        \end{tikzpicture}
+        \caption{Isochoric Process in a $PV$ Diagram}
+    \end{figure}
+    
+\end{example}
+
+\begin{example}[Isobaric Process]
+    Consider a gas in a cylinder with a movable piston with mass $m$ on top. If we heat the gas, its temperature and volume increase, while its pressure remains constant (equal to the atmospheric pressure plus the pressure exerted by the mass on top of the piston). In this case, there is boundary work done by the system as the volume changes ($dV \neq 0$). The work done by the system can be calculated using the formula:
+    \begin{equation}
+        w_{12} = -\int_{V_1}^{V_2} P dV = -P (V_2 - V_1)
+    \end{equation}
+    where $P$ is the constant pressure of the gas, and $V_1$ and $V_2$ are the initial and final volumes of the gas, respectively. We can demonstrate by the below diagram:
+    \begin{figure}[h!]
+        \centering
+        \begin{tikzpicture}
+            \draw[->] (0,0) -- (5,0) node[right] {Volume (V)};
+            \draw[->] (0,0) -- (0,5) node[above] {Pressure (P)};
+            \draw[thick] (1,2) -- (4,2) node[right] {};    
+            \fill[blue!20, opacity=0.5] (1,0) -- (4,0) -- (4,2) -- (1,2) -- cycle;
+            \node at (3,1) {$w_{12} = -P (V_2 - V_1)$};
+            \node at (4,2.5) {State 2};
+            \node at (1,1.5) {State 1};
+        \end{tikzpicture}
+        \caption{Isobaric Process in a $PV$ Diagram}
+    \end{figure}
+\end{example}
+
+\begin{example}[Isothermal Process]
+    Consider a gas in a cylinder with a movable piston. If we compress the gas very slowly while keeping it in contact with a thermal reservoir, its temperature remains constant (isothermal process). In this case, there is boundary work done by the system as the volume changes ($dV \neq 0$). The work done by the system can be calculated using the formula:
+    \begin{equation}
+        w_{12} = -\int_{V_1}^{V_2} P dV = -nR_u T \ln\left(\frac{V_2}{V_1}\right)
+    \end{equation}
+    where $n$ is the number of moles of gas, $R_u$ is the universal gas constant, $T$ is the constant temperature of the gas, and $V_1$ and $V_2$ are the initial and final volumes of the gas, respectively. We can demonstrate by the below diagram:
+    \begin{figure}[h!]
+        \centering
+        \begin{tikzpicture}
+            \draw[->] (0,0) -- (5,0) node[right] {Volume (V)};
+            \draw[->] (0,0) -- (0,5) node[above] {Pressure (P)};
+            \draw[thick, domain=1:4, samples=100] plot (\x, {4/\x}) node[right] {$P V = \text{constant}$};
+            \fill[blue!20, opacity=0.5] (1,4) -- plot[domain=1:3] (\x, {4/\x}) -- (3, 0) -- (1, 0) -- cycle;
+            \node at (2,1) {$w_{12}$};
+            \node at (1,4.5) {State 1};
+            \node at (3,1.5) {State 2};
+        \end{tikzpicture}
+        \caption{Isothermal Process in a $PV$ Diagram}
+    \end{figure}
+
+    We can use the above equation to calculate the work done by the gas during the isothermal compression process.
+    
+\end{example}
+
+\paragraph{Curve Fitting in the PV Diagram} In general, we can fit a curve in the $PV$ diagram using the polytropic process equation:
+\begin{equation}
+    P V^n = \text{constant}
+\end{equation}
+where $n$ is the polytropic index. Different values of $n$ correspond to different specific types of processes:
+\begin{itemize}
+    \item $n = 0$: Isobaric process (constant pressure)
+    \item $n = 1$: Isothermal process (constant temperature)
+    \item $n = \gamma$: Adiabatic process (no heat transfer, where $\gamma = \frac{c_p}{c_v}$ is the heat capacity ratio)
+    \item $n \to \infty$: Isochoric process (constant volume)
+\end{itemize}
+We can compute the work done by the system during a polytropic process as:
+\begin{equation}
+    w_{12} = -\int_{V_1}^{V_2} P dV = \frac{P_2 V_2 - P_1 V_1}{n - 1} \quad (n \neq 1)
+\end{equation}
+
+\begin{definition}[Flow Work]
+    Flow work is the work required to push mass into or out of a control volume. It is given by:
+    \begin{equation}
+        W_{flow} = \frac{PB}{m} = Pv
+    \end{equation}
+    where $P$ is the pressure, $B$ is the volume flow rate, and $m$ is the mass flow rate. $v$ is the specific volume (volume per unit mass).
+    \textbf{Energy flowing a system per unit mass of a fluid} is called \textbf{flow energy} or \textbf{flow work}. It is the energy required to push mass into or out of a control volume. The flow work per unit mass is given by:
+    \begin{equation}
+       H = U + PV
+    \end{equation}
+    which is called the \textbf{enthalpy} of the fluid. The enthalpy is an extensive property, so we can define the specific enthalpy as:
+    \begin{equation}
+        h = u + Pv
+    \end{equation}
 \end{definition}
 
 
