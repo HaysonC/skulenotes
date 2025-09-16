@@ -246,7 +246,7 @@ There is two definitions of double integrals in this course, due to the discrepa
     For the case of discontinuous functions, if the set of discontinuities has measure zero, then the function is still integrable.
 \end{shaded}
 
-\begin{definition}[Definition of Double Integral]
+\begin{definition}[Definition of Double Integral] \label{def:double_integral}
     Let $R$ be a rectangular region in the $xy$-plane given by $R = [a,b] \times [c,d]$. The double integral of a function $f(x,y)$ over the region $R$ is defined as:
     \begin{subequations}
     \begin{equation}
@@ -604,13 +604,163 @@ The following is the analogue of the squeeze theorem for double integrals:
         &= \int_0^{\frac{\pi}{2}} \left[ -a \sqrt{a^2 - r^2} \right]_{r=0}^{r=a} d\theta = \int_0^{\frac{\pi}{2}} a^2 \, d\theta = \frac{\pi a^2}{2}
     \end{align*}
     Therefore, the total surface area of the sphere is:
-    $$        S = 8 \cdot S_{\text{1st octant}} = 4\pi a^2 $$   
+    $$        
+        S = 8 \cdot S_{\text{1st octant}} = 4\pi a^2 
+    $$   
+\end{example}
 
+\begin{example}
+    \textit{Let $R$ be the triangular region with vertices at $(0,0,0)$, $(1,0,0)$, and $(0,1,0)$. Find the surface area of the portion of $z = 3x + y^2$ that lies above the region $R$.}
+    
+    We first express the function and take the partial derivatives:
+    $$
+        z = 3x + y^2, \quad \frac{\partial z}{\partial x} = 3, \quad \frac{\partial z}{\partial y} = 2y
+    $$
+    Thus, we can set up the double integral as follows:
+    \begin{align*}
+        S &= \iint_R \sqrt{1 + \left( \frac{\partial z}{\partial x} \right)^2 + \left( \frac{\partial z}{\partial y} \right)^2} \, dA \\
+        &= \int_0^1 \int_0^{y} \sqrt{1 + 3^2 + (2y)^2} \, dx \, dy \\
+        &= \int_0^1 \int_0^{y} \sqrt{10 + 4y^2} \, dx \, dy \\
+        &= \int_0^1 \sqrt{10 + 4y^2} \cdot y \, dy \\ 
+        \intertext{The extra $y$ is useful for substitution. Let $u = 10 + 4y^2$, then $du = 8y \, dy$ (that's why we integrate w.r.t $x$ first). Thus, we have:}
+        S &= \int_{u=10}^{u=14} \sqrt{u} \cdot \frac{du}{8} = \frac{1}{8} \cdot \frac{2}{3} u^{\frac{3}{2}} \Big|_{u=10}^{u=14} \\ 
+        &= \frac{1}{12} (14^{\frac{3}{2}} - 10^{\frac{3}{2}}) \approx 1.7
+    \end{align*}
 \end{example}
 
 
+\subsection{Triple Integrals}
+The idea of a triple integral (in fact n-tuple integral) could be extend from the idea of double integral, similar to 
+Definition \ref{def:double_integral}. We can define a triple integral as follows:
+\begin{definition}
+    Consider a function $f(x,y,z)$ that is continuous a 
+    3-D reigion with volumne $V$. We can partition the reigion into $n$ subreigons with volume $\Delta V_i$. Then, we can define the triple integral of $f$ over the reigion $V$ as follows:
+    \begin{equation}
+        \iiint_V f(x,y,z) \, dV = \lim_{|P| \to 0} \sum_{i=1}^n f(x_i^*, y_i^*, z_i^*) \Delta V_i
+    \end{equation}
+    where $(x_i^*, y_i^*, z_i^*)$ is a point in the $i$-th subregion, and $|P|$ is the maximum diameter of the subregions. This limit exists and equals to the triple integral if $f$ is continuous on $V$, since the following squeeze theorem holds, similar to the double integral case:
+    $$       
+     \sum_{i=1}^n m_i \Delta V_i \le \sum_{i=1}^n f(x_i^*, y_i^*, z_i^*) \Delta V_i \le \sum_{i=1}^n M_i \Delta V_i
+    $$
+    where $m$ and $M$ are the minimum and maximum values of $f$ on $V$, respectively.
+
+    In the retangluar case, we can express $\Delta V_i$ as:
+    $$        
+    \Delta V_i = \Delta x_i \Delta y_i \Delta z_i
+    $$
+    Thus we have:
+    $$
+    dV = dx \, dy \, dz
+    $$
+\end{definition}
+
 \subsection{Triple Integrals in Rectangular Coordinates}
-\subsection{Triple Integrals in Cylindrical Coordinates}
+\begin{definition}[Triple Integral in Rectangular Region]
+    Consider a function $f(x,y,z)$ that is continuous over a rectangular box $B$ defined by the inequalities:
+    $$
+        a \le x \le b, \quad c \le y \le d, \quad r \le z \le s
+    $$
+    Then, the triple integral of $f$ over the box $B$ can be computed as an iterated integral in any order of integration:
+    \begin{equation}
+        \iiint_B f(x,y,z) \, dV = \int_a^b \int_c^d \int_r^s f(x,y,z) \, dz \, dy \, dx
+    \end{equation}
+    or any other permutation of the order of integration.
+    
+\end{definition}
+
+\begin{example}
+    Consider $f(x,y,z)$ over a box $Q = \{(x,y,z) \mid a \le x \le b , c \le y \le d, r \le z \le s\}$. We would form the triple integral as follows:
+    $$
+        \iiint_Q f(x,y,z) \, dV = \int_a^b \int_c^d \int_r^s f(x,y,z) \, dz \, dy \, dx \\
+    $$
+    Of course, the order of integration can be change (there are $_3P_3= 6$ ways).
+\end{example}
+
+\begin{definition}[Triple Integrals in General Reigion]
+    Consider a function $f(x,y,z)$ that is continuous over a general reigion $V$ in the 3-D space. We can describe the reigion $V$ using the following inequalities:
+    $$
+        a \le x \le b, \quad g_1(x) \le y \le g_2(x), \quad h_1(x,y) \le z \le h_2(x,y)
+    $$
+    where $g_1(x)$, $g_2(x)$, $h_1(x,y)$, and $h_2(x,y)$ are continuous functions. Then, the triple integral of $f$ over the reigion $V$ can be computed as an iterated integral:
+    \begin{equation}
+        \iiint_V f(x,y,z) \, dV = \int_a^b \int_{g_1(x)}^{g_2(x)} \int_{h_1(x,y)}^{h_2(x,y)} f(x,y,z) \, dz \, dy \, dx = \iint_R \int_{h_1(x,y)}^{h_2(x,y)} f(x,y,z) \, dz \, dA
+    \end{equation}
+    where $R = \{(x,y) \mid a \le x \le b, g_1(x) \le y \le g_2(x)\}$ is the projection of the reigion $V$ onto the $xy$-plane.
+
+    The order of integration and their associated bounds can be changed based on the description of the region.
+\end{definition}
+
+\begin{example} \label{ex:triple_integral_tetrahedron}
+    \textit{Evaluate $\iiint_Q 6xy dV$, where $Q$ is the tetrahedron bounded by the coordinate planes $x=0$, $y=0$, $z=0$ and the plane $2x + y + z = 4$.}
+
+    Let $R$ be the projection of the tetrahedron onto the $xy$-plane. Then, we consider how the tetrahedron change in the $z$ direction over $R$:
+    $$
+        z = 4 - 2x - y \implies 0 \le z \le 4 - 2x - y
+    $$
+    So we can set up:
+    \begin{align*}
+        \iiint_Q 6xy \, dV &= \iint_R \int_0^{4 - 2x - y} 6xy \, dz \, dA \\
+        &= \iint_R 6xy(4 - 2x - y) \, dA
+    \end{align*}
+    Now, we consider how the projection $R$ change in the $y$ direction over $x$:
+    $$
+        2x + y = 4 \implies 0 \le y \le 4 - 2x, \quad 0 \le x \le 2
+    $$
+    So we can set up:
+    \begin{align*}
+        \iiint_Q 6xy \, dV &= \int_0^2 \int_0^{4 - 2x} 6xy(4 - 2x - y) \, dy \, dx \\
+        &= \int_0^2 \left[ 12x y^2 - 6x(4 - 2x) y^2 - 2y^3 \right]_{y=0}^{y=4 - 2x} \, dx \\
+        &= \int_0^2 (192x - 144x^2 + 24x^3 - 32x^4 + 8x^5) \, dx = \frac{64}{5}
+    \end{align*}
+\end{example}
+
+\begin{example}
+    \textit{Evaluate the integral given in the previous Example \ref{ex:triple_integral_tetrahedron} by intergrating w.r.t. $x$ first.}
+
+    We consider how the tetrahedron change in the $x$ direction over $R$, which is now the projection of the 
+    tetrahedron onto the $yz$-plane:
+    $$
+        2x + y + z = 4 \implies 0 \le x \le \frac{4 - y - z}{2}
+    $$
+    So we can set up:
+    \begin{align*}
+        \iiint_Q 6xy \, dV &= \iint_R \int_0^{\frac{4 - y - z}{2}} 6xy \, dx \, dA \\
+        &= \frac{3}{4}\iint_R y(4 - y - z)^2 \, dA
+    \end{align*}
+    Now, we consider how the projection $R$ change in the $y$ direction over $z$:
+    $$
+        y + z = 4 \implies 0 \le y \le 4 - z, \quad 0 \le z \le 4
+    $$
+    So we can set up:
+    \begin{align*}
+        \iiint_Q 6xy \, dV &= \frac{3}{4} \int_0^4 \int_0^{4 - z} y(4 - y - z)^2 \, dy \, dz \\
+        &= \frac{64}{5}
+    \end{align*}
+\end{example}
+
+\begin{example}
+    \textit{Find the volume of the solid bounded by the surface $z = 4 - y^2$ and planes given by $x+z = 4$, $x=0$, and $z=0$.}
+
+    First, we select the $z = 4 - y^2$ surface as our base reigion $R$. Then, we consider how the solid change in the $x$ direction over $R$:
+    $$
+        x + z = 4 \implies 0 \le x \le 4 - z
+    $$
+    So we can set up:
+    \begin{align*}
+        V &= \iint_R \int_0^{4 - z} 1 \, dx \, dA \\
+        &= \iint_R (4 - z) \, dA
+    \end{align*}
+    Now, we consider how the projection $R$ change in the $z$ direction over $y$:
+    $$        z = 4 - y^2 \implies 0 \le z \le 4 - y^2, \quad -2 \le y \le 2
+    $$
+    So we can set up:
+    \begin{align*}
+        V &= \int_{-2}^2 \int_0^{4 - y^2} (4 - z) \, dz \, dy \\
+        &= \int_{-2}^2 \left[ 4z - \frac{z^2}{2} \right]_{z=0}^{z=4 - y^2} \, dy \\
+        &= \int_{-2}^2 \left( 8 - \frac{y^2}{2} \right) \, dy \\
+        &= \frac{128}{5}
+    \end{align*}
+\end{example}
 \subsection{Triple Integrals in Spherical Coordinates}
 \subsection{Change of Variables in Multiple Integrals} \label{sec:change_of_variables}
 \chapter{Fluid Mechanics}

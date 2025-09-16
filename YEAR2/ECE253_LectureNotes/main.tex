@@ -24,7 +24,7 @@ In this course, we will focus on the first three layers, on top of the logic gat
 
 \paragraph{Layer of abstraction} At this course, for the digital systems part, we would start from understanding logic gates, all the way to understanding computer architecture, with each level of abstraction hiding the details of the lower level.
 
-\subsection{Hierarchy, Modularity, and Regularity}
+\section{Hierarchy, Modularity, and Regularity}
 
 \begin{definition}[Hierarchy]
     The division of system into a set of modules, then further subdividing each module into smaller modules, and so on, until pieces are \textit{easy} to understand.    
@@ -53,7 +53,10 @@ Logic gates are made out of transistors:
 
 \end{shaded}
 
-\section{Logic Circuits}
+% ===================== PART A: DIGITAL LOGIC FOUNDATIONS =====================
+\section{Digital Logic Foundations}
+% Representation and arithmetic first, then devices and gates, then algebra/minimization
+% --- Representation ---
 \subsection{Number Systems}
 \begin{definition}[Number System]
     A number system is a way of representing numbers using a set of symbols (digits) and a base (radix). The base determines the number of unique digits that can be used in the number system.
@@ -185,16 +188,17 @@ This could be summerize as the following logic:
 \begin{definition}[Boolean Algebra]
     Boolean algebra is a branch of algebra that deals with binary variables and logical operations. It provides a set of rules and properties for manipulating and simplifying logic functions. The specific rules and properties would be covered in later lectures.
 \end{definition}
+% --- Devices and gates ---
 \subsection{Transistors as Switches}
 \begin{definition}[Transistor]
-    Transistor operates as a switch. The switch is open only when the gate is high. We denote the state of the gate as $x \in \{0,1\}$, where 0 is LO and 1 is HI. If input end of the swtich is HI, the output end could be modeled by the logic function:
+    Transistor operates as a switch. The switch is open only when the gate is high. We denote the state of the gate as $x \in \{0,1\}$, where 0 is LO and 1 is HI. If input end of the switch is HI, the output end could be modeled by the logic function:
     $$
         L(x) = x
     $$
 \end{definition}
 
 \begin{example}[Serial Transistors]
-    Consdier two transistors connected in series, with the input end of the first transistor connected to HI. The output end of the second transistor can be modeled by the following truth table:
+    Consider two transistors connected in series, with the input end of the first transistor connected to HI. The output end of the second transistor can be modeled by the following truth table:
     \begin{table}[h!]
         \centering
         \begin{tabular}{|c|c|c|}
@@ -350,7 +354,7 @@ This could be summerize as the following logic:
 
 \subsection{Additional Logic Gates}
 \begin{example}[XOR Operation]
-    We have two swtiches, when both switches are in the same state (both open or both closed), the output is 0. When the switches are in different states (one open and one closed), the output is 1. The truth table for this operation is shown below:
+    We have two switches; when both switches are in the same state (both open or both closed), the output is 0. When the switches are in different states (one open and one closed), the output is 1. The truth table for this operation is shown below:
     \begin{table}[h!]
         \centering
         \begin{tabular}{|c|c|c|}      
@@ -404,7 +408,7 @@ This could be summerize as the following logic:
 
 In addition, we have the following gates:
 \begin{definition}[NAND Gate]
-    A NAND gate outputs 0 only if all inputs are 1. The truth table for a 2-input NAND gate is shown in Table \ref{tab:nand_nor_gates}.
+    A NAND gate outputs 0 only if all inputs are 1. The truth table for a 2-input NAND gate is as expected for the complement of AND.
     \\
     The logic function for a NAND gate with inputs $A$ and $B$ can be expressed as:
     $$
@@ -430,8 +434,14 @@ In addition, we have the following gates:
     \end{center}
 \end{definition}
 
-\begin{definition}
-    
+\begin{definition}[NOR Gate]
+    A NOR gate outputs 1 only if all inputs are 0. The truth table for a 2-input NOR gate is the dual of the OR gate.
+    \\
+    The logic function for a NOR gate with inputs $A$ and $B$ can be expressed as:
+    $$
+        L(A, B) = \overline{A + B}
+    $$
+    % A minimal symbolic sketch could be added similar to OR with an inversion bubble; omitted for brevity.
 \end{definition}
 
 \begin{shaded}
@@ -443,6 +453,7 @@ In addition, we have the following gates:
 \end{shaded}
 
 
+% --- Algebra and minimization ---
 \paragraph{Commonly Used Logic Operators} Below is a table summarizing the commonly used logic operators:
 \begin{table}[h!]
     \centering
@@ -450,11 +461,10 @@ In addition, we have the following gates:
         \hline
         Operator & Symbol & Description \\
         \hline
-        AND & $\cdot$ or no symbol & Outputs 1 if all inputs are 1 \\
-        OR & $+$ & Outputs 1 if at least one input is 1 \\
-        NOT & $\overline{x}$ & Outputs the inverse of the input \\
-        inverse & $'$ or $\sim$ & Outputs the 2's complement of the input \\
-        XOR & $\oplus$ & Outputs 1 if inputs are different \\
+    AND & $\cdot$ or adjacency & Outputs 1 if all inputs are 1 \\
+    OR & $+$ & Outputs 1 if at least one input is 1 \\
+    NOT & $\overline{x}$ or $x'$ or $\sim x$ & Outputs the logical negation of the input \\
+    XOR & $\oplus$ & Outputs 1 if inputs are different \\
         NAND & $\overline{\cdot}$ & Outputs 0 if all inputs are 1 \\
         NOR & $\overline{+}$ & Outputs 0 if at least one input is 1 \\
         XNOR & $\overline{\oplus}$ & Outputs 1 if inputs are the same \\
@@ -694,8 +704,31 @@ The following identities can be derived from the axioms of Boolean algebra:
     \end{align*}
 \end{proof}
 
+\paragraph{Summary of Important Theorems} The following table summarizes the important theorems/laws in Boolean algebra:
+\begin{table}[h!]
+    \centering
+    \caption{Summary of Important Theorems/Laws in Boolean Algebra (original form and dual form)}
+    \label{tab:boolean_algebra_summary}
+    \begin{tabular}{|l|c|c|}
+         \hline
+            \textbf{Law / Theorem} & \textbf{Original Form(s)} & \textbf{Dual Form(s)} \\ \hline
+            Commutative Law & $A + B = B + A$ & $A \cdot B = B \cdot A$ \\ \hline
+            Associative Law & $A + (B + C) = (A + B) + C$ & $A \cdot (B \cdot C) = (A \cdot B) \cdot C$ \\ \hline
+            Distributive Law & $A \cdot (B + C) = A \cdot B + A \cdot C$ & $A + (B \cdot C) = (A + B) \cdot (A + C)$ \\ \hline
+            Identity Law & $A + 0 = A$ & $A \cdot 1 = A$ \\ \hline
+            Null Law & $A + 1 = 1$ & $A \cdot 0 = 0$ \\ \hline
+            Idempotent Law & $A + A = A$ & $A \cdot A = A$ \\ \hline
+            Complement Law & $A + \overline{A} = 1$ & $A \cdot \overline{A} = 0$ \\ \hline
+            Double Negation Law & $\overline{\overline{A}} = A$ & - \\ \hline
+            De Morgan's Theorem & $\overline{A \cdot B} = \overline{A} + \overline{B}$ & $\overline{A + B} = \overline{A} \cdot \overline{B}$ \\ \hline
+            Absorption / Redundancy Theorem & $A + \overline{A}B = A + B$ & $A(\overline{A} + B) = AB$ \\ \hline
+            Combining Theorem & $AB + A\overline{B} = A$ & $(A + B)(A + \overline{B}) = A$ \\ \hline
+            Covering Theorem & $A + AB = A$ & $A(A + B) = A$ \\ \hline  
+    \end{tabular}
+\end{table}
+\newpage
 \begin{shaded}
-    \textbf{Logic Minimization} The goal of logic minimization is to reduce the number of logic gates and inputs in a digital circuit while maintaining its functionality. This is important because it can lead to cost savings, improved performance, and reduced power consumption. Logic minimization can be achieved through various techniques, including Boolean algebra simplification, Karnaugh maps, and the Quine-McCluskey algorithm.
+    \paragraph{Logic Minimization} The goal of logic minimization is to reduce the number of logic gates and inputs in a digital circuit while maintaining its functionality. This is important because it can lead to cost savings, improved performance, and reduced power consumption. Logic minimization can be achieved through various techniques, including Boolean algebra simplification, Karnaugh maps, and the Quine-McCluskey algorithm.
 \end{shaded}
 
 \begin{theorem}[Nand as SOP]
@@ -717,7 +750,8 @@ The following identities can be derived from the axioms of Boolean algebra:
     $$
     We are to design a circuit that would output 1 if the Gumball is either too large or too small and too light. We can express canonical SOP form as:
     \begin{align*}
-        L(s_0, s_1, s_2) &= m_3 + m_4 + m_5 + m_6 + m_7 = \overline{s_0}s_1s_2 + s_2\overline{s_0}\overline{s_2} + s_0\overline{s_1}s_2 + s_0s_1\overline{s_2} + s_0s_1s_2 \\
+        L(s_0, s_1, s_2) &= m_3 + m_4 + m_5 + m_6 + m_7 \\ 
+        &= \overline{s_0}s_1s_2 + s_2\overline{s_0}\overline{s_2} + s_0\overline{s_1}s_2 + s_0s_1\overline{s_2} + s_0s_1s_2 \\
         \intertext{Using the Combining Theorem}
         &= \overline{s_0}s_1s_2 + s_2\overline{s_0}\overline{s_2} + s_0s_2 + s_0s_1 \\
         \intertext{Using the Absorption Theorem}
@@ -726,9 +760,160 @@ The following identities can be derived from the axioms of Boolean algebra:
         &= s_2 + s_0s_1 
     \end{align*}
 \end{example}
+
+\begin{example}
+    \textit{Derive a minimal POS expression for $f(x_1, x_2, x_3 = \prod M(0, 2, 4)$}
+    \\
+    We have:
+    \begin{align*}
+        f(x_1, x_2, x_3) &= M_0 M_2 M_4 \\
+        &= (x_1 + x_2 + x_3)(x_1 + \overline{x_2} + x_3)(\overline{x_1} + x_2 + x_3) \\
+    \intertext{Recognizing the combining theorem $(x+y)(x+\overline{y}) = x$}
+        &= (x_1 + x_3)(x_2 + x_3)(\overline{x_1} + x_3) \\
+        &= (x_1 + x_3)(x_2 + \overline{x_1} + x_3) \\
+        &= (x_1 + x_3)(x_2 + x_3)
+    \end{align*}   
+\end{example}
+
+\begin{theorem}[Transporting POS to SOP]
+    A POS circuit can be implemented using only NAND gates. This is achieved by applying De Morgan's Theorem and the properties of NAND gates. We can use the trick $f = \overline{\overline{f}}$ to convert the POS expression into a form that can be implemented with NAND gates.
+\end{theorem}
+\begin{theorem}[Transporting SOP to POS]
+    An SOP circuit can be implemented using only NOR gates. This is achieved by applying De Morgan's Theorem and the properties of NOR gates. We can use the trick $f = \overline{\overline{f}}$ to convert the SOP expression into a form that can be implemented with NOR gates.
+\end{theorem}
+
+\begin{example}
+    \textit{Implement the function $f(x_1, x_2, x_3) = \sum m(1, 3, 5, 7)$ using only NAND gates.}
+    \\
+    We have:
+    \begin{align*}
+        f(x_1, x_2, x_3) &= m_1 + m_3 + m_5 + m_7 \\
+        &= \overline{x_1}\overline{x_2}x_3 + \overline{x_1}x_2x_3 + x_1\overline{x_2}x_3 + x_1x_2x_3 \\
+        &= x_3(\overline{x_1}\overline{x_2} + \overline{x_1}x_2 + x_1\overline{x_2} + x_1x_2) \\
+        &= x_3(x_1 + x_2) \quad (\text{Using Combining Theorem}) \\
+        &= \overline{\overline{x_3(x_1 + x_2)}} \quad (\text{Using } f = \overline{\overline{f}}) \\
+        &= \overline{\overline{x_3} + \overline{x_1 + x_2}} \quad (\text{Using De Morgan's Theorem}) \\
+        &= \overline{\overline{x_3} + (\overline{x_1} \cdot \overline{x_2})} \quad (\text{Using De Morgan's Theorem}) 
+    \end{align*}    
+\end{example}
+
+% ===================== PART B: DESIGN METHODS AND HDL =====================
+\section{Combinational Logic Circuits}
+
+\begin{definition}[Combinational Logic Circuit]
+    A combinational logic circuit is a digital circuit that implements a specific logic function using a combination of logic gates. The output of a combinational logic circuit depends only on the current inputs and not on any previous inputs or states. 
+\end{definition}
+\begin{definition}{Hardware Description Language (HDL)}
+    A hardware description language (HDL) is a specialized programming language used to describe the structure, behavior, and operation of electronic circuits and systems. HDLs are used in the design and verification of digital systems, including integrated circuits (ICs) and field-programmable gate arrays (FPGAs). The two most commonly used HDLs are VHDL (VHSIC Hardware Description Language) and Verilog.
+\end{definition}
+\subsection{Introduction of Verilog}
+
+
+\begin{definition}[Module]
+    A module is a self-contained block of hardware that has inputs and outputs and an internal implementation (behavioral or structural). Modules are the unit of hierarchy in Verilog.
+\end{definition}
+
+\begin{example}[Module Block]
+    A module block in Verilog is defined using the `module` keyword, followed by the module name and a list of input and output ports. For example:
+    \begin{verbatim}
+    module basic_logic(input logic a, b,
+                       output logic w, x, y, z);
+        assign w = a & b; // AND gate
+        assign x = a | b; // OR gate
+        assign y = ~a;    // NOT gate
+        assign z = a ^ b; // XOR gate
+    endmodule
+    \end{verbatim}
+
+    \textbf{Keywords} The keywords used in the module block are:
+    \begin{itemize}
+        \item \verb|assign|: Used to define continuous assignments for combinational logic.
+        \item \verb|logic|: A type of variable that can hold binary values (0 or 1).
+    \end{itemize}
+\end{example}
+
+\begin{definition}[Continuous Assignment]
+    A continuous assignment is used to model combinational logic in Verilog. It is defined using the \verb|assign| keyword, followed by the output signal, the assignment operator `=`, and the logic expression. Continuous assignments are evaluated whenever any of the input signals change. That is, the output is considered instantaneously updated when the input changes (ignoring propagation delay).
+\end{definition}
+
+\begin{example}[2-1 Multiplexers (Mux)]
+    \textit{Design a circuit that controls a light $f$ based on either two switches $x$ and $y$. The switch that control the light is determined by a control signal $s$. If $s = 0$, the light is controlled by switch $x$. If $s = 1$, the light is controlled by switch $y$.}
+    \\
+    We have the following truth table:
+
+    \begin{table}[h!]
+        \centering
+        \begin{tabular}{|c|c|c|c|}
+            \hline
+            $s$ & $x$ & $y$ & $f$ \\
+            \hline
+            0 & 0 & 0 & 0 \\
+            0 & 0 & 1 & 0 \\
+            0 & 1 & 0 & 1 \\
+            0 & 1 & 1 & 1 \\
+            1 & 0 & 0 & 0 \\
+            1 & 0 & 1 & 1 \\
+            1 & 1 & 0 & 0 \\
+            1 & 1 & 1 & 1 \\
+            \hline
+        \end{tabular}
+        \caption{Truth Table for Mux}
+        \label{tab:mux_truth_table}
+    \end{table}
+    
+    From the truth table, we can derive the following canonical SOP expression:
+    \begin{align*}
+        f(s, x, y) &= m_2 + m_3 + m_5 + m_7 \\
+        &= \overline{s}x\overline{y} + \overline{s}xy + s\overline{x}y + sxy \\
+        &= \overline{s}x(\overline{y} + y) + sy(\overline{x} + x) \quad (\text{Using Distributive Law}) \\
+        &= \overline{s}x \cdot 1 + sy \cdot 1 \quad (\text{Using Complementation}) \\
+        &= \overline{s}x + sy \quad (\text{Using Identity})
+    \end{align*}
+
+    The verilog implementation is as follows:
+    \begin{verbatim}
+    module mux2to1(input logic x, y, s,
+                   output logic f);
+        assign f = (~s & x) | (s & y);
+    endmodule
+    \end{verbatim}
+\end{example}
+
+\paragraph{The diagram of a Mux} is a trapezoid shown below:
+\begin{center}
+    \begin{tikzpicture}[scale=1]
+        % Input nodes
+        \node (x) at (-2,0.5) {$x$};
+        \node (y) at (-2,-0.5) {$y$};
+        \node (s) at (-0.5,1.5) {$s$}; 
+        % Wires to gate
+        \draw (x.east) -- (-1,0.5);
+        \draw (y.east) -- (-1,-0.5);
+        \draw (s.south) -- (-0.5,0.75);
+        % Gate body: trapezoid
+        \draw (-1,1) -- (0,0.5) -- (0,-0.5) -- (-1,-1) -- cycle;
+        % Output
+        \node (f) at (1,0) {$f$};
+
+        \node (0) at (-0.6,0.3) {0};
+        \node (1) at (-0.6,-0.2) {1};
+        \draw (0,0) -- (f.west);
+    \end{tikzpicture}
+\end{center}
+
+\paragraph{4-1 Multiplexer (Mux)} A 4-1 Mux has 4 data inputs ($d_0, d_1, d_2, d_3$). The select signal would have two bit ($s_0, s_1$) to select one of the four data inputs to be outputted. In general, this is call a multibit signal, a.k.a a bus.
+\begin{definition}
+    
+\end{definition}
+
+
+
+% ===================== PART C: SEQUENTIAL LOGIC =====================
 \section{Digital Storage Elements}
+% Flip-flops, latches, registers (to be expanded)
 
 \section{Finite State Machines (FSM)}
+% FSM modeling, state diagrams, and Verilog implementation (to be expanded)
 
 \chapter{Computer Organization and Assembly Language}
 \begin{shaded}

@@ -12,6 +12,7 @@ The up-to-date version of this document can be found at \url{https://github.com/
 \section{Harmonic Oscillators}
 
 \subsection{Governing Equations of Harmonic Oscillators}
+This subsection collects the baseline ODEs for simple, damped, and driven oscillators to set notation used later.
 
 \paragraph{Types of Harmonic Oscillators} There are three types of harmonic oscillators: simple, damped, and driven harmonic oscillators. Consider a simple one dimensional harmonic oscillator, they are defined by the following differential equations:
 
@@ -32,33 +33,35 @@ The up-to-date version of this document can be found at \url{https://github.com/
     where \( b \) is the damping coefficient.
 \end{definition}
 
+\begin{shaded}
+	\textbf{Note on damping parameter conventions.} Different texts use different symbols and normalizations:
+\begin{itemize}
+    \item Our notes use $\gamma = \tfrac{b}{m}$, so the ODE reads $\ddot{x} + \gamma\dot{x} + \omega_0^2 x = 0$ and the decay envelope is $e^{-\gamma t/2}$.
+    \item Many texts define $\beta = \tfrac{b}{2m}$ and may call it $\gamma$ instead. In that convention the ODE is $\ddot{x} + 2\beta\dot{x} + \omega_0^2 x = 0$ with envelope $e^{-\beta t}$.
+\end{itemize}
+Equivalences: $\beta = \tfrac{\gamma}{2}$ and our underdamped condition $\gamma < 2\omega_0$ corresponds to $\beta < \omega_0$ in the $2\beta$ convention. When comparing formulas, check which definition is being used and replace $\gamma \leftrightarrow 2\beta$ accordingly.
+\end{shaded}
+
 \begin{definition}[Driven Harmonic Oscillator]
     A driven harmonic oscillator is described by the following differential equation, which includes an external driving force $F(t)$:
     \begin{equation}
         m \frac{d^2 x}{dt^2} + b \frac{dx}{dt} + kx = F(t)   
     \end{equation}
 \end{definition}
-\subsection{The Wave Equation}
-
-\begin{definition}[The Wave Equation]
-    The wave equation is a second-order linear partial differential equation that describes the propagation of waves, such as sound waves, light waves, and water waves, through a medium. In one dimension, it is given by the following PDE:
-    \begin{equation}
-        \frac{\partial^2 u}{\partial t^2} - c^2 \frac{\partial^2 u}{\partial x^2} = 0
-    \end{equation}
-    where \( u(x,t) \) is the wave function, \( c \) is the speed of the wave in the medium, \( x \) is the spatial coordinate, and \( t \) is time.
-\end{definition}
+% [Moved: The Wave Equation section is presented later for a smoother flow after oscillators]
 
 \subsection{Simple Harmonic Motion}
+We analyze the undamped solution forms, relate constants to initial conditions, and derive period/frequency relations.
 \begin{definition}[Simple Harmonic Motion]
-    You should have leaned the Hooke's law and Newton's second law, which gives us the equation of motion for a simple harmonic oscillator. The same with the equation (\ref{eq:hooke}), which can be rewritten as:
+    You should have learned Hooke's law and Newton's second law, which give us the equation of motion for a simple harmonic oscillator. The same as equation (\ref{eq:hooke}), which can be rewritten as:
     \begin{equation}
         F = m\ddot{x} = -kx
     \end{equation}
-    By setting $\omega^2 = \frac{k}{m}$, ageneral solution can be written as:
+    By setting $\omega^2 = \frac{k}{m}$, a general solution can be written as:
     \begin{equation}
         x(t) = x_0 + A_1 \cos(\omega t) + A_2 \sin(\omega t)
     \end{equation}
-    where \( A \) are the constants determined by the IVP, \( \omega \) is the angular frequency, and \( \phi \) is the phase constant. $x_0$ is the equilibrium position where we generally set it to be 0. The unknown constant can be determined by knowing $x, \dot{x}$ at specific times.
+    where $A_1$ and $A_2$ are constants determined by the IVP, $\omega$ is the angular frequency, and $\phi$ is the phase constant. $x_0$ is the equilibrium position (often set to 0). The unknown constants can be determined by knowing $x, \dot{x}$ at specific times.
 \end{definition}
 
 \begin{definition}[Period, Frequency, and Angular Frequency]
@@ -169,6 +172,7 @@ by the cosine addition formula.
 \end{definition}
 
 \subsection{Damped Harmonic Motion}
+We solve the damped ODE, classify regimes (underdamped, critical, overdamped), and connect decay rates with parameters.
 \begin{definition}[Damped Harmonic Motion]
     For small velocities, the drag force is approximately proportional to the velocity and acts in the opposite direction. This drag force can be modeled as \( F_d = -\gamma \dot{x} \), where \( \gamma \) is the damping coefficient. Including this drag force in the equation of motion for a harmonic oscillator leads to the damped harmonic oscillator equation (\ref{eq:damped_ho}). Which could be rewritten as:
     \begin{equation}
@@ -241,6 +245,7 @@ by the cosine addition formula.
 \end{definition}
 
 \subsection{Energy and Quality Factor}
+We study how energy decays under light damping, define the time constant and quality factor Q, and relate them to response.
 \begin{definition}[Energy of a Very Light Damping]
     Consider a very lightly damped harmonic oscillator, where \( \gamma \ll \omega_0 \). In this case, the angular frequency of oscillation \( \omega_r \) can be approximated as:
     $$
@@ -332,20 +337,21 @@ We can also consider the ratio between the energy at one time and the energy one
 \end{example}
 
 \subsection{Undamped Forced Oscillations}
+We examine steady-state response to sinusoidal driving without losses and identify resonance behavior.
 \begin{definition}[Undamped Forced Oscillations]
-    Consider a driver porves on the left side of the sping, we have the following differential equation:
+    Consider a driver force acting on the mass-spring system; the ODE becomes:
     \begin{equation}
         m\ddot{x} + kx = \eta
     \end{equation}
-    where \( \eta = F_0 \cos(\omega t) \) is the driving force with amplitude \( F_0 \) and angular frequency \( \omega \). The general solution to this non-homogeneous differential equation given by:
+    where \( \eta = F_0 \cos(\omega t) \) is the driving force with amplitude \( F_0 \) and angular frequency \( \omega \). The steady-state particular solution is:
     \begin{equation}
         x(t) = A(\omega)\cos(\omega t - \delta) 
     \end{equation}
-    to derive $A(\omega)$ and $\delta$, we can use the equation of motion:
+    To derive $A(\omega)$ and $\delta$, use the equation of motion:
     \begin{align*}
         A(\omega)(-\omega^2 + \omega_0^2) \cos(\delta) = \omega_0^2 a
     \end{align*}
-    where \( a = \frac{F_0}{k} \) is the static displacement of the mass when the driving force is constant. We also haev:
+    where \( a = \frac{F_0}{k} \) is the static displacement of the mass when the driving force is constant. We also have:
     \begin{align*}
         A(\omega)(-\omega^2 + \omega_0^2) \sin(\delta) = 0
     \end{align*}
@@ -361,6 +367,7 @@ We can also consider the ratio between the energy at one time and the energy one
 \end{definition}
 
 \subsection{Damped Forced Oscillations}
+We add damping to the driven case, derive the frequency response amplitude and phase, and study bandwidth and Q.
 \begin{definition}[Damped Forced Oscillations]
     Consider a damped harmonic oscillator subjected to an external driving force. It is described by the following differential equation:
     \begin{equation}
@@ -396,6 +403,148 @@ We can also consider the ratio between the energy at one time and the energy one
     \end{itemize}
 \end{definition}
 
+\begin{definition}[Power absorbed during forced oscillations] 
+    We can calculate the velocity of the oscillator:
+    \begin{equation}
+        \dot{x}(t) = -\omega A(\omega) \sin(\omega t - \delta) = -v_0 \sin(\omega t - \delta)
+    \end{equation}
+    where \( v_0 = \omega A(\omega) \) is the maximum speed of the oscillator. Energy is lost at the following rate:
+    \begin{equation}
+        P(t) = b v(t)^2 
+    \end{equation}
+    Substituteing the expression for \( v(t) \) into the power equation gives:
+    $$
+        P(t) = b v_0^2 \sin^2(\omega t - \delta)
+    $$
+    The average power \( \langle P \rangle \) over one complete cycle of the driving force is given by:
+   \begin{equation}
+        \bar{P}(\omega) = \frac{b v_0^2}{2} = \frac{\omega^2 F_0^2 \gamma}{2m \left[(\omega^2 - \omega_0^2)^2 + \omega^2 \gamma^2\right]}
+   \end{equation}
+    If the driving frequency \( \omega \) is close to \( \omega_0 \), use $\omega^2 - \omega_0^2 \approx 2\omega_0\Delta \omega$ with $\Delta \omega = \omega - \omega_0$ to get the Lorentzian form:
+    \begin{equation}
+        \bar{P}(\omega) \approx \frac{\omega_0 F_0^2}{2m \gamma \Big[ 1 + \big(\tfrac{2\Delta \omega}{\gamma}\big)^2 \Big]}
+    \end{equation}
+    The maximum average power occurs at resonance:
+    \begin{equation}
+        \bar{P}_{\text{max}} = \frac{\omega_0 F_0^2}{2m \gamma}
+    \end{equation}
+\end{definition}
+
+\paragraph{Full Width Half Height} The graph of \( \bar{P}(\omega) \) versus \( \omega \) has a peak at \( \omega = \omega_0 \) with a maximum value of \( \bar{P}_{\text{max}} \). The full width at half maximum (FWHM) is the width of the peak at half of its maximum height. The FWHM is given by:
+\begin{equation}
+    \omega_\text{FWHM} = 2\Delta \omega = 2\gamma = \frac{2\omega_0}{Q}
+\end{equation}
+To illustrate the graph, we can plot \( \bar{P}(\omega) \) versus \( \omega \) for different values of the quality factor \( Q \):
+\begin{figure}[h!]
+    \centering
+    \begin{tikzpicture}
+        \begin{axis}[
+            xlabel={Driving Frequency \( \omega \)},
+            ylabel={Average Power \( \bar{P}(\omega) \)},
+            title={Average Power vs Driving Frequency for Different Quality Factors, Power normalized to \( \bar{P}_{\text{max}}  = 1\)},
+            legend pos=north east,
+            grid=major,
+            width=0.8\textwidth,
+            height=0.5\textwidth,
+            domain=0:3,
+            range=0:1.2,
+            samples=200,
+        ]
+        % Plot for Q = 1
+        \addplot[black] {1/(1 + (2*(x-1))^2)};
+        \addlegendentry{\( Q = 1 \)}
+
+        % Plot for Q = 5
+        \addplot[black, thick, dashed] {1/(1 + (2*(x-1)/0.2)^2)};
+        \addlegendentry{\( Q = 5 \)}
+
+        % Plot for Q = 10
+        \addplot[black, thick] {1/(1 + (2*(x-1)/0.1)^2)};
+        \addlegendentry{\( Q = 10 \)}
+        % add the lenght of the fwhm at P = 0.5
+        \draw[dashed] (axis cs:0.9,0) -- (axis cs:0.9,0.5);
+        \draw[dashed] (axis cs:1.1,0) -- (axis cs:1.1,0.5);
+        \draw[<->] (axis cs:0.9,0.5) -- (axis cs:1.1,0.5) node[midway, above] {\( \Delta \omega = \frac{\omega_0}{Q} \)};
+        
+        % vertcal line dotted at omega = 1
+        \draw[dotted, red, thick] (axis cs:1,0) -- (axis cs:1,1);
+        % label the peak
+        \node at (axis cs:1,1.05) {\( \bar{P}_{\text{max}} \)};
+        % label the x axis at omega = 1
+        \node at (axis cs:1,-0.05) {\( \omega_0 \)};
+    
+        % label the points
+        \node at (axis cs:0.7,-0.05) {\( \omega_0 - \frac{\gamma}{2} \)};
+        \node at (axis cs:1.3,-0.05) {\( \omega_0 + \frac{\gamma}{2} \)};
+        
+        \end{axis}
+    \end{tikzpicture}
+    \caption{Average Power vs Driving Frequency for Different Quality Factors}
+    \label{fig:power_vs_frequency}
+\end{figure}
+
+\subsection{Simple Pendulum}
+Consider the arc length \( s \) of a pendulum bob, we have:
+\begin{equation}
+    s = l\theta \quad m\ddot{s} = -mg\sin(\theta)
+\end{equation}
+
+For small angles, we can approximate \( \sin(\theta) \approx \theta \), leading to:
+\begin{equation}
+    \ddot{\theta} + \frac{g}{l}\theta = 0
+\end{equation}
+And the ODE has solution:
+\begin{equation}
+    \theta(t) = \theta_0 \cos(\omega t + \phi)
+\end{equation}
+
+\paragraph{Energy} For small angle $\theta$, the total mechanical energy \( E \) of the pendulum is given by:
+\begin{equation}
+    E = K + U = \frac{1}{2}ml^2\dot{\theta}^2 + mgl(1 - \cos(\theta)) \approx \frac{1}{2}ml^2\dot{\theta}^2 + \frac{1}{2}mgl\theta^2
+\end{equation}
+This shows that the pendulum behaves like a simple harmonic oscillator with an effective spring constant \( k = \frac{mg}{l} \).    
+
+
+\paragraph{The physical pendulum} For a rigid body swinging about a pivot point, the equation of motion is given by:
+\begin{equation}
+    I\ddot{\theta} = \tau 
+\end{equation}
+For simple rod of length \( L \) and mass \( m \) pivoted at one end, the moment of inertia about the pivot point is \( I = \frac{1}{3}mL^2 \). The torque due to gravity when the rod is displaced by an angle \( \theta \) from the vertical is \( \tau = -mg\frac{L}{2}\sin(\theta) \). For small angles, we can approximate \( \sin(\theta) \approx \theta \), leading to:
+\begin{equation}
+    \ddot{\theta} + \frac{3g}{2L}\theta = 0
+\end{equation}
+The angular frequency of oscillation for the physical pendulum is:
+\begin{equation}
+    \omega = \sqrt{\frac{3g}{2L}}
+\end{equation}
+
+\paragraph{The LC Circuit} An LC circuit consists of an inductor \( L \) and a capacitor \( C \) connected in series. The charge \( q(t) \) on the capacitor satisfies the differential equation:
+\begin{equation}
+    L\frac{d^2q}{dt^2} + \frac{1}{C}q = 0
+\end{equation}
+This is analogous to the equation of motion for a simple harmonic oscillator, with the angular frequency given by:
+\begin{equation}
+    \omega = \frac{1}{\sqrt{LC}}
+\end{equation}  
+
+\paragraph{The RLC Circuit} An RLC circuit consists of a resistor \( R \), inductor \( L \), and capacitor \( C \) connected in series. The charge \( q(t) \) on the capacitor satisfies the differential equation:
+\begin{equation}
+    L\frac{d^2q}{dt^2} + R\frac{dq}{dt} + \frac{1}{C}q = 0
+\end{equation}
+This is analogous to the resistor behaving as a damped harmonic oscillator, with the angular frequency given by:
+\begin{equation}
+    \omega = \sqrt{\frac{1}{LC} - \left(\frac{R}{2L}\right)^2}
+\end{equation}
+
+\section{The Wave Equation}
+
+\begin{definition}[The Wave Equation]
+    The wave equation is a second-order linear partial differential equation that describes the propagation of waves (sound, EM, water). In one dimension, it is:
+    \begin{equation}
+        \frac{\partial^2 u}{\partial t^2} - c^2 \frac{\partial^2 u}{\partial x^2} = 0
+    \end{equation}
+    where $u(x,t)$ is the disturbance, $c$ is the wave speed, $x$ is position, and $t$ is time.
+\end{definition}
 
 
 \chapter{Modern Physics}

@@ -33,7 +33,8 @@ The up-to-date version of this document can be found at \url{https://github.com/
 
 
 \end{shaded}
-\section{Systems and Properties in Thermodynamics}
+% ===================== PART 1: FOUNDATIONS =====================
+\section{Foundations and Fundamental Concepts}
 \begin{definition}[Energy]
     You should have learned that energy is the ability to do work.
 \end{definition}
@@ -57,9 +58,9 @@ In this course, we are going to explore two:
     \item \textbf{Entropy} Entropy is what gives students the most trouble; you can't show someone a picture of entropy, it is abstract.
 \end{itemize}
 
-These fundamental concepts are in arbitrary units and form the foundation `axioms' in science.
+These fundamental concepts are in arbitrary units and form the foundation `axioms' in science. We first build intuitive physical meaning (ability to lift, cause motion, create change) before formal laws.
 
-\subsection{Energy}
+\subsection{Mechanical Intuition for Energy Forms}
 \paragraph{Energy} An understanding of energy is its ability to \textbf{lift weights}. This is a way we could test if there is energy.
 \begin{example}[Potential Energy]
     A 1 kg mass lifted 1 meter has a potential energy of about 10 J. Imagine that it is attached to a balance, with a small mass on the other side, then, it is able to lift that weight.
@@ -87,7 +88,7 @@ water gets sprayed, evaporates, and condenses, causing the piston to lower.
 
 However, the Newcomen engine is not the most efficient steam engine, most heat is lost in the heating and cooling process. Solution? A external condenser was added to improve efficiency by cooling the steam and creating a vacuum, allowing the piston to be pulled down more effectively. This is the \textbf{Watt Engine}.
 
-\paragraph{Steam Cycle} The steam cycle is a thermodynamic cycle that converts heat energy into mechanical work. It consists of four main processes: 
+\paragraph{Steam Cycle (Preview)} The steam cycle is a thermodynamic cycle that converts heat energy into mechanical work. It consists of four main processes (we will formalize cycles later under engines): 
 \begin{enumerate}
     \item \textbf{Heating} - The working fluid (steam) is heated in the boiler, converting water into steam and increasing its energy.
     \item \textbf{Expansion} - The high-pressure steam expands in the piston, doing work on the piston and converting thermal energy into mechanical work.
@@ -141,14 +142,16 @@ This begs the question, can we create a heat engine with 100\% efficiency (i.e.,
 
 \paragraph{Irreversibility and Spontaneity} The process of losing heat is spontaneous and irreversible. Once heat is lost to the cooler surroundings, it cannot be completely recovered and converted back into work, however, the process of bringing heat from a cooler body to a hotter body is non-spontaneous and requires external work (e.g., a refrigerator). These give rise to the concept of irreversibility in thermodynamic processes, from the laws of thermodynamics.
 
-The first law of thermodynamics is simple and easy to understand:
+% ===================== PART 2: LAWS OF THERMODYNAMICS (PREVIEW) =====================
+\section{Preview of Thermodynamic Laws and Directionality}
+The first intuitive principle (later formalized) is conservation of energy in transformations between forms:
 \begin{definition}[First Law of Thermodynamics] \label{def:firstlaw}
     The first law of thermodynamics states that energy cannot be created or destroyed, only transformed from one form to another. In the context of a heat engine, this means that the work output ($W$) is equal to the heat input ($Q_H$) minus the heat rejected ($Q_C$):
     \begin{equation}
         W = Q_H - Q_C
     \end{equation}
 \end{definition}
-The second law formalizes the concept of the directionality of thermodynamic processes, stating that heat cannot spontaneously flow from a colder body to a hotter body. This law introduces the idea of entropy, a measure of the disorder or randomness in a system, which tends to increase over time in isolated systems.
+The second law formalizes directionality: heat does not spontaneously flow from cold to hot. This introduces \emph{entropy} as a bookkeeping tool for irreversibility. (A rigorous treatment of entropy will follow after we develop state / property concepts.)
 
 \begin{definition}[Second Law of Thermodynamics]
     The second law of thermodynamics states that the total entropy of an isolated system can never decrease over time. We consdier entropy as:
@@ -166,7 +169,8 @@ The second law formalizes the concept of the directionality of thermodynamic pro
 
 
 
-\subsection{Systems and States}
+% ===================== PART 3: SYSTEM DESCRIPTORS =====================
+\section{Systems, States, and Properties}
 \begin{definition}[System]
     Any piece of matter or a region of space.
 \end{definition}
@@ -253,7 +257,8 @@ Here's a quick refresher on line integrals and basic math:
     A process is a transformation from one state to another. A process can be described by the path taken by the system in the property space. For example, a gas can undergo a process of compression or expansion, which changes its pressure, volume, and temperature.
 \end{definition}
 
-\subsection{Modeling Ideal Gas}
+% ===================== PART 4: IDEAL GAS MODEL =====================
+\section{Ideal Gas Model and Molecular Basis}
 \begin{definition}[Quasi-Equilibrium Process (Reversible Path)]
     A quasi-equilibrium process is a process that occurs slowly enough that the system remains in a state of equilibrium at all times. In other words, the properties of the system change so (infinitely) slowly that they can be considered constant during the process. In this case, this path is reversible. \\
     (Example) A gas in a cylinder with a movable piston that is compressed or expanded very slowly, allowing the gas to remain in equilibrium throughout the process.
@@ -415,7 +420,8 @@ We can also observe that increasing the temperature increases the average kineti
     $$
 \end{example}
 
-\section{First Law of Thermodynamics}
+% ===================== PART 5: FIRST LAW FORMAL DEVELOPMENT =====================
+\section{First Law of Thermodynamics (Formal Development)}
 \begin{shaded}
 \paragraph{Motivation} We want to understand how energy is conserved in a system, and how energy is transferred between a system and its surroundings. This is important for understanding how engines work, how to design efficient systems, and how to analyze thermodynamic processes.
 \end{shaded}  
@@ -454,7 +460,8 @@ Dividing by $dt$, we have the rate form of the first law:
     where $\dot{Q}$ is the rate of heat transfer, and $\dot{W}$ is the rate of work transfer.
 \end{definition}
 
-\subsection{Work Modes}
+% ===================== PART 6: WORK AND ENERGY MODES =====================
+\section{Work and Energy Transfer Modes}
 \begin{definition}[Boundry Work]
     Force acts on the boundries of a systems and deformes them. \\
     (Example) Expansion and compression of a gas 
@@ -547,7 +554,7 @@ Dividing by $dt$, we have the rate form of the first law:
     
 \end{example}
 
-\paragraph{Curve Fitting in the PV Diagram} In general, we can fit a curve in the $PV$ diagram using the polytropic process equation:
+\paragraph{General Polytropic Representation} In general, we can fit a curve in the $PV$ diagram using the polytropic process equation:
 \begin{equation}
     P V^n = \text{constant}
 \end{equation}
@@ -569,19 +576,186 @@ We can compute the work done by the system during a polytropic process as:
         W_{flow} = \frac{PB}{m} = Pv
     \end{equation}
     where $P$ is the pressure, $B$ is the volume flow rate, and $m$ is the mass flow rate. $v$ is the specific volume (volume per unit mass).
-    \textbf{Energy flowing a system per unit mass of a fluid} is called \textbf{flow energy} or \textbf{flow work}. It is the energy required to push mass into or out of a control volume. The flow work per unit mass is given by:
-    \begin{equation}
-       H = U + PV
-    \end{equation}
-    which is called the \textbf{enthalpy} of the fluid. The enthalpy is an extensive property, so we can define the specific enthalpy as:
-    \begin{equation}
-        h = u + Pv
-    \end{equation}
+    
+    \textbf{Energy flowing a system per unit mass of a fluid} is called \textbf{flow energy} or \textbf{flow work}. It is the energy required to push mass into or out of a control volume. The flow work per unit mass is given by enthalpy, which we will define next.
 \end{definition}
 
 
+\begin{definition}[Enthalpy]
+    Enthalpy is a thermodynamic property that represents the total energy of a system, including both its internal energy and the energy associated with its pressure and volume. It is defined as:
+    \begin{equation}
+        H = U + PV
+    \end{equation}
+    where $H$ is the enthalpy, $U$ is the internal energy, $P$ is the pressure, and $V$ is the volume. Enthalpy is an extensive property, so we can define the specific enthalpy as:
+    \begin{equation}
+        h = u + Pv
+    \end{equation}
+    where $h$ is the specific enthalpy, $u$ is the specific internal energy, and $v$ is the specific volume.
+    
+\end{definition}
 
+\begin{example}[Constant Pressure Porcess]
+    Consider a gas in a cylinder with a movable piston. If we heat the gas at constant pressure, we would haveL
+    $$
+        P_{\text{gas}} = P_{\text{atm}}
+    $$
+    The work done by the gas during expansion is given by:
+    $$
+        w_{12} = -\int_{V_1}^{V_2} P dV = -P (V_2 - V_1)
+    $$
+    The energy balance for the system can be expressed as:
+    $$
+        Q_{\text{in}} - W_{\text{out}} = \Delta U_{\text{system}}
+    $$
+    where $Q_{\text{in}}$ is the heat added to the system, $W_{\text{out}}$ is the work done by the system, and $\Delta U_{\text{system}}$ is the change in internal energy of the system. Rearranging, we have:
+    $$
+        Q_{\text{in}} = (U_2 - U_1) + (P_2 V_2 - P_1 V_1) = (U_2 + P_2 V_2) - (U_1 + P_1 V_1) = H_2 - H_1
+    $$
+\end{example}
 
+\begin{theorem}[Enthalpy Change in a Constant Pressure Process]
+    For a constant pressure process, the heat added to the system is equal to the change in enthalpy of the system:
+    \begin{equation}
+        Q_{\text{in}} = H_2 - H_1
+    \end{equation}
+
+    For the instantaneous change, we have:
+    $$
+        \delta Q = du + Pdu
+    $$
+    from the definition of enthalpy, we have:
+    $$
+        h = u + Pv \quad \Rightarrow \quad dh = du + PdV + VdP
+    $$
+    Since the pressure is constant ($dP = 0$), we have:
+    $$
+        \delta Q = dh
+    $$
+\end{theorem}
+
+\begin{example}[Constant Volume Process]
+    Consider a gas in a cylinder with a fixed piston. If we heat the gas at constant volume, there is no boundary work done by the system, as the volume does not change ($dV = 0$). However, there may be other forms of work done on or by the system, such as electrical work if the gas is heated using an electric heater. The energy balance for the system can be expressed as:
+    $$
+        Q_{\text{in}} - W_{\text{out}} = \Delta U_{\text{system}}
+    $$
+    where $Q_{\text{in}}$ is the heat added to the system, $W_{\text{out}}$ is the work done by the system (which is zero in this case), and $\Delta U_{system}$ is the change in internal energy of the system. Rearranging, we have:
+    $$
+        Q_{\text{in}} = U_2 - U_1
+    $$
+\end{example}
+
+\begin{theorem}
+[Internal Energy Change in a Constant Volume Process]
+    For a constant volume process, the heat added to the system is equal to the change in internal energy of the system:
+    \begin{equation}
+        Q_{\text{in}} = U_2 - U_1
+    \end{equation}
+    For the instantaneous change, we have:
+    $$
+        \delta Q = du
+    $$  
+\end{theorem}
+
+\paragraph{How do we evaluate $\Delta U$ and $\Delta H$?} For an ideal gas, we can use the specific heat capacities at constant volume ($c_v$) and constant pressure ($c_p$) to evaluate the changes in internal energy and enthalpy:
+\begin{definition}[Specific Heat]
+    The specific heat is the amount of energy required to raise the temperature of a unit mass of a substance by one degree kelvin (or celsius). It is given by:
+    \begin{equation}
+        c_{\text{average}} = \frac{Q}{\Delta T}
+    \end{equation}
+    where $Q$ is the heat added to the system and $\Delta T$ is the change in temperature. For the specific heat at each instanentious temperature, we have:
+    \begin{equation}
+        c(T) = \lim_{\Delta T \to 0} \frac{Q}{\Delta T} = \frac{\delta Q}{dT}
+    \end{equation}
+    note that $c$ could change with temperature.
+\end{definition}
+
+\begin{definition}[Specifc Heat at Constant Volume]
+    The specific heat at constant volume ($c_v$) is the amount of energy required to raise the temperature of a unit mass of a substance by one degree kelvin (or celsius) while keeping the volume constant. It is given by:
+    \begin{equation}
+        c_v(T) = \left(\frac{\partial u}{\partial T}\right)_v 
+    \end{equation}
+\end{definition}
+
+\begin{definition}[Specific Heat at Constant Pressure]
+    The specific heat at constant pressure ($c_p$) is the amount of energy required to raise the temperature of a unit mass of a substance by one degree kelvin (or celsius) while keeping the pressure constant. It is given by:
+    \begin{equation}
+        c_p(T) = \left(\frac{\partial h}{\partial T}\right)_p 
+    \end{equation}
+\end{definition}
+
+\paragraph{Ideal Gas} For an ideal gas, the $h$ and $u$ depend only on temperature, so we can write:
+\begin{subequations}
+\begin{align}
+    du &= c_v(T) dT \\
+    dh &= c_p(T) dT
+\end{align}
+\end{subequations}
+Also, we have:
+$$
+    h = u + Pv = u + RT
+$$
+Differentiating, we have:
+$$
+    dh = du + R dT
+$$
+Substituting, we have:
+\begin{equation}
+    R = c_p - c_v
+\end{equation}
+
+\begin{definition}[Specifc Heat Ratio]
+    The specific heat ratio ($\gamma$) is the ratio of the specific heat at constant pressure to the specific heat at constant volume:
+    \begin{equation}
+        \gamma = \frac{c_p}{c_v}
+    \end{equation}
+    For a monoatomic ideal gas, we have:
+    \begin{equation}
+        \gamma = \frac{5}{3} \approx 1.67
+    \end{equation}
+    For a diatomic ideal gas (e.g., nitrogen, oxygen), we have:
+    \begin{equation}
+        \gamma = \frac{7}{5} = 1.4
+    \end{equation}
+\end{definition}
+
+\begin{definition}[Change in Internal Energy and Enthalpy]
+    The change in internal energy and enthalpy of an ideal gas can be calculated using the specific heat capacities at constant volume ($c_v$) and constant pressure ($c_p$):
+    \begin{subequations}
+    \begin{align}
+        \Delta u &= \int_{T_1}^{T_2} c_v(T) dT \\
+        \Delta h &= \int_{T_1}^{T_2} c_p(T) dT
+    \end{align}
+    \end{subequations}
+    where $T_1$ and $T_2$ are the initial and final temperatures, respectively.
+
+    For small temperature changes, since $c_v$ and $c_p$ are relatively constant, we can approximate the changes as:
+    \begin{subequations}
+        \begin{align}
+            \Delta u &\approx c_v (T_2 - T_1) \\
+            \Delta h &\approx c_p (T_2 - T_1)
+        \end{align}
+    \end{subequations}
+    To choose the value of $c_v$ and $c_p$, could just use the average value over the temperature range, or use the value at the midpoint temperature.
+
+\end{definition}
+
+\begin{example}
+    Consider air heated from 300 K to 400 K. For air, we have $c_v = 0.721$ kJ/kg K and $c_p = 1.008$ kJ/kg K. The change in internal energy and enthalpy can be approximated (this is because we assume $c_v$ and $c_p$ are constant over the temperature range, which is a reasonable assumption for small temperature changes) as:
+
+    \begin{align*}
+        \Delta u &\approx \int_{T_1}^{T_2} c_v(T) dT = c_v (T_2 - T_1) = 0.721 \times (400 - 300) = 72.1\, \text{kJ/kg} \\
+        \Delta h &\approx \int_{T_1}^{T_2} c_p(T) dT = c_p (T_2 - T_1) = 1.008 \times (400 - 300) = 100.8\, \text{kJ/kg} \\
+    \end{align*}
+\end{example}
+
+\paragraph{Note} Do not associated $c_v$ and $c_p$ with constant volume and constant pressure processes, they are just the specific heat capacities at constant volume and constant pressure, they are properties of the substance that is true for any process. Associate them with $\Delta u$ and $\Delta h$.
+
+\begin{example}
+    Consider a piston-cylinder device. If we put a weight on top, the gas is compressed, and the piston moves down. This boundry work process would change enthalpy, despite not changing the temperature. This is becuase:
+    $$
+        dh = du + PdV + VdP = VdP \quad (du = 0, dV = 0)
+    $$
+\end{example}
 \chapter{Heat Transfer}
 
 \end{document}
