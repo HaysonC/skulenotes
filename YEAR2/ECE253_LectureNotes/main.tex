@@ -835,7 +835,7 @@ The following identities can be derived from the axioms of Boolean algebra:
 \begin{definition}[Continuous Assignment]
     A continuous assignment is used to model combinational logic in Verilog. It is defined using the \verb|assign| keyword, followed by the output signal, the assignment operator `=`, and the logic expression. Continuous assignments are evaluated whenever any of the input signals change. That is, the output is considered instantaneously updated when the input changes (ignoring propagation delay).
 \end{definition}
-
+\subsection{Multiplexers (Mux)}
 \begin{example}[2-1 Multiplexers (Mux)]
     \textit{Design a circuit that controls a light $f$ based on either two switches $x$ and $y$. The switch that control the light is determined by a control signal $s$. If $s = 0$, the light is controlled by switch $x$. If $s = 1$, the light is controlled by switch $y$.}
     \\
@@ -879,7 +879,7 @@ The following identities can be derived from the axioms of Boolean algebra:
     \end{verbatim}
 \end{example}
 
-\paragraph{The diagram of a Mux} is a trapezoid shown below:
+\paragraph{The Diagram of a Mux} is a trapezoid shown below:
 \begin{center}
     \begin{tikzpicture}[scale=1]
         % Input nodes
@@ -902,9 +902,168 @@ The following identities can be derived from the axioms of Boolean algebra:
 \end{center}
 
 \paragraph{4-1 Multiplexer (Mux)} A 4-1 Mux has 4 data inputs ($d_0, d_1, d_2, d_3$). The select signal would have two bit ($s_0, s_1$) to select one of the four data inputs to be outputted. In general, this is call a multibit signal, a.k.a a bus.
-\begin{definition}
-    
+\begin{definition}[Bus]
+    A bus is a bundle of signals. It is used to transfer data between different components of a digital system.
 \end{definition}
+
+\begin{example}[Verilog for a 2bit 2-1 Mux]
+    The verilog implementation for a 2bit 2-1 Mux is as follows:
+    \begin{verbatim}
+    module mux2to1_2bit(input logic [1:0] x, y, // 2-bit inputs
+                        input logic s,         // select signal
+                        output logic [1:0] f); // 2-bit output
+        assign f[0] = (~s & x[0]) | (s & y[0]); // LSB
+        assign f[1] = (~s & x[1]) | (s & y[1]); // MSB
+        // Alternatively, we can use the following single line:
+        // assign f = s ? y : x; // If s=1, f=y; else f=x
+    endmodule
+    \end{verbatim}
+
+    As we can see, we can initialize the datatype of a bus using the following syntax:
+    \begin{verbatim}
+    logic [n-1:0] bus_name; // n-bit bus
+    \end{verbatim}
+    
+\end{example}
+
+\subsection{Adders}
+\begin{definition}[Half Adder]
+    A half adder is a combinational logic circuit that performs the addition of two single-bit binary numbers. It has two inputs, typically denoted as $A$ and $B$, and two outputs: the sum ($S$) and the carry ($C$). The sum output represents the least significant bit of the addition, while the carry output represents any overflow that occurs when both inputs are 1. We start with the following truth table:
+    \begin{table}[h!]
+        \centering
+        \begin{tabular}{|c|c|c|c|}
+            \hline
+            $A$ & $B$ & $S_1$ & $S_2$ \\
+            \hline
+            0 & 0 & 0 & 0 \\
+            0 & 1 & 1 & 0 \\    
+            1 & 0 & 1 & 0 \\
+            1 & 1 & 0 & 1 \\
+            \hline
+        \end{tabular}
+        \caption{Truth Table for Half Adder}
+        \label{tab:half_adder_truth_table}
+    \end{table}
+    From the truth table, we can derive the following expressions using canonical SOP form:
+    \begin{align*}
+        S_0 &= m_1 + m_2 = \overline{A}B + A\overline{B} = A \oplus B \\
+        S_1 &= m_3 = AB
+    \end{align*}
+    The Verilog implementation is as follows:
+    \begin{verbatim}
+    module half_adder(input logic A, B,
+                      output logic [1:0] S);
+        assign s[1] = a & b;
+        assign s[0] = a ^ b;
+    endmodule
+    \end{verbatim}
+\end{definition}
+
+\begin{definition}[Full Adder]
+    A full adder is a combinational logic circuit that performs the addition of three single-bit binary numbers: two significant bits and a carry-in bit. It has three inputs, we denote the signifcant bit as $A_i$ and $B_i$, and the carry-in bit as $C_i$, and two outputs: the sum ($S_i$) and the carry-out ($C_{i + 1}$). The sum output represents the least significant bit of the addition, while the carry-out output represents any overflow that occurs when the sum exceeds the value that can be represented by a single bit. We start with the following truth table:
+    \begin{table}[h!]
+        \centering
+        \begin{tabular}{|c|c|c|c|c|}
+            \hline
+            $A_i$ & $B_i$ & $C_i$ & $S_i$ & $C_{i+1}$ \\
+            \hline
+            0 & 0 & 0 & 0 & 0 \\
+            0 & 0 & 1 & 1 & 0 \\
+            0 & 1 & 0 & 1 & 0 \\
+            0 & 1 & 1 & 0 & 1 \\
+            1 & 0 & 0 & 1 & 0 \\
+            1 & 0 & 1 & 0 & 1 \\
+            1 & 1 & 0 & 0 & 1 \\
+            1 & 1 & 1 & 1 & 1 \\
+            \hline
+        \end{tabular}
+        \caption{Truth Table for Full Adder}
+        \label{tab:full_adder_truth_table}
+    \end{table}
+    From the truth table, we can derive the following expressions using canonical SOP form:
+    \begin{align*}
+        S_i &= m_1 + m_2 + m_4 + m_7 \\
+            &= \overline{A_i}\overline{B_i}C_i + \overline{A_i}B_i\overline{C_i} + A_i\overline{B_i}\overline{C_i} + A_iB_iC_i \\
+            &= A_i \oplus B_i \oplus C_i \\
+        C_{i+1} &= m_3 + m_5 + m_6 + m_7 \\
+                &= \overline{A_i}B_iC_i + A_i\overline{B_i}C_i + A_iB_i\overline{C_i} + A_iB_iC_i \\
+    \intertext{Using the Distributive Law and A = A + A}
+                &= B_iC_i(\overline{A_i} + A_i) + A_iB_i(\overline{C_i} + C_i) + A_iC_i(\overline{B_i} + B_i) \\
+                &= A_iB_i + B_iC_i + A_iC_i
+    \end{align*}
+    The circuit diagram of a full adder is shown below:
+    \begin{figure}[h!]
+        \begin{circuitikz}
+            \draw
+            % gates 
+            (0,0) node[xor port] (X1) {}
+            (2,0) node[xor port] (X2) {}
+            (1,-2) node[and port] (A1) {}
+            (3,-2) node[and port] (A2) {}
+            (2,-4) node[and port] (A3) {}
+            (4,-4) node[or port] (O1) {} 
+            (6,-4) node[or port] (O2) {};
+
+            % connections
+            \draw (X1.out) -- (X2.in 1);
+            \draw (X2.out) -- ++(1,0) node[right] {$S_i$};
+
+            % inputs
+            \draw (X1.in 1) -- ++(-1,0) node[left] {$A_i$};
+            \draw (X1.in 2) -- ++(-1,0) node[left] {$B_i$};
+            \draw (X2.in 2) -- ++(-0.3,0) node[left] {$C_i$};
+
+            % AND gate connections
+            \draw (X1.in 1) |- (A1.in 1);
+            \draw (X1.in 2) |- (A1.in 2);
+            \draw (X1.in 2) |- (A2.in 1);
+            \draw (X2.in 2) |- (A2.in 2);
+            \draw (X1.in 1) |- (A3.in 1);
+            \draw (X2.in 2) |- (A3.in 2);
+
+            % OR gate connections
+            \draw (A1.out) |- (O1.in 1);
+            \draw (A2.out) |- (O1.in 2);
+            \draw (A3.out) |- (O2.in 1);
+            \draw (O1.out) |- (O2.in 2);
+            \draw (O2.out) -- ++(1,0) node[right] {$C_{i+1}$}
+        ;
+
+        \end{circuitikz}
+        \caption{Circuit Diagram of a Full Adder}
+        \label{fig:full_adder_circuit}
+        \centering 
+    \end{figure}
+
+    The Verilog implementation is as follows:
+    \begin{verbatim}
+    module full_adder(input logic A_i, B_i, C_i,
+                      output logic S_i, C_i_plus_1)
+        assign S_i = A_i ^ B_i ^ C_i;
+        assign C_i_plus_1 = (A_i & B_i) | (B_i & C_i) | (A_i & C_i);
+    endmodule
+    \end{verbatim}
+\end{definition}
+
+\begin{definition}[Hierarchical Verilog Module]
+    Hierarchical Verilog is a verilog module that instantiates other modules within it. This allows for the creation of complex designs by combining simpler modules.
+\end{definition}
+\begin{example}[3-bit Ripple Carry Adder]
+    A 3-bit ripple carry adder can be implemented using three instances of the full adder module. The Verilog implementation is as follows:
+    \begin{verbatim}
+    module adder3(input logic [2:0] A, B,
+                  input logic C_in,
+                  output logic [2:0] S,
+                  output logic C_out);
+        logic C_1, C_2; // Internal carry signals
+
+        // Instantiate full adders
+        full_adder FA0 (A[0], B[0], C_in, S[0], C_1);
+        full_adder FA1 (A[1], B[1], C_1, S[1], C_2);
+        full_adder FA2 (A[2], B[2], C_2, S[2], C_out);
+    endmodule
+    \end{verbatim}
+\end{example}
 
 
 

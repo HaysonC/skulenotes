@@ -756,6 +756,90 @@ Substituting, we have:
         dh = du + PdV + VdP = VdP \quad (du = 0, dV = 0)
     $$
 \end{example}
+
+\begin{example}[Control Volume in a Turbine]
+    The length of a fluid inside of control volume given time is:
+    $$
+        dx = V dt
+    $$
+    The volume is given by:
+    $$
+        dV = A dx = A V dt
+    $$
+    The mass of the fluid is:
+    $$
+        \delta m = \rho dV = \rho A V dt
+    $$
+    We can infer that if work is done, then the pressure is non constant. And that:
+    $$
+        \dot{m} = \rho A V = \text{constant}
+    $$
+    So at the inlet we have high $\rho$ and high $P$, and at the outlet we have low $\rho$ and low $P$. Such that $V$ remains relatively constant. We also devucebce specific volume:
+    \begin{equation}
+        v = \frac{1}{\rho}
+    \end{equation}
+    So we have:
+    \begin{equation}
+        \dot{m} = \frac{A V}{v} = \text{constant}
+    \end{equation}
+    At steady state:
+    \begin{equation}
+        \dot{m}_{in} = \dot{m}_{out}
+    \end{equation}
+    For and ideal gas, we have:
+    \begin{equation}
+        Pv = RT
+    \end{equation}
+\end{example}
+\begin{definition}[Fluid Energy per Unit Mass]
+    The total fluid energy per unit mass is given by:
+    \begin{equation}
+        e = h + \frac{V^2}{2} + gz
+    \end{equation}
+    where $h$ is the specific enthalpy, $\frac{V^2}{2}$ is the kinetic energy per unit mass, and $gz$ is the potential energy per unit mass.
+
+    Now, we can write the energy balance at the steady state, for a steady flow device:
+    \begin{equation}
+        q + w = (h_2 - h_1) + \left(\frac{V_2^2}{2} - \frac{V_1^2}{2}\right) + g(z_2 - z_1)
+    \end{equation}
+
+    For turbine, assume $q = 0$, and the KE and PE are small, we have:
+    \begin{equation}
+        w = h_1 - h_2, \quad W = m(h_1 - h_2)
+    \end{equation}
+    For compressor, we have $w_{shaft} = h_2 - h_1 > 0$.
+
+\end{definition}
+
+\begin{example}
+    Consider a compression turbine that has 800$^\circ$C and 600 kPa at the inlet, and 300$^\circ$C and 100 kPa at the outlet. Assuming ideal gas behavior, and $c_{p, \text{air}} = 1.005$ kJ/kg K. A 10kg flow rate would have:
+    $$
+        w = h_1 - h_2 
+    $$
+    We can compute the enthalpy change:
+    $$
+        \Delta h = \int_{T_1}^{T_2} c_p(T) dT \approx c_p (T_2 - T_1) = 1.005 \times (573 - 1073) = -502.5\, \text{kJ/kg}
+    $$
+    So the power output is:
+    $$
+        W = m \Delta h = 10 \times -502.5 = -5.025\, \text{MW}
+    $$
+\end{example}
+
+\begin{example}[Pump at Constant Temperature]
+    Consider a pump (a up pumping pump) that has 20$^\circ$C and 100 kPa at the inlet, and 20$^\circ$C and 600 kPa at the outlet. Assuming incompressible liquid water, and $v = 0.001\, \text{m}^3/\text{kg}$. A 10kg flow rate would have:
+    $$
+        w_{shaft} = h_2 - h_1 + g(z_2 - z_1)
+    $$
+    We can compute the enthalpy change:
+    $$
+        \Delta h = v (P_2 - P_1) 
+    $$
+    So the power with considerion of the change in potential energy is:
+    $$
+        W = m \Delta h + mg(z_2 - z_1) = 10 \times 0.001 \times (600 - 100) + 10 \times 9.81 \times (10 - 0) = 98.5\, \text{kW}
+    $$
+\end{example}
 \chapter{Heat Transfer}
 
 \end{document}

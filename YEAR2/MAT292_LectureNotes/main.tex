@@ -483,7 +483,7 @@ y(t) = e^{-at} x(t)
 allows us to prove the uniqueness of the solution. 
 This is essentially the same idea as the integrating factor method.
 
-\begin{example}[Logistic Equation]
+\begin{example}[Logistic Equation] \label{ex:logistic-equation}
     The logistic equation is a first-order nonlinear separable autonomous ODE that models population growth with a carrying capacity. It is given by:
     $$
     \frac{dx}{dt} = \alpha x \left(1 - x \right)
@@ -1096,5 +1096,493 @@ which we refer to as the normal form of the system. Here, \( a = \frac{1}{2} f_{
     $$
     Here, \( f(t, y) = y^{1/3} \) and \( f_y(t, y) = \frac{1}{3}y^{-2/3} \). The function \( f(t, y) \) is continuous everywhere, but \( f_y(t, y) \) is not continuous at \( y = 0 \). Therefore, the Cauchy-Lipschitz theorem does not apply at the initial condition \( (0, 0) \), which explains why we have multiple solutions to this IVP.
 \end{example}
+
+\subsection{Population Dynamics}
+\begin{example}[Simple Model]
+    Consider the ODE:
+    $$
+    P' = rP
+    $$
+    where \( P(t) \) is the population at time \( t \) and \( r \) is the growth rate. This model assumes that the population grows exponentially without any constraints. The solution to this ODE is:
+    $$
+    P(t) = P_0 e^{rt}
+    $$
+
+    \textit{Is this a good model?} Not really, because it assumes unlimited resources and no environmental constraints, which is unrealistic in real-world scenarios.
+\end{example}
+
+\begin{example}[A More Realistic Model]
+    Consider the logistic growth model:
+        $$
+        P' = rP\left(1 - \frac{P}{K}\right)
+        $$
+        where \( K > 0 \) is the carrying capacity of the environment. This model accounts for limited resources and environmental constraints. When $P = K$, the population growth rate becomes zero, indicating that the population has reached its maximum sustainable size.
+        The solution to this ODE is:
+        $$
+        P(t) = \frac{K}{1 + \left(\frac{K - P_0}{P_0}\right)e^{-rt}}
+        $$
+
+        This model is more realistic as it predicts that the population will grow rapidly when small, but will slow down and stabilize as it approaches the carrying capacity \( K \).
+
+        \textbf{Note} This is the same ODE considered in Example \ref{ex:logistic-equation}.
+
+        % Two figures side-by-side using minipages, scaled to the column width
+        \begin{figure}[h!]
+            \centering
+            \begin{minipage}[b]{0.48\textwidth}
+                \centering
+                \begin{tikzpicture}
+                    \begin{axis}[
+                        axis lines = middle,
+                        xlabel = \( P \),
+                        ylabel = \( P' \),
+                        ymin = -10, ymax = 10,
+                        xmin = -10, xmax = 110,
+                        domain=-1:110,
+                        samples=200,
+                        width=\linewidth,
+                        height=5.5cm,
+                        grid=both,
+                        minor tick num=1,
+                        major grid style={line width=.2pt,draw=gray!50},
+                        minor grid style={line width=.1pt,draw=gray!20},
+                    ]
+                    % Logistic growth curve (example parameters r=0.3, K=100)
+                    \addplot[blue, thick] {0.3*x*(1 - x/100)};
+                    % Fixed points
+                    \node at (axis cs:0,0) [circle, draw, inner sep=1.5pt] {};
+                    \node at (axis cs:100,0) [circle,fill,inner sep=1.5pt]{};
+                    % Labels
+                    \node at (axis cs:50,5) [anchor=south west] {\( P' = rP(1 - P/K) \)};
+                    \node at (axis cs:0,1) [anchor=south west] {\( P^* = 0 \)};
+                    \node at (axis cs:100,1) [anchor=south west] {\( P^* = K \)};
+                    \end{axis}
+                \end{tikzpicture}
+                \vspace{1mm}
+
+                \small\textbf{(a)} Fixed Point Diagram for the Logistic Growth Model
+            \end{minipage}\hfill
+            \begin{minipage}[b]{0.48\textwidth}
+                \centering
+                \begin{tikzpicture}
+                    \begin{axis}[
+                        axis lines = middle,
+                        xlabel = \( t \),
+                        ylabel = \( P \),
+                        ymin = -10, ymax = 150,
+                        xmin = 0, xmax = 50,
+                        domain=0:50,
+                        samples=200,
+                        width=\linewidth,
+                        height=5.5cm,
+                        grid=both,
+                        minor tick num=1,
+                        major grid style={line width=.2pt,draw=gray!50},
+                        minor grid style={line width=.1pt,draw=gray!20},
+                    ]
+                    % Logistic growth solution curves for different initial conditions (K=100, r=0.3)
+                    \addplot[blue, thick] {100/(1 + (100/10 - 1)*exp(-0.3*x))}; % P0 = 10
+                    \addplot[blue, thick] {100/(1 + (100/50 - 1)*exp(-0.3*x))}; % P0 = 50
+                    \addplot[blue, thick] {100/(1 + (100/90 - 1)*exp(-0.3*x))}; % P0 = 90
+
+                    % carrying capacity line
+                    \draw[dashed] (axis cs:0,100) -- (axis cs:50,100);
+                    \node at (axis cs:50.5,100) [anchor=west] {\( P = K \)};
+
+                    \addplot[red, thick] {100/(1 + (100/190 - 1)*exp(-0.3*x))}; % P0 = 10
+                    \addplot[red, thick] {100/(1 + (100/150- 1)*exp(-0.3*x))}; % P0 = 50
+                    \addplot[red, thick] {100/(1 + (100/110 - 1)*exp(-0.3*x))}; % P0 = 90
+
+                    % Labels for initial conditions
+                    \node at (axis cs:25,85) [anchor=south west] {\( P_0 = 10 \)};
+                    \node at (axis cs:25,60) [anchor=south west] {\( P_0 = 50 \)};
+                    \node at (axis cs:25,40) [anchor=south west] {\( P_0 = 90 \)};
+                    \end{axis}
+                \end{tikzpicture}
+                \vspace{1mm}
+
+                \small\textbf{(b)} Sample solution trajectories (different \(P_0\))
+            \end{minipage}
+            \caption{Logistic growth: (a) fixed-point diagram; (b) sample solution trajectories for different initial conditions.}
+            \label{fig:logistic-growth-side-by-side}
+        \end{figure}
+\end{example}
+
+\begin{example}[Logistics with Threshold]
+    Now we introduce a threshold \( T \) below which the population cannot sustain itself:
+        $$
+        P' = rP\left(1 - \frac{P}{K}\right)\left(\frac{P}{T} - 1\right)
+        $$
+        This model introduces an Allee effect, where the population growth rate becomes negative when the population is below the threshold \( T \). The fixed points of this system are:
+        $$
+        P^* = 0, \quad P^* = T, \quad P^* = K
+        $$
+        The stability of these fixed points can be analyzed as follows:
+        \begin{itemize}
+            \item \( P^* = 0 \) is stable (since \( f'(0) < 0 \))
+            \item \( P^* = T \) is unstable (since \( f'(T) > 0 \))
+            \item \( P^* = K \) is stable (since \( f'(K) < 0 \))
+        \end{itemize}
+
+    A phase plot and sample solution trajectories are shown below (the sketch shows guides at \(P=T\) and \(P=K\), and sample trajectories that converge to \(K\) or diverge to \(0\)):
+
+        \begin{figure}[h!]
+            \centering
+            \begin{minipage}[b]{0.48\textwidth}
+                \centering
+                \begin{tikzpicture}
+                    \begin{axis}[
+                        axis lines = middle,
+                        xlabel = \( P \),
+                        ylabel = \( P' \),
+                        ymin = -10, ymax = 10,
+                        xmin = -5, xmax = 110,
+                        domain=-1:110,
+                        samples=200,
+                        width=\linewidth,
+                        height=5.5cm,
+                        grid=both,
+                        minor tick num=1,
+                        major grid style={line width=.2pt,draw=gray!50},
+                        minor grid style={line width=.1pt,draw=gray!20},
+                    ]
+                    % Logistic growth with threshold curve (example parameters r=0.3, K=100, T=40)
+                    \addplot[blue, thick] {0.3*x*(1 - x/100)*(x/40 - 1)};
+                    % Axis baseline and vertical guides at P=T and P=K
+                    \addplot[black] coordinates {(0,0) (110,0)}; % P-axis
+                    \draw[red,dashed]  (axis cs:40,-9) -- (axis cs:40,9) node[black, above right] {\(P=T\)};
+                    \draw[teal,dashed] (axis cs:100,-9) -- (axis cs:100,9) node[black, above right] {\(P=K\)};
+                    % Fixed points markers on P-axis (at P'=0)
+                    \node at (axis cs:0,0) [circle,fill,inner sep=1.5pt,label=below:{\(0\)}] {};
+                    \node at (axis cs:40,0) [circle,draw,fill=white,inner sep=1.5pt,label=below:{\(T\)}] {};
+                    \node at (axis cs:100,0) [circle,fill,inner sep=1.5pt,label=below:{\(K\)}] {};
+                    % Flow direction arrows on P-axis (qualitative)
+                    \draw[->,thick] (axis cs:20,0) -- (axis cs:5,0);    % 0<T: P decreases (left)                    \draw[->,thick] (axis cs:45,0) -- (axis cs:70,0.6);   % T<K: P increases (right)
+                    \draw[->,thick] (axis cs:75,0) -- (axis cs:95,0);   % >K: P decreases (left)
+                   
+                    \end{axis}
+                \end{tikzpicture}
+                \vspace{1mm}    
+                \small\textbf{(a)} Phase diagram (fixed points and flow)
+            \end{minipage}\hfill
+            \begin{minipage}[b]{0.48\textwidth}
+                \centering
+                \begin{tikzpicture}
+                    \begin{axis}[
+                        axis lines = middle,
+                        xlabel = \( t \),
+                        ylabel = \( P \),
+                        ymin = -5, ymax = 110,
+                        xmin = 0, xmax = 50,    
+                        domain=0:50,
+                        samples=200,
+                        width=\linewidth,
+                        height=5.5cm,
+                        grid=both,
+                        minor tick num=1,   
+                        major grid style={line width=.2pt,draw=gray!50},
+                        minor grid style={line width=.1pt,draw=gray!20},
+                    ]
+                    % carrying capacity line
+                    \draw[dashed] (axis cs:0,100) -- (axis cs:50,100);
+                    \node at (axis cs:50.5,100) [anchor=west] {\( P = K \)};
+                    % threshold line (visual)
+                    \draw[dashed] (axis cs:0,40) -- (axis cs:50,40);
+                    \node at (axis cs:50.5,40) [anchor=west] {\( P = T \)};
+                    % Sample solution trajectories (qualitative sketches)
+                    % Below-threshold -> decline to 0 (four examples)
+                    \addplot[red, thick, opacity=0.9, domain=0:50, samples=200]
+                        {40/(1 + (40/35 - 1)*exp(0.25*x))};
+                    \addplot[red, thick, opacity=0.9, domain=0:50, samples=200]
+                        {40/(1 + (40/25 - 1)*exp(0.25*x))};
+                    \addplot[red, thick, opacity=0.9, domain=0:50, samples=200]
+                        {40/(1 + (40/15 - 1)*exp(0.25*x))};
+                    \addplot[red, thick, opacity=0.9, domain=0:50, samples=200]
+                        {40/(1 + (40/5  - 1)*exp(0.25*x))};
+                    \node[red] at (axis cs:7,26) [anchor=west] {\(P_0<T\) diverges to $0$};
+                    % Above-threshold -> grow to K (four examples)
+                    \addplot[blue, thick, opacity=0.9, domain=0:50, samples=200]
+                        {100/(1 + (100/45 - 1)*exp(-0.3*x))};
+                    \addplot[blue, thick, opacity=0.9, domain=0:50, samples=200]
+                        {100/(1 + (100/60 - 1)*exp(-0.3*x))};
+                    \addplot[blue, thick, opacity=0.9, domain=0:50, samples=200]
+                        {100/(1 + (100/80 - 1)*exp(-0.3*x))};
+                    \addplot[blue, thick, opacity=0.9, domain=0:50, samples=200]
+                        {100/(1 + (100/95 - 1)*exp(-0.3*x))};
+                    \node[blue] at (axis cs:40,82) [anchor=east] {\(P_0>T\) converges to $K$};
+                    \end{axis}
+                \end{tikzpicture}
+                \vspace{1mm}    
+                \small\textbf{(b)} Sample time trajectories: convergence to \(K\) or collapse to \(0\)
+            \end{minipage}
+            \caption{Logistic growth with threshold: (a) phase portrait with horizontal guides at \(P=T\) and \(P=K\); (b) qualitative solution trajectories showing convergence and divergence relative to the threshold.}
+            \label{fig:logistic-growth-threshold-side-by-side}
+        \end{figure}
+\end{example}
+
+\begin{example}[Harvesting Model]
+    Consider a population model with harvesting:
+    $$
+    P' = rP\left(1 - \frac{P}{K}\right) - H
+    $$
+    where \( H \) is the constant harvesting rate. The fixed points of this system are given by solving:
+    $$
+    rP\left(1 - \frac{P}{K}\right) - H = 0
+    $$
+    This leads to a quadratic equation in \( P \):
+    $$
+    P^2 - KP + \frac{KH}{r} = 0
+    $$
+    The solutions to this equation are:
+    $$
+    P^* = \frac{K \pm \sqrt{K^2 - 4\frac{KH}{r}}}{2}
+    $$
+    The stability of these fixed points can be analyzed as follows:
+    \begin{itemize}
+        \item If \( H < \frac{rK}{4} \), there are two real fixed points: one stable and one unstable.
+        \item If \( H = \frac{rK}{4} \), there is one real fixed point (a saddle-node bifurcation point).
+        \item If \( H > \frac{rK}{4} \), there are no real fixed points, indicating that the population will decline to extinction.
+    \end{itemize}
+    \textbf{Fixed Point Diagram} A fixed point diagram is shown below:
+        \begin{figure}[h!]
+            \centering
+            \begin{tikzpicture}
+                \begin{axis}[
+                    axis lines = middle,
+                    xlabel = \( y \),
+                    ylabel = \( f(y) \),
+                    ymin = -10, ymax = 10,
+                    xmin = -5, xmax = 105,
+                    domain=-1:105,
+                    samples=200,
+                    width=0.6\linewidth,
+                    height=6cm,
+                    grid=both,
+                    minor tick num=1,
+                    major grid style={line width=.2pt,draw=gray!50},
+                    minor grid style={line width=.1pt,draw=gray!20},
+                    legend pos=north east,
+                ]
+                % Quadratic curve for different H values with legend entries
+                \addplot[blue, thick] {0.3*x*(1 - x/100) - 5};
+                \addlegendentry{\(H < \tfrac{rK}{4}\)}
+                \addplot[red, thick, dashed] {0.3*x*(1 - x/100) - 7.5};
+                \addlegendentry{\(H = \tfrac{rK}{4}\)}
+                \addplot[green, thick, dotted] {0.3*x*(1 - x/100) - 10};
+                \addlegendentry{\(H > \tfrac{rK}{4}\)}
+                % Fixed points using plot marks (uses built-in plot labeling via legend)
+                \addplot[black, only marks, mark=o, mark size=2.5pt] coordinates {(20,0)};
+                \addplot[black, only marks, mark=*, mark size=2.5pt] coordinates {(80,0)};
+                % semi-filled marker for intermediate / degenerate fixed point
+                % half-filled marker: right half black, left half white
+                \node at (axis cs:50,0) [circle, draw, fill=white, inner sep=1.5pt] {};
+                \end{axis}
+            \end{tikzpicture}
+            \caption{Fixed point diagram for the harvesting model with different harvesting rates \(H\).}
+        \end{figure}
+
+     \textbf{Bifurcation Diagram} This is a classic example of a saddle-node bifurcation (0 to 2 fixed points). The bifurcation point is at $(k/2, 4h/K)$. The bifurcation diagram is shown below:
+        \begin{figure}[h!]
+            \centering
+            \begin{tikzpicture}
+                \begin{axis}[
+                    axis lines = middle,
+                    xlabel = \( r \),
+                    ylabel = \( P^* \),
+                    ymin = -10, ymax = 110,
+                    xmin = -1, xmax = 30,
+                    domain=0:30,
+                    samples=200,
+                    width=0.6\linewidth,
+                    height=6cm,
+                    grid=both,
+                    minor tick num=1,
+                    major grid style={line width=.2pt,draw=gray!50},
+                    minor grid style={line width=.1pt,draw=gray!20},
+                ]
+                % Bifurcation curve (example parameters r=0.3, K=100)
+                \addplot[blue, thick, domain=7.5:30] {50 + 10*sqrt(x-7.5)};
+                \addplot[red, thick, dashed, domain=7.5:30] {50 - 10*sqrt(x-7.5)};
+                \draw[dashed] (axis cs:7.5,-10) -- (axis cs:7.5,110);
+                \node at (axis cs:7.5,110) [anchor=north west] {\( r = \frac{4H}{K} \)};
+                % Mark bifurcation point
+                \node at (axis cs:7.5,50) [circle,fill,inner sep=1.5pt]{};
+                \end{axis}
+            \end{tikzpicture}
+            \caption{Bifurcation diagram for the harvesting model showing the saddle-node bifurcation at \(H = \frac{rK}{4} \).}
+        \end{figure}
+
+\end{example}
+
+\begin{theorem}[ID Autonomous ODEs are Monotonic]
+    Consider the ODE:
+    $$
+    y' = f(y)
+    $$
+    where \( f(y) \) is continuous. Then, the solution \( y(t) \) is monotonic on its interval of existence.
+    
+\end{theorem}
+\begin{proof}
+    WLOG, suppose \( f(y_0) > 0 \). For the sake of contradiction, suppose \( y(t) \) is not monotonic. Then, there exists \( t_1 > t_0 \) such that \( y(t_1) < y(t_0) \). By the Intermediate Value Theorem, there exists \( t_2 \in (t_0, t_1) \) such that \( y(t_2) = y(t_0) \). By the Mean Value Theorem, there exists \( c \in (t_0, t_2) \) such that:
+    $$\frac{y(t_2) - y(t_0)}{t_2 - t_0} = y'(c)$$
+    But \( y(t_2) = y(t_0) \), so the left-hand side is zero. Thus, \( y'(c) = 0 \). However, since \( f(y) \) is continuous and \( f(y_0) > 0 \), there exists a neighborhood around \( y_0 \) where \( f(y) > 0 \). This contradicts the assumption that \( y'(c) = 0 \). Therefore, \( y(t) \) must be monotonic.
+\end{proof}
+
+\begin{definition}[System of ODEs]
+    A system of ODEs is a set of coupled first-order ODEs of the form:
+    $$
+    \begin{cases}
+    x_1' = f_1(t, x_1, x_2, \ldots, x_n) \\
+    x_2' = f_2(t, x_1, x_2, \ldots, x_n) \\
+    \vdots \\
+    x_n' = f_n(t, x_1, x_2, \ldots, x_n)
+    \end{cases}
+    $$
+    where \( x_i(t) \) are the state variables and \( f_i(t, x_1, x_2, \ldots, x_n) \) are given functions.
+\end{definition}
+\subsection{Systems of ODEs}
+
+\begin{definition}[Two-Species Interaction Model]
+    Consider a model of two species interacting, such as predator-prey dynamics:
+    $$
+    \begin{cases}
+    x' = x(r_1 - ax -by) \\
+    y' = y(r_2 + cx - dy)
+    \end{cases}
+    $$
+    where \( x(t) \) and \( y(t) \) are the populations of the two species, \( r_1, r_2, a, b, c, d \) are constants representing:
+    \begin{itemize}
+        \item \( r_1, r_2 \): intrinsic growth rates of species \( x \) and \( y \)
+        \item \( a, d \): intrinsic carrying capacity coefficients
+        \item \( b, c \): interspecific coefficients representing the effect of one species on the other
+    \end{itemize}
+\end{definition}
+
+\begin{example}[Lotka-Volterra Model]
+    Now, consider the classic Lotka-Volterra predator-prey model:
+    $$
+    \begin{cases}
+    x' &= ax - bxy \\
+    y' &= -cy + dxy \\
+    (x(0), y(0)) &= (x_0, y_0)
+    \end{cases}
+    $$
+    where \( x(t) \) is the prey population, \( y(t) \) is the predator population, and \( a, b, c, d \) are positive constants representing:
+    \begin{itemize}
+        \item \( a \): growth rate of prey in the absence of predators
+        \item \( b \): predator efficiency (how many prey are eaten per predator per unit time)
+        \item \( c \): natural death rate of predators in the absence of prey
+        \item \( d \): conversion efficiency (how many predators are born per prey eaten)
+    \end{itemize}
+    Consider the fixed points of this system by setting \( x' = 0 \) and \( y' = 0 \). Then we have:
+    $$
+    (x^*, y^*) = (0, 0) \quad \text{and} \quad (x^*, y^*) = \left(\frac{c}{d}, \frac{a}{b}\right)
+    $$
+    The case where \( (x^*, y^*) = (0, 0) \) is trivial (extinction of both species). The non-trivial fixed point \( \left(\frac{c}{d}, \frac{a}{b}\right) \) represents a coexistence equilibrium where the rate of the prey being eaten is the rate of the prey being born.
+\end{example}
+
+We can further analyze this by considering Nullclines.
+
+\begin{definition}[Nullclines]
+    Nullclines are curves in the phase plane where the derivative of \textbf{one of the variables} is zero. For the Lotka-Volterra model, the nullclines are given by:
+    \begin{itemize}
+        \item Prey nullcline (\( x' = 0 \)): \( y = \frac{a}{b} \) (horizontal line)
+        \item Predator nullcline (\( y' = 0 \)): \( x = \frac{c}{d} \) (vertical line)
+    \end{itemize}
+    The intersection of these nullclines gives the fixed points of the system.
+    
+\end{definition}
+
+\begin{example}[Nullclines of the Lotka-Volterra Model]
+    The x-nullclines ($x' = 0$) are given by:
+    $$x' = ax - bxy = 0 \implies x(a - by) = 0 \implies x = 0 \text{ or } y = \frac{a}{b}$$
+    The y-nullclines ($y' = 0$) are given by:
+    $$y' = -cy + dxy = 0 \implies y(-c + dx) = 0 \implies y = 0 \text{ or } x = \frac{c}{d}$$
+
+    Also, consider the growth of each species in the nullcline regions:
+    \begin{itemize}
+        \item For \( x' = 0 \) (prey nullcline):
+        \begin{itemize}
+            \item If \( x = 0 \), then \( y' < 0 \) (predator population decreases).
+            \item If \( y < \frac{a}{b} \), then \( x' > 0 \) (prey population increases).
+            \item If \( y > \frac{a}{b} \), then \( x' < 0 \) (prey population decreases).
+        \end{itemize}
+        \item For \( y' = 0 \) (predator nullcline):
+        \begin{itemize}
+            \item If \( y = 0 \), then \( x' > 0 \) (prey population increases).
+            \item If \( x < \frac{c}{d} \), then \( y' < 0 \) (predator population decreases).
+            \item If \( x > \frac{c}{d} \), then \( y' > 0 \) (predator population increases).
+        \end{itemize}
+    \end{itemize}
+
+    These directions would ultimately leads to a circular flow around the fixed point \( \left(\frac{c}{d}, \frac{a}{b}\right) \). 
+
+    The intersection of these nullclines gives the fixed points of the system. A phase portrait showing the nullclines and the fixed point is illustrated below:
+        \begin{figure}[h!]
+            \centering
+            \begin{tikzpicture}
+                \begin{axis}[
+                    axis lines = middle,
+                    view     = {0}{90},
+                    xlabel = \( x \) (Prey),
+                    ylabel = \( y \) (Predator),
+                    ymin = -1, ymax = 6,
+                    xmin = -1, xmax = 6,
+                    domain=-1:6,
+                    samples=200,
+                    width=0.6\linewidth,
+                    height=6cm,
+                    grid=both,
+                    minor tick num=1,
+                    major grid style={line width=.2pt,draw=gray!50},
+                    minor grid style={line width=.1pt,draw=gray!20},
+                ]
+                % Prey nullcline (horizontal line)
+                \addplot[red, thick] {3};
+                % trvial nullclines (axes)
+                \addplot[blue, thick] {0};
+                \node at (axis cs:5,3) [anchor=south west] {\( y = \frac{a}{b} \)};
+                % Predator nullcline (vertical line)
+                \addplot[red, thick] coordinates {(0,0) (0,6)};
+                \addlegendentry{Predator nullcline}
+                % trvial nullclines (axes)
+                \addplot[blue, thick] coordinates {(2,0) (2,6)};
+                \addlegendentry{Prey nullcline}
+
+
+                \node at (axis cs:2,5) [anchor=north east] {\( x = \frac{c}{d} \)};
+                % Fixed point marker
+                \node at (axis cs:2,3) [circle,fill,inner sep=1.5pt,label=above right:{\(\left(\frac{c}{d}, \frac{a}{b}\right)\)}] {};
+                \end{axis}
+            \end{tikzpicture}
+            \caption{Nullclines of the Lotka-Volterra model showing the prey nullcline (horizontal line) and predator nullcline (vertical line). The intersection point represents the coexistence equilibrium.}
+        \end{figure}
+    
+\end{example}
+
+
+\begin{example}[Simple Pendulum]
+    Consider a simple pendulum of length \( L \) and mass \( m \) under the influence of gravity \( g \). The angle \( \theta(t) \) that the pendulum makes with the vertical satisfies the second-order ODE:
+    $$
+    \theta'' + \frac{g}{L} \sin(\theta) = 0
+    $$
+    To convert this into a system of first-order ODEs, we let:
+    $$\begin{cases}
+    x := \theta  \quad x' = \theta' = y \\
+    y := \theta' \quad y' = \theta'' = -\frac{g}{L} \sin(x)
+    \end{cases}$$
+
+    Consider the fixed points of this system by setting \( x' = 0 \) and \( y' = 0 \). Then we have:
+    $$(x^*, y^*) = (n\pi, 0) \quad n \in \mathbb{Z}$$
+    The case where \( n \) is even (e.g., \( 0, 2, 4, \ldots \)) corresponds to the pendulum hanging straight down (stable equilibrium), while the case where \( n \) is odd (e.g., \( 1, 3, 5, \ldots \)) corresponds to the pendulum being inverted (unstable equilibrium).
+    
+    Consider the nullclines:
+    \begin{itemize}
+        \item \( x' = 0 \) (horizontal nullcline): \( y = 0 \)
+        \item \( y' = 0 \) (vertical nullcline): \( \sin(x) = 0 \implies x = n\pi, n \in \mathbb{Z} \) And we have, for $y$:
+        
+    \end{itemize}
+\end{example}
+
 
 \end{document}

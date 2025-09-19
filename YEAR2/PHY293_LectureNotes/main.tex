@@ -513,6 +513,14 @@ For simple rod of length \( L \) and mass \( m \) pivoted at one end, the moment
 \begin{equation}
     \ddot{\theta} + \frac{3g}{2L}\theta = 0
 \end{equation}
+And the small angle approximates leads to:
+\begin{equation}
+    \ddot{\theta} + \omega^2 \theta = 0
+\end{equation}
+where \( \omega = \sqrt{\frac{3g}{2L}} \). The solution to this ODE is:
+\begin{equation}
+    \theta(t) = \theta_0 \cos(\omega t + \phi)
+\end{equation}
 The angular frequency of oscillation for the physical pendulum is:
 \begin{equation}
     \omega = \sqrt{\frac{3g}{2L}}
@@ -535,7 +543,124 @@ This is analogous to the resistor behaving as a damped harmonic oscillator, with
 \begin{equation}
     \omega = \sqrt{\frac{1}{LC} - \left(\frac{R}{2L}\right)^2}
 \end{equation}
+The following are equations that summarize the analogies between mechanical and electrical oscillators:
+\begin{table}[h!]
+    \centering
+    \begin{tabular}{|c|c|c|}
+        \hline
+        \textbf{Mechanical Oscillator} & \textbf{Electrical Oscillator} & \textbf{Analogy} \\
+        \hline
+        Mass \( m \) & Inductance \( L \) & Inertia \\
+        Spring constant \( k \) & Inverse capacitance \( \frac{1}{C} \) & Restoring force \\
+        Damping coefficient \( b \) & Resistance \( R \) & Energy dissipation \\
+        Displacement \( x \) & Charge \( q \) & Position \\
+        Velocity \( \dot{x} \) & Current \( I = \frac{dq}{dt} \) & Rate of change of position \\
+        Force \( F \) & Voltage \( V \) & Driving force \\
+        \hline
+    \end{tabular}
+    \caption{Analogies between Mechanical and Electrical Oscillators}
+    \label{tab:oscillator_analogies}
+\end{table}
 
+\subsection{Coupled Oscillators}
+\begin{definition}[Coupled Oscillators]
+    Consider two masses \( m_1 \) and \( m_2 \) on two pendulum connected by springs with spring constant \( k \).  The equations of motion for the two masses are given by:
+
+    \begin{equation}
+        \begin{cases}
+            \ddot{x}_1 &= -\frac{g}{L}x_1 + \frac{k}{m_1} (x_1 - x_2) \quad (a) \\
+            \ddot{x}_2 &= -\frac{g}{L}x_2 - \frac{k}{m_2} (x_1 - x_2) \quad (b)
+        \end{cases}
+    \end{equation}
+    where \( x_1 \) and \( x_2 \) are the displacements of masses \( m_1 \) and \( m_2 \) from their equilibrium positions, respectively. Now if we add and subtract the two equations, we get:
+    $$
+        \begin{cases}
+            \ddot{x}_1 + \ddot{x}_2 &= -\frac{g}{L}(x_1 + x_2) \quad (c) \\
+            \ddot{x}_1 - \ddot{x}_2 &= -\left(\frac{g}{L} + \frac{k}{m_1} + \frac{k}{m_2}\right)(x_1 - x_2) \quad (d)
+        \end{cases}
+    $$
+    Let:
+    $$ 
+    q_1 = x_1 + x_2 \quad \text{and} \quad q_2 = x_1 - x_2
+    $$
+    also, we let:
+    $$
+        \omega_1 = \sqrt{\frac{g}{L}} \quad \text{and} \quad \omega_2 = \sqrt{\frac{g}{L} + \frac{k}{m_1} + \frac{k}{m_2}}
+    $$
+    Then, the equations of motion can be rewritten as:
+    $$
+        \begin{cases}
+            \ddot{q}_1 &= -\omega_1^2 q_1 \\
+            \ddot{q}_2 &= -\omega_2^2 q_2
+        \end{cases}
+    $$
+    Observe that \( q_1 \) and \( q_2 \) are decoupled, and each behaves like a simple harmonic oscillator with angular frequencies \( \omega_1 \) and \( \omega_2 \), respectively. The general solutions for \( q_1(t) \) and \( q_2(t) \) are:
+    \begin{equation}
+        \begin{cases}
+            q_1(t) &= A_1 \cos(\omega_1 t + \phi_1) \\
+            q_2(t) &= A_2 \cos(\omega_2 t + \phi_2)
+        \end{cases}
+    \end{equation}
+    where \( A_1, A_2, \phi_1, \) and \( \phi_2 \) are constants determined by the initial conditions. Finally, we can expressions for \( x_1(t) \) and \( x_2(t) \) in terms of \( q_1(t) \) and \( q_2(t) \):
+    \begin{equation}
+        \begin{cases}
+            x_1(t) &= \frac{q_1(t) + q_2(t)}{2} = \frac{A_1}{2} \cos(\omega_1 t + \phi_1) + \frac{A_2}{2} \cos(\omega_2 t + \phi_2) \\
+            x_2(t) &= \frac{q_1(t) - q_2(t)}{2} = \frac{A_1}{2} \cos(\omega_1 t + \phi_1) - \frac{A_2}{2} \cos(\omega_2 t + \phi_2)
+        \end{cases}
+    \end{equation}
+    All parts of the system oscillate with the same normal frequency (eigenvalue) in a normal mode (eigenvector).
+\end{definition}
+
+\begin{definition}[Normal Modes]
+    A \textbf{normal mode} is a natural pattern of oscillation in which every part of the system moves in sync with a single frequency. 
+
+    For the two-mass pendulum system, there are two normal modes:
+    \begin{itemize}
+        \item \textbf{In-phase mode} (\(\omega_1\)): both masses swing together, reaching maximum displacement on the same side at the same time.  
+        $$
+        x_1 = x_2
+        $$
+        
+        \item \textbf{Out-of-phase mode} (\(\omega_2\)): the two masses swing in opposite directions, so when one moves left, the other moves right.  
+        $$
+        x_1 = -x_2
+        $$
+    \end{itemize}
+
+    Any general motion of the system can be written as a combination (superposition) of these two normal modes.
+\end{definition}
+\paragraph{Energy in Coupled Oscillators} The total mechanical energy \( E \) of the coupled oscillator system is given by:
+\begin{equation}
+    E = \frac{1}{2}m_1\dot{x}_1^2 + \frac{1}{2}m_2\dot{x}_2^2 + \frac{1}{2}k(x_1 - x_2)^2 + \frac{1}{2}m_1\frac{g}{L}x_1^2 + \frac{1}{2}m_2\frac{g}{L}x_2^2
+\end{equation}
+Substituting the expressions for \( x_1 = \frac{q_1 + q_2}{2} \) and \( x_2 = \frac{q_1 - q_2}{2} \) into the energy equation, two independent energies terms for $q_1$ and $q_2$ emerge:
+\begin{equation}
+    E = \left[ \frac{1}{4} m \dot{q}_1^2 + \frac{1}{4}\frac{m_1 g}{L} q_1^2 \right] + \left[ \frac{1}{4} m \dot{q}_2^2 + \frac{1}{4}\frac{m_2 g}{L} q_2^2 \right]
+\end{equation}
+This shows that the total energy is the sum of the energies associated with each normal mode, and that no cross term between the modes exists. Thus energy does not flow from one mode to another.
+
+\begin{example}
+    Given two coupled pendulums with $x_0(0) = A$, $x_1(0) = 0$, and both masses at rest initially, we have:
+    \begin{align*}
+        q_0(t) &= C_0 \cos(\omega_0 t) \\
+        q_1(t) &= C_1 \cos(\omega_1 t)
+    \end{align*}
+    where \( C_0 \) and \( C_1 \) are constants determined by the initial conditions. Using the initial conditions. Using the cosine addition formula, which is:
+    \begin{align*}
+        \cos(A) + \cos(B) &= 2\cos\left(\frac{A+B}{2}\right)\cos\left(\frac{A-B}{2}\right) \\
+        \cos(A) - \cos(B) &= -2\sin\left(\frac{A+B}{2}\right)\sin\left(\frac{A-B}{2}\right)
+    \end{align*}
+    we can express the motion of each pendulum as:
+    \begin{align*}
+        x_0(t) &= \frac{q_0 + q_1}{2} = A \cos\left(\frac{\omega_0 + \omega_1}{2} t\right) \cos\left(\frac{\omega_0 - \omega_1}{2} t\right) \\
+        x_1(t) &= \frac{q_0 - q_1}{2} = A \sin\left(\frac{\omega_0 + \omega_1}{2} t\right) \sin\left(\frac{\omega_0 - \omega_1}{2} t\right)
+    \end{align*}
+    Due to the formula for the product of cosines and sines, we see that energy oscillates between the two pendulums with a beat frequency of \( \frac{\omega_1 - \omega_0}{2} \). The time for all the energy to transfer from one pendulum to the other is given by:
+    \begin{align*}
+        T &= \frac{2\pi}{\frac{\omega_1 - \omega_0}{2}} = \frac{4\pi}{\omega_1 - \omega_0}
+    \end{align*}
+
+\end{example}
 \section{The Wave Equation}
 
 \begin{definition}[The Wave Equation]
