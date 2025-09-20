@@ -840,6 +840,36 @@ Substituting, we have:
         W = m \Delta h + mg(z_2 - z_1) = 10 \times 0.001 \times (600 - 100) + 10 \times 9.81 \times (10 - 0) = 98.5\, \text{kW}
     $$
 \end{example}
+
+\subsection{Second Law of Thermodynamics and Entropy}
+\paragraph{Motivation} We want to understand the direction of energy transfer and the efficiency of energy conversion processes. In an engine or a driven process, we want a measurement for the \textit{quality} of energy, and how much of it is \textit{usable}. This is important for understanding how to design efficient systems, and how to analyze thermodynamic processes.
+\begin{definition}[Entropy]
+    Entropy is an extensive property that changes when heat is transferred to or from a system. The entropy change is defined as:
+    \begin{equation}
+        dS = \frac{\delta Q_{rev}}{T}
+    \end{equation}
+    where $dS$ is the change in entropy, $\delta Q_{rev}$ is the reversible heat transfer, and $T$ is the absolute temperature. 
+    Now for the total entropy change of a system, we have:
+    \begin{equation}
+        \Delta S_{system} = S_2 - S_1 = \int_{1}^{2} \frac{\delta Q_{rev}}{T}
+    \end{equation}
+    where $S_1$ and $S_2$ are the initial and final entropies of the system, respectively.
+\end{definition}
+
+\paragraph{Inevitable Entropy Generation} Consider a two systems undergoing heat transfer, we can model the entropy of the entire system as:
+$$
+    \Delta S_{universe} = \frac{Q_{rev}}{T_{hot}} - \frac{Q_{rev}}{T_{cold}}
+$$
+Since $T_{hot} > T_{cold}$, we have $\Delta S_{universe} > 0$. This means that for any process that involves heat transfer, the entropy of the universe always increases. This is a statement of the second law of thermodynamics.
+
+\begin{theorem}[Second Law of Thermodynamics]
+    The entropy in an isolated system always increases for any real process. This can be expressed as:
+    \begin{equation}
+        \Delta S > 0
+    \end{equation}
+   
+    Entropy would generate until it reaches equilibrium, where $\Delta S_{universe} = 0$.
+\end{theorem}
 \chapter{Heat Transfer}
 
 \end{document}

@@ -11,9 +11,58 @@ The up-to-date version of this document can be found at \url{https://github.com/
 \chapter{Vector Calculus}
 
 % set section counter from 15 
-\setcounter{section}{14}
+\setcounter{section}{13}
 \paragraph{Note} the section numbering is based on Stewart's book.
-\section{Double and Triple Integrals}
+
+\section{Partial Derivatives}
+\subsection{Taylor Series for Multivariable Functions}
+\paragraph{Continuing from Calc II} We consider Taylor series of multivariable functions, and we would need to consider partial derivatives.
+
+\begin{shaded}
+    \subsubsection{Review. Taylor Series for Single Variable Functions}
+    Let $f(x)$ be a function that is infinitely differentiable at $x = a$. The Taylor series of $f(x)$ about the point $x = a$ is given by:
+    \begin{equation}
+        f(x) = f(a) + f'(a)(x-a) + \frac{f''(a)}{2!}(x-a)^2 + \frac{f'''(a)}{3!}(x-a)^3 + \cdots = \sum_{n=0}^{\infty} \frac{f^{(n)}(a)}{n!} (x-a)^n
+    \end{equation}
+
+    Also, consider the taylor approximation of $f(x + \Delta x)$ about $x$: 
+    \begin{equation}
+        f(x + \Delta x) = f(x) + f'(x)\Delta x + \frac{f''(x)}{2!}(\Delta x)^2 + \frac{f'''(x)}{3!}(\Delta x)^3 + \cdots = \sum_{n=0}^{\infty} \frac{f^{(n)}(x)}{n!} (\Delta x)^n
+    \end{equation}
+\end{shaded}
+\begin{definition}[Taylor Series for Multivariable Functions]
+    Let $f(x,y)$ be a function that is infinitely differentiable at the point $(a,b)$. Consider the increment $\Delta x$ in the $x$-direction and $\Delta y$ in the $y$-direction centred at $(x_0,y_0)$. We have the following parametric equations:
+    $$
+        \begin{cases}
+            x = x_0 + \Delta x t \\
+            y = y_0 + \Delta y t
+        \end{cases} \quad t \in [0,1]
+    $$
+    Define a new function $g(t) = f(x_0 + \Delta x t, y_0 + \Delta y t)$, which is a single-variable function in terms of $t$. We can then apply the Taylor series for single-variable functions to $g(t)$ about $t = 0$:
+    $$
+        g(t) = g(0) + g'(0)t + \frac{g''(0)}{2!}t^2 + \frac{g'''(0)}{3!}t^3 + \cdots = \sum_{n=0}^{\infty} \frac{g^{(n)}(0)}{n!} t^n
+    $$
+    Using the chain rule, we can compute the taylor series of $f(x,y)$ about the point $(x_0,y_0)$:
+    \begin{align}
+        f(x_0 + \Delta x, y_0 + \Delta y) &= f(x_0,y_0) + \left( \frac{\partial f}{\partial x} \Delta x + \frac{\partial f}{\partial y} \Delta y \right) + \nonumber \\
+        &\quad \frac{1}{2!} \left( \frac{\partial^2 f}{\partial x^2} (\Delta x)^2 + 2\frac{\partial^2 f}{\partial x \partial y} \Delta x \Delta y + \frac{\partial^2 f}{\partial y^2} (\Delta y)^2 \right) + \cdots \\
+        &= f(x_0,y_0) + \sum_{n=1}^{\infty} \sum_{k=0}^n \frac{1}{k!(n-k)!} \frac{\partial^n f}{\partial x^k \partial y^{n-k}} (\Delta x)^k (\Delta y)^{n-k}
+    \end{align}
+    Or equivalently, we can write:
+    \begin{equation}
+        f(x,y) = f(x_0,y_0) + \sum_{n=1}^{\infty} \sum_{k=0}^n \frac{1}{k!(n-k)!} \frac{\partial^n f}{\partial x^k \partial y^{n-k}} (x - x_0)^k (y - y_0)^{n-k}
+    \end{equation}
+    We could also use the fact:
+    $$
+        \frac{1}{k!(n-k)!} = \frac{1}{n!} \binom{n}{k}
+    $$
+    we rewrite the above equations, such that we can use the pascal's triangle to help us remember the coefficients:
+    \begin{equation}
+        f(x,y) = f(x_0,y_0) + \sum_{n=1}^{\infty} \frac{1}{n!} \sum_{k=0}^n \binom{n}{k} \frac{\partial^n f}{\partial x^k \partial y^{n-k}} (x - x_0)^k (y - y_0)^{n-k}
+    \end{equation}
+
+\end{definition}
+\section{Multiple Integrals}
 \begin{definition}[Double Integral]
     Let $f(x,y)$ be a function defined on a closed and bounded region $R$ in the $xy$-plane. The double integral of $f$ over $R$ is denoted by
     \begin{equation}
@@ -980,13 +1029,77 @@ Definition \ref{def:double_integral}. We can define a triple integral as follows
     \begin{equation}
         r = \sqrt{x^2 + y^2}, \quad \theta = \tan^{-1}\left(\frac{y}{x}\right), \quad z = z
     \end{equation}
+
+    For the change of variables in triple integrals, the volume element $dV$ in cylindrical coordinates is given by:
+    \begin{equation}
+        dV = dA \, dz = r \, dr \, d\theta \, dz
+    \end{equation}
 \end{definition}
 
 \begin{example}
-    
-    
+    Consider the triple integral in the cononical reigion $V$ bounded by the cone $z = \sqrt{x^2 + y^2}$ and the plane $z=2$. Changing to cylindrical coordinates, we consider the projection of the cone onto the $xy$-plane as our polar base region $R$. Then, we consider how the cone change in the $z$ direction over $R$:
+    $$
+        z = r \implies r \le z \le 2
+    $$
+    So the region $V_{\text{polar}}$ is:
+    $$
+    V_{\text{polar}} = \{(r, \theta, z) \mid 0 \le r \le 2, 0 \le \theta \le 2\pi, r \le z \le 2\}
+    $$
+    So we can set up:
+    $$
+        \iiint_V f(x,y,z) \, dV = \int_0^{2\pi} \int_0^2 \int_r^2 f(r \cos \theta, r \sin \theta, z) \, r \, dz \, dr \, d\theta
+    $$
+
+    Let $f(x,y,z) = x^2 +. y^2 = r^2$. Then, we have:
+    \begin{align*}
+        \iiint_V (x^2 + y^2) \, dV &= \int_0^{2\pi} \int_0^2 \int_r^2 r^2 \cdot r \, dz \, dr \, d\theta \\
+        &= \int_0^{2\pi} \int_0^2 r^3 (2 - r) \, dr \, d\theta = \frac{16\pi}{5}
+    \end{align*}
+
 \end{example}
 \subsection{Triple Integrals in Spherical Coordinates}
+\begin{definition}[Spherical Coordinates]
+    The spherical coordinates of a point $P$ in 3-D space are given by the ordered triple $(\rho, \phi, \theta)$, where:
+    \begin{itemize}
+        \item $\rho$ is the distance from the origin to the point $P$,
+        \item $\phi$ is the angle between the positive $z$-axis and the line segment from the origin to point $P$ (also known as the polar angle or colatitude),
+        \item $\theta$ is the angle between the positive $x$-axis and the projection of the line segment from the origin to point $P$ onto the $xy$-plane (also known as the azimuthal angle).
+    \end{itemize}
+    The relationships between spherical coordinates and rectangular coordinates are given by:
+    \begin{equation}
+        x = \rho \sin \phi \cos \theta, \quad y = \rho \sin \phi \sin \theta, \quad z = \rho \cos \phi
+    \end{equation}
+    and conversely:
+    \begin{equation}
+        \rho = \sqrt{x^2 + y^2 + z^2}, \quad \phi = \cos^{-1}\left(\frac{z}{\sqrt{x^2 + y^2 + z^2}}\right), \quad \theta = \tan^{-1}\left(\frac{y}{x}\right)
+    \end{equation}
+
+    For the change of variables in triple integrals, the volume element $dV$ in spherical coordinates is given by:
+    \begin{equation}
+        dV = \rho^2 \sin \phi \, d\rho \, d\phi \, d\theta
+    \end{equation}
+\end{definition}
+
+\begin{example}
+    \textit{find the mass of a half sphere of radius $a$ that has a density $ k(2a - \rho)$, where $k$ is a constant and $\rho$ is the distance from the origin.}
+
+    Let $\lambda = k(2a - \rho)$ be the density function. Then, we consider the half sphere $S$ in spherical coordinates:
+    $$       
+    S = \{(\rho, \phi, \theta) \mid 0 \le \rho \le a, 0 \le \phi \le \frac{\pi}{2}, 0 \le \theta \le 2\pi\}
+    $$
+    So we can set up:
+    \begin{align*}
+        M &= \iiint_S \lambda \, dV = \iiint_S k(2a - \rho) \, dV \\
+        &= k \int_0^{2\pi} \int_0^{\frac{\pi}{2}} \int_0^a (2a - \rho) \rho^2 \sin \phi \, d\rho \, d\phi \, d\theta \\
+        &= k \int_0^{2\pi} \int_0^{\frac{\pi}{2}} \left[ 2a \cdot \frac{\rho^3}{3} - \frac{\rho^4}{4} \right]_{\rho=0}^{\rho=a} \sin \phi \, d\phi \, d\theta \\
+        &= k \int_0^{2\pi} \int_0^{\frac{\pi}{2}} \left( \frac{2a^4}{3} - \frac{a^4}{4} \right) \sin \phi \, d\phi \, d\theta \\
+        &= k \cdot \frac{5a^4}{12} \int_0^{2\pi} \left[ -\cos \phi \right]_{\phi=0}^{\phi=\frac{\pi}{2}} \, d\theta = k \cdot \frac{5a^4}{12} \cdot 2\pi \\ 
+        &= \frac{5\pi k a^4}{6}
+    \end{align*}
+
+\end{example}
+
+\subsection{}
 \subsection{Change of Variables in Multiple Integrals} \label{sec:change_of_variables}
 \chapter{Fluid Mechanics}
 \end{document} 

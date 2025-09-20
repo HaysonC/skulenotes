@@ -1065,6 +1065,100 @@ The following identities can be derived from the axioms of Boolean algebra:
     \end{verbatim}
 \end{example}
 
+\subsection{Decoders and Encoders}
+\begin{definition}[Decoder]
+    A decoder is a combinational logic circuit that converts binary information from $n$ input lines to a maximum of $2^n$ unique output lines. Each output line corresponds to one of the possible combinations of the input lines. When a specific combination of input lines is activated (set to 1), the corresponding output line is activated (set to 1), while all other output lines remain inactive (set to 0). Decoders are commonly used in applications such as memory address decoding, data multiplexing, and digital display systems.
+    
+\end{definition}
+\begin{example}[2-bit 7-Segment Display]
+    A 7-segment display is an electronic display device that consists of seven individual segments (labeled $h_0$ to $h_6$) that can be illuminated in different combinations to represent numerical digits (0-9) and some alphabetic characters. The truth table for binary inputs $x_0, x_1, x_2, x_3$ (only $x_0$ and $x_1$ are used in this demonstration) to control the 7-segment display is shown below (note that 0 represents an active segment):
+    \begin{table}[h!]
+        \centering
+        \begin{tabular}{|c|c||c|c|c|c|c|c|c|}
+            \hline
+            $x_1$ & $x_0$ & $h_0$ & $h_1$ & $h_2$ & $h_3$ & $h_4$ & $h_5$ & $h_6$ \\
+            \hline
+            0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 1 \\ % 0
+            0 & 1 & 1 & 0 & 0 & 1 & 1 & 1 & 1 \\ % 1
+            1 & 0 & 0 & 0 & 1 & 0 & 0 & 1 & 0 \\ % 2
+            1 & 1 & 0 & 0 & 0 & 0 & 1 & 1 & 0 \\ % 3
+        \hline
+        \end{tabular}
+        \caption{Truth Table for 7-Segment Display (0-3)}
+        \label{tab:7_segment_display_truth_table}
+    \end{table}
+    So we have:
+    \begin{align*}
+        h_0 &= \overline{x_1}{x_0} \\
+        h_1 &= 0 \\
+        h_2 &= x_1\overline{x_0} \\
+        h_3 &= h_0 = \overline{x_1}{x_0} \\
+        h_4 &= x_0 \\
+        h_5 &= x_0 + x_1 \\
+        h_6 &= \overline{x_1} \\
+    \end{align*}
+    The Verilog implementation is as follows:
+    \begin{verbatim}
+    module seven_segment(input logic [1:0] x,
+                         output logic [6:0] h);
+        assign h[0] = ~x[1] & x[0];
+        assign h[1] = 1'b0;
+        assign h[2] = x[1] & ~x[0];
+        assign h[3] = ~x[1] & x[0];
+        assign h[4] = x[0];
+        assign h[5] = x[0] | x[1];
+        assign h[6] = ~x[1];
+    endmodule
+    \end{verbatim}
+
+
+\end{example}
+
+\begin{definition}[If-Else Statement]
+    An if-else statement is a conditional statement that allows for branching in the execution of code based on the evaluation of a boolean expression. In Verilog, if-else statements are used to model combinational logic and can be used within always blocks or initial blocks. The syntax for an implementation of mux using an if-else statement in Verilog is as follows:
+    \begin{verbatim}
+        module mux(input logic x, y, s,
+                   output logic f);
+            always_comb // Always @(x or y or s) is equivalent.
+            // The sensitivity list gives the signals
+            // that can trigger the always block.
+            begin
+                if (s == 1'b0) // If statements must go inside always block.
+                    f = x; // Keyword 'assign' not used in always block.
+                else
+                    f = y;
+                end
+            end
+        endmodule
+    \end{verbatim}
+    \textbf{Analogy} The always block is like the \verb|useEffect(() => { ... }| hook in React. The sensitivity list is like the dependency array in React.
+\end{definition}
+
+\begin{definition}[Case Statement]
+    A case statement is a control flow statement that allows for multi-way branching based on the value of a single expression. In Verilog, case statements are used to model combinational logic and can be used within always blocks. The syntax for an implementation of a full 7-segment display using a case statement in Verilog is as follows:
+    \begin{verbatim}
+        module seven_segment_case(input logic [3:0] x,
+                                  output logic [6:0] h);
+            always_comb begin
+                case (x) 
+                    4'b0000: h = 7'b1000000; // 0
+                    4'b0001: h = 7'b1111001; // 1
+                    4'b0010: h = 7'b0100100; // 2
+                    4'b0011: h = 7'b0110000; // 3
+                    4'b0100: h = 7'b0011001; // 4
+                    4'b0101: h = 7'b0010010; // 5
+                    4'b0110: h = 7'b0000010; // 6
+                    4'b0111: h = 7'b1111000; // 7
+                    4'b1000: h = 7'b0000000; // 8
+                    4'b1001: h = 7'b0010000; // 9
+                    default: h = 7'b1111111; // All segments off for invalid input
+                endcase
+            end
+        endmodule
+    \end{verbatim}
+
+
+\end{definition}
 
 
 % ===================== PART C: SEQUENTIAL LOGIC =====================

@@ -661,6 +661,128 @@ This shows that the total energy is the sum of the energies associated with each
     \end{align*}
 
 \end{example}
+\subsection{Normal Modes}
+\paragraph{Oscilating Masses Connected by Springs} Consider two masses \( m_1 = m_2 = m \) connected by three spring with spring constant \( k \) and fixed to walls on either side. The equations of motion for the two masses are given by:
+\begin{equation}
+    \begin{cases}
+        m\ddot{x}_1 &= -k x_1 + k (x_2 - x_1) \quad (a) = m\ddot{x}_1 = -2k x_1 + k x_2 \\
+        m\ddot{x}_2 &= -k x_2 - k (x_2 - x_1) \quad (b) = m\ddot{x}_2 = k x_1 - 2k x_2
+    \end{cases}
+\end{equation}
+To solve these equations, we assume solutions of the form:
+$$
+    \begin{cases}
+        x_1(t) &= A \cos(\omega t + \phi) \\
+        x_2(t) &= B \cos(\omega t + \phi)
+    \end{cases}
+$$
+Substituting these assumed solutions into the equations of motion, we get:
+\begin{equation} \label{eq:coupled_springs}
+    \begin{cases}
+        \frac{A}{B} &= \frac{k}{m\omega^2 - 2k} \\
+        \frac{A}{B} &= \frac{m\omega^2 - 2k}{k}
+    \end{cases}
+\end{equation}
+We can deduce that $A = \pm B$  
+We can set the equation:
+$$
+    (m\omega^2 - 2k)^2 = k^2 \implies m\omega^2 - 2k = \pm k
+$$
+
+So we can derive two normal mode frequencies:
+\begin{equation}
+    \begin{cases}
+        \omega_1 &= \sqrt{\frac{k}{m}} \quad \text{(in-phase mode)} \\
+        \omega_2 &= \sqrt{\frac{3k}{m}} \quad \text{(out-of-phase mode)}
+    \end{cases}
+\end{equation}
+
+\paragraph{Solving as an Eigenproblem} Alternatively, we can create a system of equations from \eqref{eq:coupled_springs}:
+\begin{equation}
+    \begin{bmatrix}
+        \frac{2k}{m} & -\frac{k}{m} \\
+        -\frac{k}{m} & \frac{2k}{m}
+    \end{bmatrix}
+    \begin{bmatrix}
+        A \\ B
+    \end{bmatrix}
+    = \omega^2
+    \begin{bmatrix}
+        A \\ B
+    \end{bmatrix}
+\end{equation}
+To find the eigenvalues \( \omega^2 \), we solve the characteristic equation:
+$$
+    \text{det}\left(\begin{bmatrix}
+        \frac{2k}{m} - \omega^2 & -\frac{k}{m} \\
+        -\frac{k}{m} & \frac{2k}{m} - \omega^2
+    \end{bmatrix}\right) = 0
+$$
+Calculating the determinant, we have:
+$$
+    \left(\frac{2k}{m} - \omega^2\right)^2 - \left(-\frac{k}{m}\right)^2 = 0
+$$
+Expanding and simplifying, we get:
+$$
+    \omega^4 - \frac{4k}{m}\omega^2 + \frac{5k^2}{m^2} = 0
+$$
+This gives us the two normal mode frequencies:
+\begin{equation}
+    \begin{cases}
+        \omega_1^2 &= \frac{k}{m} \implies \omega_1 = \sqrt{\frac{k}{m}} \\
+        \omega_2^2 &= \frac{3k}{m} \implies \omega_2 = \sqrt{\frac{3k}{m}}
+    \end{cases}
+\end{equation}
+
+\begin{example}
+    CConsider two equal masses $m$ suspended from identical springs of spring constant $k$. The masses are hanged on the celing. We can solve this system's frequency via the eigenvalue method. The equations of motion are:
+    $$
+        \begin{cases}
+            m\ddot{x}_2 &= -k(x_2 - x_1)\\
+            m\ddot{x}_1 &= -k x_1 + k(x_2 - x_1) = -2k x_1 + k x_2
+        \end{cases}
+    $$
+    Assume solutions of the form:
+    $$        
+    \begin{cases}
+            x_1(t) &= A \cos(\omega t + \phi) \\
+            x_2(t) &= B \cos(\omega t + \phi)
+        \end{cases}
+    $$
+    Substituting these assumed solutions into the equations of motion, we get:
+    $$
+        \begin{cases}
+            -A \omega^2 &= -\frac{k}{m}(-2A + B) \\
+            -B \omega^2 &= -\frac{k}{m}(A - B)
+        \end{cases}
+    $$
+    We can rewrite this as an eigenvalue problem:
+    $$
+        \begin{bmatrix}
+            \frac{2k}{m} & -\frac{k}{m} \\
+            -\frac{k}{m} & \frac{k}{m}
+        \end{bmatrix}
+        \begin{bmatrix}
+            A \\ B
+        \end{bmatrix}
+        = \omega^2
+        \begin{bmatrix}
+            A \\ B
+        \end{bmatrix}
+    $$
+    To find the eigenvalues \( \omega^2 \), we solve the characteristic equation:
+    $$
+        \text{det}\left(\begin{bmatrix}
+            \frac{2k}{m} - \omega^2 & -\frac{k}{m} \\
+            -\frac{k}{m} & \frac{k}{m} - \omega^2
+        \end{bmatrix}\right) = 0
+    $$
+    Calculating the determinant, we have:
+    $$
+        \omega^2 = \frac{k}{2m}(3\pm \sqrt{5})
+    $$
+\end{example}
+
 \section{The Wave Equation}
 
 \begin{definition}[The Wave Equation]
@@ -670,6 +792,7 @@ This shows that the total energy is the sum of the energies associated with each
     \end{equation}
     where $u(x,t)$ is the disturbance, $c$ is the wave speed, $x$ is position, and $t$ is time.
 \end{definition}
+
 
 
 \chapter{Modern Physics}

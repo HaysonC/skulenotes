@@ -1557,7 +1557,13 @@ We can further analyze this by considering Nullclines.
             \end{tikzpicture}
             \caption{Nullclines of the Lotka-Volterra model showing the prey nullcline (horizontal line) and predator nullcline (vertical line). The intersection point represents the coexistence equilibrium.}
         \end{figure}
-    
+        And a figure for the vector field is shown below:
+        \begin{figure}[h!]
+            \centering
+            \includegraphics[width=0.6\linewidth]{predprey.png}
+            \caption{Vector field of the Lotka-Volterra model showing the circular flow around
+            the fixed point \(\left(\frac{c}{d}, \frac{a}{b}\right)\).}
+        \end{figure}
 \end{example}
 
 
@@ -1582,7 +1588,216 @@ We can further analyze this by considering Nullclines.
         \item \( y' = 0 \) (vertical nullcline): \( \sin(x) = 0 \implies x = n\pi, n \in \mathbb{Z} \) And we have, for $y$:
         
     \end{itemize}
+
+    A vector field of the system is shown below:
+        \begin{figure}[h!]
+            \centering
+            \includegraphics[width=0.6\linewidth]{pendulum.png}
+            \caption{Vector field of the simple pendulum system showing the fixed points at \( (n\pi, 0) \).}
+        \end{figure}
+
 \end{example}
+
+\paragraph{Systems of ODEs as Matrices}
+A system of ODEs can be expressed in matrix form as:
+$$\mathbf{x}' = A\mathbf{x} + \mathbf{b}(t)
+$$where \( \mathbf{x} \) is the state vector, \( A \) is a matrix of coefficients, and \( \mathbf{b}(t) \) is a vector of functions.
+
+\begin{definition}[General System of ODEs]
+    WLOG, for a system of 2 ODEs with $x$ and $y$, we write:
+    $$\begin{cases}
+    x' = f(t, x, y) \\
+    y' = g(t, x, y)
+    \end{cases}$$
+    where \( f \) and \( g \) are given functions:
+    $$
+    f(t, x, y) = p_{11}(t)x + p_{12}(t)y + g_1(t) \\
+    g(t, x, y) = p_{21}(t)x + p_{22}(t)y + g_2(t)
+    $$
+    We can express this in matrix form as:
+    \begin{equation}
+    \begin{bmatrix}x' \\ y'
+    \end{bmatrix} = \begin{bmatrix}
+    p_{11}(t) & p_{12}(t) \\
+    p_{21}(t) & p_{22}(t)
+    \end{bmatrix} \begin{bmatrix}x \\ y
+    \end{bmatrix} + \begin{bmatrix}g_1(t) \\ g_2(t)
+    \end{bmatrix}
+    \end{equation}
+
+    Furthermore, we generalize this to \( n \) dimensions, and the inhomogeneous, non-autonomous system of linears ODEs is given by:
+    \begin{align*}
+    \mathbf{x}'_1 &= \sum^n_{j=1} P_{1j}(t)x_j + g_1(t) \quad i = 1, 2, \ldots, n \\
+     & \vdots \\
+    \mathbf{x}'_n &= \sum^n_{j=1} P_{nj}(t)x_j + g_n(t)
+    \end{align*}
+    or in matrix form:
+    \begin{equation}
+    \mathbf{x}' = A(t)\mathbf{x} + \mathbf{G}(t)
+    \end{equation}
+    where \( A(t) \) is an \( n \times n \) matrix of functions, \( \mathbf{x} \) is the state vector, and \( \mathbf{G}(t) \) is the inhomogeneous term.
+\end{definition}
+
+\begin{theorem}[Existence and Uniqueness for Systems of ODEs]
+    If $p_{ij}(t)$ and $g_i(t)$ are continuous on an open interval $I = (a, b)$ containing $t_0$ for all $i, j = 1, 2, \ldots, n$, then the initial value problem
+    $$\mathbf{x}' = A(t)\mathbf{x} + \mathbf{G}(t), \quad \mathbf{x}(t_0) = \mathbf{x}_0$$
+    has a unique solution on the interval \( I \).
+\end{theorem}
+
+\begin{example}[Linear, homogeneous and autonomous]
+    Consider the simple ODE system:
+    $$
+        \textbf{x}' = A\textbf{x} +\textbf{b}
+    $$
+    We cosidner the fix points by setting \( \textbf{x}' = 0 \):
+    $$A\textbf{x} + \textbf{b} = 0 \implies A\textbf{x} = -\textbf{b}$$
+    If \( A \) is invertible, then the fixed point is given by:
+    $$\textbf{x}^* = -A^{-1}\textbf{b}$$
+    If \( A \) is not invertible, then there are either no fixed points or infinitely many fixed points. Now, we let $\textbf{y} = \textbf{x} + A^{-1}\textbf{b}$, then we have:
+    $$\textbf{y}' =\textbf{x}'$$
+    we have:
+    $$Ay = A\textbf{x} + \textbf{b} = \textbf{x}' = \textbf{y}'$$
+    Thus, the system reduces to:
+    $$\textbf{y}' = A\textbf{y}$$
+    which is a linear, homogeneous, and autonomous system. The fixed point of this system is given by:
+    $$\textbf{y}^* = 0$$
+\end{example}
+
+\begin{example}[Simple ODEs]
+    Consider the system of ODEs:
+    $$
+    \textbf{x}' = \begin{bmatrix} 1 & 0 \\ 0 & -2
+    \end{bmatrix}\textbf{x} 
+    $$
+    and the initial condition:
+    $$
+    \textbf{x}(0) = \begin{bmatrix} x_0 \\ y_0
+    \end{bmatrix}
+    $$
+    Then we can consider the solutions:
+    $$x_1(t) = x_0 e^{t}$$
+    $$x_2(t) = y_0 e^{-2t}$$
+    or we can write the solution in vector form:
+    $$\textbf{x}(t) = x_0 \begin{bmatrix}
+        1 \\ 0
+    \end{bmatrix} e^{t} + y_0 \begin{bmatrix}
+        0 \\ 1
+    \end{bmatrix} e^{-2t}
+    $$
+
+    The fixed point and nullclines are given by:
+    $$\textbf{x}^* = \begin{bmatrix}0 \\ 0
+    \end{bmatrix}$$
+    The nullclines are given by:
+    \begin{itemize}
+        \item \( x' = 0 \): \( x = 0 \) (vertical line)
+        \item \( y' = 0 \): \( y = 0 \) (horizontal line)
+    \end{itemize}
+    
+    \textbf{Stability of Nullclines} The $x$-nullcline since it goes to the origin as $t \to -\infty$ and away from the origin as $t \to \infty$, while the $y$-nullcline goes to the origin as $t \to \infty$ and away from the origin as $t \to -\infty$. 
+        \begin{figure}[h!]
+            \centering
+            \begin{tikzpicture}
+                \begin{axis}[
+                    axis lines = middle,
+                    view     = {0}{90},
+                    xlabel = \( x \),
+                    ylabel = \( y \),
+                    ymin = -3, ymax = 3,
+                    xmin = -3, xmax = 3,
+                    domain=-3:3,
+                    samples=200,
+                    width=0.6\linewidth,
+                    height=6cm,
+                    grid=both,
+                    minor tick num=1,
+                    major grid style={line width=.2pt,draw=gray!50},
+                    minor grid style={line width=.1pt,draw=gray!20},
+                ]
+                % x-nullcline (vertical line)
+                \addplot[blue, thick] coordinates {(0,-3) (0,3)};
+                % y-nullcline (horizontal line)
+                \addplot[red, thick] coordinates {(-3,0) (3,0)};
+                % Fixed point marker
+                \node at (axis cs:0,0) [circle,fill,inner sep=1.5pt,label=above right:{\((0, 0)\)}] {};
+                \end{axis}
+            \end{tikzpicture}
+            \caption{Phase portrait of the simple ODE system showing the nullclines and the fixed point at the origin.}
+        \end{figure}
+        \textbf{Note - Stability} The stability here really means that the trajectories approach or move away from the fixed point along the nullclines, this does not mean for perturbation along the nullclines.
+        \textbf{Saddle Node} The fixed point is a saddle node (since one eigenvalue is positive and the other is negative). The trajectories in the phase plane are shown below:
+\end{example}
+
+\begin{example}[Linear Algebra]
+    Consider the system of ODEs:
+    $$
+    \textbf{x}' = A\textbf{x}
+    $$
+    where \( A \) is a constant matrix. Consider:
+    \begin{align*}
+        \textbf{x} &= \vec{v} e^{\lambda t} \\
+        \textbf{x}' &= \lambda \vec{v} e^{\lambda t} \\
+        &= A\vec{v} e^{\lambda t} = A\textbf{x}
+    \end{align*}
+    Thus, we have:
+    
+    \begin{equation}
+    A\vec{v} = \lambda \vec{v}
+        \end{equation}
+    which is the eigenvalue problem. 
+\end{example}
+
+\begin{example}[Superposition]
+
+    Assume $x_1(t)$ and $x_2(t)$ are solutions to the system of ODEs:
+    $$\textbf{x}' = A\textbf{x}$$
+    Then, any linear combination of these solutions is also a solution:
+    $$\textbf{x}(t) = c_1 x_1(t) + c_2 x_2(t)$$
+    where \( c_1 \) and \( c_2 \) are constants. This is due to the linearity of the system.
+\end{example}
+
+\begin{definition}[General Eigenproblem for n-dim ODEs System]
+    Combining the above ideas, consider the system:
+    $$\textbf{x}' = A\textbf{x}$$
+    where \( A \in \mathbb{R}^{n \times n} \). We define the \textit{specturm} as:
+    \begin{equation}
+    \sigma(A) = \{(\lambda_i, \vec{v}_i) \in \mathbb{C} \times \mathbb{C}^n : A\vec{v}_i = \lambda_i \vec{v}_i, i = 1, 2, \ldots, n\}
+    \end{equation}
+    where \( \lambda_i \) are the eigenvalues and \( \vec{v}_i \) are the corresponding eigenvectors. The general solution to the system can be expressed as:
+    \begin{equation}
+            \textbf{x}(t) = \sum_{i=1}^{n} c_i \vec{v}_i e^{\lambda_i t}
+    \end{equation}
+    where \( c_i \) are constants determined by the initial conditions.
+\end{definition}
+
+\begin{example}
+    Consider the following system of ODEs:
+    $$
+    \textbf{x}' = \begin{bmatrix} 0 & 1 \\ 1 & 0
+    \end{bmatrix}\textbf{x}
+    $$
+    We find the eigenvalues and eigenvectors by solving the characteristic polynomial:
+    \begin{align*}
+    \det(A - \lambda I) &= \det\begin{bmatrix} -\lambda & 1 \\ 1 & -\lambda
+    \end{bmatrix} \\
+    &= \lambda^2 - 1 = 0 \\
+    \implies \lambda_1 &= 1, \quad \lambda_2 = -1
+    \end{align*}
+    The corresponding eigenvectors are:
+    \begin{align*}
+    \vec{v}_1 &= \begin{bmatrix} 1 \\ 1
+    \end{bmatrix}, \quad \vec{v}_2 = \begin{bmatrix} -1 \\ 1
+    \end{bmatrix}
+    \end{align*}
+    Thus, the general solution to the system is:
+    $$\textbf{x}(t) = c_1 \begin{bmatrix} 1 \\ 1
+    \end{bmatrix} e^{t} + c_2 \begin{bmatrix} -1 \\ 1
+    \end{bmatrix} e^{-t}$$
+    where \( c_1 \) and \( c_2 \) are constants determined by the initial conditions.
+
+    Consider the phase portait. If we start on the span of $ [-1, 1]^T$, then we go to the origin as $t \to \infty$. If we start on the span of $ [1, 1]^T$, then we go away from the origin as $t \to \infty$. Then, the trivial fixed point is a saddle node.
+\end{example}
+
 
 
 \end{document}
