@@ -35,6 +35,9 @@ The up-to-date version of this document can be found at \url{https://github.com/
 \end{shaded}
 % ===================== PART 1: FOUNDATIONS =====================
 \section{Foundations and Fundamental Concepts}
+\begin{review}[Section overview]
+Key ideas: energy and entropy as fundamental concepts; systems, states, and properties. Tips: always sketch system boundary and list knowns/assumptions. Units: keep Joule and Watt consistent (W = J/s).
+\end{review}
 \begin{definition}[Energy]
     You should have learned that energy is the ability to do work.
 \end{definition}
@@ -131,10 +134,7 @@ However, the Newcomen engine is not the most efficient steam engine, most heat i
 \end{figure}
 
 \paragraph{Efficiency of a Heat Engine} The efficiency of a heat engine is defined as the ratio of the work output to the heat input:
-
-\begin{equation}
-    \eta = \frac{W}{Q_H}
-\end{equation}
+\keyeq{\eta = \frac{W}{Q_H}}
 
 Obviously, the best engine is when $\eta$ is maximized ($W$ is maximized, and $Q_H$ is minimized). For example, a Newcomen engine has a low efficiency ($\eta \approx 0.34\%$), while a classic watt engine has a higher efficiency ($\eta \approx 4\%$). The modern powerplant is optimized such that it has $\eta \approx 30\%$.
 
@@ -144,25 +144,22 @@ This begs the question, can we create a heat engine with 100\% efficiency (i.e.,
 
 % ===================== PART 2: LAWS OF THERMODYNAMICS (PREVIEW) =====================
 \section{Preview of Thermodynamic Laws and Directionality}
+\begin{review}[Section overview]
+Most-used relations: \noteeq{W = Q_H - Q_C}, sign convention (to system positive), and “heat flows hot→cold.” Pitfall: mixing absolute temperature (K) with Celsius.
+\end{review}
 The first intuitive principle (later formalized) is conservation of energy in transformations between forms:
 \begin{definition}[First Law of Thermodynamics] \label{def:firstlaw}
     The first law of thermodynamics states that energy cannot be created or destroyed, only transformed from one form to another. In the context of a heat engine, this means that the work output ($W$) is equal to the heat input ($Q_H$) minus the heat rejected ($Q_C$):
-    \begin{equation}
-        W = Q_H - Q_C
-    \end{equation}
+    \keyeq{ W = Q_H - Q_C }
 \end{definition}
 The second law formalizes directionality: heat does not spontaneously flow from cold to hot. This introduces \emph{entropy} as a bookkeeping tool for irreversibility. (A rigorous treatment of entropy will follow after we develop state / property concepts.)
 
 \begin{definition}[Second Law of Thermodynamics]
     The second law of thermodynamics states that the total entropy of an isolated system can never decrease over time. We consdier entropy as:
-    \begin{equation}
-        S = \frac{Q}{T}
-    \end{equation}
+    \numeq{ S = \frac{Q}{T} }
     In the above example, we can see that entropy increases as heat is transferred from the hot reservoir to the cold reservoir:
 
-    \begin{equation}
-        \Delta S = S_{\text{final}} - S_{\text{initial}} = \frac{Q_C}{T_C} - \frac{Q_H}{T_H} > 0
-    \end{equation}
+    \keyeq{ \Delta S = \frac{Q_C}{T_C} - \frac{Q_H}{T_H} > 0 }
 
     Since $Q_C = Q_H$ in a closed system and $T_H > T_C$, we have $\Delta S > 0$.
 \end{definition}
@@ -171,6 +168,9 @@ The second law formalizes directionality: heat does not spontaneously flow from 
 
 % ===================== PART 3: SYSTEM DESCRIPTORS =====================
 \section{Systems, States, and Properties}
+\begin{review}[Section overview]
+System types: closed (no mass), open/control volume (mass+energy), isolated (no mass or energy). Property vs path-dependent: properties (T, P, V, U, m) vs. transfers (Q, W). Pitfall: use \(\delta W, \delta Q\) for path differentials.
+\end{review}
 \begin{definition}[System]
     Any piece of matter or a region of space.
 \end{definition}
@@ -193,9 +193,7 @@ The second law formalizes directionality: heat does not spontaneously flow from 
     A property is any attribute of a system that can be measured without knowing the history of the system. \\
     (Example) Position, Temperature, Mass, Energy \\
     (Non-example) Work, Transfer of energy (heat), Mass outside the system (denote $\delta m$)
-    \begin{equation}
-        W = \int dW \quad (\text{depends on path})
-    \end{equation}
+    \numeq{ W = \int \! \delta W \quad (\text{depends on path}) }
     Hence, to remind ourselves, we denote infinitesimal work as $\delta W$ instead of $dW$. Then, we can compute the work done by the force field $\textbf{F}$ along a curve $C$ as:
     \begin{equation}
         \delta W = \int_C \textbf{F} \cdot ds
@@ -259,6 +257,9 @@ Here's a quick refresher on line integrals and basic math:
 
 % ===================== PART 4: IDEAL GAS MODEL =====================
 \section{Ideal Gas Model and Molecular Basis}
+\begin{review}[Section overview]
+Ideal gas: \noteeq{PV = n R_u T = m R T}. Useful processes: isothermal (\noteeq{PV=\text{const}}), adiabatic reversible (\noteeq{PV^\gamma=\text{const}}, \noteeq{TV^{\gamma-1}=\text{const}}). Pitfalls: use absolute T (K); check units of R.
+\end{review}
 \begin{definition}[Quasi-Equilibrium Process (Reversible Path)]
     A quasi-equilibrium process is a process that occurs slowly enough that the system remains in a state of equilibrium at all times. In other words, the properties of the system change so (infinitely) slowly that they can be considered constant during the process. In this case, this path is reversible. \\
     (Example) A gas in a cylinder with a movable piston that is compressed or expanded very slowly, allowing the gas to remain in equilibrium throughout the process.
@@ -422,6 +423,9 @@ We can also observe that increasing the temperature increases the average kineti
 
 % ===================== PART 5: FIRST LAW FORMAL DEVELOPMENT =====================
 \section{First Law of Thermodynamics (Formal Development)}
+\begin{review}[Section overview]
+Closed system: \noteeq{\Delta U=Q-W}. Control volume steady state (single-in/out): \noteeq{\dot W_{shaft}=\dot m(h_1-h_2)+\dot m(\tfrac{V_1^2-V_2^2}{2}+g(z_1-z_2)) - (\dot Q_1-\dot Q_2)}. Sign convention: work out of system positive.
+\end{review}
 \begin{shaded}
 \paragraph{Motivation} We want to understand how energy is conserved in a system, and how energy is transferred between a system and its surroundings. This is important for understanding how engines work, how to design efficient systems, and how to analyze thermodynamic processes.
 \end{shaded}  
@@ -462,6 +466,9 @@ Dividing by $dt$, we have the rate form of the first law:
 
 % ===================== PART 6: WORK AND ENERGY MODES =====================
 \section{Work and Energy Transfer Modes}
+\begin{review}[Section overview]
+Boundary work for quasi-equilibrium: \noteeq{W=\int P\,dV}. Useful cases: isobaric \noteeq{W=P\Delta V}, isothermal ideal gas \noteeq{W=nRT\ln(V_2/V_1)}. Flow work is included in enthalpy: \noteeq{h=u+Pv}.
+\end{review}
 \begin{definition}[Boundry Work]
     Force acts on the boundries of a systems and deformes them. \\
     (Example) Expansion and compression of a gas 
@@ -749,7 +756,11 @@ Substituting, we have:
 \end{example}
 
 \paragraph{Note} Do not associated $c_v$ and $c_p$ with constant volume and constant pressure processes, they are just the specific heat capacities at constant volume and constant pressure, they are properties of the substance that is true for any process. Associate them with $\Delta u$ and $\Delta h$.
-
+\subsection{Control Volume Steady State Energy Equation}
+\begin{review}[Subsection overview]
+Control volume steady state (single-in/out): \\ \noteeq{\dot W_{shaft}=\dot m(h_1-h_2)+\dot m(\tfrac{V_1^2-V_2^2}{2}+g(z_1-z_2)) - (\dot Q_1-\dot Q_2)}. Sign convention: work out of system positive.
+Mass flow rate: \noteeq{\dot m=\rho AV=\frac{AV}{v}}. Ideal gas: \noteeq{Pv=RT}. Fluid energy per unit mass: \noteeq{e=h+\tfrac{V^2}{2}+gz}.
+\end{review}
 \begin{example}
     Consider a piston-cylinder device. If we put a weight on top, the gas is compressed, and the piston moves down. This boundry work process would change enthalpy, despite not changing the temperature. This is becuase:
     $$
@@ -842,34 +853,95 @@ Substituting, we have:
 \end{example}
 
 \subsection{Second Law of Thermodynamics and Entropy}
+\begin{review}[Subsection overview]
+Entropy balance (CV): \noteeq{\dot S_{cv}=\sum \tfrac{\dot Q_j}{T_j}+\sum \dot m_i s_i-\sum \dot m_e s_e+\dot S_{gen}}, with \noteeq{\dot S_{gen}\ge0}. Reversible process: \noteeq{dS=\tfrac{\delta Q_{rev}}{T}}.
+\end{review}
 \paragraph{Motivation} We want to understand the direction of energy transfer and the efficiency of energy conversion processes. In an engine or a driven process, we want a measurement for the \textit{quality} of energy, and how much of it is \textit{usable}. This is important for understanding how to design efficient systems, and how to analyze thermodynamic processes.
 \begin{definition}[Entropy]
     Entropy is an extensive property that changes when heat is transferred to or from a system. The entropy change is defined as:
     \begin{equation}
-        dS = \frac{\delta Q_{rev}}{T}
+        dS = \frac{\delta Q_{\text{rev}}}{T}
     \end{equation}
-    where $dS$ is the change in entropy, $\delta Q_{rev}$ is the reversible heat transfer, and $T$ is the absolute temperature. 
+    where $dS$ is the change in entropy, $\delta Q_{\text{rev}}$ is the reversible heat transfer, and $T$ is the absolute temperature. 
     Now for the total entropy change of a system, we have:
     \begin{equation}
-        \Delta S_{system} = S_2 - S_1 = \int_{1}^{2} \frac{\delta Q_{rev}}{T}
+        \Delta S_{\text{system}} = S_2 - S_1 = \int_{1}^{2} \frac{\delta Q_{\text{rev}}}{T}
     \end{equation}
     where $S_1$ and $S_2$ are the initial and final entropies of the system, respectively.
 \end{definition}
 
 \paragraph{Inevitable Entropy Generation} Consider a two systems undergoing heat transfer, we can model the entropy of the entire system as:
 $$
-    \Delta S_{universe} = \frac{Q_{rev}}{T_{hot}} - \frac{Q_{rev}}{T_{cold}}
+    \Delta S_{\text{universe}} = \frac{Q_{\text{rev}}}{T_{\text{hot}}} - \frac{Q_{\text{rev}}}{T_{\text{cold}}}
 $$
-Since $T_{hot} > T_{cold}$, we have $\Delta S_{universe} > 0$. This means that for any process that involves heat transfer, the entropy of the universe always increases. This is a statement of the second law of thermodynamics.
+Since $T_{\text{hot}} > T_{\text{cold}}$, we have $\Delta S_{\text{universe}} > 0$. This means that for any process that involves heat transfer, the entropy of the universe always increases. This is a statement of the second law of thermodynamics.
 
 \begin{theorem}[Second Law of Thermodynamics]
-    The entropy in an isolated system always increases for any real process. This can be expressed as:
+    For an isolated system, the entropy never decreases for a real process; it grows until the system reaches equilibrium. In a counting formulation this is expressed by the number of accessible microstates \(\Omega\): the equilibrium macrostate is the one with the largest \(\Omega\). Using the logarithmic definition below makes these counts add up nicely:
     \begin{equation}
-        \Delta S > 0
+        S \equiv \ln \Omega .
     \end{equation}
-   
-    Entropy would generate until it reaches equilibrium, where $\Delta S_{universe} = 0$.
+    At equilibrium \(\Omega=\Omega_{\rm eq}\) is (for large systems) overwhelmingly larger than the multiplicities of other macrostates, so the system almost surely occupies the equilibrium macrostate and the entropy is maximal.
 \end{theorem}
+
+\begin{proof}
+    Simple combinatorics gives an instructive example. If we distribute \(N\) indistinguishable energy quanta among \(M\) distinguishable boxes, the number of microstates is
+    \begin{align*}
+        \Omega(\{n_i\}) &= \frac{(N+M-1)!}{\prod_{i=1}^M n_i!\,(M-1)!}
+        \quad\text{and for the total count with only the total \(N\) fixed}\quad \\
+        \Omega_{\rm tot} & =\binom{N+M-1}{N}.
+    \end{align*}
+    Symmetry shows the multiplicity is maximal when the quanta are as equally distributed as possible, i.e. \(n_i \approx N/M\) (the most probable macrostate). Using Stirling's approximation \(\ln n!\approx n\ln n - n\) one obtains, for small deviations \(\delta n_i\) about the equal distribution,
+    $$
+        \ln\Omega(\{n_i\}) \approx \ln\Omega_{\rm eq} - \frac{1}{2}\sum_{i}\frac{(\delta n_i)^2}{n_{i,\rm eq}} + \cdots.
+    $$
+    The second term shows a Gaussian suppression of multiplicity for deviations: the ratio
+    $$
+        \frac{\Omega(\{n_i\})}{\Omega_{\rm eq}} \approx \exp\!\Big(-\tfrac{1}{2}\sum_i\frac{(\delta n_i)^2}{n_{i,\rm eq}}\Big)
+    $$
+    becomes exponentially small once the deviations are large compared with the typical fluctuation size (~\(\sqrt{N}\)). Therefore, as \(N\) grows large, almost all microstates are concentrated in a narrow band around the equal-distribution macrostate and one finds effectively
+    $$
+        \Omega_{\rm eq} \approx \Omega_{\rm tot},
+    $$
+    which implies \(S=\ln\Omega\) is maximal at equilibrium. This concentration of measure is the combinatorial heart of the second law.
+\end{proof}
+
+\begin{definition}[Microstates and Boltzmann Entropy]
+    A microstate is a complete microscopic specification of the system; \(\Omega\) counts how many microstates correspond to a given macroscopic description (a macrostate). The entropy defined by the logarithm of that count,
+    \begin{equation}
+        S = \ln \Omega,
+    \end{equation}
+    has the convenient property that independent subsystems add: \(S_{\rm tot}=\ln(\Omega_1\Omega_2)=S_1+S_2\).
+
+    To recover the conventional physical units one multiplies by Boltzmann's constant \(k_B\). The Boltzmann entropy is therefore
+    \begin{equation}
+        S_{\text{Boltzmann}} = k_B \ln \Omega,
+    \end{equation}
+    where \(k_B \approx 1.38\times 10^{-23}\,{\rm J/K}\).
+\end{definition}
+
+\begin{definition}[Maxwell-Boltzmann Distribution]
+    Consider a system with the $n$ particle and energy levels $\epsilon_i$. The system must first satisfy:
+    $$
+        \sum_i n_i = n \quad \text{and} \quad \sum_i n_i \epsilon_i = U
+    $$ 
+    That gives us the number of particles in a particular energy level given a temperature $T$. And this is visualized by the Maxwell-Boltzmann distribution:
+    \begin{figure}[h!]
+        \centering
+        \includegraphics[width=0.8\textwidth]{MBGraph2.png}
+        \caption{Maxwell-Boltzmann distribution of particles in energy levels}
+    \end{figure}
+\end{definition}
+\begin{definition}[Change of Entropy for an Ideal Gas]
+    The change in entropy of an ideal gas is:
+    \begin{equation}
+        \Delta S = s_2 - s_1 = k_B \ln\left(\frac{\Omega_2}{\Omega_1}\right) \\
+    \end{equation}
+    After some derivation, we have:
+    \begin{equation}
+        \Delta S = mR \left[ \ln\left(\frac{3}{2} \frac{T_2}{T_1}\right) + \ln\left(\frac{V_2}{V_1}\right) \right]
+    \end{equation}
+\end{definition}
 \chapter{Heat Transfer}
 
 \end{document}

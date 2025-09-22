@@ -7,6 +7,10 @@
 \usepackage{lastpage}
 \usepackage{enumitem}
 \usepackage{fancyhdr}
+\usepackage{pgfplots}
+\pgfplotsset{compat=1.18}
+\usepgfplotslibrary{fillbetween}
+\usetikzlibrary{fillbetween}
 \usepackage{mathrsfs}
 \usepackage{wrapfig}
 \usepackage{setspace}
@@ -27,6 +31,15 @@
 \usepackage{tikz}
 \usetikzlibrary{positioning}
 \colorlet{shadecolor}{orange!15}
+% Green review box wrapper around shaded
+% Usage: \begin{review}[Title] ... \end{review}
+\colorlet{reviewbg}{green!12}
+% Temporarily override shadecolor so only review boxes are green
+\newenvironment{review}[1][]{%
+	\begingroup\colorlet{oldshadecolor}{shadecolor}\colorlet{shadecolor}{reviewbg}%
+	\begin{shaded}%
+	\ifx\relax#1\relax\else\textbf{#1}\par\fi
+}{\end{shaded}\colorlet{shadecolor}{oldshadecolor}\endgroup}
 \parindent 0in
 \parskip 12pt
 \geometry{margin=1in, headsep=0.25in}
@@ -36,6 +49,16 @@
 \newtheorem{exer}{Exercise}
 \newtheorem{note}{Note}
 \usepackage{fancyhdr}\usepackage{xcolor}\usepackage{amsmath}\usepackage{amssymb}\pagestyle{fancy}\rhead{}
+% Fix header height for fancyhdr to avoid warnings
+\setlength{\headheight}{14pt}
+% Equation numbering and helpers
+\numberwithin{equation}{section}
+% Important equation: numbered display
+\newcommand{\keyeq}[1]{\begin{equation}#1\end{equation}}
+% Non-disruptive (no number):
+\newcommand{\numeq}[1]{\[ #1 \]}
+% Inline with box highlight for quick scanning
+\newcommand{\noteeq}[1]{\,\boxed{#1}\,}
 \newtheorem{theorem}{Theorem}[subsection]
 \theoremstyle{definition}
 \newtheorem{definition}[theorem]{Definiton}

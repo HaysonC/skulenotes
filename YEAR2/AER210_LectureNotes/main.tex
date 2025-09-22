@@ -15,8 +15,9 @@ The up-to-date version of this document can be found at \url{https://github.com/
 \paragraph{Note} the section numbering is based on Stewart's book.
 
 \section{Partial Derivatives}
-\subsection{Taylor Series for Multivariable Functions}
 \paragraph{Continuing from Calc II} We consider Taylor series of multivariable functions, and we would need to consider partial derivatives.
+
+\subsection{Taylor Series for Multivariable Functions}
 
 \begin{shaded}
     \subsubsection{Review. Taylor Series for Single Variable Functions}
@@ -44,8 +45,8 @@ The up-to-date version of this document can be found at \url{https://github.com/
     $$
     Using the chain rule, we can compute the taylor series of $f(x,y)$ about the point $(x_0,y_0)$:
     \begin{align}
-        f(x_0 + \Delta x, y_0 + \Delta y) &= f(x_0,y_0) + \left( \frac{\partial f}{\partial x} \Delta x + \frac{\partial f}{\partial y} \Delta y \right) + \nonumber \\
-        &\quad \frac{1}{2!} \left( \frac{\partial^2 f}{\partial x^2} (\Delta x)^2 + 2\frac{\partial^2 f}{\partial x \partial y} \Delta x \Delta y + \frac{\partial^2 f}{\partial y^2} (\Delta y)^2 \right) + \cdots \\
+        f(x_0 + \Delta x, y_0 + \Delta y) &= f(x_0,y_0) + \left( \frac{\partial f}{\partial x} \Delta x + \frac{\partial f}{\partial y} \Delta y \right) \nonumber \\
+        & + \frac{1}{2!} \left( \frac{\partial^2 f}{\partial x^2} (\Delta x)^2 + 2\frac{\partial^2 f}{\partial x \partial y} \Delta x \Delta y + \frac{\partial^2 f}{\partial y^2} (\Delta y)^2 \right) + \cdots \\
         &= f(x_0,y_0) + \sum_{n=1}^{\infty} \sum_{k=0}^n \frac{1}{k!(n-k)!} \frac{\partial^n f}{\partial x^k \partial y^{n-k}} (\Delta x)^k (\Delta y)^{n-k}
     \end{align}
     Or equivalently, we can write:
@@ -61,7 +62,77 @@ The up-to-date version of this document can be found at \url{https://github.com/
         f(x,y) = f(x_0,y_0) + \sum_{n=1}^{\infty} \frac{1}{n!} \sum_{k=0}^n \binom{n}{k} \frac{\partial^n f}{\partial x^k \partial y^{n-k}} (x - x_0)^k (y - y_0)^{n-k}
     \end{equation}
 
+    WLOG, this can be extended to functions of more than two variables.
 \end{definition}
+
+\begin{example}[Thrid (3$^{\text{rd}}$) order Taylor Polynomial]
+    For some function $f(x,y)$, the third order Taylor polynomial about the point $(x_0,y_0)$ is given by:
+    \begin{align*}
+        f(x,y) &= f(x_0,y_0) + \left( \frac{\partial f}{\partial x} (x - x_0) + \frac{\partial f}{\partial y} (y - y_0) \right) \\
+        &\quad + \frac{1}{2!} \left( \frac{\partial^2 f}{\partial x^2} (x - x_0)^2 + 2\frac{\partial^2 f}{\partial x \partial y} (x - x_0)(y - y_0) + \frac{\partial^2 f}{\partial y^2} (y - y_0)^2 \right) \\
+        &\quad + \frac{1}{3!} \left( \frac{\partial^3 f}{\partial x^3} (x - x_0)^3 + 3\frac{\partial^3 f}{\partial x^2 \partial y} (x - x_0)^2 (y - y_0) + 3\frac{\partial^3 f}{\partial x \partial y^2} (x - x_0)(y - y_0)^2 + \frac{\partial^3 f}{\partial y^3} (y - y_0)^3 \right) \\
+        &\quad + O\left( ||(x - x_0, y - y_0)||^4 \right)
+    \end{align*}
+    where $O\left( ||(x - x_0, y - y_0)||^4 \right)$ represents the higher order terms that are of order 4 or higher in the Taylor series expansion.
+\end{example}
+
+\begin{example}[Three Variable Case]
+    For some function $f(x,y,z)$, the second order Taylor polynomial about the point $(x_0,y_0,z_0)$ is given by:
+    \begin{align*}
+        f(x,y,z) &= f(x_0,y_0,z_0) + \left( \frac{\partial f}{\partial x} (x - x_0) + \frac{\partial f}{\partial y} (y - y_0) + \frac{\partial f}{\partial z} (z - z_0) \right) + \\
+        &\quad \frac{1}{2!} \left( \frac{\partial^2 f}{\partial x^2} (x - x_0)^2 + 2\frac{\partial^2 f}{\partial x \partial y} (x - x_0)(y - y_0) + 2\frac{\partial^2 f}{\partial x \partial z} (x - x_0)(z - z_0) + \right. \\
+        &\quad \left. \frac{\partial^2 f}{\partial y^2} (y - y_0)^2 + 2\frac{\partial^2 f}{\partial y \partial z} (y - y_0)(z - z_0) + \frac{\partial^2 f}{\partial z^2} (z - z_0)^2 \right) + \\
+        &\quad O\left( ||(x - x_0, y - y_0, z - z_0)||^3 \right)
+    \end{align*}
+    where $O\left( ||(x - x_0, y - y_0, z - z_0)||^3 \right)$ represents the higher order terms that are of order 3 or higher in the Taylor series expansion.
+    
+\end{example}
+
+\begin{example}
+    \textit{Find the second order Taylor polynomial of $f(x,y) = \sqrt{x^2 + y^3}$ about the point $(1,2)$.}
+    
+    First, we compute the necessary partial derivatives at the point $(1,2)$:
+    \begin{align*}
+        f(x,y) &= \sqrt{x^2 + y^3} \implies f(1,2) = \sqrt{1^2 + 2^3} = \sqrt{9} = 3 \\
+        f_x(x,y) &= \frac{x}{\sqrt{x^2 + y^3}} \implies f_x(1,2) = \frac{1}{3} \\
+        f_y(x,y) &= \frac{3y^2}{2\sqrt{x^2 + y^3}} \implies f_y(1,2) = \frac{6}{3} = 2 \\
+        f_{xx}(x,y) &= \frac{y^3}{(x^2 + y^3)^{3/2}} \implies f_{xx}(1,2) = \frac{8}{27} \\
+        f_{yy}(x,y) &= \frac{3x^2}{4(x^2 + y^3)^{3/2}} \implies f_{yy}(1,2) = \frac{3}{27} = \frac{1}{9} \\
+        f_{xy}(x,y) &= -\frac{3xy^2}{2(x^2 + y^3)^{3/2}} \implies f_{xy}(1,2) = -\frac{6}{27} = -\frac{2}{9}
+    \end{align*}
+    Now, we can plug these values into the second order Taylor polynomial formula:
+    \begin{align*}
+        f(x,y) &\approx f(1,2) + f_x(1,2)(x-1) + f_y(1,2)(y-2) \\
+        &\quad + \frac{1}{2} \left( f_{xx}(1,2)(x-1)^2 + 2f_{xy}(1,2)(x-1)(y-2) + f_{yy}(1,2)(y-2)^2 \right) \\
+        &\approx 3 + \frac{1}{3}(x-1) + 2(y-2) + \frac{1}{2} \left( \frac{8}{27}(x-1)^2 - \frac{4}{9}(x-1)(y-2) + \frac{1}{9}(y-2)^2 \right)
+    \end{align*}
+\end{example}
+
+\begin{example}
+    \textit{Find the third-order taylor expansion for $f(x,y) = e^{x-2y}$ about the point $(0,0)$.}
+    
+    \textbf{Method 1 (using multivariable taylor series)} We compute the necessary partial derivatives at the point $(0,0)$:
+    \begin{align*}
+        f(x,y) &= e^{x-2y} \implies f(0,0) = e^0 = 1 \\
+        f_x(x,y) &= e^{x-2y} \implies f_x(0,0) = 1 \\
+        f_y(x,y) &= -2e^{x-2y} \implies f_y(0,0) = -2 \\
+        f_{xx}(x,y) &= e^{x-2y} \implies f_{xx}(0,0) = 1 \\
+        f_{yy}(x,y) &= 4e^{x-2y} \implies f_{yy}(0,0) = 4 \\
+        f_{xy}(x,y) &= -2e^{x-2y} \implies f_{xy}(0,0) = -2 \\
+        f_{xxx}(x,y) &= e^{x-2y} \implies f_{xxx}(0,0) = 1 \\
+        f_{yyy}(x,y) &= -8e^{x-2y} \implies f_{yyy}(0,0) = -8 \\
+        f_{xxy}(x,y) &= -2e^{x-2y} \implies f_{xxy}(0,0) = -2 \\
+        f_{xyy}(x,y) &= 4e^{x-2y} \implies f_{xyy}(0,0) = 4
+    \end{align*}
+    Now, we can plug these values into the third order Taylor polynomial formula:
+    \begin{align*}
+        f(x,y) &\approx f(0,0) + f_x(0,0)x + f_y(0,0)y \\
+        &\quad + \frac{1}{2} \left( f_{xx}(0,0)x^2 + 2f_{xy}(0,0)xy + f_{yy}(0,0)y^2 \right) \\
+        &\quad + \frac{1}{6} \left( f_{xxx}(0,0)x^3 + 3f_{xxy}(0,0)x^2y + 3f_{xyy}(0,0)xy^2 + f_{yyy}(0,0)y^3 \right) \\
+        &\approx 1 + x - 2y + \frac{1}{2} \left( x^2 - 4xy + 4y^2 \right) + \frac{1}{6} \left( x^3 - 6x^2y + 12xy^2 - 8y^3 \right)
+    \end{align*}
+    \textbf{Method 2 (using single variable taylor series)} We know that $e^{x - 2y} = e^{x} e^{-2y}$. We can find the taylor series of $e^x$ and $e^{-2y}$ about $0$ separately, and then multiply them together. Due to margin, this is left as an exercise to the reader.
+\end{example}
 \section{Multiple Integrals}
 \begin{definition}[Double Integral]
     Let $f(x,y)$ be a function defined on a closed and bounded region $R$ in the $xy$-plane. The double integral of $f$ over $R$ is denoted by
@@ -1098,8 +1169,186 @@ Definition \ref{def:double_integral}. We can define a triple integral as follows
     \end{align*}
 
 \end{example}
-
-\subsection{}
 \subsection{Change of Variables in Multiple Integrals} \label{sec:change_of_variables}
+\begin{shaded}
+    \subsubsection{Change of Variables in Single Integrals}
+    Consider the following integral:
+    $$
+        \int_1^3 2x\sqrt{x^2 +1} \, dx
+    $$
+    We can use substitution to solve this integral. Let $u = x^2 + 1$, then $du = 2x \, dx$. Then, we carefully plug in to the integral, and notice how this could extend to multiple integrals:
+    \begin{align*}
+        \int_1^3 2x\sqrt{x^2 +1} \, dx &= \int_{u=2}^{u=10} 2 \sqrt{u} \sqrt{u-1} \cdot \frac{du}{2\sqrt{u-1}} = \int_{u=2}^{u=10} \sqrt{u} \, du \\
+        &= \left[ \frac{2}{3} u^{\frac{3}{2}} \right]_{u=2}^{u=10} = \frac{2}{3} (10^{\frac{3}{2}} - 2^{\frac{3}{2}})
+    \end{align*}
+    The key step is to express $dx$ in terms of $du$:
+    $$        
+    dx = \frac{du}{2x}
+    $$
+    Consider how the area under a curve shifts when we change the variable from $x$ to $u$, we can visualize this as follows:
+    % two minipages side by side one with the graph of y = f(x) from 0 to 3 and the other with the graph of y = f(u) from 2 to 10
+    \end{shaded}
+    \newpage
+
+    \begin{figure}[h!]
+        \centering
+        \begin{minipage}{0.45\textwidth}
+            \centering
+            \begin{tikzpicture}
+                \begin{axis}[
+                        axis lines = middle,
+                        xlabel = $x$,
+                        ylabel = $y$,
+                        domain=0:3,
+                        samples=100,
+                        width=6cm,
+                        height=5cm,
+                    ]
+                    % Draw the curve y = f(x) and name the x-axis as a path
+                    \addplot[blue, thick, name path=fcurve] {2*x*sqrt(x^2 + 1)};
+                    \addplot[thick, name path=axisline] {0};
+                    % Draw vertical guide lines (for visual reference)
+                    \draw[black, thick] (axis cs:1,0) -- (axis cs:1,8);
+                    \draw[black, thick] (axis cs:3,0) -- (axis cs:3,18);
+                    % Shade the area under the curve from x=1 to x=3 using fill between curve and axis
+                    \addplot[blue!20, opacity=0.5] fill between[of=fcurve and axisline, soft clip={domain=1:3}];
+                    % Add labels
+                    \node at (axis cs:2,5) {$y = f(x)$};
+                    \node at (axis cs:2,1) {Area};
+                \end{axis}
+            \end{tikzpicture}
+            \caption{Area under the curve $y = f(x)$ from $x=1$ to $x=3$.}
+        \end{minipage}
+        \hfill
+        \begin{minipage}{0.45\textwidth}
+            \centering
+            \begin{tikzpicture}
+                \begin{axis}[
+                        axis lines = middle,
+                        xlabel = $u$,
+                        ylabel = $y$,
+                        domain=0:12,
+                        samples=100,
+                        width=6cm,
+                        height=5cm,
+                    ]
+                    % Draw the curve y = f(u) and name the x-axis as a path
+                    \addplot[blue, thick, name path=gcurve] {2*sqrt(x)*sqrt(x - 1)};
+                    \addplot[thick, name path=axisline] {0};
+                    % Shade the area under the curve from u=2 to u=10 using fill between curve and axis
+                    \addplot[blue!20, opacity=0.5] fill between[of=gcurve and axisline, soft clip={domain=2:10}];
+                    % Add labels
+                    \node at (axis cs:6,9) {$y = f(u)$};
+                    \node at (axis cs:6,3) {Area};
+                \end{axis}
+            \end{tikzpicture}
+            \caption{Area under the curve $y = f(u)$ from $u=2$ to $u=10$.}
+        \end{minipage}  
+    \end{figure}
+\begin{shaded}
+
+    Although $2x \sqrt{x^2 + 1} = 2\sqrt{u} \sqrt{u-1}$, the area under the curve at any given $x_0$, $u_0 = x_0^2 + 1$ are not necessarily equal: $f(x_0) \neq f(u_0)$. This is because the width of each rectangle changes when we change the variable from $x$ to $u$. But for small changes, we can approximate the width of each rectangle as follows:
+    $$        
+    \Delta u \approx \frac{du}{dx} \Delta x = 2x \Delta x
+    $$
+    So, the area of each rectangle changes as follows:
+    $$        
+    \text{Area} \approx f(x) \Delta x = f(u) \frac{\Delta u}{2x}
+    $$
+    Taking the limit as $\Delta x \to 0$ (and thus $\Delta u \to 0$), we get:
+    $$        
+    \text{Area} = f(x) \, dx = f(u) \frac{du}{2x}
+    $$
+    This is the key idea behind the change of variables in integrals, and it can be extended to multiple integrals.
+\end{shaded}
+
+\paragraph{Change of Variables in Double Integrals} Consider the following change of variables in double integral $\iint_R f(x,y) \, dA$:
+$$
+\begin{cases}
+    x = g(u,v) \\
+    y = h(u,v)
+\end{cases}
+$$
+Such that we call the corresponding region in the $uv$-plane as $S$. Now we assume that there exists a bijective mapping between $(x,y)$ and $(u,v)$, and that the functions $g$ and $h$ have continuous partial derivatives. Then, we can express the area element $dA$ in terms of $du$ and $dv$.
+
+We can imagine any uniform small rectangle in the $uv$-plane with sides $\Delta u$ and $\Delta v$. Consider how the four corners of the rectangle map to the $xy$-plane:
+\begin{itemize}
+    \item The corner at $(u,v)$ maps to $(x,y) = (g(u,v), h(u,v))$.
+    \item The corner at $(u + \Delta u, v)$ maps to $(x,y) = (g(u + \Delta u, v), h(u + \Delta u, v))$.
+    \item The corner at $(u, v + \Delta v)$ maps to $(x,y) = (g(u, v + \Delta v), h(u, v + \Delta v))$.
+    \item The corner at $(u + \Delta u, v + \Delta v)$ maps to $(x,y) = (g(u + \Delta u, v + \Delta v), h(u + \Delta u, v + \Delta v))$.
+\end{itemize}
+And we can consider the infinitesimal case as $\Delta u \to 0$ and $\Delta v \to 0$. Then, we can approximate the area of the parallelogram (we can prove this is a parallelogram as the dot product of the two sides converge to 0) formed by these four points in the $xy$-plane by the magnitude of the cross product of the two vectors. 
+
+First, we consider the first order taylor approximateion of $g$ and $h$ at the above four corners:
+\begin{align*}
+    g(u + \Delta u, v) &\approx g(u,v) + g_u(u,v) \Delta u \\
+    h(u + \Delta u, v) &\approx h(u,v) + h_u(u,v) \Delta u \\
+    g(u, v + \Delta v) &\approx g(u,v) + g_v(u,v) \Delta v \\
+    h(u, v + \Delta v) &\approx h(u,v) + h_v(u,v) \Delta v \\
+    g(u + \Delta u, v + \Delta v) &\approx g(u,v) + g_u(u,v) \Delta u + g_v(u,v) \Delta v \\
+    h(u + \Delta u, v + \Delta v) &\approx h(u,v) + h_u(u,v) \Delta u + h_v(u,v) \Delta v
+\end{align*}
+And then we condsier the vecotr's form of the two sides of the parallelogram:
+\begin{align*}
+    \overrightarrow{A} &= \langle g(u + \Delta u, v) - g(u,v), h(u + \Delta u, v) - h(u,v) \rangle \\
+    &\approx \langle g_u(u,v) \Delta u, h_u(u,v) \Delta u \rangle = \Delta u \langle g_u(u,v), h_u(u,v) \rangle \\
+    \overrightarrow{B} &= \langle g(u, v + \Delta v) - g(u,v), h(u, v + \Delta v) - h(u,v) \rangle \\
+    &\approx \langle g_v(u,v) \Delta v, h_v(u,v) \Delta v \rangle = \Delta v \langle g_v(u,v), h_v(u,v) \rangle
+\end{align*}
+Now, we can compute the area of the parallelogram as follows:
+\begin{align*}
+    \text{Area} &\approx |\overrightarrow{A} \times \overrightarrow{B}| = \left| \begin{vmatrix}
+        \mathbf{i} & \mathbf{j} & \mathbf{k} \\
+        g_u(u,v) \Delta u & h_u(u,v) \Delta u & 0 \\
+        g_v(u,v) \Delta v & h_v(u,v) \Delta v & 0
+    \end{vmatrix} \right| \\
+    &= \left| (0 - 0) \mathbf{i} - (0 - 0) \mathbf{j} + (g_u(u,v) h_v(u,v) - g_v(u,v) h_u(u,v)) \Delta u \Delta v \mathbf{k} \right| \\
+    &= |g_u(u,v) h_v(u,v) - g_v(u,v) h_u(u,v)| \Delta u \Delta v
+\end{align*}
+Taking the limit as $\Delta u \to 0$ and $\Delta v \to 0$, we get:
+$$
+dA = |g_u(u,v) h_v(u,v) - g_v(u,v) h_u(u,v)| \, du \, dv
+$$
+which could be rewritten as the following defintion:
+
+\begin{definition}[Jacobian of a Transformation]
+    Consider the transformation:
+    $$
+    \begin{cases}
+        x = g(u,v) \\
+        y = h(u,v)
+    \end{cases}
+    $$
+    The Jacobian of the transformation is defined as:
+    \begin{equation}
+        J = \frac{\partial(x,y)}{\partial(u,v)} = \begin{vmatrix}
+            \dfrac{\partial x}{\partial u} & \dfrac{\partial x}{\partial v} \\
+            \dfrac{\partial y}{\partial u} & \dfrac{\partial y}{\partial v}
+        \end{vmatrix} = g_u(u,v) h_v(u,v) - g_v(u,v) h_u(u,v)
+        \end{equation}
+    And the area element $dA$ in terms of $du$ and $dv$ is given by:
+    $$
+        dA = |J| \, du \, dv
+    $$
+    Additionally, we if we define the chang of variable the other way around:
+    $$
+    \begin{cases}
+        u = p(x,y) \\
+        v = q(x,y)
+    \end{cases}
+    $$
+    Then, the Jacobian of the transformation is defined as:
+    $$
+        J = \frac{\partial(u,v)}{\partial(x,y)} = \begin{vmatrix}
+            \dfrac{\partial u}{\partial x} & \dfrac{\partial u}{\partial y} \\
+            \dfrac{\partial v}{\partial x} & \dfrac{\partial v}{\partial y}
+        \end{vmatrix} = p_x(x,y) q_y(x,y) - p_y(x,y) q_x(x,y)
+    $$
+    And the area element $dA$ in terms of $dx$ and $dy$ is given by:
+    $$        dA = \frac{1}{|J|} \, dx \, dy
+    $$
+    
+\end{definition}
 \chapter{Fluid Mechanics}
 \end{document} 
