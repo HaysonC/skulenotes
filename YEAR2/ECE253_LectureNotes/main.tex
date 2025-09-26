@@ -1306,12 +1306,74 @@ The following identities can be derived from the axioms of Boolean algebra:
         \caption{Truth Table for Gated D Latch}
         \label{tab:gated_d_latch_truth_table}
     \end{table}
+
+    The Verilog implementation is as follows:
+    \begin{verbatim}
+    module d_latch(input logic D, CLK,
+                   output logic Q);
+        always_latch begin // this is new in SystemVerilog, 
+        // dont write else in always_latch 
+            if (CLK) // Transparent mode
+                Q = D;
+        end
+    endmodule
+    \end{verbatim}
 \end{definition}
 
 \paragraph{Equivalence with a mux} If we feed back the output of a mux back to one of the input, this is essentially a gated D latch with the SW as CLK and the input is the D.
 
-\begin{definition}[D-Flip Flops]
+\begin{definition}[D-Flip Flops (Registors)]
     A D flip-flop is a type of flip-flop that captures the value of the D input at a specific portion of the clock cycle (rising edge) and holds that value until the next clock cycle. It is done by chaining the output of a D latch to the input of another D-latch. While the second D-latch recognizes the CLK, and the first one recognizes $\overline{\text{CLK}}$.
+
+    The verilog implementation is as follows:
+    \begin{verbatim}
+    module d_ff(input logic D, CLK,
+                output logic Q);
+        always_ff @(posedge CLK) begin
+            Q <= D; // Non-blocking assignment
+        end
+    endmodule
+    \end{verbatim}
+    \verb|postedge| is a keyword used to create a positive edge-triggered FF. We use $<= $ instead of $= $ because we want to use non-blocking assignment. This is because in a sequential circuit, all the FFs are triggered at the same time, and we want to make sure that the value of Q is updated only after all the FFs have been evaluated.
+\end{definition}
+
+\begin{definition}[8-Bit Register]
+    An 8-bit register is a digital storage device that can hold 8 bits of binary data. It is typically implemented using a series of D flip-flops, where each flip-flop stores one bit of data. The register has a clock input (CLK) that controls when the data is loaded into the register, and an enable input (EN) that determines whether the register should load new data or retain its current value. When EN is high (1), the register loads the data present on the D input into the flip-flops on the rising edge of the clock. When EN is low (0), the register retains its current value regardless of changes on the D input.
+
+    The Verilog implementation is as follows:
+    \begin{verbatim}
+    module register8(input logic [7:0] D,
+                     input logic CLK, EN,
+                     output logic [7:0] Q);
+        always_ff @(posedge CLK) begin
+            if (EN)
+                Q <= D; // Load new data
+            // else retain old data
+        end
+    endmodule
+    \end{verbatim}
+    
+\end{definition}
+
+\paragraph{Resets} We have two types of rests to reset the FF to a known state:
+\begin{itemize}
+    \item \textbf{Synchronous reset:} Active only on the clock edge. If reset = 1 at the triggering edge the flip‑flop is forced to the predefined state (usually 0); otherwise it captures D.
+    \item \textbf{Asynchronous reset:} Active immediately when asserted, forcing the flip‑flop to the predefined state (usually 0) regardless of the clock; normal edge‑triggered operation resumes when deasserted.
+\end{itemize}
+\begin{definition}[Synchronous Reset D-FF]
+    The Verilog implementation is as follows:
+    \begin{verbatim}
+    module d_ff_sync_reset(input logic D, CLK, RST,
+                           output logic Q);
+        always_ff @(posedge CLK) begin
+            if (RST==1'b0)
+                Q <= 1'b0; // Reset to 0
+            else
+                Q <= D; // Normal operation
+        end
+    endmodule
+    \end{verbatim}
+    
 \end{definition}
 \section{Finite State Machines (FSM)}
 % FSM modeling, state diagrams, and Verilog implementation (to be expanded)

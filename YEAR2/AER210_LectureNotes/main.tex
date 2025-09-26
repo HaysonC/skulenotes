@@ -1527,9 +1527,108 @@ which could be rewritten as the following defintion:
     \end{align*}
     So, we have:
     $$        
-        J = \frac{1}{J^{-1}} = -\frac{1}{8xy}
+        J = \frac{1}{J^{-1}} = -\frac{1}{8xy} \implies I = \iint_R xy \, dA = \iint_S \frac{xy}{8xy} \, du \, dv = \iint_S \frac{1}{8} \, du \, dv = \frac{15}{8}
     $$
     This is consistent with the result we obtained in \ref{ex:change_of_variables}, and results in a much simpler integral to evaluate.
+\end{example}
+
+\begin{example}
+    Consider the integral:  
+    $$
+        \iint_R \exp{\left(\frac{x - y}{x + y}\right)} \, dA
+    $$
+    where $R$ is the trapezoid with vertices at $(1,0)$, $(2,0)$, $(0,-2)$ and $(0,-1)$.
+
+    Motivated by the integrabled, we can use the change of variables:
+    $$
+    \begin{cases}
+        u = x + y \\
+        v = x - y
+    \end{cases} 
+    $$
+    Also, we can define our bounds as follow:
+    \begin{itemize}
+        \item $y = x - 2 \implies u = 2$
+        \item $y = x - 1 \implies v = 1$
+        \item $x = 0 \implies u = -v$
+        \item $y = 0 \implies u = v$
+    \end{itemize}
+    We can find the Jacobian of this transformation by its inverse:
+    $$
+    J^{-1} = \frac{\partial(u,v)}{\partial(x,y)} = \begin{vmatrix}
+        \dfrac{\partial u}{\partial x} & \dfrac{\partial u}{\partial y} \\
+        \dfrac{\partial v}{\partial x} & \dfrac{\partial v}{\partial y}
+    \end{vmatrix} = \begin{vmatrix}
+        1 & 1 \\
+        1 & -1
+    \end{vmatrix} = -2 \implies J = -\frac{1}{2}
+    $$
+    So, we can write the integral in terms of $u$ and $v$:
+    \begin{align*}
+        \iint_R \exp{\left(\frac{x - y}{x + y}\right)} \, dA &= \iint_S \exp{\left(\frac{v}{u}\right)} \cdot |J| \, du \, dv \\
+        &= \frac{1}{2} \int_1^2 \int_{-v}^{v} \exp{\left(\frac{v}{u}\right)} \, du \, dv \\
+        &= \frac{1}{2} \int_1^2 v(e - e^{-1}) \, dv = \frac{3}{4} (e - e^{-1})
+    \end{align*}
+\end{example}
+
+\begin{example}
+    \textit{Evaluate the integral}
+    $$
+        \iint_R (x^2 - y^2) \exp(xy) \, dA
+    $$
+    where $R$ is the region bounded by the hyperbolas $xy=1$ and $xy=4$, and the lines $y=x$ and $y=x+2$.
+
+    Motivated by the bounds, we can use the change of variables:
+    $$
+    \begin{cases}
+        u = xy \\
+        v = y - x
+    \end{cases}
+    $$
+    So, let $S$ be the corresponding region in the $uv$-plane. We can find the bounds of $S$ by plugging in the lines that bound $R$:   
+    \begin{itemize}
+        \item $xy = 1 \implies u = 1$
+        \item $xy = 4 \implies u = 4$
+        \item $y = x \implies v = 0$
+        \item $y = x + 2 \implies v = 2$
+    \end{itemize}
+    We find the Jacobian of this transformation by its inverse:
+    $$
+    J^{-1} = \frac{\partial(u,v)}{\partial(x,y)} = \begin{vmatrix}
+        \dfrac{\partial u}{\partial x} & \dfrac{\partial u}{\partial y} \\
+        \dfrac{\partial v}{\partial x} & \dfrac{\partial v}{\partial y}
+    \end{vmatrix} = \begin{vmatrix}
+        y & x \\
+        -1 & 1
+    \end{vmatrix} = y + x \implies J = \frac{1}{y + x}
+    $$
+    So, we can express the integral in terms of $u$ and $v$:
+    \begin{align*}
+        \iint_R (x^2 - y^2) \exp(xy) \, dA &= \iint_S (x+y)(x-y)e^u \cdot |J| \, du \, dv \\
+        &= \int_0^2 \int_1^4 -v e^u \, du \, dv = \int_0^2 -v(e^4 - e) \, dv = 2(e - e^4)
+    \end{align*}
+\end{example}
+\begin{example}
+    \textit{Find the volume of the region bounded by the hyperbolic cylinders:}
+    $$ 
+    xy = 1, \quad xy = 3, \quad xz = 1, \quad xz = 3, \quad x = 36, \quad y = 25, \quad yz = 49
+    $$
+    Motivated by the bounds, we can use the change of variables:
+    $$
+    \begin{cases}
+        u = xy \\
+        v = xz \\
+        w = yz
+    \end{cases} 
+    $$
+    So, let $S$ be the corresponding region in the $uvw$-space. We can find the bounds of $S$ by plugging in the surfaces that bound the region:
+
+    \begin{align*}
+        1 &\leq u \leq 3 \\
+        1 &\leq v \leq 3 \\
+        25 &\leq w \leq 49
+    \end{align*}
+
 \end{example}
 \chapter{Fluid Mechanics}
 \end{document} 
