@@ -1275,9 +1275,7 @@ We can imagine any uniform small rectangle in the $uv$-plane with sides $\Delta 
 \begin{itemize}
     \item The corner at $(u,v)$ maps to $(x,y) = (g(u,v), h(u,v))$.
     \item The corner at $(u + \Delta u, v)$ maps to $(x,y) = (g(u + \Delta u, v), h(u + \Delta u, v))$.
-    \item The corner at $(u, v + \Delta v)$ maps to $(x,y) = (g(u, v + \Delta v), h(u, v + \Delta v))$.
-    \item The corner at $(u + \Delta u, v + \Delta v)$ maps to $(x,y) = (g(u + \Delta u, v + \Delta v), h(u + \Delta u, v + \Delta v))$.
-\end{itemize}
+    \item The corner at $(u, v + \Delta v)$ maps to $(x,y) = (g(u, v + \Delta v), h(u, v + \Delta v))$.\end{itemize}
 And we can consider the infinitesimal case as $\Delta u \to 0$ and $\Delta v \to 0$. Then, we can approximate the area of the parallelogram (we can prove this is a parallelogram as the dot product of the two sides converge to 0) formed by these four points in the $xy$-plane by the magnitude of the cross product of the two vectors. 
 
 First, we consider the first order taylor approximateion of $g$ and $h$ at the above four corners:
@@ -1286,15 +1284,13 @@ First, we consider the first order taylor approximateion of $g$ and $h$ at the a
     h(u + \Delta u, v) &\approx h(u,v) + h_u(u,v) \Delta u \\
     g(u, v + \Delta v) &\approx g(u,v) + g_v(u,v) \Delta v \\
     h(u, v + \Delta v) &\approx h(u,v) + h_v(u,v) \Delta v \\
-    g(u + \Delta u, v + \Delta v) &\approx g(u,v) + g_u(u,v) \Delta u + g_v(u,v) \Delta v \\
-    h(u + \Delta u, v + \Delta v) &\approx h(u,v) + h_u(u,v) \Delta u + h_v(u,v) \Delta v
 \end{align*}
 And then we condsier the vecotr's form of the two sides of the parallelogram:
 \begin{align*}
     \overrightarrow{A} &= \langle g(u + \Delta u, v) - g(u,v), h(u + \Delta u, v) - h(u,v) \rangle \\
-    &\approx \langle g_u(u,v) \Delta u, h_u(u,v) \Delta u \rangle = \Delta u \langle g_u(u,v), h_u(u,v) \rangle \\
+    &\approx \Delta u \langle g_u(u,v), h_u(u,v) \rangle \\
     \overrightarrow{B} &= \langle g(u, v + \Delta v) - g(u,v), h(u, v + \Delta v) - h(u,v) \rangle \\
-    &\approx \langle g_v(u,v) \Delta v, h_v(u,v) \Delta v \rangle = \Delta v \langle g_v(u,v), h_v(u,v) \rangle
+    &\approx \Delta v \langle g_v(u,v), h_v(u,v) \rangle
 \end{align*}
 Now, we can compute the area of the parallelogram as follows:
 \begin{align*}
@@ -1322,7 +1318,7 @@ which could be rewritten as the following defintion:
     $$
     The Jacobian of the transformation is defined as:
     \begin{equation}
-        J = \frac{\partial(x,y)}{\partial(u,v)} = \begin{vmatrix}
+        J = \left| \frac{\partial(x,y)}{\partial(u,v)} \right|= \begin{vmatrix}
             \dfrac{\partial x}{\partial u} & \dfrac{\partial x}{\partial v} \\
             \dfrac{\partial y}{\partial u} & \dfrac{\partial y}{\partial v}
         \end{vmatrix} = g_u(u,v) h_v(u,v) - g_v(u,v) h_u(u,v)
@@ -1346,9 +1342,194 @@ which could be rewritten as the following defintion:
         \end{vmatrix} = p_x(x,y) q_y(x,y) - p_y(x,y) q_x(x,y)
     $$
     And the area element $dA$ in terms of $dx$ and $dy$ is given by:
-    $$        dA = \frac{1}{|J|} \, dx \, dy
+    $$        
+        dA = \frac{1}{|J|} \, dx \, dy
     $$
     
+    WLOG, the Jacobian can be defined for any number of variables. The geneal Jacobian for a transformation is defined as:
+    \begin{equation}
+        J = \frac{\partial(x_1, x_2, \ldots, x_n)}{\partial(u_1, u_2, \ldots, u_n)} = \begin{vmatrix}
+            \dfrac{\partial x_1}{\partial u_1} & \dfrac{\partial x_1}{\partial u_2} & \cdots & \dfrac{\partial x_1}{\partial u_n} \\
+            \dfrac{\partial x_2}{\partial u_1} & \dfrac{\partial x_2}{\partial u_2} & \cdots & \dfrac{\partial x_2}{\partial u_n} \\
+            \vdots & \vdots & \ddots & \vdots \\
+            \dfrac{\partial x_n}{\partial u_1} & \dfrac{\partial x_n}{\partial u_2} & \cdots & \dfrac{\partial x_n}{\partial u_n}
+        \end{vmatrix}
+    \end{equation}
+    for the transformation:
+    $$
+    \begin{cases}
+        x_1 = g_1(u_1, u_2, \ldots, u_n) \\
+        x_2 = g_2(u_1, u_2, \ldots, u_n) \\
+        \vdots \\
+        x_n = g_n(u_1, u_2, \ldots, u_n)
+    \end{cases}
+    $$
 \end{definition}
+
+\begin{example}[Change to Polar Coordinates]
+    Consider the change of variables from rectangular coordinates $(x,y)$ to polar coordinates $(r,\theta)$:
+    $$
+    \begin{cases}
+        x = r \cos \theta \\
+        y = r \sin \theta
+    \end{cases}
+    $$
+    We can compute the Jacobian of this transformation as follows:
+    \begin{align*}
+        J &= \frac{\partial(x,y)}{\partial(r,\theta)} = \begin{vmatrix}
+            \dfrac{\partial x}{\partial r} & \dfrac{\partial x}{\partial \theta} \\
+            \dfrac{\partial y}{\partial r} & \dfrac{\partial y}{\partial \theta}
+        \end{vmatrix} = \begin{vmatrix}
+            \cos \theta & -r \sin \theta \\
+            \sin \theta & r \cos \theta
+        \end{vmatrix} \\
+        &= r (\cos^2 \theta + \sin^2 \theta) = r
+    \end{align*}
+    So, the area element $dA$ in terms of $dr$ and $d\theta$ is given by:
+    $$        
+        dA = |J| \, dr \, d\theta = r \, dr \, d\theta
+    $$
+    This is consistent with the formula for the area element in polar coordinates.
+\end{example}
+
+\begin{example}
+    Cosndier the interal:
+    $$
+        \iint_R (x^2 + 2xy) \, dA
+    $$
+    where $R$ the region bounded by the lines $y=2x + 3$ and $y=2x + 1$, $y=5-x$ and $y=2 - x$.
+
+    Motivated by the bounds, we can use the change of variables:
+    $$
+    \begin{cases}
+        u = y - 2x \\
+        v = y + x
+    \end{cases}
+    $$ 
+    So, let $S$ be the corresponding region in the $uv$-plane. We can find the bounds of $S$ by plugging in the lines that bound $R$:
+    \begin{itemize}
+        \item $y = 2x + 3 \implies u = 3$
+        \item $y = 2x + 1 \implies u = 1$
+        \item $y = 5 - x \implies v = 5$
+        \item $y = 2 - x \implies v = 2$
+    \end{itemize}
+    
+    Then, we consider the Jacobian. First, we express $x$ and $y$ in terms of $u$ and $v$:
+    $$
+    \begin{cases}
+        u = y - 2x \\
+        v = x + y
+    \end{cases} \implies \begin{cases}
+        x = \frac{1}{3} (v - u) \\
+        y = \frac{1}{3} (2v + u)
+    \end{cases}
+    $$
+    Then, we can compute the Jacobian of this transformation as follows:
+    \begin{align*}
+        J &= \frac{\partial(x,y)}{\partial(u,v)} = \begin{vmatrix}
+            \dfrac{\partial x}{\partial u} & \dfrac{\partial x}{\partial v} \\
+            \dfrac{\partial y}{\partial u} & \dfrac{\partial y}{\partial v}
+        \end{vmatrix} = \begin{vmatrix}
+            -\frac{1}{3} & \frac{1}{3} \\
+            \frac{1}{3} & \frac{2}{3}
+        \end{vmatrix} \\
+        &= -\frac{2}{9} - \frac{1}{9} = -\frac{1}{3}
+    \end{align*}
+    So, we can express the integral in terms of $u$ and $v$:
+    \begin{align*}
+        \iint_R (x^2 + 2xy) \, dA &= \iint_S \left( \left(\frac{1}{3} (v - u)\right)^2 + 2 \cdot \frac{1}{3} (v - u) \cdot \frac{1}{3} (2v + u) \right) |J| \, du \, dv \\
+        &= \iint_S \left( \frac{1}{9} (v - u)^2 + \frac{2}{9} (v - u)(2v + u) \right) \cdot \frac{1}{3} \, du \, dv \\
+        &= \frac{1}{27} \iint_S (5v^2 - u^2) \, du \, dv \\
+        &= \frac{196}{27}
+    \end{align*}
+\end{example}
+
+\begin{example} \label{ex:change_of_variables}
+    \textit{Evaluate the integral}
+    $$
+        \iint_R xy \, dA
+    $$
+    where $R$ is the region bounded by curves $x^2 + y^2 = 4$, $x^2 + y^2 = 9$, $x^2 - y^2 = 1$, and $x^2 - y^2 = 4$.
+
+    Motivated by the bounds, we can use the change of variables:
+    $$
+    \begin{cases}
+        u = x^2 + y^2 \\
+        v = x^2 - y^2
+    \end{cases} \implies \begin{cases}
+        x = \sqrt{\frac{u + v}{2}} \\
+        y = \sqrt{\frac{u - v}{2}}
+    \end{cases}
+    $$
+    The jacobian of this transformation is:
+    \begin{align*}
+        J &= \frac{\partial(x,y)}{\partial(u,v)} = \begin{vmatrix}
+            \dfrac{\partial x}{\partial u} & \dfrac{\partial x}{\partial v} \\
+            \dfrac{\partial y}{\partial u} & \dfrac{\partial y}{\partial v}
+        \end{vmatrix} = \begin{vmatrix}
+            \frac{1}{2\sqrt{2(u+v)}} & \frac{1}{2\sqrt{2(u+v)}} \\
+            \frac{1}{2\sqrt{2(u-v)}} & -\frac{1}{2\sqrt{2(u-v)}}
+        \end{vmatrix} \\
+        &= -\frac{1}{8} \left( \frac{1}{\sqrt{u^2 - v^2}} + \frac{1}{\sqrt{u^2 - v^2}} \right) = -\frac{1}{4\sqrt{u^2 - v^2}}
+    \end{align*}
+    So, we can express the integral in terms of $u$ and $v$:
+    \begin{align*}
+        \iint_R xy \, dA &= \iint_S \sqrt{\frac{u + v}{2}} \cdot \sqrt{\frac{u - v}{2}} \cdot |J| \, du \, dv \\
+        &= \iint_S \frac{\sqrt{u^2 - v^2}}{2} \cdot \frac{1}{4\sqrt{u^2 - v^2}} \, du \, dv = \iint_S \frac{1}{8} \, du \, dv \\
+        &= \int_1^4 \int_4^9 \frac{1}{8} \, dv \, du = \frac{1}{8}(4 - 1)(9 - 4) = \frac{15}{8}
+    \end{align*}
+    
+\end{example}
+
+\begin{theorem}[Back Transformation]
+    Consider the Jacobian $J$ of a transformation:
+    $$
+    \begin{cases}
+        x = g(u,v) \\
+        y = h(u,v)
+    \end{cases}
+    $$
+    If $J \neq 0$, then the Jacobian of the inverse transformation:
+    $$
+    \begin{cases}
+        u = p(x,y) \\
+        v = q(x,y)
+    \end{cases}
+    $$
+    is given by:
+    \begin{equation}
+        J^{-1} = \frac{\partial(u,v)}{\partial(x,y)} = \frac{1}{\frac{\partial(x,y)}{\partial(u,v)}}
+    \end{equation}
+\end{theorem}
+\begin{proof}
+    % a short intuitive proof sketch
+    \textbf{Sketch:} Consider a small rectangle in the $uv$-plane with sides $\Delta u$ and $\Delta v$. The area of this rectangle is $\Delta A_{uv} = \Delta u \Delta v$. This rectangle maps to a parallelogram in the $xy$-plane with area $\Delta A_{xy} \approx |J| \Delta u \Delta v$. Now, consider the inverse transformation. A small rectangle in the $xy$-plane with sides $\Delta x$ and $\Delta y$ maps back to a parallelogram in the $uv$-plane with area $\Delta A_{uv} \approx |J^{-1}| \Delta x \Delta y$. Since these areas must be consistent under the transformations, we have:
+    $$
+        |J| \Delta u \Delta v = \Delta x \Delta y \quad \text{and} \quad |J^{-1}| \Delta x \Delta y = \Delta u \Delta v
+    $$
+    Dividing the first equation by the second, we get:
+    $$
+        |J| = \frac{1}{|J^{-1}|}
+    $$
+\end{proof}
+
+\begin{example}
+    Consider the transformation and integral in \ref{ex:change_of_variables}. We can verify the result using the back transformation theorem. The Jacobian of the inverse transformation is:
+    \begin{align*}
+        J^{-1} &= \frac{\partial(u,v)}{\partial(x,y)} = \begin{vmatrix}
+            \dfrac{\partial u}{\partial x} & \dfrac{\partial u}{\partial y} \\
+            \dfrac{\partial v}{\partial x} & \dfrac{\partial v}{\partial y}
+        \end{vmatrix} = \begin{vmatrix}
+            2x & 2y \\
+            2x & -2y
+        \end{vmatrix} \\
+        &= -4xy - 4xy = -8xy
+    \end{align*}
+    So, we have:
+    $$        
+        J = \frac{1}{J^{-1}} = -\frac{1}{8xy}
+    $$
+    This is consistent with the result we obtained in \ref{ex:change_of_variables}, and results in a much simpler integral to evaluate.
+\end{example}
 \chapter{Fluid Mechanics}
 \end{document} 

@@ -1798,6 +1798,154 @@ $$where \( \mathbf{x} \) is the state vector, \( A \) is a matrix of coefficient
     Consider the phase portait. If we start on the span of $ [-1, 1]^T$, then we go to the origin as $t \to \infty$. If we start on the span of $ [1, 1]^T$, then we go away from the origin as $t \to \infty$. Then, the trivial fixed point is a saddle node.
 \end{example}
 
+\begin{definition}[Computing Eigenvalues via Trace and Determinant]
+    Consider matrix $A \in \mathbb{R}^{2 \times 2}$. We compute the eigenvalues by solving the characteristic polynomial:
+    \begin{align*}
+    0 &= \det(A - \lambda I) \\
+    &= \lambda^2 - \text{tr}(A)\lambda + \det(A) \\
+    \implies \lambda_{1,2} &= \frac{\text{tr}(A) \pm \sqrt{\text{tr}(A)^2 - 4\det(A)}}{2}
+    \end{align*}
 
+    If the roots are real, there are four cases that coud emerge from this (WLOG): 
+    \begin{itemize}
+        \item $\lambda_1 > \lambda_2 > 0$: We see much faster growth in the span assocaited with $\lambda_1$.
+        \item $\lambda_1 < \lambda_2 < 0$: We see much faster decay in the span assocaited with $\lambda_1$.
+        \item $\lambda_1 < 0 < \lambda_2$: We would see the span assocaited with $\lambda_2$ dominate as $t \to \infty$ and the span assocaited with $\lambda_1$ dominate as $t \to -\infty$. This is a saddle node.
+        \item $\lambda_2  = 0 < \lambda_1$: Along the span of $v_2$, we would see horizontal line, as we growth only along the span of $v_1$. 
+        \item $\lambda_1 = \lambda_2 > 0$: Along the span of $v_2$, we would see horizontal line, as we decay only along the span of $v_1$.
+        \item $\lambda_1 = \lambda_2 = 0$: The system is trivial, and all points are fixed points.
+        \item $\lambda_1 = \lambda_2 < 0$: It is a inward star that everything goes to the origin.
+        \item $\lambda_1 = \lambda_2 > 0$: It is an outward star that everything goes away from the origin.
+    \end{itemize}
+\end{definition}
+
+\begin{definition}[Complex Eigenvalues]
+    Consider the case where the eigenvalues are complex, i.e., \( \lambda = \alpha \pm i\beta \) with \( \beta \neq 0 \). The general solution to the system can be expressed as:
+    $$\textbf{x}(t) = e^{\alpha t} \left( c_1 \text{Re}(\vec{v} e^{i\beta t}) + c_2 \text{Im}(\vec{v} e^{i\beta t}) \right)$$
+    where \( \vec{v} \) is the complex eigenvector corresponding to \( \lambda \), and \( c_1, c_2 \) are constants determined by the initial conditions.
+
+    This would lead to the following definition of a radial and angular component:
+    \begin{equation}
+    v(t) = ve^{\alpha t} \mathrm{cis} (\beta t)
+    \end{equation}
+    where \( r(t) \) represents the radial distance from the origin and \( \theta(t) \) represents the angular position. So, for a general solution, we have:
+    \begin{equation}
+    \textbf{x}(t) = \sum_i c_i v_i e^{\alpha_i t} \mathrm{cis} (\beta_i t)
+    \end{equation}
+    The behavior of the system depends on the sign of \( \alpha \) and $\beta$:
+    \begin{itemize}
+        \item If \( \alpha > 0 \) the system spirals outward (complex source).
+        \begin{itemize}
+            \item If \( \beta > 0 \), the systems sprial counter-clockwise.
+            \item If \( \beta < 0 \), the systems sprial clockwise.
+        \end{itemize}
+        \item If \( \alpha < 0 \) the system spirals inward (complex sink).
+        \begin{itemize}
+            \item If \( \beta > 0 \), the systems sprial counter-clockwise.
+            \item If \( \beta < 0 \), the systems sprial clockwise.
+        \end{itemize}
+        \item If \( \alpha = 0 \) the system is a center (closed orbits).
+        \begin{itemize}
+            \item If \( \beta > 0 \), the systems sprial counter-clockwise.
+            \item If \( \beta < 0 \), the systems sprial clockwise.       
+        \end{itemize}
+    \end{itemize}
+\end{definition}
+
+\paragraph{Complex Eigenvalues Resolves to Real Numbers} Consider eigenvalues $\lambda = \alpha \pm i\beta \in \mathbb{C}$ with $v = \textbf{p} + i\textbf{q}\in \mathbb{C}^n$. Then, the general solution $x: \mathbb{R} \to \mathbb{R}^n$ is given by:
+\begin{equation}
+\textbf{x}(t) = c_1 e^{\lambda t} \textbf{v} + c_2 e^{\bar{\lambda} t} \bar{\textbf{v}}
+\end{equation}
+where $c_1, c_2 \in \mathbb{C}$.
+
+We also have:
+$$
+    \bar{\textbf{x}} = \bar{c_1} e^{\bar{\lambda} t} \bar{\textbf{v}} + \bar{c_2} e^{\lambda t} \textbf{v}
+$$
+So, we can say that:
+$$
+c_1 = \bar{c_2}, \quad c_2 = \bar{c_1}
+$$
+Let $c_1 =  \delta + i\gamma$, then $c_2 = \delta - i\gamma$. Thus, we have:
+\begin{equation}
+\textbf{x}(t) = (\delta + i\gamma)e^{(\alpha + i\beta)t}(\textbf{p} + i\textbf{q}) + (\delta - i\gamma)e^{(\alpha - i\beta)t}(\textbf{p} - i\textbf{q}) \\
+\end{equation}
+Seperating the real and imaginary parts, we have:
+\begin{equation}
+\textbf{x}(t) = \delta (ve^{\lambda t} + \bar{v}e^{\bar{\lambda} t}) + i\gamma (ve^{\lambda t} - \bar{v}e^{\bar{\lambda} t})
+\end{equation}
+By the Euler's formula, we have:
+\begin{equation}
+\textbf{x}(t) = 2\delta \mathrm{Re}(ve^{\lambda t}) - 2\gamma \mathrm{Im}(ve^{\lambda t}) \in \mathbb{R}^n
+\end{equation}
+
+\paragraph{Generalized eigenvectors and solution for a defective matrix}
+Consider the matrix
+\[
+A=\begin{bmatrix}2 & 1\\[4pt]0 & 2\end{bmatrix},
+\]
+which has a double eigenvalue \(\lambda=2\) but only one linearly independent eigenvector
+\[
+v=\begin{bmatrix}1\\[4pt]0\end{bmatrix}.
+\]
+
+To complete a Jordan chain of length two we seek a generalized eigenvector \(v_g\) satisfying
+\begin{equation}
+(A-\lambda I)\,v_g = v. \label{eq:gen-eig}
+\end{equation}
+For this \(A\) we have \(A-2I=\begin{bmatrix}0&1\\0&0\end{bmatrix}\). Choosing the convenient solution
+\[
+v_g=\begin{bmatrix}0\\[4pt]1\end{bmatrix}
+\]
+indeed yields \((A-2I)v_g=v\), so \eqref{eq:gen-eig} holds.
+
+The two linearly independent solutions corresponding to this Jordan chain are
+\begin{equation}
+x_1(t)=v\,e^{\lambda t} = \begin{bmatrix}1\\[4pt]0\end{bmatrix} e^{2t}, \label{eq:sol1}
+\end{equation}
+and
+\begin{equation}
+x_2(t)=(v_g + t\,v)\,e^{\lambda t} = \left(\begin{bmatrix}0\\[4pt]1\end{bmatrix} + t\begin{bmatrix}1\\[4pt]0\end{bmatrix}\right)e^{2t}. \label{eq:sol2}
+\end{equation}
+One checks directly that these satisfy \(x_i'(t)=Ax_i(t)\) using \(Av=\lambda v\) and \(Av_g=\lambda v_g + v\).
+
+Therefore the general solution of \(\mathbf{x}'=A\mathbf{x}\) is the linear combination
+\begin{equation}
+\mathbf{x}(t)=C_1\,x_1(t) + C_2\,x_2(t)
+= e^{\lambda t} \begin{bmatrix}
+C_1 + C_2 t \\[4pt] C_2
+\end{bmatrix}
+\end{equation}
+The phase portrait of this system is shown below:
+% insert later
+
+\begin{definition}[Trace-Determinant Plane]
+    We found that we can find the eigenvalues of a \( 2 \times 2 \) matrix \( A \) using:
+    $$
+    \lambda_{1,2} = \frac{\text{tr}(A) \pm \sqrt{\text{tr}(A)^2 - 4\det(A)}}{2}
+    $$
+    where
+    \begin{itemize}
+        \item \( \text{tr}(A) = \lambda_1 + \lambda_2 = a_{11} + a_{22} \) is the trace of \( A \)
+        \item \( \det(A) = \lambda_1 \lambda_2 = a_{11}a_{22} - a_{12}a_{21} \) is the determinant of \( A \)   
+    \end{itemize}
+    And we have the following analysis:
+    \begin{itemize}
+        \item If \( \det(A) < 0 \) and \( \text{tr}(A) > 0 \), then \( \lambda_1 > 0 > \lambda_2 \) (saddle node).
+        \item Consider the discriminant boundry \( \text{tr}(A)^2 - 4\det(A) = 0 \), it is a parabola that upward opening with vertex at the origin. Consider region above that, where there is complex eigenvalues:
+        \begin{itemize}
+            \item If \( \text{tr}(A) > 0 \) and \( \det(A) > 0 \), then \( \alpha = \text{tr}(A)/2 > 0 \) (spiral source).
+            \item If \( \text{tr}(A) < 0 \) and \( \det(A) > 0 \), then \( \alpha = \text{tr}(A)/2 < 0 \) (spiral sink).
+            \item If \( \text{tr}(A) = 0 \) and \( \det(A) > 0 \), then \( \lambda_1 = -\lambda_2 = i\beta \) (center).
+        \end{itemize}
+        \item Consider the region below the discriminant boundry, where there is real eigenvalues:
+        \begin{itemize}
+            \item If \( \text{tr}(A) > 0 \) and \( \det(A) > 0 \), then \( \lambda_1 \geq \lambda_2 > 0 \) (nodal source).
+            \item If \( \text{tr}(A) < 0 \) and \( \det(A) > 0 \), then \( 0 > \lambda_1 \geq \lambda_2 \) (nodal sink).
+        \end{itemize}
+        \item \textbf{Degenerate Star Node} Consider the line \( \text{tr}(A)^2 - 4\det(A) = 0 \).
+        \item \textbf{Lines of Nodes} Consider the line \( \det(A) = 0 \).
+    \end{itemize}
+\end{definition}
 
 \end{document}

@@ -783,7 +783,146 @@ This gives us the two normal mode frequencies:
     $$
 \end{example}
 
-\section{The Wave Equation}
+\begin{example}
+    Consider three equal masses \( m \) connected by four identical springs with spring constant \( k \) and fixed to walls on either side. The equations of motion for the three masses are given by:
+    $$
+        \begin{cases}
+            m\ddot{x}_1 &= -2k x_1 + k x_2 \\
+            m\ddot{x}_2 &= -2k x_2 + k x_1 + k x_3 \\
+            m\ddot{x}_3 &= -2k x_3 + k x_2
+        \end{cases}
+    $$
+    Assume solutions of the form:
+    $$        
+    \begin{cases}
+            x_1(t) &= A \cos(\omega t + \phi) \\
+            x_2(t) &= B \cos(\omega t + \phi) \\
+            x_3(t) &= C \cos(\omega t + \phi)
+        \end{cases}
+    $$
+    Substituting these assumed solutions into the equations of motion, we get:
+    $$      
+        \begin{cases}
+            A \omega^2 &= -\frac{k}{m}(-2A + B) \\
+            B \omega^2 &= -\frac{k}{m}(A - 2B + C) \\
+            C \omega^2 &= -\frac{k}{m}(B - 2C)
+        \end{cases}
+    $$
+    We can rewrite this as an eigenvalue problem:
+    $$
+        \begin{bmatrix}
+            -\frac{2k}{m} & \frac{k}{m} & 0 \\
+            \frac{k}{m} & -\frac{2k}{m} & \frac{k}{m} \\
+            0 & \frac{k}{m} & -\frac{2k}{m}
+        \end{bmatrix}
+        \begin{bmatrix}
+            A \\ B \\ C
+        \end{bmatrix}
+        = \omega^2
+        \begin{bmatrix}
+            A \\ B \\ C
+        \end{bmatrix}
+    $$
+    To find the eigenvalues \( \omega^2 \), we solve the characteristic equation:
+    $$
+        \text{det}\left(\begin{bmatrix} 
+            -\frac{2k}{m} - \omega^2 & \frac{k}{m} & 0 \\
+            \frac{k}{m} & -\frac{2k}{m} - \omega^2 & \frac{k}{m} \\
+            0 & \frac{k}{m} & -\frac{2k}{m} - \omega^2
+        \end{bmatrix}\right) = 0
+    $$
+    Calculating the determinant, we have:
+    $$        \left(\frac{2k}{m} - \omega^2\right)\left[\left(-\frac{2k}{m} - \omega^2\right)^2 - \left(\frac{k}{m}\right)^2\right] - \left(\frac{k}{m}\right)^2\left(\frac{2k}{m} - \omega^2\right) = 0
+    $$   
+    This gives us the three normal mode frequencies:
+    $$
+        \begin{cases}
+            \omega_1 &= \sqrt{\frac{2k}{m}} \\
+            \omega_2 &= \sqrt{\frac{2k}{m}(2 - \sqrt{2})} \\
+            \omega_3 &= \sqrt{\frac{2k}{m}(2 + \sqrt{2})}
+        \end{cases}
+    $$
+\end{example}
+\paragraph{Intuition} For any perturbation, we can expressed it as a linear combination of the excitations of several normal modes. Each normal mode oscillates at its own frequency, and the overall motion is a superposition of these modes.
+\section{Waves}
+
+\subsection{Travelling Waves}
+
+\begin{definition}[Travelling Pulse]
+    A travelling pulse is a disturbance that moves through a medium. For any wave function $f(x,t)$, if it satisfies the property:
+    \begin{equation} \label{eq:travelling_wave}
+        y(x,t) = f(x \pm vt)
+    \end{equation}
+    then it represents a wave travelling in the positive (for $x - vt$) or negative (for $x + vt$) x-direction with speed \( v \). $y$ could represent displacement, pressure, electric field, etc.
+\end{definition}
+
+\begin{definition}[Sinusoidal Wave]
+    A sinusoidal wave is a wave that can be described by a sine or cosine function. The general form of a sinusoidal wave travelling in the positive x-direction is:
+    \begin{equation}
+        y(x,t) = A \cos(kx \pm \omega t + \phi_0)
+    \end{equation}
+    where:
+    \begin{itemize}
+        \item \( A \) is the amplitude (maximum displacement)
+        \item \( k = \frac{2\pi}{\lambda} \) is the wave number, with \( \lambda \) being the wavelength
+        \item \( \omega = 2\pi f \) is the angular frequency, with \( f \) being the frequency
+        \item \( \phi _0 \) is the initial phase.
+    \end{itemize}
+    So we can write the wave function as a form of \eqref{eq:travelling_wave}:
+    \begin{equation}
+        y(x,t) = A \cos\left[k(x \pm vt) + \phi_0\right]
+    \end{equation}
+    The wave speed \( v \) is related to the angular frequency and wave number by:
+    \begin{equation}
+        v = \frac{\omega}{k} = f\lambda
+    \end{equation}
+\end{definition}
+
+\paragraph{Transverse and Longitudinal Waves} There is two (or three) main categories of waves:
+\begin{itemize}
+    \item \textbf{Transverse Waves}: In transverse waves, the oscillations are perpendicular to the direction of wave propagation. \\
+    (Examples) Light waves, water waves, and waves on a string.
+    \item \textbf{Longitudinal Waves}: In longitudinal waves, the oscillations are parallel to the direction of wave propagation. \\
+    (Examples) Sound waves and pressure waves in fluids.
+    \item \textbf{Both}: Some waves can exhibit both transverse and longitudinal characteristics. \\
+    (Examples) Rayleigh surface waves in seismology.
+\end{itemize}
+\begin{definition}[Velocity of a Fixed Particle]
+    For a fixed particle, we have:
+    \begin{equation}
+        v_y = \frac{\partial y}{\partial t} = A \omega \cos(kx \pm \omega t + \phi_0)
+    \end{equation}
+\end{definition}
+
+\begin{example}[Vibrating String]
+    Consider a string in the $xy$-plane, stretched along the x-axis with tension \( \tau \) and linear mass density \( \mu \). Now, consider at the end of the string at $x$ makes a small angle \( \theta \) with the x-axis. Then the components of the tension are:
+    $$
+    \begin{cases}
+        \tau_x &= \tau \cos(\theta) \approx \tau \\
+        \tau_y &= \tau \sin(\theta) \approx \tau \frac{\partial y}{\partial x}
+    \end{cases}
+    $$
+    Now, consider a small segment of the string between \( x \) and \( x + \delta x \). The vetical force on the other end is given, via linear approximation, by:
+    $$    
+        \tau_y(x + \delta x) \approx \tau_y(x) \left[ \frac{\partial y}{\partial x}_x + \frac{\partial^2 y}{\partial x^2} \delta x \right]
+    $$
+    So the net force is given by:
+    $$
+        F_y = \tau_y(x + \delta x) - \tau_y(x) = \tau \frac{\partial^2 y}{\partial x^2} \delta x
+    $$
+    Becuase $F=ma$, we have:
+    $$
+        \tau \frac{\partial^2 y}{\partial x^2} \delta x = dm \frac{\partial^2 y}{\partial t^2}
+    $$
+    where \( dm = \mu \delta x \) is the mass of the small segment. Thus, we have:
+    $$
+        \frac{\partial^2 y}{\partial t^2} - v^2 \frac{\partial^2 y}{\partial x^2} = 0
+    $$
+    where \( v = \sqrt{\frac{\tau}{\mu}} \) is the wave speed on the string. This is the one-dimensional wave equation.
+
+\end{example}
+
+\subsection{The Wave Equation}
 
 \begin{definition}[The Wave Equation]
     The wave equation is a second-order linear partial differential equation that describes the propagation of waves (sound, EM, water). In one dimension, it is:
@@ -792,7 +931,6 @@ This gives us the two normal mode frequencies:
     \end{equation}
     where $u(x,t)$ is the disturbance, $c$ is the wave speed, $x$ is position, and $t$ is time.
 \end{definition}
-
 
 
 \chapter{Modern Physics}

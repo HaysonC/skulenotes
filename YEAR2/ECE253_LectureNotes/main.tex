@@ -1199,13 +1199,13 @@ The following identities can be derived from the axioms of Boolean algebra:
 
     We call sequential circuit a circuit that have \textbf{state}.
 \end{definition}
-\begin{definition}[Cross-Couple RS Latch]
+\begin{definition}[Cross-Couple RS-Latch]
     A cross-coupled RS latch is a basic memory element that can store one bit of information. It consists of two NOR gates connected in a feedback loop. The latch has two inputs, labeled R (reset) and S (set), and two outputs, labeled Q and $\overline{Q}$. The behavior of the latch is as follows:
     \begin{itemize}
         \item When S = 1 and R = 0, the latch is set, and Q = 1 and $\overline{Q} = 0$.
         \item When S = 0 and R = 1, the latch is reset, and Q = 0 and $\overline{Q} = 1$.
         \item When S = 0 and R = 0, the latch maintains its previous state (no change).
-        \item When S = 1 and R = 1, this condition is invalid for a NOR-based RS latch, as it would force both outputs to be 0, which violates the requirement that Q and $\overline{Q}$ must always be complements of each other.
+        \item When S = 1 and R = 1, this condition is invalid for a NOR-based RS latch, as it would force both outputs to be 0, which violates the requirement that Q and $\overline{Q}$ must always be complements of each other. Additoanlly, this would break the logic for subsequent operations.
     \end{itemize}
     The truth table for a cross-coupled RS latch is shown below:
     \begin{table}[h!]
@@ -1217,7 +1217,7 @@ The following identities can be derived from the axioms of Boolean algebra:
             0 & 0 & $Q_{prev}$ & $\overline{Q}_{prev}$ \\
             0 & 1 & 0 & 1 \\
             1 & 0 & 1 & 0 \\
-            1 & 1 & Invalid & Invalid \\
+            1 & 1 & Invalid (0) & Invalid (0) \\
             \hline
         \end{tabular}
         \caption{Truth Table for Cross-Coupled RS Latch}
@@ -1225,6 +1225,94 @@ The following identities can be derived from the axioms of Boolean algebra:
     \end{table}
 \end{definition}
 
+\begin{definition}[Timing Diagram]
+    A timing diagram is a graphical representation of the relationship between signals in a digital circuit over time. It shows how the signals change. The timing diagram of a RS Latch could be visualized as follows:
+    \begin{figure}[h!]
+        \centering
+        \begin{tikzpicture}
+            % Time axis
+            \draw[->] (0,0) -- (10,0) node[right] {Time};
+            
+            % S signal
+            \draw (0,1) -- (1,1) -- (1,2) -- (3,2) -- (3,1) -- (5,1) -- (5,2) -- (7,2) -- (7,1) -- (10,1);
+            \node at (-0.5,1) {S};
+            
+            % R signal
+            \draw (0,-1) -- (2,-1) -- (2,-2) -- (4,-2) -- (4,-1) -- (6,-1) -- (6,-2) -- (8,-2) -- (8,-1) -- (10,-1);
+            \node at (-0.5,-1) {R};
+            
+            % Q signal
+            \draw[thick] (0,-3) -- (4,-3) -- (4,-4) -- (6, -4) -- (6.5, -3) -- (7,-4) -- (7.5, -3) -- (8,-4) -- (8.5, -3) -- (9,-4);
+            \node at (-0.5,-3) {Q};
+            
+            % Q' signal
+            \draw[thick] (0,-5.3) -- (4,-5.3) -- (4,-4.3) -- (5,-4.3) -- (5,-5.3) -- (6,-5.3);
+            \node at (-0.5,-5.3) {$\overline{Q}$};
+            
+            % Time markers
+            \foreach \x in {0,1,...,10} {
+                \draw[dotted] (\x,3) -- (\x,-5.4);
+                \node at (\x,-6) {\x};
+            }
+        \end{tikzpicture}
+        \caption{Timing Diagram of a Cross-Coupled RS Latch}
+        \label{fig:rs_latch_timing_diagram}
+        \centering
+    \end{figure}
+    
+\end{definition}
+
+\begin{definition}[Gated RS-Latch]
+    We can put an AND gate along with the R and S signals, and the circuit will only reset to 0 or set to 1 when the clock is HI. The truth table of a gated RS latch is: 
+    
+    \begin{table}[h!]
+        \centering
+        \begin{tabular}{|c|c|c||c|}
+            \hline
+            CLK & $S$ & $R$ & $Q(t+1)$ \\
+            \hline
+            0 & X & X & $Q(t)$ \\
+            1 & 0 & 0 & 0 \\
+            1 & 0 & 1 & 1 \\
+            1 & 1 & 0 & 1 \\
+            1 & 1 & 1 & Invalid \\
+            \hline
+        \end{tabular}
+        \caption{Truth Table for Gated RS Latch}
+        \label{tab:rs_latch_truth_table}
+    \end{table}
+    \newpage
+    Additionally, we can use purely NAND gates instead of NOR gates and AND gates, using a technique called bubble pushing. A implementation is shown in the below figure.
+    \begin{figure}[h!]
+        \includegraphics[width=0.5\textwidth]{RS-with-NAND.png}
+        \centering
+        \caption{Gated SR latch using NAND}
+    \end{figure}
+\end{definition}
+
+\begin{definition}[Gated D-Latch]
+    We can set $D = S = \overline{R}$, so we would prevent $S = R = 1$. So when the clock is HI, $Q$ tracks $D$ (a.k.a. Transparent Mode), and when clock is high, it won't store (a.k.a. Opaque Mode). The truth table is shown as follows:
+    \begin{table}[h!]
+        \centering
+        \begin{tabular}{|c|c||c|}
+            \hline
+            CLK & $D$ & $Q(t+1)$ \\
+            \hline
+            0 & X & $Q(t)$ \\
+            1 & 0 & 0 \\
+            1 & 1 & 1 \\ 
+            \hline
+        \end{tabular}
+        \caption{Truth Table for Gated D Latch}
+        \label{tab:gated_d_latch_truth_table}
+    \end{table}
+\end{definition}
+
+\paragraph{Equivalence with a mux} If we feed back the output of a mux back to one of the input, this is essentially a gated D latch with the SW as CLK and the input is the D.
+
+\begin{definition}[D-Flip Flops]
+    A D flip-flop is a type of flip-flop that captures the value of the D input at a specific portion of the clock cycle (rising edge) and holds that value until the next clock cycle. It is done by chaining the output of a D latch to the input of another D-latch. While the second D-latch recognizes the CLK, and the first one recognizes $\overline{\text{CLK}}$.
+\end{definition}
 \section{Finite State Machines (FSM)}
 % FSM modeling, state diagrams, and Verilog implementation (to be expanded)
 
@@ -1239,7 +1327,6 @@ The following identities can be derived from the axioms of Boolean algebra:
 \end{shaded}
 The assembly code is then assembled into machine code, which is a series of 0s and 1s that the computer can understand. The assembly would be specific to the architecture of the computer (machine dependent), which is why we have different assembly languages for different architectures (e.g., x86, RISC-V, ARM).
 \section{Computer Organization}
-
 \section{Assembly Language}
 \end{document}
 
