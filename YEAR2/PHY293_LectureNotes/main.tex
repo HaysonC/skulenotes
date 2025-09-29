@@ -910,29 +910,151 @@ This gives us the two normal mode frequencies:
     $$
         F_y = \tau_y(x + \delta x) - \tau_y(x) = \tau \frac{\partial^2 y}{\partial x^2} \delta x
     $$
-    Becuase $F=ma$, we have:
+    Because \( F=ma \), we have:
     $$
-        \tau \frac{\partial^2 y}{\partial x^2} \delta x = dm \frac{\partial^2 y}{\partial t^2}
+        \tau \frac{\partial^2 y}{\partial x^2} \delta x = \text{d}m \frac{\partial^2 y}{\partial t^2}
     $$
-    where \( dm = \mu \delta x \) is the mass of the small segment. Thus, we have:
+    where \( \text{d}m = \mu \delta x \) is the mass of the small segment. Thus, we have:
     $$
         \frac{\partial^2 y}{\partial t^2} - v^2 \frac{\partial^2 y}{\partial x^2} = 0
     $$
     where \( v = \sqrt{\frac{\tau}{\mu}} \) is the wave speed on the string. This is the one-dimensional wave equation.
 
 \end{example}
-
-\subsection{The Wave Equation}
-
 \begin{definition}[The Wave Equation]
-    The wave equation is a second-order linear partial differential equation that describes the propagation of waves (sound, EM, water). In one dimension, it is:
+    The wave equation is a second-order linear partial differential equation that describes the propagation of waves (sound, EM, water) through a medium. In one dimension, it is given by:
     \begin{equation}
         \frac{\partial^2 u}{\partial t^2} - c^2 \frac{\partial^2 u}{\partial x^2} = 0
     \end{equation}
     where $u(x,t)$ is the disturbance, $c$ is the wave speed, $x$ is position, and $t$ is time.
+
+    Or in general:
+    \begin{equation}
+        \frac{\partial^2 u}{\partial t^2} - c^2 \nabla^2 u = 0
+    \end{equation}
+    where \( \nabla^2 \) is the Laplacian operator.
 \end{definition}
 
+\begin{definition}[Energy of a String]
+    The kinetic energy of a string segment of mass \( \text{d}m = \mu \text{d}x \) is given by:
+    \begin{equation}
+        \text{d}K = \frac{1}{2} \text{d}m v_y^2 = \frac{1}{2} \mu \text{d}x \left(\frac{\partial y}{\partial t}\right)^2
+    \end{equation}
+    The potential energy stored in the string due to its tension is given by:
+    \begin{equation}
+        \text{d}U = \frac{1}{2} \tau (\delta s - \delta x) 
+    \end{equation}
+    where \( \delta s \) is the actual length of the string segment and \( \delta x \) is the horizontal length. For small displacements, we can approximate:
+    $$
+        \delta s \approx \delta x \left(1 + \frac{1}{2}\left(\frac{\partial y}{\partial x}\right)^2\right)
+    $$
+    Thus, the potential energy becomes:
+    \begin{equation}
+        \text{d}U \approx \frac{1}{2} \tau \delta x \left(\frac{\partial y}{\partial x}\right)^2
+    \end{equation}
+    The total energy \( E \) of the string segment is the sum of its kinetic and potential energies:
+    \begin{equation}
+        \text{d}E = \frac{1}{2} \mu \text{d}x \left(\frac{\partial y}{\partial t}\right)^2 + \frac{1}{2} \tau \text{d}x \left(\frac{\partial y}{\partial x}\right)^2
+    \end{equation}
+    For a sinusoidal wave \( y(x,t) = A \cos(kx - \omega t) \), the change in energy is:
+    \begin{equation}
+        \text{d}E = \frac{1}{2} \mu A^2 \omega^2 \sin^2(kx - \omega t) \text{d}x + \frac{1}{2} \tau A^2 k^2 \sin^2(kx - \omega t) \text{d}x
+    \end{equation}
+    Integrating over one wavelength \( \lambda \), we find the total energy in one wavelength:
+    \begin{equation}
+        E = \int_0^\lambda \text{d}E = \frac{1}{4} \mu A^2 \omega^2 \lambda + \frac{1}{4} \tau A^2 k^2 \lambda
+    \end{equation}
+    
+\end{definition}
 
+\begin{definition}[Power Transmitted by a String]
+   The power carried by a transverse wave could be calculated from $P=Fv$. The transverse force on the string is given by:
+    \begin{equation}
+        P(x,t) = A^2 \mu v \omega^2 \sin^2(kx - \omega t + \phi_0)
+    \end{equation}
+    The average power is then given by:
+    \begin{equation}
+        \bar{P} = \frac{1}{2} A^2 \mu v \omega^2 = \frac{1}{2} \mu A^2 \omega^2 \frac{\lambda}{T}
+    \end{equation}
+    And the maximum power is given by:
+    \begin{equation}
+        P_{max} = A^2 \mu v \omega^2
+    \end{equation}
+\end{definition}
+
+\paragraph{Speed of Sound} The speed of sound waves through various meida is as follows:
+\begin{itemize}
+    \item In ideal gas, it is given by:
+    \begin{equation}
+        v = \sqrt{\frac{\gamma RT}{m}} = \sqrt{\frac{\gamma k_B T}{m}}
+    \end{equation}
+    where \( \gamma \) is the adiabatic index, \( R \) is the universal gas constant, \( k_B \) is the Boltzmann constant, \( T \) is the absolute temperature, and \( m \) is the molar mass of the gas. $\gamma$ varies based on the type of gas:
+    \begin{itemize}
+        \item Monatomic gases (e.g., helium, neon): \( \gamma = \frac{5}{3} \)
+        \item Diatomic gases (e.g., nitrogen, oxygen): \( \gamma = \frac{7}{5} \)
+        \item Polyatomic gases (e.g., carbon dioxide, methane): \( \gamma \) is typically between 1.3 and 1.4
+    \end{itemize}
+    \item In a liquid, it is given by:
+    \begin{equation}
+        v = \sqrt{\frac{B_{\text{adiabatic}}}{m}} = \sqrt{\frac{B}{\rho}}
+    \end{equation}
+    where \(B_{\text{adiabatic}}\) is the adiabatic bulk modulus, \( B \) is the bulk modulus, \( \rho \) is the density of the liquid and \( m \) is the molar mass of the liquid.
+    \item In a solid, it is given by:
+    \begin{equation}
+        v = \sqrt{\frac{E}{\rho}} 
+    \end{equation}
+    where \( E \) is the Young's modulus and \( \rho \) is the density of the solid. It could also be given by:
+    $$
+        v = \sqrt{\frac{B}{\rho}}
+    $$
+    where \( B \) is the bulk modulus.
+\end{itemize}
+
+\begin{definition}[Impedance]
+    Similar to electrical impedance, we also have acoustic impedance and mechanical, they measure how much a structure recisits motion when subjected to a harmonic force. They are defined as follows:
+    \begin{itemize}
+        \item Electical impedance \( Z_e \):
+        \begin{equation}
+            Z_e = \sqrt{R^2 + \left(\omega L - \frac{1}{\omega C}\right)^2}
+        \end{equation}
+        \item Acoustic impedance \( Z_a \), it is the ratio of acoustic pressure to particle velocity:
+        \begin{equation}
+            Z_a = \frac{p}{v} = \rho v = \sqrt{B\rho}
+        \end{equation}
+        \item Mechanical impedance \( Z_m \):
+        \begin{equation}
+            Z_m = v\mu = \sqrt{\tau\mu}
+        \end{equation}
+    \end{itemize}
+\end{definition}
+
+\paragraph{Wave boundry Conditions} When a wave encounters a boundary between two different media, part of the wave is reflected back into the original medium, and part is transmitted into the new medium. This is constrined by the following boundary conditions:
+\begin{itemize}
+    \item The displacement of the wave must be continuous across the boundary:
+    \begin{equation}
+        y_1(x_b, t) = y_2(x_b, t) = y_3(x_b, t)
+    \end{equation}
+    \item The derivative of the displacement with respect to position must also be continuous across the boundary:
+    \begin{equation}
+        \frac{\partial y_1}{\partial x}\bigg|_{x_b} = \frac{\partial y_2}{\partial x}\bigg|_{x_b} = \frac{\partial y_3}{\partial x}\bigg|_{x_b}
+    \end{equation}
+\end{itemize}
+and then from these conditions, we can derive the amplitudes of the reflected and transmitted waves:
+\begin{equation}
+    A_i = A_r + A_t
+\end{equation}
+and 
+\begin{equation}
+    A_i Z_1 = A_r Z_1 + A_t Z_2
+\end{equation}
+From these two equations, we can solve for the reflection and transmission coefficients:
+\begin{equation}
+    R = \frac{A_r}{A_i} = \frac{Z_2 - Z_1}{Z_2 + Z_1}
+\end{equation}
+and
+\begin{equation}
+    T = \frac{A_t}{A_i} = \frac{2Z_2}{Z_2 + Z_1}
+\end{equation}
 \chapter{Modern Physics}
 \end{document}
 

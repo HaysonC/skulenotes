@@ -1629,6 +1629,180 @@ which could be rewritten as the following defintion:
         25 &\leq w \leq 49
     \end{align*}
 
+    We find the Jacobian of this transformation by its inverse:
+    $$
+    J^{-1} = \frac{\partial(u,v,w)}{\partial(x,y,z)} = \begin{vmatrix}
+        \dfrac{\partial u}{\partial x} & \dfrac{\partial u}{\partial y} & \dfrac{\partial u}{\partial z} \\
+        \dfrac{\partial v}{\partial x} & \dfrac{\partial v}{\partial y} & \dfrac{\partial v}{\partial z} \\
+        \dfrac{\partial w}{\partial x} & \dfrac{\partial w}{\partial y} & \dfrac{\partial w}{\partial z}
+    \end{vmatrix} = \begin{vmatrix}
+        y & x & 0 \\
+        z & 0 & x \\
+        0 & z & y
+    \end{vmatrix} = xyz
+    $$
+    So, we can express the volume of the region in terms of $u$, $v$ and $w$:
+    \begin{align*}
+        V &= \iiint_R 1 \, dV = \iiint_S |J| \, du \, dv \, dw = \iiint_S \frac{1}{xyz} \, du \, dv \, dw \\
+        &= \int_{25}^{49} \int_1^3 \int_1^3 \frac{1}{\sqrt{\frac{uvw}{y^2}}} \, du \, dv \, dw = \int_{25}^{49} \int_1^3 \int_1^3 \frac{y}{\sqrt{uvw}} \, du \, dv \, dw \\
+        &= \int_{25}^{49} \int_1^3 \int_1^3 \frac{5}{\sqrt{uvw}} \, du \, dv \, dw = 5 \int_{25}^{49} \int_1^3 \left[ 2\sqrt{u} \right]_{u=1}^{u=3} \frac{1}{\sqrt{vw}} \, dv \, dw \\
+        &= 10(\sqrt{3} - 1) \int_{25}^{49} \left[ 2\sqrt{v} \right]_{v=1}^{v=3} \frac{1}{\sqrt{w}} \, dw = 20(\sqrt{3} - 1)(\sqrt{3} - 1) \int_{25}^{49} \frac{1}{\sqrt{w}} \, dw \\
+        &= 20(\sqrt{3} - 1)^2 \left[ 2\sqrt{w} \right]_{w=25}^{w=49} = 40(\sqrt{3} - 1)^2 (7 - 5) = 80(\sqrt{3} - 1)^2
+    \end{align*}
+
 \end{example}
+
+\section{Vector Calculus}
+\section{Line Integrals}
+\begin{definition}[Line Integral of a Scalar Field]
+    Consider a scalar field $f(x,y) $ and a smooth curve $C$. Then we define the line integral of $f$ along $C$ as the following Riemann sum:
+    $$
+        \int_C f(x,y) \, ds = \lim_{||P|| \to 0} \sum_{i=1}^n f(x_i^*, y_i^*) \Delta s_i
+    $$
+    where $P$ is a partition of $C$ into $n$ subintervals, $||P||$ is the norm of the partition, $(x_i^*, y_i^*)$ is a sample point in the $i$-th subinterval, and $\Delta s_i$ is the length of the $i$-th subinterval.
+\end{definition}
+
+\begin{definition}[Parametrization of a Curve]
+    A smooth curve $C$ in the plane can be parametrized by:
+    \begin{equation}
+        \begin{cases}
+            x = g(t) \\
+            y = h(t)
+        \end{cases} \implies \vec{r(t)} = \langle g(t), h(t) \rangle, \quad a \leq t \leq b
+    \end{equation}
+    where $g$ and $h$ are continuous functions with continuous derivatives on $[a,b]$.
+
+    Under the following asummumption, we can solve the line integral using the parametrization:
+    \begin{itemize}
+        \item The function $f(x,y)$ is continuous on $C$.
+        \item The curve $C$ is smooth and can be parametrized by $\vec{r(t)}$.
+        \begin{itemize}
+            \item $r'(t)$ is continuous on $[a,b]$.
+            \item $r'(t) \neq 0$ for all $t \in [a,b]$. (Except possibly at the endpoints.) 
+        \end{itemize}
+    \end{itemize}
+\end{definition}
+
+\paragraph{Change of variable from $ds$} We can express the line integral in terms of the parameter $t$ as follows:
+\begin{equation}
+    \int_C f(x,y) \, ds = \int_a^b f(g(t), h(t)) \, ||\vec{r'(t)}|| \, dt
+\end{equation}
+where $||\vec{r'(t)}|| = \sqrt{(g'(t))^2 + (h'(t))^2}$ is the speed of the curve.
+
+\begin{definition}[Center of Mass via Line Integral]
+    Consider a wire in the plane with a density function $\rho(x,y)$ and a smooth curve $C$ parametrized by $\vec{r(t)} = \langle g(t), h(t) \rangle$, $a \leq t \leq b$. Then, the mass of the wire is given by:
+    \begin{equation}
+        m = \int_C \rho(x,y) \, ds = \int_a^b \rho(g(t), h(t)) \, ||\vec{r'(t)}|| \, dt
+    \end{equation}
+    And the center of mass $(\bar{x}, \bar{y})$ of the wire is given by:
+    \begin{align}
+        \bar{x} &= \frac{1}{m} \int_C x \rho(x,y) \, ds = \frac{1}{m} \int_a^b g(t) \rho(g(t), h(t)) \, ||\vec{r'(t)}|| \, dt \\
+        \bar{y} &= \frac{1}{m} \int_C y \rho(x,y) \, ds = \frac{1}{m} \int_a^b h(t) \rho(g(t), h(t)) \, ||\vec{r'(t)}|| \, dt
+    \end{align}
+\end{definition}
+
+\begin{example}[Center of Mass of a Semi-Circular Wire]
+    Let $a$ be the radius of a semi-circular wire. We want to find the center of mass of the wire. We can parametrize the semi-circular wire as follows:
+    $$
+    \begin{cases}
+        x = a \cos t \\
+        y = a \sin t
+    \end{cases} \quad 0 \leq t \leq \pi
+    $$
+    The density function is constant, $\rho(x,y) = \rho_0$. The mass of the wire is just the length of the wire times the density:
+    $$
+        m = \pi a \rho_0
+    $$
+    The $x$-coordinate of the center of mass is just 0 by symmetry. The $y$-coordinate of the center of mass is given by:
+    \begin{align*}
+        \bar{y} &= \frac{1}{m} \int_C y \rho(x,y) \, ds = \frac{1}{\pi a \rho_0} \int_0^\pi a \sin t \cdot \rho_0 \cdot a \, dt \\
+        &= \frac{a^2}{\pi a} \int_0^\pi \sin t \, dt = \frac{a}{\pi} \left[ -\cos t \right]_0^\pi = \frac{2a}{\pi}
+    \end{align*}
+    So, the center of mass of the semi-circular wire is located at:
+    $$
+        \left( \bar{x}, \bar{y} \right) = \left( 0, \frac{2a}{\pi} \right)
+    $$
+\end{example}
+
+\begin{definition}[Line Integral with Space Curve]
+    Consider a scalar field $f(x,y,z)$ and a smooth space curve $C$. Then we define the line integral of $f$ along $C$ as the following Riemann sum:
+    $$
+        \int_C f(x,y,z) \, ds = \lim_{||P|| \to 0} \sum_{i=1}^n f(x_i^*, y_i^*, z_i^*) \Delta s_i
+    $$
+    where $P$ is a partition of $C$ into $n$ subintervals, $||P||$ is the norm of the partition, $(x_i^*, y_i^*, z_i^*)$ is a sample point in the $i$-th subinterval, and $\Delta s_i$ is the length of the $i$-th subinterval.
+
+    A smooth space curve $C$ can be parametrized by:
+    \begin{equation}
+        \begin{cases}
+            x = g(t) \\
+            y = h(t) \\
+            z = k(t)
+        \end{cases} \implies \vec{r(t)} = \langle g(t), h(t), k(t) \rangle, \quad a \leq t \leq b
+    \end{equation}
+    where $g$, $h$ and $k$ are continuous functions with continuous derivatives on $[a,b]$.
+
+    Under the following asummumption, we can solve the line integral using the parametrization:
+    \begin{itemize}
+        \item The function $f(x,y,z)$ is continuous on $C$.
+        \item The curve $C$ is smooth and can be parametrized by $\vec{r(t)}$.
+        \begin{itemize}
+            \item $r'(t)$ is continuous on $[a,b]$.
+            \item $r'(t) \neq 0$ for all $t \in [a,b]$. (Except possibly at the endpoints.) 
+        \end{itemize}
+    \end{itemize}
+
+    We can express the line integral in terms of the parameter $t$ as follows:
+    \begin{equation}
+        \int_C f(x,y,z) \, ds = \int_a^b f(g(t), h(t), k(t)) \, ||\vec{r'(t)}|| \, dt
+    \end{equation}
+    where $||\vec{r'(t)}|| = \sqrt{(g'(t))^2 + (h'(t))^2 + (k'(t))^2}$ is the speed of the curve.
+\end{definition}
+
+\begin{example}[Mass of a Spring]
+    Find the mass of a spring parametrized by:
+    $$
+    \begin{cases}
+        x = 2 \cos t \\
+        y = t \\
+        z = 2 \sin t
+    \end{cases} \quad 0 \leq t \leq 6\pi
+    $$
+    with a density function $\rho(x,y,z) = 2y$.
+
+    The mass of the spring is given by:
+    \begin{align*}
+        m &= \int_C \rho(x,y,z) \, ds = \int_0^{6\pi} 2t \cdot \sqrt{(-2\sin t)^2 + 1^2 + (2\cos t)^2} \, dt \\
+        &= \int_0^{6\pi} 2t \cdot \sqrt{4 + 1} \, dt = \sqrt{5} \int_0^{6\pi} 2t \, dt = \sqrt{5} \left[ t^2 \right]_0^{6\pi} = 36\pi^2 \sqrt{5}
+    \end{align*}    
+\end{example}
+
+\begin{definition}[Line Intergral with Piecewise Smooth Curve]
+    Consider a scalar field $f(x,y)$ and a piecewise smooth curve $C$ composed of $n$ smooth curves $C_1, C_2, \ldots, C_n$. Then we define the line integral of $f$ along $C$ as the sum of the line integrals along each smooth curve:
+    \begin{equation}
+        \int_C f(x,y) \, ds = \sum_{i=1}^n \int_{C_i} f(x,y) \, ds
+    \end{equation}
+\end{definition}
+
+\begin{theorem}[Directionality of Scalar Line Integrals] The line integral of a scalar field is independent of the direction of the curve. That is, if we reverse the direction of the curve, the value of the line integral remains the same:
+\begin{equation}
+    \int_C f(x,y) \, ds = \int_{-C} f(x,y) \, ds
+\end{equation}
+\end{theorem}
+\begin{proof}
+    Let $C$ be a smooth curve parametrized by $\vec{r(t)} = \langle g(t), h(t) \rangle$, $a \leq t \leq b$. Then, the line integral of $f$ along $C$ is given by:
+    \begin{equation}
+        \int_C f(x,y) \, ds = \int_a^b f(g(t), h(t)) \, ||\vec{r'(t)}|| \, dt
+    \end{equation}
+    Now, consider the curve $-C$ obtained by reversing the direction of $C$. We can parametrize $-C$ by $\vec{r(-t)} = \langle g(-t), h(-t) \rangle$, $-b \leq t \leq -a$. The line integral of $f$ along $-C$ is given by:
+    \begin{align*}
+        \int_{-C} f(x,y) \, ds &= \int_{-b}^{-a} f(g(-t), h(-t)) \, ||\vec{r'(-t)}|| \, dt \\
+        &= \int_a^b f(g(u), h(u)) \, ||\vec{r'(u)}|| \, du \quad (u = -t, du = -dt) \\
+        &= \int_a^b f(g(t), h(t)) \, ||\vec{r'(t)}|| \, dt
+    \end{align*}
+    Thus, we have shown that:
+    $$
+        \int_C f(x,y) \, ds = \int_{-C} f(x,y) \, ds
+    $$
+\end{proof}
 \chapter{Fluid Mechanics}
 \end{document} 

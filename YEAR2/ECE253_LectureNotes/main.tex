@@ -1357,16 +1357,16 @@ The following identities can be derived from the axioms of Boolean algebra:
 
 \paragraph{Resets} We have two types of rests to reset the FF to a known state:
 \begin{itemize}
-    \item \textbf{Synchronous reset:} Active only on the clock edge. If reset = 1 at the triggering edge the flip‑flop is forced to the predefined state (usually 0); otherwise it captures D.
+    \item \textbf{Synchronous reset:} Active only on the clock edge. If reset = 1 (or resetn = 0) at the triggering edge the flip‑flop is forced to the predefined state (usually 0); otherwise it captures D.
     \item \textbf{Asynchronous reset:} Active immediately when asserted, forcing the flip‑flop to the predefined state (usually 0) regardless of the clock; normal edge‑triggered operation resumes when deasserted.
 \end{itemize}
 \begin{definition}[Synchronous Reset D-FF]
     The Verilog implementation is as follows:
     \begin{verbatim}
-    module d_ff_sync_reset(input logic D, CLK, RST,
+    module d_ff_sync_reset(input logic D, CLK, RSTn,
                            output logic Q);
         always_ff @(posedge CLK) begin
-            if (RST==1'b0)
+            if (RSTn == 1'b0)
                 Q <= 1'b0; // Reset to 0
             else
                 Q <= D; // Normal operation
@@ -1375,8 +1375,77 @@ The following identities can be derived from the axioms of Boolean algebra:
     \end{verbatim}
     
 \end{definition}
+
+\begin{definition}[Asynchronous Reset D-FF]
+    The Verilog implementation is as follows:
+    \begin{verbatim}
+    module d_ff_async_reset(input logic D, CLK, RSTn,
+                            output logic Q);
+        always_ff @(posedge CLK or negedge RSTn) begin
+            if (RSTn == 1'b0)
+                Q <= 1'b0; // Reset to 0
+            else
+                Q <= D; // Normal operation
+        end
+    endmodule
+    \end{verbatim}
+\end{definition}
+
+\paragraph{Enable Inputs} We can add an enable input to a D-FF by adding a mux before the D input. It determines whether data is loaded on the clock edge or the old data is retained. If the enable input is high (1), the data on the D input is loaded into the flip-flop on the rising edge of the clock. If the enable input is low (0), there would be a feedback signal going into the mux, so the old data is retained.
+\begin{definition}[Counters]
+    To count binary numbers, we have the follow truth table:
+    \begin{table}[h!]
+        \centering
+        \begin{tabular}{|c|c|}
+            \hline
+            CLK Cycle & Binary Count (Q2 Q1 Q0) \\
+            \hline
+            0 & 000 \\
+            1 & 001 \\
+            2 & 010 \\
+            3 & 011 \\
+            4 & 100 \\
+            5 & 101 \\
+            6 & 110 \\
+            7 & 111 \\
+            \hline
+        \end{tabular}
+        \caption{Truth Table for a 3-bit Counter}
+        \label{tab:3_bit_counter_truth_table}
+    \end{table}
+    From the truth table, we can derive the following rules:
+    \begin{itemize}
+        \item $Q_0$ toggles every clock cycle.
+        $$
+        Q_0(t+1) = Q_0(t) \oplus 1
+        $$
+        \item $Q_1$ toggles when $Q_0$ is 1.
+        $$
+        Q_1(t+1) = Q_1(t) \oplus Q_0(t)
+        $$
+        \item $Q_2$ toggles when $Q_1$ and $Q_0$ are both 1.
+        $$
+        Q_2(t+1) = Q_2(t) \oplus (Q_1(t) Q_0(t))
+        $$
+    \end{itemize}
+    We call this a TQ flip-flop, where T stands for toggle. It is done by connecting the Q output back, to a new XOR gate. The input of that XOR gate is Q and T. And the XOR gate output is connected to the D input of a D-FF. The Verilog implementation is as follows:
+    \begin{verbatim}
+    module counter3(input logic CLK, RSTn,
+                    output logic [3:0] Q);
+        always_ff @(posedge CLK or negedge RSTn) begin
+            if (RSTn == 1'b0)
+                Q <= 4'b0000;
+            else begin
+                Q[0] <= Q[0] ^ 1'b1; // Toggle Q0
+                Q[1] <= Q[1] ^ Q[0]; // Toggle Q1
+                Q[2] <= Q[2] ^ (Q[1] & Q[0]); // Toggle Q2
+                Q[3] <= Q[3] ^ (Q[2] & Q[1] & Q[0]); // Toggle Q3
+            end
+        end
+    endmodule
+    \end{verbatim}
+\end{definition}
 \section{Finite State Machines (FSM)}
-% FSM modeling, state diagrams, and Verilog implementation (to be expanded)
 
 \chapter{Computer Organization and Assembly Language}
 \begin{shaded}

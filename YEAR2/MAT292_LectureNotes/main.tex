@@ -1948,4 +1948,72 @@ The phase portrait of this system is shown below:
     \end{itemize}
 \end{definition}
 
+\subsection{Wronskian and Fundamental Matrix}
+\begin{definition}[Functionals]
+    A functional is a mapping from a vector space of functions to the real numbers. For example, consider the space of continuous functions on an interval \( [a, b] \), denoted by \( C[a, b] \). A functional \( J: C[a, b] \to \mathbb{R} \) could be defined as:
+    $$
+    J[f] = \int_a^b f(x) \, dx
+    $$
+    for any function \( f \in C[a, b] \).
+\end{definition}
+
+\paragraph{Motivation} For an $n$th-order differential equation we need $n$ linearly independent solutions to form the general solution. These solutions constitute a basis of the solution space, so we must check whether a given set of solutions is linearly independent.
+
+\begin{definition}[Wronskian]
+    Consider \( n \) functions \( x_1(t), x_2(t), \ldots, x_n(t) \) for which \( x: \mathbb{R} \to \mathbb{R}^n \) that are solutions of a $n$th-order linear differential equation on an interval \( I \). The Wronskian \( W(t) \) is defined as the determinant of the matrix whose columns are formed by the functions and their derivatives up to order \( n-1 \):
+    \begin{equation}
+    W(t) = \det\begin{bmatrix}
+    x_1(t) & x_2(t) & \cdots & x_n(t) \\
+    x_1'(t) & x_2'(t) & \cdots & x_n'(t) \\
+    \vdots & \vdots & \ddots & \vdots \\
+    x_1^{(n-1)}(t) & x_2^{(n-1)}(t) & \cdots & x_n^{(n-1)}(t)
+    \end{bmatrix} 
+    \end{equation}
+    Iff there exist \( t \) in interval \( I \) such that \( W(t) \neq 0 \), then the functions \( x_1(t), x_2(t), \ldots, x_n(t) \) are linearly independent on \( I \).
+
+\end{definition}
+
+\begin{example}
+    Let $f(x) = \cos (mx)$ and $g(x) = \sin (mx)$ for some constant $m \neq 0$. We compute the Wronskian:
+    \begin{align*}
+    W(f, g)(x) &= \det\begin{bmatrix}
+    \cos(mx) & \sin(mx) \\
+    -m\sin(mx) & m\cos(mx)
+    \end{bmatrix} \\
+    &= m\cos^2(mx) + m\sin^2(mx) \\
+    &= m(\cos^2(mx) + \sin^2(mx)) \\
+    &= m \neq 0
+    \end{align*}
+    Since \( W(f, g)(x) \neq 0 \) for all \( x \), the functions \( \cos(mx) \) and \( \sin(mx) \) are linearly independent on \( \mathbb{R} \).
+\end{example}
+\paragraph{Trading order for dimension} Consider the $n$th-order ODE:
+$$a_n(t)x^{(n)} + a_{n-1}(t)x^{(n-1)} + \ldots + a_1(t)x' + a_0(t)x = g(t)$$
+where \( a_n(t) \neq 0 \) on an interval \( I \). We can convert this into a system of first-order ODEs by defining:
+$$\begin{cases}
+x_1 = x \\
+x_2 = x' \\
+x_3 = x'' \\
+\vdots \\
+x_n = x^{(n-1)}
+\end{cases}$$
+Then, we have solution $x: \mathbb{R} \to \mathbb{R}^n$ given by:
+$$
+x = v_1 e^{\lambda_1 t} + v_2 e^{\lambda_2 t} + \ldots + v_n e^{\lambda_n t}
+$$
+where \( v_i \) are the eigenvectors and \( \lambda_i \) are the eigenvalues of the corresponding matrix \( A \). Then, we can define the Wronskian for this system as:
+\begin{equation}
+W(v_1e^{\lambda_1 t}, v_2 e^{\lambda_2 t}, \ldots, v_n e^{\lambda_n t}) = 
+\begin{vmatrix}
+v_1 e^{\lambda_1 t} & v_2 e^{\lambda_2 t} & \ldots & v_n e^{\lambda_n t} 
+\end{vmatrix} = e^{(\lambda_1 + \lambda_2 + \ldots + \lambda_n)t} \begin{vmatrix}
+v_1 & v_2 & \ldots & v_n 
+\end{vmatrix}
+\end{equation}
+Which the first term is never zero, so the Wronskian is non-zero iff the eigenvectors are linearly independent. The basis $\{v_1 e^{\lambda_1 t}, v_2 e^{\lambda_2 t}, \ldots, v_n e^{\lambda_n t}\}$ is a fundamental called the fundamental set of solutions.
+
+\paragraph{General Planer Systems} Consider the system of ODEs:
+$$\textbf{x}' = A\textbf{x}$$
+where \( A \in \mathbb{R}^{2 \times 2} \).
+
+
 \end{document}
