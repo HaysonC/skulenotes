@@ -2014,6 +2014,121 @@ Which the first term is never zero, so the Wronskian is non-zero iff the eigenve
 \paragraph{General Planer Systems} Consider the system of ODEs:
 $$\textbf{x}' = A\textbf{x}$$
 where \( A \in \mathbb{R}^{2 \times 2} \).
+We define the fundamental matrix \( \Phi(t) \) as:
+\begin{equation}
+\Phi(t) = \begin{bmatrix}
+x_1(t) & x_2(t) \\ 
+y_1(t) & y_2(t)
+\end{bmatrix}
+\end{equation}
+where \( (x_1(t), y_1(t)) \) and \( (x_2(t), y_2(t)) \) are two linearly independent solutions of the system. The Wronskian of the system is given by:
+\begin{equation}
+W(t) = \det(\Phi(t)) = x_1(t)y_2(t) - x_2(t)y_1(t)
+\end{equation}
+The Wronskian satisfies the differential equation:
+\begin{equation}
+W'(t) = \text{tr}(A) W(t)
+\end{equation}
+with the solution:
+\begin{equation}
+W(t) = W(0) e^{\text{tr}(A)t}
+\end{equation}
+where \( W(0) \) is the Wronskian at \( t = 0 \).
 
+\subsection{Stability of Nonlinear Systems in Local Linear Approximation}
+\begin{definition}[Change of Variables]
+    The change of variable in a higher dimensions, the change of variables related by the Jacobian matrix. WLOG, consider change of variables $F: \mathbb{R}^2 \to \mathbb{R}^2$ and system $x' = Ax$. Let:
+    $$
+    F(x,y) = \begin{bmatrix}f_1(x,y) \\ f_2(x,y)
+    \end{bmatrix}
+    $$
+
+    Then, the Jacobian matrix \( J_F \) is given by:
+    \begin{equation}
+    J_F = \begin{bmatrix}
+    \frac{\partial f_1}{\partial x} & \frac{\partial f_1}{\partial y} \\
+    \frac{\partial f_2}{\partial x} & \frac{\partial f_2}{\partial y}
+    \end{bmatrix}
+    \end{equation}
+    The change of variables transforms the system \( x' = Ax \) into a new system \( u' = Bu \) where:
+    \begin{equation}
+    B = J_F A J_F^{-1}
+    \end{equation}
+    provided that \( J_F \) is invertible.
+\end{definition}
+
+\begin{shaded}
+\subsubsection*{A reference for simple linear stability analysis.}
+
+\paragraph{Linear Stablity Analysis} Consider the simple linear one-dimensional ODE:
+$$y' = f(y)$$
+where \( f(y) \) is a differentiable function. Let \( y^* \) be a fixed point, i.e., \( f(y^*) = 0 \). We can perform a linear stability analysis by considering a small perturbation \( \eta(t) = y(t) - y^* \). Then, we have:
+\begin{align*}
+\eta' &= y' - (y^*)' \\
+&= f(y) - 0 \\
+&= f(y^* + \eta) \\
+&\approx f(y^*) + f'(y^*)\eta \\
+&= f'(y^*)\eta = A\eta
+\end{align*}
+So, we have the linearized system:
+$$\eta' = A\eta$$
+where \( A = f'(y^*) \). The stability of the fixed point \( y^* \) is determined by the sign of \( A \).
+\end{shaded}
+
+\begin{definition}[Linear Stability Analysis in Higher Dimensions]
+Consider the two-dimensional system:
+$$\begin{cases}
+x' = f(x, y) \\
+y' = g(x, y)
+\end{cases}$$
+where \( f(x, y) \) and \( g(x, y) \) are differentiable functions. Let \( (x^*, y^*) \) be a fixed point. We let perturbations \( u(t) = x(t) - x^* \) and \( v(t) = y(t) - y^* \). Then, we have:
+$$
+\begin{cases}
+    u' &= x' = \cancel{f(x,y)} + \frac{\partial f}{\partial x}(x^*, y^*)u + \frac{\partial f}{\partial y}(x^*, y^*)v + \cancel{O(u^2, v^2, uv)} \\
+    v' &= y' = \cancel{g(x,y)} + \frac{\partial g}{\partial x}(x^*, y^*)u + \frac{\partial g}{\partial y}(x^*, y^*)v + \cancel{O(u^2, v^2, uv)}
+\end{cases}
+$$
+So we can write the linearized system as:
+$$\begin{bmatrix}
+u' \\ v'
+\end{bmatrix} = J \begin{bmatrix}
+u \\ v
+\end{bmatrix}$$
+where \( J \) is the Jacobian matrix evaluated at the fixed point \( (x^*, y^*) \). This describes the local behavior of the system near the fixed point. Then the stability and behavior is determined by the determinant and trace of the Jacobian matrix \( J \), and hence the eigenvalues and eigenvectors of \( J \).
+\end{definition}
+
+\begin{definition}
+    Consider the nonlinear pendulum equation:
+    $$\theta'' + \frac{g}{L}\sin(\theta) = 0$$
+    where \( \theta \) is the angle of the pendulum, \( g \) is the acceleration due to gravity, and \( L \) is the length of the pendulum. We can rewrite this as a system of first-order ODEs by defining:
+    $$\begin{cases}
+    x_1 = \theta \\
+    x_2 = \theta'
+    \end{cases}$$
+    Then, we have:
+    $$\begin{cases}
+    x_1' = x_2 \\
+    x_2' = -\frac{g}{L}\sin(x_1)    
+    \end{cases}$$
+    Now, consider the Jacaobian matrix:
+    $$J = \begin{bmatrix}
+    0 & 1 \\
+    -\frac{g}{L}\cos(x_1) & 0
+    \end{bmatrix}$$
+    
+    Consider the fixed point $(n \pi, 0)$ for \( n \in \mathbb{Z} \). We have:
+    $$J = \begin{bmatrix}
+    0 & 1 \\
+    -\frac{g}{L}\cos(n \pi) & 0
+    \end{bmatrix} = \begin{bmatrix}
+    0 & 1 \\
+    -\frac{g}{L}(-1)^n & 0
+    \end{bmatrix}$$
+    So the derminant is:
+    $$\det(J) = -\frac{g}{L}(-1)^n$$
+    and the trace is:
+    $$\text{tr}(J) = 0$$
+    When $n$ is even, we have a positive determinant, so the fixed point is a center. When $n$ is odd, we have a negative determinant, so the fixed point is a saddle node.
+\end{definition}
 
 \end{document}

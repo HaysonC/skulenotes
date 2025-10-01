@@ -1055,6 +1055,107 @@ and
 \begin{equation}
     T = \frac{A_t}{A_i} = \frac{2Z_2}{Z_2 + Z_1}
 \end{equation}
+
+\paragraph{Special Cases} There are two special cases:
+\begin{itemize}
+    \item \textbf{Fixed End}: If the wave encounters a boundary where the medium is fixed (e.g., a string tied to a wall), the reflected wave undergoes a phase change of \( \pi \) (inversion). The reflection coefficient is \( R = -1 \) and the transmission coefficient is \( T = 0 \).
+    \item \textbf{Free End}: If the wave encounters a boundary where the medium is free to move (e.g., a string attached to a ring that can slide along a rod), the reflected wave does not undergo a phase change. The reflection coefficient is \( R = 1 \) and the transmission coefficient is \( T = 2 \).
+\end{itemize}
+
+\begin{example}[Transmission of 64\% Energy]
+Suppose a wave transmits \(64\%\) of its incident energy across a boundary. Then:
+\begin{equation}
+    T_e = 0.64, 
+    \quad R_e = 1 - T_e = 0.36
+\end{equation}
+so that the amplitude reflection coefficient is
+\begin{equation}
+    R = +\sqrt{R_e} = 0.6 
+\end{equation}
+\textbf{Important} the positive sign indicates the reflected wave is \emph{in phase} with the incident wave.
+
+From the boundary condition in Eq.~\eqref{eq:amp-continuity},
+\begin{equation}
+    T = 1 + R = 1 + 0.6 = 1.6
+\end{equation}
+Thus, the amplitude transmission coefficient is \(T = 1.6\), even though only \(64\%\) of the energy is transmitted. This apparent paradox arises because the transmitted energy depends on both the amplitude squared and the ratio of impedances \(\tfrac{Z_2}{Z_1}\).
+\end{example}
+\subsection{Superposition and Standing Waves}
+\begin{definition}[Modulation of two waves]
+    Consider two monochromatic waves:
+    $$
+    \begin{cases}
+        y_1(x,t) &= A \cos(k_1 x - \omega_1 t) \\
+        y_2(x,t) &= A \cos(k_2 x - \omega_2 t)
+    \end{cases}
+    $$
+    Then, the resultant wave $y_1 + y_2$ can be expressed as:
+    \begin{equation}
+        y(x,t) = 2A \cos\left(\frac{(k_1 - k_2)x - (\omega_1 - \omega_2)t}{2}\right) \cos\left(\frac{(k_1 + k_2)x - (\omega_1 + \omega_2)t}{2}\right)
+    \end{equation}
+\end{definition}
+
+\begin{definition}[Coherence]
+    Two waves are said to be coherent if they are monochromatic and maintain a constant phase relationship over time. This means that the difference in phase between the two waves does not change as they propagate:
+    \begin{equation}
+        \Delta \phi = \phi_1 - \phi_2 = \text{constant}
+    \end{equation}
+    Coherent waves can produce stable interference patterns, such as constructive and destructive interference.
+\end{definition}
+
+\begin{definition}[Phase and Phase Difference]
+    Phase of the wave is an argument $kx \pm \omega t + \phi_0$ of the wave function. The phase difference between two waves at a given point in space and time is given by:
+    \begin{equation}
+        \Delta \phi = (k_1 x - \omega_1 t + \phi_1) - (k_2 x - \omega_2 t + \phi_2)
+    \end{equation}
+    where \( k_1, k_2 \) are the wave numbers, \( \omega_1, \omega_2 \) are the angular frequencies, and \( \phi_1, \phi_2 \) are the initial phases of the two waves.
+
+    If we consider two waves of the same frequency and wave number, the phase difference simplifies to:
+    \begin{equation}
+        \Delta \phi = \Delta\phi + k\Delta x + \omega \Delta t
+    \end{equation}
+
+\end{definition}
+\begin{definition}[Waves in Two and Three Dimensions]
+    In two or three dimensions, waves can propagate in various directions. The general form of a wave in two dimensions is:
+    \begin{equation}
+        z(x,y,t) = A \cos(k_x x + k_y y - \omega t + \phi_0)
+    \end{equation}
+    where \( k_x \) and \( k_y \) are the wave numbers in the \( x \) and \( y \) directions, respectively, and \( \phi_0 \) is the initial phase. We also define $v$ and $k$ as:
+    \begin{equation}
+        v = \frac{\omega}{k}, \quad k = \sqrt{k_x^2 + k_y^2}
+    \end{equation}
+\end{definition}
+
+\begin{definition}[Spherical Waves]
+    A spherical wave is a wave that propagates outward in all directions from a point source. The general form of a spherical wave is:
+    \begin{equation}
+        y(r,t) = \frac{A}{r} \cos(kr - \omega t + \phi_0)
+    \end{equation}
+    where \( r = \sqrt{x^2 + y^2 + z^2} \) is the radial distance from the source, \( A \) is the amplitude at a reference distance, \( k \) is the wave number, \( \omega \) is the angular frequency, and \( \phi_0 \) is the initial phase. The amplitude decreases with distance as \( 1/r \) due to the spreading of the wavefront.
+    
+\end{definition}
+
+\begin{definition}[Interference]
+    Consider two coherent in phase sources $S_1$ and $S_2$ separated by a distance \( d \). The path difference \( \Delta r \) between the two waves at a point \( P \) is given by:
+    \begin{equation}
+        \Delta r = r_2 - r_1
+    \end{equation}
+    where \( r_1 \) and \( r_2 \) are the distances from the sources \( S_1 \) and \( S_2 \) to the point \( P \), respectively.
+
+    We have the following two cases for constructive and destructive interference:
+    \begin{itemize}
+        \item \textbf{Constructive Interference}: Occurs when the path difference is an integer multiple of the wavelength:
+        \begin{equation}
+            \Delta r = m \lambda, \quad m = 0, 1, 2, \ldots
+        \end{equation}
+        \item \textbf{Destructive Interference}: Occurs when the path difference is an odd multiple of half the wavelength:
+        \begin{equation}
+            \Delta r = \left(m + \frac{1}{2}\right) \lambda, \quad m = 0, 1, 2, \ldots
+        \end{equation}
+    \end{itemize}
+\end{definition}
+
 \chapter{Modern Physics}
 \end{document}
 
