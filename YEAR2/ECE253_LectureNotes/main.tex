@@ -1445,8 +1445,389 @@ The following identities can be derived from the axioms of Boolean algebra:
     endmodule
     \end{verbatim}
 \end{definition}
-\section{Finite State Machines (FSM)}
 
+\begin{example}[Clock Reduction]
+    Suppose we want to reduce a 1Mhz clock to a 1Hz clock. We can use a 20-bit counter to achieve this. Since $2^{20} = 1,048,576$, which is slightly more than 1 million, we can use the most significant bit (MSB) of the counter as the output clock. The MSB will toggle every $2^{19}$ clock cycles, which is approximately 1 second when the input clock is 1MHz. The Verilog implementation is as follows:
+    \begin{verbatim}
+    module clock_divider(input logic CLK_1MHZ, RSTn,
+                         output logic CLK_1HZ);
+        logic [19:0] counter; // 20-bit counter     
+        always_ff @(posedge CLK_1MHZ or negedge RSTn) begin
+            if (RSTn == 1'b0)
+                counter <= 20'b0;
+            else
+                counter <= counter + 1; // Increment counter
+        end
+        assign CLK_1HZ = counter[19]; // MSB as 1Hz clock
+    endmodule
+    \end{verbatim}
+
+    In a real hardware implementation, we would feed the bit to a d flip-flop, and that would create the rising and falling edge signals.
+\end{example}
+
+\subsection{Optimizations}
+
+\begin{definition}[Karnaugh Map (K-Map)]
+    A Karnaugh map (K-map) is a graphical representation of a truth table that is used to simplify boolean algebra expressions. It is a grid-like structure that organizes the minterms of a boolean function in such a way that adjacent cells differ by only one variable. By grouping adjacent cells that contain 1s, we can identify common factors and simplify the boolean expression.
+
+    The K-map for a 3-variable function is shown below:
+    \begin{figure}[h!]
+        \centering
+        \begin{tabular}{c|c|c|c|c}
+            & \multicolumn{4}{c}{BC} \\
+            \cline{2-5}
+            A & 00 & 01 & 11 & 10 \\
+            \hline
+            0 & m0 & m1 & m3 & m2 \\
+            1 & m4 & m5 & m7 & m6 \\
+        \end{tabular}
+        \caption{3-Variable Karnaugh Map}
+        \label{fig:3_variable_karnaugh_map}
+    \end{figure}
+
+    The K-map for a 4-variable function is shown below:
+    \begin{figure}[h!]
+        \centering
+        \begin{tabular}{c|c|c|c|c|c}
+            & \multicolumn{4}{c}{CD} \\
+            \cline{2-5}
+            AB & 00 & 01 & 11 & 10 \\
+            \hline
+            00 & m0 & m1 & m3 & m2 \\
+            01 & m4 & m5 & m7 & m6 \\
+            11 & m12 & m13 & m15 & m14 \\
+            10 & m8 & m9 & m11 & m10 \\
+        \end{tabular}
+        \caption{4-Variable Karnaugh Map}
+        \label{fig:4_variable_karnaugh_map}
+    \end{figure}
+
+    The following rules are used to group the minterms in a K-map:
+    \begin{itemize}
+        \item Groups must contain only 1s.
+        \item Groups must be rectangular and contain $2^n$ cells (where n is a non-negative integer).
+        \item Groups can wrap around the edges of the K-map.
+        \item Each group should be as large as possible.
+        \item Each 1 in the K-map should be covered by at least one group.
+    \end{itemize}
+    By following these rules, we can create groups of 1s in the K-map and simplify the boolean expression accordingly.
+    
+\end{definition}
+
+\begin{example}
+    Suppose we have the following truth table:
+    \begin{table}[h!]
+        \centering
+        \begin{tabular}{|c|c|c||c|}
+            \hline
+            A & B & C & F \\
+            \hline
+            0 & 0 & 0 & 0 \\
+            0 & 0 & 1 & 1 \\
+            0 & 1 & 0 & 1 \\
+            0 & 1 & 1 & 1 \\
+            1 & 0 & 0 & 0 \\
+            1 & 0 & 1 & 1 \\
+            1 & 1 & 0 & 1 \\
+            1 & 1 & 1 & 1 \\
+            \hline
+        \end{tabular}
+        \caption{Truth Table for Example}
+        \label{tab:example_truth_table}
+    \end{table}
+    We can derive the following minterms from the truth table:
+    $$
+    F(A,B,C) = m_1 + m_2 + m_3 + m_5 + m_6 + m_7
+    $$
+    The K-map for the function is shown below:
+    \begin{figure}[h!]
+        \centering
+        \begin{tabular}{c|c|c|c|c}
+            & \multicolumn{4}{c}{BC} \\
+            \cline{2-5}
+            A & 00 & 01 & 11 & 10 \\
+            \hline
+            0 & 0 & 1 & 1 & 1 \\
+            1 & 0 & 1 & 1 & 1 \\
+        \end{tabular}
+        \caption{Karnaugh Map for Example}
+        \label{fig:example_karnaugh_map}
+    \end{figure}
+    We can group the minterms as follows:
+    \begin{itemize}
+        \item Group of four covering $m_2, m_3, m_6, m_7$: This group corresponds to $B = 1$ (since B is constant in this group). So this group simplifies to $B$.
+        \item Group of two covering $m_1, m_5$: This group corresponds to $A = 0$ and $C = 1$ (since A and C are constant in this group). So this group simplifies to $\overline{A}C$.
+    \end{itemize}
+    Therefore, the simplified boolean expression is:
+    $$
+    F(A,B,C) = B + \overline{A}C
+    $$
+\end{example}
+
+\begin{definition}[Don't Care Conditions]
+    In some cases, certain input combinations may never occur or their output values are irrelevant to the overall function. These input combinations are referred to as "don't care" conditions and are typically represented by an "X" in the truth table. When simplifying a boolean expression using a K-map, we can treat these "don't care" conditions as either 0 or 1, whichever leads to a simpler expression. This flexibility can help in creating larger groups of 1s in the K-map, leading to a more simplified boolean expression.
+    
+\end{definition}
+\begin{example}[Don't Care Conditions]
+    Suppose we have the following truth table with don't care conditions:
+    \begin{table}[h!]
+        \centering
+        \begin{tabular}{|c|c|c||c|}
+            \hline
+            A & B & C & F \\
+            \hline
+            0 & 0 & 0 & 0 \\
+            0 & 0 & 1 & 1 \\
+            0 & 1 & 0 & X \\
+            0 & 1 & 1 & 1 \\
+            1 & 0 & 0 & 0 \\
+            1 & 0 & 1 & X \\
+            1 & 1 & 0 & 1 \\
+            1 & 1 & 1 & 1 \\
+            \hline
+        \end{tabular}
+        \caption{Truth Table with Don't Care Conditions}
+        \label{tab:example_dont_care_truth_table}
+    \end{table}
+    We can derive the following minterms from the truth table:
+    $$
+    F(A,B,C) = m_1 + m_3 + m_6 + m_7
+    $$
+    The K-map for the function is shown below:
+    \begin{figure}[h!]
+        \centering
+        \begin{tabular}{c|c|c|c|c}
+            & \multicolumn{4}{c}{BC} \\
+            \cline{2-5}
+            A & 00 & 01 & 11 & 10 \\
+            \hline
+            0 & 0 & X & 1 & X \\
+            1 & 0 & X & 1 & X \\
+        \end{tabular}
+        \caption{Karnaugh Map with Don't Care Conditions}
+        \label{fig:example_dont_care_karnaugh_map}
+    \end{figure}
+    We can group the minterms as follows:
+    \begin{itemize}
+        \item Group of four covering $m_3, m_7$ and the don't care conditions: This group corresponds to $C = 1$ (since C is constant in this group). So this group simplifies to $C$.
+        \item Group of two covering $m_1$: This group corresponds to $A = 0$ and $B = 0$ (since A and B are constant in this group). So this group simplifies to $\overline{A}\overline{B}$.
+    \end{itemize}
+    Therefore, the simplified boolean expression is:
+    $$
+    F(A,B,C) = C + \overline{A}\overline{B}
+    $$
+\end{example}
+
+\paragraph{Gray Code}
+Gray code is a binary numeral system where two successive values differ in only one bit. This property makes Gray code useful in minimizing errors in digital systems, particularly in applications like rotary encoders and digital communication.
+The following table shows the 3-bit binary and Gray code representations:
+\begin{table}[h!]
+    \centering
+    \begin{tabular}{|c|c|}
+        \hline
+        Binary & Gray Code \\
+        \hline
+        000 & 000 \\
+        001 & 001 \\
+        010 & 011 \\
+        011 & 010 \\
+        100 & 110 \\
+        101 & 111 \\
+        110 & 101 \\
+        111 & 100 \\
+        \hline
+    \end{tabular}
+    \caption{3-bit Binary and Gray Code Representations}
+    \label{tab:3_bit_binary_gray_code}
+\end{table}
+\paragraph{Terminologies} For a K-map, we have the following terminologies:
+\begin{itemize}
+    \item \textbf{Implicant:} A product term (AND term) that can be used to cover one or more minterms in the K-map.
+    \item \textbf{Prime Implicant:} An implicant that cannot be combined with any other implicant to form a larger implicant. In other words, it is an implicant that covers the maximum number of minterms possible.
+    \item \textbf{Essential Prime Implicant:} A prime implicant that covers at least one minterm that is not covered by any other prime implicant. In other words, it is a prime implicant that is necessary to cover all the minterms in the K-map.
+    \item \textbf{Cover:} A set of implicants that together cover all the minterms in the K-map.
+\end{itemize}
+
+\begin{example}[Implicant and Prime Implicant]
+    Consider the following K-map:
+    \begin{figure}[h!]
+        \centering
+        \begin{tabular}{c|c|c|c|c}
+            & \multicolumn{4}{c}{BC} \\
+            \cline{2-5}
+            A & 00 & 01 & 11 & 10 \\
+            \hline
+            0 & 1 & 1 & 0 & 0 \\
+            1 & 1 & 1 & 1 & 0 \\
+        \end{tabular}
+        \caption{Karnaugh Map for Example}
+        \label{fig:example_karnaugh_map_implicant}
+    \end{figure}
+    We can identify the following implicants:
+    \begin{itemize}
+        \item $A'B'$ covering minterms $m_0, m_1$
+        \item $A'B$ covering minterms $m_2, m_3$
+        \item $AB'$ covering minterms $m_4, m_5$
+        \item $AB$ covering minterms $m_6, m_7$
+        \item $B$ covering minterms $m_2, m_3, m_6, m_7$
+        \item $A$ covering minterms $m_4, m_5, m_6, m_7$
+    \end{itemize}
+    The prime implicants are:
+    \begin{itemize}
+        \item $A'B'$ (cannot be combined with any other implicant)
+        \item $B$ (cannot be combined with any other implicant)
+        \item $A$ (cannot be combined with any other implicant)
+    \end{itemize}
+    The essential prime implicants are:
+    \begin{itemize}
+        \item $A'B'$ (covers minterm $m_0$ which is not covered by any other prime implicant)
+        \item $B$ (covers minterms $m_2, m_3$ which are not covered by any other prime implicant)
+        \item $A$ (covers minterms $m_4, m_5$ which are not covered by any other prime implicant)
+    \end{itemize}
+    Therefore, the cover of the K-map is:
+    $$
+    F(A,B,C) = A'B' + B + A
+    $$
+\end{example}
+
+\begin{example}
+    Let $f(x_1, x_2, x_3, x_4) = \sum m(2, 4, 5, 8, 10, 11, 12, 13, 15)$ be a function represented by the following K-map:
+    % up : x_1 x_2, left: x_3 x_4
+    \begin{figure}[h!]
+        \centering
+        \begin{tabular}{c|c|c|c|c}
+            & \multicolumn{4}{c}{$x_1 x_2$} \\
+            \cline{2-5}
+            $x_3 x_4$ & 00 & 01 & 11 & 10 \\
+            \hline
+            00 & 0 & 1 & 1 & 1 \\
+            01 & 0 & 1 & 1 & 0 \\
+            11 & 0 & 0 & 1 & 1 \\
+            10 & 1 & 0 & 0 & 1 \\   
+        \end{tabular}
+        \caption{Karnaugh Map for Example}
+        \label{fig:example_karnaugh_map_dont_care}
+    \end{figure}
+
+\end{example}
+
+
+
+\paragraph{Procedure to fine the minimum cost cover}
+\begin{enumerate}
+    \item Find all prime implicants.
+    \item Identify all essential prime implicants (EPIs) and include them in the cover.
+    \item Remove all minterms covered by the EPIs from the K-map.
+    \item Check and inspect whether it is the minimum cost cover. 
+\end{enumerate}
+
+
+\begin{definition}[K-Maps with Maxterm]
+    We can also use K-maps to simplify boolean expressions represented by maxterms. The procedure is similar to that of minterms, but instead of grouping 1s, we group 0s. The following rules are used to group the maxterms in a K-map:
+    \begin{itemize}
+        \item Groups must contain only 0s.
+        \item Groups must be rectangular and contain $2^n$ cells (where n is a non-negative integer).
+        \item Groups can wrap around the edges of the K-map.
+        \item Each group should be as large as possible.
+        \item Each 0 in the K-map should be covered by at least one group.
+    \end{itemize}
+    By following these rules, we can create groups of 0s in the K-map and
+\end{definition}
+
+
+\section{Finite State Machines (FSM)}
+\begin{definition}[State Diagram]
+    A state diagram is a graphical representation of a finite state machine (FSM) that illustrates the states, transitions, inputs, and outputs of the system. It consists of nodes (representing states) and directed edges (representing transitions between states). Each edge is typically labeled with the input condition that triggers the transition and may also include the output associated with that transition.
+
+    State diagrams are used to visualize the behavior of sequential systems, making it easier to understand how the system responds to different inputs and how it transitions between various states over time.
+\end{definition}
+
+\begin{example}
+    Cosnider a circult that detect the input sequance $w=$`101' using a FSM. The state diagram is shown below:
+    \begin{figure}[h!]
+        \centering
+        \begin{tikzpicture}[node distance=2cm, on grid, auto]
+            % Nodes
+            \node[state, initial] (S0) {S0};
+            \node[state] (S1) [right=of S0] {S1};
+            \node[state] (S2) [right=of S1] {S2};
+            \node[state, accepting] (S3) [right=of S2] {S3};    
+            % Edges
+            \path[->]
+                (S0) edge [loop above] node {0/0} ()
+                     edge node {1/0} (S1)
+                (S1) edge node {0/0} (S2)
+                     edge [loop above] node {1/0} ()
+                (S2) edge node {1/1} (S3)
+                     edge [bend left] node {0/0} (S0)
+                (S3) edge [bend left] node {0/0} (S2)
+                     edge [bend left] node {1/0} (S1);
+        \end{tikzpicture}
+        \caption{State Diagram for FSM that detects `101'}
+        \label{fig:fsm_state_diagram}
+    \end{figure}
+    The FSM has four states: S0, S1, S2, and S3. The initial state is S0, and the accepting state is S3. The transitions between states are labeled with the input/output pairs. For example, from state S0, if the input is 1, the FSM transitions to state S1 and outputs 0. The FSM detects the sequence `101' and outputs 1 when it reaches state S3.
+    
+    We can also draw its state table as follows:
+    \begin{table}[h!]
+        \centering
+        \begin{tabular}{|c|cc|c|}
+            \hline
+            Curreent State & $w=0$ & $w=1$ & Output \\
+            \hline
+            S0 & S0 & S1 & 0 \\
+            S1 & S2 & S1 & 0 \\
+            S2 & S0 & S3 & 0 \\
+            S3 & S2 & S1 & 1 \\
+            \hline
+        \end{tabular}
+        \caption{State Table for FSM that detects `101'}
+        \label{tab:fsm_state_table}
+    \end{table}
+
+    Then, we would assign the states. First the circuit has 4 states, so we need at least 2 flip-flops $y_2$, $y_1$ to represent the states. We can assign the states as follows:
+    \begin{itemize}
+        \item S0 = 00, $y_2 y_1$
+        \item S1 = 01, $y_2 \overline{y_1}$
+        \item S2 = 10, $\overline{y_2} y_1$
+        \item S3 = 11, $\overline{y_2} \overline{y_1}$
+    \end{itemize}
+    Then, we can derive the following state transition table:
+
+    \begin{table}[h!]
+        \centering
+        \begin{tabular}{|c|cc|c|}
+            \hline
+            Current State ($y_2 y_1$) & $w=0$ & $w=1$ & Output \\
+            \hline
+            00 & 00 & 01 & 0 \\
+            01 & 10 & 01 & 0 \\
+            10 & 00 & 11 & 0 \\
+            11 & 10 & 01 & 1 \\
+            \hline
+        \end{tabular}
+        \caption{State Transition Table for FSM that detects `101'}
+        \label{tab:fsm_state_transition_table}
+    \end{table}
+
+    From the state transition table, we can synthesis the circuit using D flip-flops. Let $Y_2$ and $Y_1$ be the next state of $y_2$ and $y_1$, respectively. We can derive the following equations:
+    \begin{itemize}
+        \item $Y_1 = w$
+        \item $Z = y_2 y_1$
+        \item $Y_2 = \overline{w} y_1 + w \overline{y_2} \overline{y_1}$
+    \end{itemize}
+    
+\end{example}
+
+\begin{definition}[Finite State Machine (FSM)]
+    A finite state machine (FSM) is a mathematical model of computation used to design both computer programs and sequential logic circuits. It is composed of a finite number of states, transitions between those states, inputs, and outputs. FSMs are used to model the behavior of systems that can be in one of a limited number of states at any given time and can transition from one state to another based on input signals.
+
+    There are two main types of FSMs:
+    \begin{itemize}
+        \item \textbf{Moore Machine:} In a Moore machine, the outputs depend only on the current state. The output is associated with each state, and it changes only when the state changes.
+        \item \textbf{Mealy Machine:} In a Mealy machine, the outputs depend on both the current state and the current inputs. The output can change immediately in response to changes in the input, even if the state remains the same.
+    \end{itemize}
+\end{definition}
 \chapter{Computer Organization and Assembly Language}
 \begin{shaded}
 \textbf{What is Assembly Language?} We know that we can run C/C++ on any computer (Machine Agnostic), but how does the computer understand C/C++? The answer is the compiler that parse it to assembly through:

@@ -19,6 +19,19 @@ The up-to-date version of this document can be found at \url{https://github.com/
 
 \subsection{Taylor Series for Multivariable Functions}
 
+\begin{keybox}
+	\textbf{Key Equations:}
+\begin{itemize}
+    \item Multivariable Taylor (about $(x_0,y_0)$): $\displaystyle f(x,y) = f_0 + \sum_i f_i\Delta x_i + \tfrac12\sum_{i,j} f_{ij}\Delta x_i\Delta x_j + \cdots$
+    \item 2D form: $\displaystyle f(x_0{+}\Delta x,y_0{+}\Delta y) = f_0 + f_x\Delta x + f_y\Delta y + \tfrac12(f_{xx}\Delta x^2 + 2f_{xy}\Delta x\Delta y + f_{yy}\Delta y^2)+\cdots$
+\end{itemize}
+	\textbf{Tips:}
+\begin{itemize}
+    \item Use a line path $(x,y)=(x_0,y_0)+t(\Delta x,\Delta y)$ to reduce to 1D.
+    \item Hessian controls the quadratic term and local shape (min/max/saddle with tests later).
+\end{itemize}
+\end{keybox}
+
 \begin{shaded}
     \subsubsection{Review. Taylor Series for Single Variable Functions}
     Let $f(x)$ be a function that is infinitely differentiable at $x = a$. The Taylor series of $f(x)$ about the point $x = a$ is given by:
@@ -144,6 +157,19 @@ The up-to-date version of this document can be found at \url{https://github.com/
 
 \subsection{Double Integrals in a Rectangular Region}
 
+\begin{keybox}
+	\textbf{Key Equations:}
+\begin{itemize}
+    \item Rectangle $R=[a,b]\times[c,d]$: $\displaystyle \iint_R f\,dA = \int_a^b\!\int_c^d f(x,y)\,dy\,dx = \int_c^d\!\int_a^b f(x,y)\,dx\,dy$
+    \item Separable $f(x,y)=g(x)h(y)$: product of one-dimensional integrals.
+\end{itemize}
+	\textbf{Tips:}
+\begin{itemize}
+    \item Swap order freely on rectangles; use Fubini/Tonelli conditions.
+    \item Check integrability and symmetry to simplify.
+\end{itemize}
+\end{keybox}
+
  By the point of seeing this note, you should be familiar with the simple case of rectangular, simple cases are provided as examples:
 
 \begin{example}
@@ -207,6 +233,19 @@ The up-to-date version of this document can be found at \url{https://github.com/
     Evaluating each integral separately gives 1 for both, so the final result is: $1 \times 1 = 1$.
 \end{example}
 \subsection{Double Integrals in General Regions}
+
+\begin{keybox}
+	\textbf{Key Ideas:}
+\begin{itemize}
+    \item Type I: $a\le x\le b$, $g_1(x)\le y\le g_2(x)$, integrate $dy$ then $dx$.
+    \item Type II: $c\le y\le d$, $h_1(y)\le x\le h_2(y)$, integrate $dx$ then $dy$.
+\end{itemize}
+	\textbf{Tips/Pitfalls:}
+\begin{itemize}
+    \item Draw the region; switching order often simplifies bounds.
+    \item Split region if boundaries change formula across sub-intervals.
+\end{itemize}
+\end{keybox}
 \paragraph{Types of Regions} When the region $R$ is not rectangular, we can still compute the double integral by expressing the region in terms of inequalities. There are three common types of regions:
 \begin{definition}[Type I Region]
     A region $R$ is called a Type I region if it can be described by the inequalities:
@@ -432,6 +471,15 @@ The following is the analogue of the squeeze theorem for double integrals:
 
 \subsection{Double Integrals in Non-Rectangular Regions}
 
+\begin{keybox}
+	\textbf{Key Equations/Concepts:}
+\begin{itemize}
+    \item Piecewise descriptions: break $R$ into Type I/II parts.
+    \item Use symmetry and monotonic boundaries to choose efficient order.
+\end{itemize}
+	\textbf{Tip:} Convert to polar if circular arcs or $x^2{+}y^2$ appear.
+\end{keybox}
+
 \begin{theorem}[Change of Variable to Polar Coordinates]
     Consider the double integral of a function $f(x,y)$ over a region $R$ in the $xy$-plane. If we change the variables from Cartesian coordinates $(x,y)$ to polar coordinates $(r,\theta)$ using the transformations:
     $$
@@ -463,9 +511,9 @@ The following is the analogue of the squeeze theorem for double integrals:
 
 \begin{definition}[Reigion Defined by Varying $r$ with $\theta$]
     Consider a region $R$ in the $xy$-plane that can be described in polar coordinates by the inequalities:
-    $$
+    \begin{equation}
         \alpha \le \theta \le \beta, \quad g_1(\theta) \le r \le g_2(\theta)
-    $$
+    \end{equation}
     where $g_1(\theta)$ and $g_2(\theta)$ are continuous functions on the interval $[\alpha, \beta]$. Then, to evaluate the double integral over this region for a continuous function $f(x,y)$, we set up the integral as follows:
     \begin{equation}
         \iint_R f(x,y) \, dA = \int_\alpha^\beta \int_{g_1(\theta)}^{g_2(\theta)} f(r \cos{\theta}, r \sin{\theta}) \, r \, dr \, d\theta
@@ -544,6 +592,19 @@ The following is the analogue of the squeeze theorem for double integrals:
 \end{example}
 
 \subsection{Applications of Double Integrals}
+
+\begin{keybox}
+	\textbf{Key Formulas:}
+\begin{itemize}
+    \item Mass: $M=\iint_R \rho\,dA$; Center of mass: $\bar x=\frac{1}{M}\iint_R x\rho\,dA$, $\bar y=\frac{1}{M}\iint_R y\rho\,dA$.
+    \item Moments of inertia: $I_x=\iint_R y^2\rho\,dA$, $I_y=\iint_R x^2\rho\,dA$, $I_O=I_x+I_y$ (planar).
+\end{itemize}
+	\textbf{Tips:}
+\begin{itemize}
+    \item Use symmetry to zero cross-terms and simplify integrals.
+    \item Choose coordinates aligned with geometry.
+\end{itemize}
+\end{keybox}
 \begin{shaded}
     \subsubsection*{Review: Moment of Inertia using Single Integral}
 
@@ -672,6 +733,18 @@ The following is the analogue of the squeeze theorem for double integrals:
 \end{example}
 
 \subsection{Surface Area}
+
+\begin{keybox}
+	\textbf{Key Formula:}
+\begin{itemize}
+    \item Graph $z=f(x,y)$ over $R$: $\displaystyle S=\iint_R \sqrt{1+f_x^2+f_y^2}\,dA$.
+\end{itemize}
+	\textbf{Tips:}
+\begin{itemize}
+    \item For parametric $\mathbf r(u,v)$ use $\iint\!\lVert \mathbf r_u\times\mathbf r_v\rVert\,du\,dv$.
+    \item Approximate with linearization when small slopes.
+\end{itemize}
+\end{keybox}
 \begin{theorem}[Surface Area]
     Given $z=f(x,y)$, where $f$ is a differentiable function over the region $R$ in the $xy$-plane, the surface area $S$ of the surface above the region $R$ is given by:
     \begin{equation}
@@ -750,6 +823,19 @@ The following is the analogue of the squeeze theorem for double integrals:
 
 
 \subsection{Triple Integrals in Rectangular Coordinates}
+
+\begin{keybox}
+	\textbf{Key Equations:}
+\begin{itemize}
+    \item $\displaystyle \iiint_E f\,dV = \int\!\int\!\int f(x,y,z)\,dz\,dy\,dx$ over box or layered bounds.
+    \item Mass/CM/ Moments extend by adding $z$ and $dV$.
+\end{itemize}
+	\textbf{Tips:}
+\begin{itemize}
+    \item Choose order by inspecting projection and boundary dependence.
+    \item Slice by planes to keep inner bounds simple.
+\end{itemize}
+\end{keybox}
 The idea of a triple integral (in fact n-tuple integral) could be extend from the idea of double integral, similar to 
 Definition \ref{def:double_integral}. We can define a triple integral as follows:
 \begin{definition}
@@ -1085,6 +1171,15 @@ Definition \ref{def:double_integral}. We can define a triple integral as follows
     where $M = \pi a^2 h \rho_0$ is the mass of the cylinder. 
 \end{example}
 \subsection{Triple Integrals in Cylindrical Coordinates}
+
+\begin{keybox}
+	\textbf{Key Relations:}
+\begin{itemize}
+    \item $(r,\theta,z)$ with $x=r\cos\theta$, $y=r\sin\theta$, $dV=r\,dr\,d\theta\,dz$.
+    \item Use when symmetry around $z$-axis or $x^2{+}y^2$ appears.
+\end{itemize}
+	\textbf{Tip:} Don’t forget the Jacobian factor $r$.
+\end{keybox}
 \begin{definition}[Cylindrical Coordinates]
     The cylindrical coordinates of a point $P$ in 3-D space are given by the ordered triple $(r, \theta, z)$, where:
     \begin{itemize}
@@ -1129,6 +1224,19 @@ Definition \ref{def:double_integral}. We can define a triple integral as follows
 
 \end{example}
 \subsection{Triple Integrals in Spherical Coordinates}
+
+\begin{keybox}
+	\textbf{Key Relations:}
+\begin{itemize}
+    \item $(\rho,\phi,\theta)$ with $x=\rho\sin\phi\cos\theta$, $y=\rho\sin\phi\sin\theta$, $z=\rho\cos\phi$.
+    \item $dV=\rho^2\sin\phi\,d\rho\,d\phi\,d\theta$.
+\end{itemize}
+	\textbf{Tips:}
+\begin{itemize}
+    \item Spheres/cones/spherical caps are natural in these coordinates.
+    \item Bound order: typically $\rho$ (inner), then $\phi$, then $\theta$.
+\end{itemize}
+\end{keybox}
 \begin{definition}[Spherical Coordinates]
     The spherical coordinates of a point $P$ in 3-D space are given by the ordered triple $(\rho, \phi, \theta)$, where:
     \begin{itemize}
@@ -1170,6 +1278,19 @@ Definition \ref{def:double_integral}. We can define a triple integral as follows
 
 \end{example}
 \subsection{Change of Variables in Multiple Integrals} \label{sec:change_of_variables}
+
+\begin{keybox}
+	\textbf{Key Equations:}
+\begin{itemize}
+    \item $\displaystyle \iint_R f(x,y)\,dA = \iint_{R'} f(x(u,v),y(u,v))\,\left|\det J\right|\,du\,dv$.
+    \item $J=\partial(x,y)/\partial(u,v)$; similarly for 3D.
+\end{itemize}
+	\textbf{Tips/Pitfalls:}
+\begin{itemize}
+    \item Map the region carefully; sketch both $R$ and $R'$.
+    \item Include the Jacobian; watch sign via absolute value.
+\end{itemize}
+\end{keybox}
 \begin{shaded}
     \subsubsection{Change of Variables in Single Integrals}
     Consider the following integral:
@@ -1654,6 +1775,21 @@ which could be rewritten as the following defintion:
 
 \section{Vector Calculus}
 \section{Line Integrals}
+
+\subsection{Line Integrals and Vector Fields}
+
+\begin{keybox}
+	\textbf{Key Equations:}
+\begin{itemize}
+    \item Scalar field: $\displaystyle \int_C f\,ds = \int_a^b f(\mathbf r(t))\,\lVert \mathbf r'(t)\rVert\,dt$.
+    \item Vector field work: $\displaystyle \int_C \mathbf F\cdot d\mathbf r = \int_a^b \mathbf F(\mathbf r(t))\cdot\mathbf r'(t)\,dt$.
+\end{itemize}
+	\textbf{Tips:}
+\begin{itemize}
+    \item Orientation matters; reverse curve flips sign of vector line integral.
+    \item For conservative fields, path independence and potential functions apply.
+\end{itemize}
+\end{keybox}
 \begin{definition}[Line Integral of a Scalar Field]
     Consider a scalar field $f(x,y) $ and a smooth curve $C$. Then we define the line integral of $f$ along $C$ as the following Riemann sum:
     $$
@@ -1804,5 +1940,260 @@ where $||\vec{r'(t)}|| = \sqrt{(g'(t))^2 + (h'(t))^2}$ is the speed of the curve
         \int_C f(x,y) \, ds = \int_{-C} f(x,y) \, ds
     $$
 \end{proof}
+
+\begin{definition}[Line Integral of a Vector Field]
+    Consider a vector field $\vec{F}(x,y)$ and a smooth curve $C$. Then we define the line integral of $\vec{F}$ along $C$ as the following Riemann sum:
+    \begin{equation}
+        \int_C \vec{F} \cdot d\vec{r} = \lim_{||P|| \to 0} \sum_{i=1}^n \vec{F}(x_i^*, y_i^*) \cdot \Delta \vec{r_i}
+    \end{equation}
+    where $P$ is a partition of $C$ into $n$ subintervals and $||P||$ is the norm of the partition, $(x_i^*, y_i^*)$ is a sample point in the $i$-th subinterval, and $\Delta \vec{r_i}$ is the vector from the start to the end of the $i$-th subinterval. We define $d \vec{r}$ as the infinitesimal vector along the curve:
+    \begin{equation}
+        d\vec{r} = \frac{d\vec{r}}{dt} dt = \vec{T} \, ds
+    \end{equation}
+    where $\vec{T}$ is the unit tangent vector to the curve and $ds$ is the infinitesimal arc length along the curve.
+
+    To evaluate the line integral, we can use the parametrization of the curve $C$:
+    \begin{equation}
+        \int_C F \cdot d\vec{r} = \int_a^b \vec{F}(r(t)) \cdot \vec{r'(t)} \, dt
+    \end{equation}
+    where $\vec{r(t)} = \langle g(t), h(t) \rangle$, $a \leq t \leq b$ is the parametrization of the curve $C$.
+\end{definition}
+
+\begin{example}
+    Consider the line integral of $\vec{F}(x, y, z) = yz \, \hat{i} + xz \, \hat{j} + xy \, \hat{k}$ along the curve $C$ parametrized by $ \vec{r}(t) = t^2 \, \hat{i} + t \, \hat{j} + t^3 \, \hat{k}, \quad 0 \leq t \leq 2 $. We have that:
+    \begin{align*}
+        \int_C \vec{F} \cdot d\vec{r} &= \int_0^2 \vec{F}(r(t)) \cdot \vec{r'(t)} \, dt \\
+        &= \int_0^2 \langle t \cdot t^3, t^2 \cdot t^3, t^2 \cdot t \rangle \cdot \langle 2t, 1, 3t^2 \rangle \, dt \\
+        &= \int_0^2 \langle t^4, t^5, t^3 \rangle \cdot \langle 2t, 1, 3t^2 \rangle \, dt \\
+        &= \int_0^2 (2t^5 + t^5 + 3t^5) \, dt = \int_0^2 6t^5 \, dt = \left[ t^6 \right]_0^2 = 64
+    \end{align*}
+\end{example}
+
+\subsection{Fundamental Theorem of Line Integrals}
+
+\begin{keybox}
+	\textbf{Key Statement:}
+\begin{itemize}
+    \item If $\mathbf F=\nabla \phi$ and $C$ goes from $A$ to $B$, then $\displaystyle \int_C \mathbf F\cdot d\mathbf r = \phi(B)-\phi(A)$.
+\end{itemize}
+	\textbf{Consequences:}
+\begin{itemize}
+    \item Path independence; integral on closed loops is $0$.
+    \item Test for conservative in simply connected regions: $\nabla\times\mathbf F=\mathbf 0$.
+\end{itemize}
+\end{keybox}
+\begin{shaded}
+Recall, fundametnal theorem of calculus:
+\begin{theorem}[Fundamental Theorem of Calculus]
+    If $f$ is continuous on $[a,b]$ and $F$ is an antiderivative of $f$ on $[a,b]$, then:
+    \begin{equation}
+        \int_a^b f(x) \, dx = F(b) - F(a)
+    \end{equation}
+\end{theorem}
+\end{shaded}
+
+\begin{definition}[Conservative Vector Field]
+    A vector field $\vec{F}$ is said to be conservative if there exists a scalar potential function $\phi$ such that:
+    \begin{equation}
+        \vec{F} = \nabla \phi
+    \end{equation}
+    where $\nabla \phi$ is the gradient of $\phi$.
+    
+\end{definition}
+
+\begin{theorem}[Test for Conservative Vector Field]
+    A vector field $\vec{F} = P \, \hat{i} + Q \, \hat{j} + R \, \hat{k}$ is conservative if:
+    \begin{equation}
+        \frac{\partial P}{\partial y} = \frac{\partial Q}{\partial x}, \quad \frac{\partial P}{\partial z} = \frac{\partial R}{\partial x}, \quad \frac{\partial Q}{\partial z} = \frac{\partial R}{\partial y}
+    \end{equation}
+    in a simply connected domain.
+\end{theorem}
+
+\begin{theorem}[Conservative Closed Integral]
+    If \(\vec F\) is a conservative vector field on an open, simply connected region \(D\), then for every closed curve \(C\) in \(D\),
+    \[
+        \oint_C \vec F \cdot d\vec r = 0
+    \]
+\end{theorem}
+
+\begin{theorem}[Fundamental Theorem of Line Integrals]
+    Let $\vec{F}$ be a continuous vector field on an open connected region $D$. If $\vec{F}$ is conservative, then for any smooth curve $C$ in $D$ with endpoints $A$ and $B$, we have:
+    \begin{equation}
+        \int_C \vec{F} \cdot d\vec{r} = \phi(B) - \phi(A)
+    \end{equation}
+    where $\phi$ is the potential function of $\vec{F}$.
+\end{theorem}
+
+\begin{proof}
+Let \(\vec F\) be conservative on the open, connected region \(D\). Then there exists a scalar potential function \(\phi\in C^1(D)\) with \(\nabla\phi=\vec F\).
+
+Let \(C\) be any smooth curve in \(D\) from \(A\) to \(B\). Parametrise \(C\) by a smooth vector function
+\[
+\vec r:[a,b]\to D,\qquad \vec r(t)=(x(t),y(t),z(t)),
+\]
+with \(\vec r(a)=A\) and \(\vec r(b)=B\). Since \(\vec F=\nabla\phi\) and \(\vec r\) is smooth, the integrand \(\nabla\phi(\vec r(t))\cdot\vec r\,'(t)\) is continuous on \([a,b]\). By the chain rule,
+\[
+\frac{d}{dt}\big(\phi(\vec r(t))\big)
+= \nabla\phi(\vec r(t))\cdot\vec r\,'(t).
+\]
+Therefore the line integral of \(\vec F\) along \(C\) becomes
+\[
+\int_C \vec F\cdot d\vec r
+= \int_a^b \nabla\phi(\vec r(t))\cdot\vec r\,'(t)\,dt
+= \int_a^b \frac{d}{dt}\big(\phi(\vec r(t))\big)\,dt.
+\]
+Applying the Fundamental Theorem of Calculus to the last integral yields
+\[
+\int_a^b \frac{d}{dt}\big(\phi(\vec r(t))\big)\,dt
+= \phi(\vec r(b))-\phi(\vec r(a))
+= \phi(B)-\phi(A).
+\]
+If \(C\) is only piecewise smooth the same argument applies on each smooth piece and the contributions telescope to give the same result.
+\end{proof}
+
+\subsection{Green's Theorem}
+
+\begin{keybox}
+	\textbf{Theorem (Plane):}
+\begin{itemize}
+    \item For region $R$ with positively oriented boundary $C$ and $\mathbf F=\langle P,Q\rangle$,
+    $\displaystyle \oint_C P\,dx+Q\,dy=\iint_R \left(\frac{\partial Q}{\partial x}-\frac{\partial P}{\partial y}\right)\,dA$.
+\end{itemize}
+	\textbf{Tips:}
+\begin{itemize}
+    \item Orientation CCW for boundary; decompose region if needed.
+    \item Convert flux/ circulation forms appropriately.
+\end{itemize}
+\end{keybox}
+\begin{definition}[Simple Curve]
+    A simple curve is a curve that does not intersect itself.
+\end{definition}
+\paragraph{Positive Orientation} A curve is said to be positively oriented if it is traversed in a counterclockwise direction. Some books denote the direction in the circle of the $\oint$ symbol. To convert a negatively oriented curve to a positively oriented curve, we can simply reverse the direction of the curve. We also have:
+\begin{equation}
+    \oint_C F \cdot d\vec{r} = -\oint_{-C} F \cdot d\vec{r} \\
+\end{equation}
+where $-C$ is the curve $C$ traversed in the opposite direction.
+\begin{definition}[Closed Integral]
+    A closed integral is a line integral where the curve is closed, i.e., the starting point and the ending point are the same. We denote a closed integral by the symbol \(\oint\). For example:
+    \[
+        \oint_C P \, dx + Q \, dy
+    \]
+\end{definition}
+
+\begin{theorem}[Green's Theorem]
+    Let \(C\) be a positively oriented, piecewise smooth, simple closed curve in the plane, and let \(D\) be the region bounded by \(C\). If \(P\) and \(Q\) have continuous partial derivatives on an open region that contains \(D\), then:
+    \[
+    \oint_C (P \, dx + Q \, dy) = \iint_D \left( \frac{\partial Q}{\partial x} - \frac{\partial P}{\partial y} \right) dA
+    \]
+\end{theorem}
+
+\begin{proof}
+    \textbf{Simple Case:}
+    Assume the region \(D\) is a simple region that could be expressed by both a type I and type II region. That is, we can express \(D\) as:
+    \[
+        D = \{(x,y) | a \leq x \leq b, g_1(x) \leq y \leq g_2(x) \} = \{(x,y) | c \leq y \leq d, h_1(y) \leq x \leq h_2(y) \}
+    \]
+    where \(g_1\), \(g_2\), \(h_1\) and \(h_2\) are continuous functions on their respective intervals. WLOG, we can prove for type I region. We can expressed the first part of the integral as:
+    \begin{align*}
+        \oint_C P \, dx &= \int_{C_1} P \, dx + \int_{C_2} P \, dx \\
+        &= \int_a^b P(x, g_1(x)) \, dx + \int_b^a P(x, g_2(x)) \, dx \\
+        &= \int_a^b P(x, g_1(x)) \, dx - \int_a^b P(x, g_2(x)) \, dx \\
+        &= \int_a^b [P(x, g_1(x)) - P(x, g_2(x))] \, dx \\
+        &= -\int_a^b \int_{g_1(x)}^{g_2(x)} \frac{\partial P}{\partial y} \, dy \, dx
+    \end{align*}
+    Then, we can also prove in a similar manner for the second part of the integral by expressing it as a type II region. We obtain:
+    $$
+        \oint_C Q \, dy = \int_c^d \int_{h_1(y)}^{h_2(y)} \frac{\partial Q}{\partial x} \, dx \, dy
+    $$
+    The results of both integrals can be combined, and the theorem follows.
+\end{proof}
+
+\begin{example}
+    \textit{Verify Green's Theorem for the integral:}
+    $$
+        \oint_C y \, dx - x \, dy
+    $$
+    \textit{where \(C\) is the circle \(x^2 + y^2 = 1\) oriented counterclockwise.}
+
+    We can parametrize the curve \(C\) as:
+    $$
+    \begin{cases}
+        x = \cos t \\
+        y = \sin t
+    \end{cases} \quad 0 \leq t \leq 2\pi
+    $$
+    Then, we can evaluate the line integral directly:
+    \begin{align*}
+        \oint_C y \, dx - x \, dy &= \oint_C \langle y, -x \rangle \cdot d\vec{r} = \int_0^{2\pi} \langle \sin t, -\cos t \rangle \cdot \langle -\sin t, \cos t \rangle \, dt \\
+        &= \int_0^{2\pi} \sin t (-\sin t) - \cos t (\cos t) \, dt \\
+        &= \int_0^{2\pi} -\sin^2 t - \cos^2 t \, dt = \int_0^{2\pi} -1 \, dt = -2\pi
+    \end{align*}
+    Now, we can verify Green's Theorem by evaluating the double integral:
+    \begin{align*}
+        \iint_D \left( \frac{\partial Q}{\partial x} - \frac{\partial P}{\partial y} \right) dA &= \iint_D \left( -1 - 1 \right) dA = \iint_D -2 \, dA \\
+        &= -2 \cdot \text{Area}(D) = -2 \cdot \pi = -2\pi
+    \end{align*}
+    Both methods yield the same result, confirming Green's Theorem.
+    
+\end{example}
+
+\begin{example}
+    \textit{Evaluate the line integral:}
+    $$
+        \oint_C \left(4 - e^{\sqrt{x}}\right) \, dx + \left(\sin{y} + 3x^2\right) \, dy
+    $$
+    \textit{where \(C\) is the curve in the first quadrant defined by two circles with radius $a$ and $b$ ($b > a$).}
+
+    We can use Green's Theorem to evaluate the line integral. We can reduce to a much simpler double integral:
+    \begin{align*}
+        \iint_D \left( \frac{\partial Q}{\partial x} - \frac{\partial P}{\partial y} \right) dA &= \iint_D \left( 6x - 0 \right) dA = \iint_D 6x \, dA
+    \end{align*}
+    We can express the region \(D\) in polar coordinates as:
+    $$    D = \{(r, \theta) | a \leq r \leq b, 0 \leq \theta \leq \frac{\pi}{2} \} $$
+    So, we can express the double integral in polar coordinates:
+    \begin{align*}
+        \iint_D 6x \, dA &= \int_0^{\frac{\pi}{2}} \int_a^b 6r \cos \theta \cdot r \, dr \, d\theta = \int_0^{\frac{\pi}{2}} 6\cos \theta \int_a^b r^2 \, dr \, d\theta \\
+        &= \int_0^{\frac{\pi}{2}} 6\cos \theta \left[ \frac{r^3}{3} \right]_a^b \, d\theta = 2(b^3 - a^3) \int_0^{\frac{\pi}{2}} \cos \theta \, d\theta \\
+        &= 2(b^3 - a^3)
+    \end{align*}
+\end{example}
+
+\subsection{Surfaces and Their Areas}
+\begin{definition}[3-Dimensional Parametric Surface]
+    A 3-dimensional parametric surface is a surface that can be parametrized by two parameters \(u\) and \(v\):
+    \begin{equation}
+        \begin{cases}
+            x = g(u,v) \\
+            y = h(u,v) \\
+            z = k(u,v)
+        \end{cases} \implies \vec{r(u,v)} = \langle g(u,v), h(u,v), k(u,v) \rangle, \quad (u,v) \in D
+    \end{equation}
+    where \(g\), \(h\) and \(k\) are continuous functions with continuous partial derivatives on the domain \(D\).
+\end{definition}
+
+\begin{example}
+    \textit{Parameterize the upper hemisphere given by \(x^2 + y^2 + z^2 = a^2\).}
+
+    \textbf{Method 1:} We can express \(z\) in terms of \(x\) and \(y\):
+    $$    
+        z = \sqrt{a^2 - x^2 - y^2}
+    $$
+    Then, we let $x = u$ and $y = v$. So, we can parametrize the surface as:
+    $$    
+        \vec{r(u,v)} = \langle u, v, \sqrt{a^2 - u^2 - v^2} \rangle
+    $$
+    where \((u,v) \in D = \{(u,v) | u^2 + v^2 \leq a^2\}\).
+
+    \textbf{Method 2:} We can also use spherical coordinates to parametrize the surface. We have:
+    $$    
+        \begin{cases}
+            x = a \sin \phi \cos \theta \\
+            y = a \sin \phi \sin \theta \\
+            z = a \cos \phi
+        \end{cases} \implies \vec{r(\phi, \theta)} = \langle a \sin \phi \cos \theta, a \sin \phi \sin \theta, a \cos \phi \rangle
+    $$
+    where \(0 \leq \phi \leq \frac{\pi}{2}\) and \(0 \leq \theta \leq 2\pi\).
+\end{example}
+
 \chapter{Fluid Mechanics}
 \end{document} 

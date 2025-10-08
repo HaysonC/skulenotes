@@ -2097,7 +2097,7 @@ u \\ v
 where \( J \) is the Jacobian matrix evaluated at the fixed point \( (x^*, y^*) \). This describes the local behavior of the system near the fixed point. Then the stability and behavior is determined by the determinant and trace of the Jacobian matrix \( J \), and hence the eigenvalues and eigenvectors of \( J \).
 \end{definition}
 
-\begin{definition}
+\begin{example}
     Consider the nonlinear pendulum equation:
     $$\theta'' + \frac{g}{L}\sin(\theta) = 0$$
     where \( \theta \) is the angle of the pendulum, \( g \) is the acceleration due to gravity, and \( L \) is the length of the pendulum. We can rewrite this as a system of first-order ODEs by defining:
@@ -2129,6 +2129,236 @@ where \( J \) is the Jacobian matrix evaluated at the fixed point \( (x^*, y^*) 
     and the trace is:
     $$\text{tr}(J) = 0$$
     When $n$ is even, we have a positive determinant, so the fixed point is a center. When $n$ is odd, we have a negative determinant, so the fixed point is a saddle node.
+\end{example}
+
+\begin{definition}[Polar Coordinates]
+    Consider the transformation from Cartesian coordinates \( (x, y) \) to polar coordinates \( (r, \theta) \) given by:
+    \begin{equation}
+        \begin{cases}
+        x = r \cos(\theta) \\
+        y = r \sin(\theta)
+        \end{cases} \implies x^2 + y^2 = r^2, \quad \tan(\theta) = \frac{y}{x}
+        \end{equation}
+    The inverse transformation is given by:
+    \begin{equation}
+        \begin{cases}
+        r = \sqrt{x^2 + y^2} \\
+        \theta = \tan^{-1}\left(\frac{y}{x}\right)
+        \end{cases}
+    \end{equation}
+
+    A trick we can do is to consider the time derivatives of both sides. We have:
+    \begin{align*}
+     2 r r' &= 2x x' + 2y y'  \\
+     r' &= \frac{x x' + y y'}{r} \\
+     \theta' &= \frac{1}{1 + (y/x)^2} \left(\frac{x y' - y x'}{x^2}\right) \\
+     &= \frac{x y' - y x'}{r^2}
+    \end{align*}
+
+    Then we can transform a system of ODEs in Cartesian coordinates to polar coordinates:
+    \begin{equation}
+        \begin{cases}
+        x' = f(x, y) \\
+        y' = g(x, y)
+        \end{cases} \implies
+        \begin{cases}
+        r' = F(r, \theta) = \frac{x f(x, y) + y g(x, y)}{r} \\
+        \theta' = G(r, \theta) = \frac{x g(x, y) - y f(x, y)}{r^2}
+        \end{cases}
+    \end{equation}
+
 \end{definition}
+
+\paragraph{Relationship to Eigenvectors} Consider the nullclines $\theta' = 0$. Along this nullcline, the direction on the $xy$-plane is purely radial (either inward or outward). This occurs when:
+$$x y' - y x' = 0 \implies \frac{y'}{x'} = \frac{y}{x}$$
+This means that the slope of the trajectory is equal to the slope of the position vector, which corresponds to the direction of an eigenvector of the system. Thus, the nullclines in polar coordinates correspond to the directions of the eigenvectors in the Cartesian coordinate system.
+
+\paragraph{Clockwise Parity} For clockwise rotation, we have $\theta' < 0$. For counter-clockwise rotation, we have $\theta' > 0$.
+
+\begin{example}[Limit Cycles and Closed Orbits]
+    Consider the following system of ODEs:
+    $$\begin{cases}
+        x' = -y + x(1 - x^2 - y^2) \\
+        y' = x + y(1 - x^2 - y^2)
+    \end{cases}
+    $$
+    The system is nonlinear. There is a trivial (in fact, it is the only) fixed point at the origin. We can determine the stability of this fixed point by analyzing the Jacobian matrix:
+    \begin{align*}
+        J &= \begin{bmatrix}
+        \frac{\partial f}{\partial x} & \frac{\partial f}{\partial y} \\
+        \frac{\partial g}{\partial x} & \frac{\partial g}{\partial y}
+        \end{bmatrix} \\ 
+        &= \begin{bmatrix}
+        1 - 3x^2 - y^2 & -1 - 2xy \\
+        1 - 2xy & 1 - x^2 - 3y^2
+        \end{bmatrix} \\
+        J(0, 0) &= \begin{bmatrix}
+        1 & -1 \\
+        1 & 1
+        \end{bmatrix} \\
+        \det(J(0, 0)) &= 2 > 0 \\
+        \text{tr}(J(0, 0)) &= 2 > 0
+    \end{align*}
+
+    Then, we conclude that this is a outward spiral (spiral source). We can also convert this system into polar coordinates:
+    \begin{align*}
+        r' &= \left [ r\cos \theta [ -r\sin \theta + r\cos \theta (1 - r^2)] + r\sin \theta [r\cos \theta + r\sin \theta (1 - r^2)] \right ] / r \\
+        &= r(1 - r^2) \\
+        \theta' &= \left [ r\cos \theta [r\cos \theta + r\sin \theta (1 - r^2)] - r\sin \theta [-r\sin \theta + r\cos \theta (1 - r^2)] \right ] / r^2 \\
+        &= 1
+    \end{align*}
+    So, we have a decoupled system with constant angular velocity of 1 (counter-clockwise rotation) and a radial component that is positive when \( r < 1 \) and negative when \( r > 1 \). On $r = 1$, we have a have a closed orbit. Now, we can solve this system:
+    \begin{align*}
+        \frac{dr}{dt} &= r(1 - r^2) \\
+        \int \frac{1}{r(1 - r^2)} dr &= \int dt \\
+        \ln \left | \frac{r}{\sqrt{1 - r^2}} \right | &= t + C \\
+        \frac{r}{\sqrt{1 - r^2}} &= Ke^t \\
+        r(t) &= \frac{Ke^t}{\sqrt{1 + K^2 e^{2t}}}
+    \end{align*}
+    also, obviously, \( \theta(t) = t + \theta(0) \).
+
+    where \( K = e^C \) is a constant determined by the initial condition. The phase portrait is shown below:
+
+    \begin{figure}[h!]
+        \centering
+        \includegraphics[width=\textwidth]{limitCycle.jpg}
+        \caption{Phase Portrait of the Nonlinear Pendulum System}
+        
+    \end{figure}
+\end{example}
+
+\begin{definition}[Limit Cycle]
+    A limit cycle is a closed trajectory in the phase space of a dynamical system that is isolated. This means that there are no other closed trajectories in its immediate vicinity. Limit cycles can be stable, unstable, or semi-stable:
+    \begin{itemize}
+        \item A stable limit cycle attracts nearby trajectories, meaning that trajectories starting close to the limit cycle will converge to it as time goes to infinity.
+        \item An unstable limit cycle repels nearby trajectories, meaning that trajectories starting close to the limit cycle will diverge away from it as time goes to infinity.
+        \item A semi-stable limit cycle has both attracting and repelling properties depending on the direction from which nearby trajectories approach it.
+    \end{itemize}
+    
+\end{definition}
+
+\begin{example}[Von der Pol Oscillator]
+    Consider the Van der Pol oscillator, which is a classic example of a system that exhibits limit cycle behavior. The system is described by the second-order differential equation:
+    $$\frac{d^2x}{dt^2} - \mu(1 - x^2)\frac{dx}{dt} + x = 0$$
+    where \( \mu \) is a scalar parameter indicating the nonlinearity and the strength of the damping. We can rewrite this as a system of first-order ODEs by defining:
+    $$\begin{cases}
+    x_1 = x \\
+    x_2 = \frac{dx}{dt}
+    \end{cases}$$
+    Then, we have:
+    $$\begin{cases}
+    x_1' = x_2 \\
+    x_2' = \mu(1 - x_1^2)x_2 - x_1
+    \end{cases}$$
+    Consider the fixed point at the origin \( (0, 0) \). We can also consider the nullclines:
+    \begin{itemize}
+        \item \( x_1' = 0 \) implies \( x_2 = 0 \) and \( x_2' = -x_1 \)
+        \item \( x_2' = 0 \) implies \( x_2 = \frac{x_1}{\mu(1 - x_1^2)} \) for \( x_1 \neq \pm 1 \)
+    \end{itemize}
+
+    We now consider the Jacobian matrix:
+    \begin{align*}
+        J &= \begin{bmatrix}
+        \frac{\partial f}{\partial x_1} & \frac{\partial f}{\partial x_2} \\
+        \frac{\partial g}{\partial x_1} & \frac{\partial g}{\partial x_2}
+        \end{bmatrix} \\ 
+        &= \begin{bmatrix}
+        0 & 1 \\
+        -1 - 2\mu x_1 x_2 & \mu(1 - x_1^2)
+        \end{bmatrix} \\
+        J(0, 0) &= \begin{bmatrix}
+        0 & 1 \\
+        -1 & \mu
+        \end{bmatrix} \\
+        \det(J(0, 0)) &= 1 > 0 \\
+        \text{tr}(J(0, 0)) &= \mu
+    \end{align*}
+
+    Consider the line $\tau^2 - 4\Delta = 0$, we have:
+    \begin{itemize}
+        \item If \( \mu < 0 \), then the fixed point is a stable spiral (spiral sink).
+        \item If \( \mu = 0 \), then the fixed point is a center.
+        \item If \( \mu > 0 \), then the fixed point is an unstable spiral (spiral source).
+    \end{itemize}
+    Thus, this is a limit cycle that is stable when \( \mu > 0 \). 
+\end{example}
+
+\begin{theorem}[Pomcor\'e-Bendixson Theorem]
+    Consider a two-dimensional autonomous system:
+    $$\begin{cases}
+        x' = f(x, y) \\
+        y' = g(x, y)
+    \end{cases}$$
+    where \( f \) and \( g \) are continuously differentiable functions. If there exists a trajectory that remains in a closed, bounded region \( R \) of the phase plane for all future time and if \( R \) contains only unstable nodes, then all trajectories in \( R \) approach a limit cycle as \( t \to \infty \).
+\end{theorem}
+\paragraph{Intuition} A monotonically increasing function that gets bounded must converge. 
+
+\section{Matrices and Linear Algebra}
+
+\subsection{Matrix Exponentials}
+\begin{shaded}
+\subsubsection*{Taylor Series Definition of Exponentials}
+Consider a scalar exponential, then,
+$$e^x = \sum_{n=0}^{\infty} \frac{x^n}{n!}$$
+is the Taylor series expansion of \( e^x \) around \( x = 0 \). This series converges for all real numbers \( x \).
+\end{shaded}
+
+\begin{definition}[Matrix Exponential]
+    Consider a square matrix \( A \in \mathbb{R}^{n \times n} \). The matrix exponential \( e^{At} \) is defined by the Taylor series expansion:
+    \begin{equation}
+    e^{At} = I + At + \frac{(At)^2}{2!} + \frac{(At)^3}{3!} + \ldots = \sum_{k=0}^{\infty} \frac{(At)^k}{k!}
+    \end{equation}
+    where \( I \) is the identity matrix of the same dimension as \( A \), and \( t \) is a scalar parameter (often representing time in applications).
+\end{definition}
+
+\paragraph{Diagonalization} If \( A \) is diagonalizable, i.e., there exists an invertible matrix \( P \) and a diagonal matrix \( D \) such that \( A = PDP^{-1} \), then the matrix exponential can be computed as:
+\begin{equation}
+e^{At} = Pe^{Dt}P^{-1}
+\end{equation}
+where \( e^{Dt} \) is computed by exponentiating each diagonal element of \( D \):
+\begin{equation}
+e^{Dt} = \begin{bmatrix}
+e^{d_1t} & 0 & \cdots & 0 \\
+0 & e^{d_2t} & \cdots & 0 \\
+\vdots & \vdots & \ddots & \vdots \\
+0 & 0 & \cdots & e^{d_nt}
+\end{bmatrix}
+\end{equation}
+this would make it easier to compute the matrix exponential.
+
+\begin{definition}[Properties of Matrix Exponentials]
+    The matrix exponential has several important properties:
+    \begin{itemize}
+        \item \( e^{A \cdot 0} = I \), where \( 0 \) is the zero matrix.
+        \item \( e^{A+B} = e^{A}e^{B} \) if \( A \) and \( B \) commute (i.e., \( AB = BA \)).
+        \item \( e^{A(t+s)} = e^{At}e^{As} \) for any scalars \( t \) and \( s \).
+        \item \( \frac{d}{dt}e^{At} = Ae^{At} = e^{At}A \).
+        \item If \( A \) is invertible, then \( e^{At} \) is also invertible, and its inverse is given by \( (e^{At})^{-1} = e^{-At} \).
+        \item The solution to the system of linear differential equations \( \mathbf{x}'(t) = A\mathbf{x}(t) \) with initial condition \( \mathbf{x}(0) = \mathbf{x}_0 \) is given by:
+        \begin{equation}
+        \mathbf{x}(t) = e^{At}\mathbf{x}_0
+        \end{equation}
+        \item The derivatives of the matrix exponential can be computed using the series expansion:
+        \begin{equation}
+        \frac{d^n}{dt^n}e^{At} = A^n e^{At}
+        \end{equation}
+    \end{itemize}
+\end{definition}
+
+\begin{example}[Schrödinger Equation]
+    Consider the time-dependent Schrödinger equation in quantum mechanics:
+    $$i\hbar \frac{\partial}{\partial t} | \Psi(t) \rangle = \hat{H} | \Psi(t) \rangle$$
+    where \( | \Psi(t) \rangle \) is the state vector (wavefunction) of the quantum system, \( \hat{H} \) is the Hamiltonian operator (which can be represented as a matrix in a finite-dimensional space for which \( \hat{H} = \hat{H}^\dagger \) (Conjugate-Transpose)), \( i \) is the imaginary unit, and \( \hbar \) is the reduced Planck constant. We claim that Hermitian matrices have real eigenvalues and orthogonal eigenvectors. We first rewrite the soltuion of the Schrödinger equation as:
+    $$
+        | \Psi(t) \rangle = \exp \left(-\frac{i}{\hbar} \hat{H} t \right) | \Psi(0) \rangle
+    $$
+    Let $\langle \phi(n) | = | \phi(n) \rangle^\dagger$, then we call $\langle \phi(n) | \Psi(t) \rangle$ the norm of the wavefunction in the direction of the eigenvector \( | \phi(n) \rangle \). We have:
+    \begin{align*}
+        \langle \phi(n) | \Psi(t) \rangle
+        &= \langle \phi(0) | \sum_{k=0}^{\infty} \frac{1}{k!} \left(-\frac{i}{\hbar} \hat{H} t \right)^k | \Psi(0) \rangle \\  
+        &= \langle \phi(0) | \Psi(0) \rangle
+    \end{align*}
+    Then, the solution lies on the same norm as the initial condition, in other words, the solution is in $S^{n-1}$ if the initial condition is in $S^{n-1}$.
+\end{example}
 
 \end{document}

@@ -12,6 +12,17 @@ The up-to-date version of this document can be found at \url{https://github.com/
 \section{Harmonic Oscillators}
 
 \subsection{Governing Equations of Harmonic Oscillators}
+
+\begin{keybox}
+\textbf{Key Equations:}
+\begin{itemize}
+    \item Simple Harmonic Oscillator: $m\ddot{x} + kx = 0$ or $\ddot{x} + \omega_0^2 x = 0$ where $\omega_0 = \sqrt{k/m}$
+    \item Damped: $m\ddot{x} + b\dot{x} + kx = 0$ or $\ddot{x} + \gamma\dot{x} + \omega_0^2 x = 0$ where $\gamma = b/m$
+    \item Driven: $m\ddot{x} + b\dot{x} + kx = F(t)$
+\end{itemize}
+\textbf{Tip:} Remember to check the damping parameter convention ($\gamma$ vs $2\beta$) when comparing formulas!
+\end{keybox}
+
 This subsection collects the baseline ODEs for simple, damped, and driven oscillators to set notation used later.
 
 \paragraph{Types of Harmonic Oscillators} There are three types of harmonic oscillators: simple, damped, and driven harmonic oscillators. Consider a simple one dimensional harmonic oscillator, they are defined by the following differential equations:
@@ -44,39 +55,51 @@ Equivalences: $\beta = \tfrac{\gamma}{2}$ and our underdamped condition $\gamma 
 
 \begin{definition}[Driven Harmonic Oscillator]
     A driven harmonic oscillator is described by the following differential equation, which includes an external driving force $F(t)$:
-    \begin{equation}
+    $$
         m \frac{d^2 x}{dt^2} + b \frac{dx}{dt} + kx = F(t)   
-    \end{equation}
+    $$
 \end{definition}
 % [Moved: The Wave Equation section is presented later for a smoother flow after oscillators]
 
 \subsection{Simple Harmonic Motion}
+
+\begin{keybox}
+\textbf{Key Equations:}
+\begin{itemize}
+    \item General solution: $x(t) = A\cos(\omega t + \phi)$ where $\omega = \sqrt{k/m}$
+    \item Period: $T = 2\pi/\omega = 2\pi\sqrt{m/k}$
+    \item Frequency: $f = 1/T = \omega/(2\pi)$
+    \item Total Energy: $E = \frac{1}{2}kA^2$ (constant for undamped oscillator)
+\end{itemize}
+\textbf{Common Pitfall:} Don't forget to match initial conditions properly when solving for amplitude and phase!
+\end{keybox}
+
 We analyze the undamped solution forms, relate constants to initial conditions, and derive period/frequency relations.
 \begin{definition}[Simple Harmonic Motion]
     You should have learned Hooke's law and Newton's second law, which give us the equation of motion for a simple harmonic oscillator. The same as equation (\ref{eq:hooke}), which can be rewritten as:
-    \begin{equation}
+    $$
         F = m\ddot{x} = -kx
-    \end{equation}
+    $$
     By setting $\omega^2 = \frac{k}{m}$, a general solution can be written as:
-    \begin{equation}
+    $$
         x(t) = x_0 + A_1 \cos(\omega t) + A_2 \sin(\omega t)
-    \end{equation}
+    $$
     where $A_1$ and $A_2$ are constants determined by the IVP, $\omega$ is the angular frequency, and $\phi$ is the phase constant. $x_0$ is the equilibrium position (often set to 0). The unknown constants can be determined by knowing $x, \dot{x}$ at specific times.
 \end{definition}
 
 \begin{definition}[Period, Frequency, and Angular Frequency]
     The period \( T \) is the time it takes for one complete cycle of the motion, given by:
-    \begin{equation}
+    $$
         T = 2\pi \sqrt{\frac{m}{k}}
-    \end{equation}
+    $$
     The frequency \( f \) is the number of cycles per unit time, given by:
-    \begin{equation}
+    $$
         f = \frac{1}{T} = \frac{1}{2\pi} \sqrt{\frac{k}{m}}
-    \end{equation}
+    $$
     The angular frequency \( \omega \) is related to the frequency by:
-    \begin{equation}
+    $$
         \omega = 2\pi f = \sqrt{\frac{k}{m}}
-    \end{equation}
+    $$
     
 \end{definition}
 
@@ -104,17 +127,15 @@ We analyze the undamped solution forms, relate constants to initial conditions, 
 \end{example}
 \begin{theorem}[A Trigonometric Identity]
 We can also express the solution in a more compact form using a single cosine function with a phase shift:
-\begin{equation}
+$$
     x(t) = A \cos(\omega t + \phi)
-\end{equation}
+$$
 where
-\begin{subequations}
-    \begin{align}
-        A &= \sqrt{A_1^2 + A_2^2}, \\
-        \phi &= \arctan\!\left(\frac{-A_2}{A_1}\right) 
-              = \arctan\!\left(\frac{-v(0)/\omega}{x(0)}\right).
-    \end{align}
-\end{subequations}
+$$
+        A = \sqrt{A_1^2 + A_2^2}, \qquad
+        \phi = \arctan\!\left(\frac{-A_2}{A_1}\right) 
+              = \arctan\!\left(\frac{-v(0)/\omega}{x(0)}\right)
+$$
 \end{theorem}
 
 \begin{proof}
@@ -146,25 +167,25 @@ by the cosine addition formula.
 
 \begin{definition}[The Energy of a Simple Harmonic Oscillator]
     The total mechanical energy \(E\) of a simple harmonic oscillator is the sum of its kinetic energy \(K\) and potential energy \(U\). 
-    \begin{equation}
+    $$
         E = K + U
-    \end{equation}
+    $$
     First we consider the change of potential energy from a position $x_i$ to $x_f$, assuming the path is along the spring or the curve $C$ of the oscillator. The force exerted by the spring is given by Hooke's law, \( F = -kx \). The change in potential energy can be simply parametized and calculated as follows:
-    \begin{equation}
+    $$
         \Delta U = \int_C F\cdot ds = -\int_{x_i}^{x_f} F\,dx = \int_{x_i}^{x_f} kx\,dx = \left[\frac{1}{2}kx^2\right]_{x_i}^{x_f} = \frac{1}{2}k(x_f^2 - x_i^2)
-    \end{equation}
+    $$
 
     Therefore, the potential energy \(U\) at a position \(x\) (taking the reference point at \(x=0\)) is given by:
-    \begin{equation}
+    $$
         U(x) = \frac{1}{2}kx^2
-    \end{equation}
+    $$
 
     The kinetic energy \(K\) of the oscillator is given by:
-    \begin{equation}
+    $$
         K = \frac{1}{2}m\dot{x}^2
-    \end{equation}
+    $$
     Therefore, the total mechanical energy \(E\) of the simple harmonic oscillator is:
-    \begin{equation}
+    \begin{equation}\label{eq:energy_sho}
         E = K + U = \frac{1}{2}m\dot{x}^2 + \frac{1}{2}kx^2
     \end{equation}
     The total mechanical energy \(E\) remains constant over time, as energy is conserved in the absence of non-conservative forces (like friction or air resistance).
@@ -172,46 +193,53 @@ by the cosine addition formula.
 \end{definition}
 
 \subsection{Damped Harmonic Motion}
+
+\begin{keybox}
+\textbf{Key Equations:}
+\begin{itemize}
+    \item Damped ODE: $\ddot{x} + \gamma\dot{x} + \omega_0^2 x = 0$ where $\gamma = b/m$
+    \item Underdamped ($\gamma < 2\omega_0$): $x(t) = A_0 e^{-\gamma t/2}\cos(\omega_r t + \phi)$ where $\omega_r = \sqrt{\omega_0^2 - \gamma^2/4}$
+    \item Critically damped ($\gamma = 2\omega_0$): $x(t) = (A_1 t + A_2)e^{-\gamma t/2}$
+    \item Overdamped ($\gamma > 2\omega_0$): Exponential decay without oscillation
+\end{itemize}
+\textbf{Concept:} Critical damping returns to equilibrium fastest without oscillating!
+\end{keybox}
+
 We solve the damped ODE, classify regimes (underdamped, critical, overdamped), and connect decay rates with parameters.
 \begin{definition}[Damped Harmonic Motion]
     For small velocities, the drag force is approximately proportional to the velocity and acts in the opposite direction. This drag force can be modeled as \( F_d = -\gamma \dot{x} \), where \( \gamma \) is the damping coefficient. Including this drag force in the equation of motion for a harmonic oscillator leads to the damped harmonic oscillator equation (\ref{eq:damped_ho}). Which could be rewritten as:
-    \begin{equation}
+    $$
         \ddot{x} + \gamma \dot{x} + \omega_0^2 x = 0
-    \end{equation}
+    $$
     where \( \omega_0 = \sqrt{\frac{k}{m}} \) is the natural angular frequency of the undamped oscillator, and \( \gamma = \frac{b}{m} \) is the damping coefficient per unit mass.
     
     To skip the math, lets assume a solution of the form \( x(t) = e^{i\omega t} \), substituting into the differential equation gives us a formulation for \( \omega \):
-    \begin{align}
-        -\omega^2 - i\gamma\omega + \omega_0^2 &= 0 \nonumber \\
-        \omega &= -i\frac{\gamma}{2} \pm \sqrt{\omega_0^2 - \frac{\gamma^2}{4}} \label{eq:omega_damped}
-    \end{align}
-    Also, we can characterize the real and imaginary parts of \( \omega \) as:
-    \begin{subequations}
-        \begin{equation}
-            \omega_r = \mathrm{Re}(\omega) = \pm \sqrt{\omega_0^2 - \frac{\gamma^2}{4}}
-        \end{equation}
-        \begin{equation}
-            \omega_i = \mathrm{Im}(\omega) = -\frac{\gamma}{2}
-        \end{equation}
-    \end{subequations}
-    The general solution for the damped harmonic oscillator can be written as:
-    \begin{equation}
-        x(t) = \exp(\omega_i t) \exp(-i \omega_r t) = \exp\left(-\frac{\gamma}{2}t\right) \exp(\mp i \sqrt{\omega_0^2 - \frac{\gamma^2}{4}} t)
+    \begin{equation}\label{eq:omega_damped}
+        \omega = -i\frac{\gamma}{2} \pm \sqrt{\omega_0^2 - \frac{\gamma^2}{4}}
     \end{equation}
+    Also, we can characterize the real and imaginary parts of \( \omega \) as:
+    $$
+        \omega_r = \mathrm{Re}(\omega) = \pm \sqrt{\omega_0^2 - \frac{\gamma^2}{4}}, \qquad
+        \omega_i = \mathrm{Im}(\omega) = -\frac{\gamma}{2}
+    $$
+    The general solution for the damped harmonic oscillator can be written as:
+    $$
+        x(t) = \exp(\omega_i t) \exp(-i \omega_r t) = \exp\left(-\frac{\gamma}{2}t\right) \exp(\mp i \sqrt{\omega_0^2 - \frac{\gamma^2}{4}} t)
+    $$
     \begin{subequations}
     \begin{itemize}
         \item \textbf{No Damping} (\( \gamma = 0 \)): The system behaves like a simple harmonic oscillator with angular frequency \( \omega_0 \). Given by:
-        \begin{equation}
+        $$
             z = \exp(-i\omega_0 t)
-        \end{equation}
+        $$
         \item \textbf{Underdamping} (\( 0 < \gamma < 2\omega_0 \)): The system oscillates with a gradually decreasing amplitude. The angular frequency of oscillation is given by \( \omega_r = \sqrt{\omega_0^2 - \frac{\gamma^2}{4}} \). Given by:
-        \begin{equation}
+        $$
             z = \exp\left(-\frac{\gamma}{2}t\right) \exp(-i \omega_r t)
-        \end{equation}
+        $$
         The trigonometric form of the solution is:
-        \begin{equation}
+        $$
             x(t) = A_0 \exp\left(-\frac{\gamma}{2}t\right) \cos(\omega_r t + \phi)
-        \end{equation}
+        $$
         where \( A_0 \) and \( \phi \) are constants determined by the initial conditions
         From this, we can derive the following cases:
         \item \textbf{Critical Damping} (\( \gamma = 2\omega_0 \)): The system returns to equilibrium as quickly as possible without oscillating. Consider:
@@ -227,24 +255,36 @@ We solve the damped ODE, classify regimes (underdamped, critical, overdamped), a
             \ddot{f} = 0 \implies f(t) = A_1 t + A_2
         $$
         Therefore, the general solution for the critically damped case is:
-        \begin{equation}
+        $$
             x(t) = (A_1 t + A_2) \exp\left(-\frac{\gamma}{2}t\right)
-        \end{equation}
+        $$
         where \( A_1 \) and \( A_2 \) are constants determined by
         \item \textbf{Overdamping} (\( \gamma > 2\omega_0 \)): The system returns to equilibrium without oscillating, but more slowly than in the critically damped case. The solution is given by:
-        \begin{equation}
+        $$
             z = \exp\left(-\frac{\gamma}{2}t\right) \exp\left(\sqrt{\frac{\gamma^2}{4} - \omega_0^2} t\right)
-        \end{equation}
+        $$
         So the general solution is (the solution is via a substitution of $x(t) = e^{-\gamma t/2} f(t)$ into the differential equation, which resolves the ODE to a simple form):
-        \begin{equation}
+        $$
             x(t) = A_1 \exp\left[\left(-\frac{\gamma}{2} + \sqrt{\frac{\gamma^2}{4} - \omega_0^2}\right) t\right] + A_2 \exp\left[\left(-\frac{\gamma}{2} - \sqrt{\frac{\gamma^2}{4} - \omega_0^2}\right) t\right]
-        \end{equation}
+        $$
         where \( A_1 \) and \( A_2 \) are constants determined by the initial conditions.
     \end{itemize}
     \end{subequations}
 \end{definition}
 
 \subsection{Energy and Quality Factor}
+
+\begin{keybox}
+\textbf{Key Equations:}
+\begin{itemize}
+    \item Energy decay: $E(t) = E_0 e^{-\gamma t}$ for light damping
+    \item Time constant: $\tau = 1/\gamma$ (time for energy to drop to $1/e$)
+    \item Quality factor: $Q = \omega_0/\gamma = \omega_0\tau$ (higher $Q$ = less damping)
+    \item Energy loss per cycle: $\frac{\Delta E}{E} \approx -\frac{2\pi}{Q}$
+\end{itemize}
+\textbf{Concept:} $Q$ measures how many oscillations occur before energy decays significantly!
+\end{keybox}
+
 We study how energy decays under light damping, define the time constant and quality factor Q, and relate them to response.
 \begin{definition}[Energy of a Very Light Damping]
     Consider a very lightly damped harmonic oscillator, where \( \gamma \ll \omega_0 \). In this case, the angular frequency of oscillation \( \omega_r \) can be approximated as:
@@ -271,11 +311,11 @@ We study how energy decays under light damping, define the time constant and qua
              &= E_0 e^{-\gamma t} \quad \text{where } E_0 = \frac{1}{2}m A_0^2 \omega_0^2 \text{ is the initial energy at } t=0
     \end{align*}
     We can also define the time constant \( \tau \) as the time it takes for the energy to decrease to \( \frac{1}{e} \) of its initial value:
-    \begin{equation}
+    $$
         \tau = \frac{1}{\gamma}
-    \end{equation}
+    $$
     So we have, for very light damping:
-    \begin{equation}
+    \begin{equation}\label{eq:energy_decay}
         E(t) = E_0 e^{-\gamma t} = E_0 e^{-\frac{t}{\tau}}
     \end{equation}
 \end{definition}
@@ -289,30 +329,28 @@ We study how energy decays under light damping, define the time constant and qua
                       &= (ma + kx)\dot{x} \\
     \end{align*}
     For a undamped harmonic oscillator, \( ma + kx = 0 \), so \( \frac{dE}{dt} = 0 \), indicating that the total mechanical energy is conserved and obeys Hooke's law completely. However, for a damped harmonic oscillator, \( ma + kx = -b\dot{x} \), leading to:
-    \begin{equation}
+    $$
         \frac{dE}{dt} = -b\dot{x}^2
-    \end{equation}
+    $$
 \end{definition}
 
 \begin{definition}[Quality Factor (Q-Factor)]
     The quality factor \( Q \) is a dimensionless parameter that characterizes the damping of a harmonic oscillator. It is defined as:
-    \begin{subequations}
-    \begin{equation}
+    \begin{equation}\label{eq:Q_factor}
         Q = \frac{\omega}{\gamma} = \omega \tau
     \end{equation}
     And for very light damping, we can approximate \( \omega \approx \omega_0 \), leading to:
-    \begin{equation}
+    $$
         Q \approx \frac{\omega_0}{\gamma} = \omega_0 \tau
-    \end{equation}
-    \end{subequations}
+    $$
     This allows us to rewrite the equation of a damped harmonic oscillator as:
-    \begin{equation}
+    $$
         \ddot{x} + \frac{\omega_0}{Q} \dot{x} + \omega_0^2 x = 0
-    \end{equation}
+    $$
     and:
-    \begin{equation}
+    $$
         \omega = \omega_0 \sqrt{1 - \frac{1}{4Q^2}}
-    \end{equation}
+    $$
 
 We can also consider the ratio between the energy at one time and the energy one period later:
 \begin{align*}
@@ -337,16 +375,27 @@ We can also consider the ratio between the energy at one time and the energy one
 \end{example}
 
 \subsection{Undamped Forced Oscillations}
+
+\begin{keybox}
+\textbf{Key Equations:}
+\begin{itemize}
+    \item Driven ODE: $m\ddot{x} + kx = F_0\cos(\omega t)$
+    \item Steady-state solution: $x(t) = A(\omega)\cos(\omega t - \delta)$
+    \item Amplitude: $A(\omega) = \frac{\omega_0^2 a}{|\omega_0^2 - \omega^2|}$ where $a = F_0/k$
+\end{itemize}
+\textbf{Common Pitfall:} At resonance $(\omega \approx \omega_0)$, amplitude becomes infinite without damping!
+\end{keybox}
+
 We examine steady-state response to sinusoidal driving without losses and identify resonance behavior.
 \begin{definition}[Undamped Forced Oscillations]
     Consider a driver force acting on the mass-spring system; the ODE becomes:
-    \begin{equation}
+    $$
         m\ddot{x} + kx = \eta
-    \end{equation}
+    $$
     where \( \eta = F_0 \cos(\omega t) \) is the driving force with amplitude \( F_0 \) and angular frequency \( \omega \). The steady-state particular solution is:
-    \begin{equation}
+    $$
         x(t) = A(\omega)\cos(\omega t - \delta) 
-    \end{equation}
+    $$
     To derive $A(\omega)$ and $\delta$, use the equation of motion:
     \begin{align*}
         A(\omega)(-\omega^2 + \omega_0^2) \cos(\delta) = \omega_0^2 a
@@ -356,29 +405,41 @@ We examine steady-state response to sinusoidal driving without losses and identi
         A(\omega)(-\omega^2 + \omega_0^2) \sin(\delta) = 0
     \end{align*}
     Now, consider the case when $\delta = 0$, we have:
-    \begin{equation}
+    $$
         A(\omega) = \frac{\omega_0^2 a}{\omega_0^2 - \omega^2}
-    \end{equation}
+    $$
     and the case where \( \delta = \pi \), we have:
-    \begin{equation}
+    $$
         A(\omega) = -\frac{\omega_0^2 a}{\omega_0^2 - \omega^2}
-    \end{equation}
+    $$
     Observe, when $\omega \approx \omega_0$, the amplitude \( A(\omega) \) becomes very large, indicating resonance. At resonance, the system oscillates with maximum amplitude, which can lead to significant energy transfer from the driving force to the oscillator.
 \end{definition}
 
 \subsection{Damped Forced Oscillations}
+
+\begin{keybox}
+\textbf{Key Equations:}
+\begin{itemize}
+    \item Amplitude: $A(\omega) = \frac{\omega_0^2 a}{\sqrt{\omega^2\gamma^2 + (\omega^2 - \omega_0^2)^2}}$
+    \item Resonance amplitude: $A_{\text{max}} = Qa$ where $Q = \omega_0/\gamma$
+    \item Phase shift: $\tan(\delta) = \frac{\omega\gamma}{\omega_0^2 - \omega^2}$
+    \item FWHM: $\Delta\omega = \gamma = \omega_0/Q$
+\end{itemize}
+\textbf{Concept:} Damping prevents infinite amplitude at resonance and causes phase lag!
+\end{keybox}
+
 We add damping to the driven case, derive the frequency response amplitude and phase, and study bandwidth and Q.
 \begin{definition}[Damped Forced Oscillations]
     Consider a damped harmonic oscillator subjected to an external driving force. It is described by the following differential equation:
-    \begin{equation}
+    $$
         m\ddot{x} + b\dot{x} + kx = F_0 \cos(\omega t)
-    \end{equation}
+    $$
     where \( F_0 \) is the amplitude of the driving force, \( \omega \) is the angular frequency of the driving force, \( b \) is the damping coefficient, \( m \) is the mass, and \( k \) is the spring constant. The general solution to this non-homogeneous differential equation is given by:
-    \begin{equation}
+    $$
         x(t) = A(\omega)\cos(\omega t - \delta)
-    \end{equation}
+    $$
     and the amplitude \( A(\omega) \) is given by:
-    \begin{equation}
+    \begin{equation}\label{eq:damped_amplitude}
         A(\omega) = \frac{\omega_0^2 a}{\sqrt{\omega^2 \gamma^2 + (\omega^2 - \omega_0^2)^2}}
     \end{equation}
     We can derive the following 4 cases:
@@ -387,14 +448,14 @@ We add damping to the driven case, derive the frequency response amplitude and p
         \item \textbf{Low-Frequency Limit} (\( \omega \ll \omega_0 \)): In this limit, the amplitude \( A(\omega) \) approaches the static displacement \( a = \frac{F_0}{k} \). This means that at very low frequencies, the system behaves like a static spring, and the mass is displaced by an amount proportional to the applied force.
         \item \textbf{High-Frequency Limit} (\( \omega \gg \omega_0 \)): In this limit, the amplitude \( A(\omega) \) decreases with increasing frequency, following the relation \( A(\omega) \approx \frac{\omega_0^2 a}{\omega^2} \). This indicates that at very high frequencies, the mass cannot respond quickly enough to the rapidly oscillating driving force, resulting in a smaller amplitude of oscillation.
         \item \textbf{Resonance} (\( \omega \approx \omega_0 \)): At resonance, the amplitude \( A(\omega) \) reaches its maximum value but it does not become infinite due to the presence of damping: 
-        \begin{equation}
+        $$
             A_{\text{max}} = \frac{\omega_0^2 a}{\omega_0 \gamma} = \frac{\omega_0 a}{\gamma} = Q a
-        \end{equation}
+        $$
     \end{enumerate}
     We also have the phase shift \( \delta \) given by:
-    \begin{equation}
+    $$
         \tan(\delta) = \frac{\omega \gamma}{\omega_0^2 - \omega^2}
-    \end{equation}
+    $$
     The phase shift \( \delta \) indicates how much the oscillation of the mass lags behind the driving force. The behavior of \( \delta \) can be summarized as follows:
     \begin{itemize}
         \item At low frequencies (\( \omega \ll \omega_0 \)), \( \delta \) approaches 0, meaning the mass oscillates in phase with the driving force.
@@ -405,35 +466,35 @@ We add damping to the driven case, derive the frequency response amplitude and p
 
 \begin{definition}[Power absorbed during forced oscillations] 
     We can calculate the velocity of the oscillator:
-    \begin{equation}
+    $$
         \dot{x}(t) = -\omega A(\omega) \sin(\omega t - \delta) = -v_0 \sin(\omega t - \delta)
-    \end{equation}
+    $$
     where \( v_0 = \omega A(\omega) \) is the maximum speed of the oscillator. Energy is lost at the following rate:
-    \begin{equation}
+    $$
         P(t) = b v(t)^2 
-    \end{equation}
+    $$
     Substituteing the expression for \( v(t) \) into the power equation gives:
     $$
         P(t) = b v_0^2 \sin^2(\omega t - \delta)
     $$
     The average power \( \langle P \rangle \) over one complete cycle of the driving force is given by:
-   \begin{equation}
+   \begin{equation}\label{eq:avg_power}
         \bar{P}(\omega) = \frac{b v_0^2}{2} = \frac{\omega^2 F_0^2 \gamma}{2m \left[(\omega^2 - \omega_0^2)^2 + \omega^2 \gamma^2\right]}
    \end{equation}
     If the driving frequency \( \omega \) is close to \( \omega_0 \), use $\omega^2 - \omega_0^2 \approx 2\omega_0\Delta \omega$ with $\Delta \omega = \omega - \omega_0$ to get the Lorentzian form:
-    \begin{equation}
+    $$
         \bar{P}(\omega) \approx \frac{\omega_0 F_0^2}{2m \gamma \Big[ 1 + \big(\tfrac{2\Delta \omega}{\gamma}\big)^2 \Big]}
-    \end{equation}
+    $$
     The maximum average power occurs at resonance:
-    \begin{equation}
+    $$
         \bar{P}_{\text{max}} = \frac{\omega_0 F_0^2}{2m \gamma}
-    \end{equation}
+    $$
 \end{definition}
 
 \paragraph{Full Width Half Height} The graph of \( \bar{P}(\omega) \) versus \( \omega \) has a peak at \( \omega = \omega_0 \) with a maximum value of \( \bar{P}_{\text{max}} \). The full width at half maximum (FWHM) is the width of the peak at half of its maximum height. The FWHM is given by:
-\begin{equation}
+$$
     \omega_\text{FWHM} = 2\Delta \omega = 2\gamma = \frac{2\omega_0}{Q}
-\end{equation}
+$$
 To illustrate the graph, we can plot \( \bar{P}(\omega) \) versus \( \omega \) for different values of the quality factor \( Q \):
 \begin{figure}[h!]
     \centering
@@ -484,65 +545,76 @@ To illustrate the graph, we can plot \( \bar{P}(\omega) \) versus \( \omega \) f
 \end{figure}
 
 \subsection{Simple Pendulum}
+
+\begin{keybox}
+\textbf{Key Equations:}
+\begin{itemize}
+    \item Small angle approximation: $\ddot{\theta} + \frac{g}{l}\theta = 0$ (valid for $\theta \ll 1$ rad)
+    \item Period: $T = 2\pi\sqrt{l/g}$ (independent of mass!)
+    \item Physical pendulum: $\omega = \sqrt{\frac{mgd}{I}}$ where $d$ is distance to CM
+\end{itemize}
+\textbf{Tip:} LC circuits are analogous to oscillators: $L \leftrightarrow m$, $1/C \leftrightarrow k$, $R \leftrightarrow b$
+\end{keybox}
+
 Consider the arc length \( s \) of a pendulum bob, we have:
-\begin{equation}
+$$
     s = l\theta \quad m\ddot{s} = -mg\sin(\theta)
-\end{equation}
+$$
 
 For small angles, we can approximate \( \sin(\theta) \approx \theta \), leading to:
-\begin{equation}
+$$
     \ddot{\theta} + \frac{g}{l}\theta = 0
-\end{equation}
+$$
 And the ODE has solution:
-\begin{equation}
+$$
     \theta(t) = \theta_0 \cos(\omega t + \phi)
-\end{equation}
+$$
 
 \paragraph{Energy} For small angle $\theta$, the total mechanical energy \( E \) of the pendulum is given by:
-\begin{equation}
+$$
     E = K + U = \frac{1}{2}ml^2\dot{\theta}^2 + mgl(1 - \cos(\theta)) \approx \frac{1}{2}ml^2\dot{\theta}^2 + \frac{1}{2}mgl\theta^2
-\end{equation}
+$$
 This shows that the pendulum behaves like a simple harmonic oscillator with an effective spring constant \( k = \frac{mg}{l} \).    
 
 
 \paragraph{The physical pendulum} For a rigid body swinging about a pivot point, the equation of motion is given by:
-\begin{equation}
+$$
     I\ddot{\theta} = \tau 
-\end{equation}
+$$
 For simple rod of length \( L \) and mass \( m \) pivoted at one end, the moment of inertia about the pivot point is \( I = \frac{1}{3}mL^2 \). The torque due to gravity when the rod is displaced by an angle \( \theta \) from the vertical is \( \tau = -mg\frac{L}{2}\sin(\theta) \). For small angles, we can approximate \( \sin(\theta) \approx \theta \), leading to:
-\begin{equation}
+$$
     \ddot{\theta} + \frac{3g}{2L}\theta = 0
-\end{equation}
+$$
 And the small angle approximates leads to:
-\begin{equation}
+$$
     \ddot{\theta} + \omega^2 \theta = 0
-\end{equation}
+$$
 where \( \omega = \sqrt{\frac{3g}{2L}} \). The solution to this ODE is:
-\begin{equation}
+$$
     \theta(t) = \theta_0 \cos(\omega t + \phi)
-\end{equation}
+$$
 The angular frequency of oscillation for the physical pendulum is:
-\begin{equation}
+$$
     \omega = \sqrt{\frac{3g}{2L}}
-\end{equation}
+$$
 
 \paragraph{The LC Circuit} An LC circuit consists of an inductor \( L \) and a capacitor \( C \) connected in series. The charge \( q(t) \) on the capacitor satisfies the differential equation:
-\begin{equation}
+$$
     L\frac{d^2q}{dt^2} + \frac{1}{C}q = 0
-\end{equation}
+$$
 This is analogous to the equation of motion for a simple harmonic oscillator, with the angular frequency given by:
-\begin{equation}
+$$
     \omega = \frac{1}{\sqrt{LC}}
-\end{equation}  
+$$  
 
 \paragraph{The RLC Circuit} An RLC circuit consists of a resistor \( R \), inductor \( L \), and capacitor \( C \) connected in series. The charge \( q(t) \) on the capacitor satisfies the differential equation:
-\begin{equation}
+$$
     L\frac{d^2q}{dt^2} + R\frac{dq}{dt} + \frac{1}{C}q = 0
-\end{equation}
+$$
 This is analogous to the resistor behaving as a damped harmonic oscillator, with the angular frequency given by:
-\begin{equation}
+$$
     \omega = \sqrt{\frac{1}{LC} - \left(\frac{R}{2L}\right)^2}
-\end{equation}
+$$
 The following are equations that summarize the analogies between mechanical and electrical oscillators:
 \begin{table}[h!]
     \centering
@@ -563,15 +635,26 @@ The following are equations that summarize the analogies between mechanical and 
 \end{table}
 
 \subsection{Coupled Oscillators}
+
+\begin{keybox}
+\textbf{Key Concepts:}
+\begin{itemize}
+    \item Normal coordinates $q_1 = x_1 + x_2$, $q_2 = x_1 - x_2$ decouple the equations
+    \item Each normal mode has its own frequency: $\omega_1$ (in-phase), $\omega_2$ (out-of-phase)
+    \item General motion = superposition of normal modes
+    \item Energy doesn't flow between modes (they're independent)
+\end{itemize}
+\textbf{Tip:} Beat frequency $= (\omega_2 - \omega_1)/2$ describes energy transfer between oscillators!
+\end{keybox}
 \begin{definition}[Coupled Oscillators]
     Consider two masses \( m_1 \) and \( m_2 \) on two pendulum connected by springs with spring constant \( k \).  The equations of motion for the two masses are given by:
 
-    \begin{equation}
+    $$
         \begin{cases}
             \ddot{x}_1 &= -\frac{g}{L}x_1 + \frac{k}{m_1} (x_1 - x_2) \quad (a) \\
             \ddot{x}_2 &= -\frac{g}{L}x_2 - \frac{k}{m_2} (x_1 - x_2) \quad (b)
         \end{cases}
-    \end{equation}
+    $$
     where \( x_1 \) and \( x_2 \) are the displacements of masses \( m_1 \) and \( m_2 \) from their equilibrium positions, respectively. Now if we add and subtract the two equations, we get:
     $$
         \begin{cases}
@@ -595,19 +678,19 @@ The following are equations that summarize the analogies between mechanical and 
         \end{cases}
     $$
     Observe that \( q_1 \) and \( q_2 \) are decoupled, and each behaves like a simple harmonic oscillator with angular frequencies \( \omega_1 \) and \( \omega_2 \), respectively. The general solutions for \( q_1(t) \) and \( q_2(t) \) are:
-    \begin{equation}
+    $$
         \begin{cases}
             q_1(t) &= A_1 \cos(\omega_1 t + \phi_1) \\
             q_2(t) &= A_2 \cos(\omega_2 t + \phi_2)
         \end{cases}
-    \end{equation}
+    $$
     where \( A_1, A_2, \phi_1, \) and \( \phi_2 \) are constants determined by the initial conditions. Finally, we can expressions for \( x_1(t) \) and \( x_2(t) \) in terms of \( q_1(t) \) and \( q_2(t) \):
-    \begin{equation}
+    $$
         \begin{cases}
             x_1(t) &= \frac{q_1(t) + q_2(t)}{2} = \frac{A_1}{2} \cos(\omega_1 t + \phi_1) + \frac{A_2}{2} \cos(\omega_2 t + \phi_2) \\
             x_2(t) &= \frac{q_1(t) - q_2(t)}{2} = \frac{A_1}{2} \cos(\omega_1 t + \phi_1) - \frac{A_2}{2} \cos(\omega_2 t + \phi_2)
         \end{cases}
-    \end{equation}
+    $$
     All parts of the system oscillate with the same normal frequency (eigenvalue) in a normal mode (eigenvector).
 \end{definition}
 
@@ -630,13 +713,13 @@ The following are equations that summarize the analogies between mechanical and 
     Any general motion of the system can be written as a combination (superposition) of these two normal modes.
 \end{definition}
 \paragraph{Energy in Coupled Oscillators} The total mechanical energy \( E \) of the coupled oscillator system is given by:
-\begin{equation}
+$$
     E = \frac{1}{2}m_1\dot{x}_1^2 + \frac{1}{2}m_2\dot{x}_2^2 + \frac{1}{2}k(x_1 - x_2)^2 + \frac{1}{2}m_1\frac{g}{L}x_1^2 + \frac{1}{2}m_2\frac{g}{L}x_2^2
-\end{equation}
+$$
 Substituting the expressions for \( x_1 = \frac{q_1 + q_2}{2} \) and \( x_2 = \frac{q_1 - q_2}{2} \) into the energy equation, two independent energies terms for $q_1$ and $q_2$ emerge:
-\begin{equation}
+$$
     E = \left[ \frac{1}{4} m \dot{q}_1^2 + \frac{1}{4}\frac{m_1 g}{L} q_1^2 \right] + \left[ \frac{1}{4} m \dot{q}_2^2 + \frac{1}{4}\frac{m_2 g}{L} q_2^2 \right]
-\end{equation}
+$$
 This shows that the total energy is the sum of the energies associated with each normal mode, and that no cross term between the modes exists. Thus energy does not flow from one mode to another.
 
 \begin{example}
@@ -662,13 +745,24 @@ This shows that the total energy is the sum of the energies associated with each
 
 \end{example}
 \subsection{Normal Modes}
+
+\begin{keybox}
+\textbf{Key Concepts:}
+\begin{itemize}
+    \item Normal mode = pattern where all parts oscillate at same frequency
+    \item Find frequencies by solving eigenvalue problem: det$(K - \omega^2 M) = 0$
+    \item Number of normal modes = number of degrees of freedom
+    \item Eigenvectors give amplitude ratios for each mode
+\end{itemize}
+\textbf{Tip:} For symmetric systems, look for in-phase and out-of-phase modes!
+\end{keybox}
 \paragraph{Oscilating Masses Connected by Springs} Consider two masses \( m_1 = m_2 = m \) connected by three spring with spring constant \( k \) and fixed to walls on either side. The equations of motion for the two masses are given by:
-\begin{equation}
+$$
     \begin{cases}
         m\ddot{x}_1 &= -k x_1 + k (x_2 - x_1) \quad (a) = m\ddot{x}_1 = -2k x_1 + k x_2 \\
         m\ddot{x}_2 &= -k x_2 - k (x_2 - x_1) \quad (b) = m\ddot{x}_2 = k x_1 - 2k x_2
     \end{cases}
-\end{equation}
+$$
 To solve these equations, we assume solutions of the form:
 $$
     \begin{cases}
@@ -690,15 +784,15 @@ $$
 $$
 
 So we can derive two normal mode frequencies:
-\begin{equation}
+$$
     \begin{cases}
         \omega_1 &= \sqrt{\frac{k}{m}} \quad \text{(in-phase mode)} \\
         \omega_2 &= \sqrt{\frac{3k}{m}} \quad \text{(out-of-phase mode)}
     \end{cases}
-\end{equation}
+$$
 
 \paragraph{Solving as an Eigenproblem} Alternatively, we can create a system of equations from \eqref{eq:coupled_springs}:
-\begin{equation}
+$$
     \begin{bmatrix}
         \frac{2k}{m} & -\frac{k}{m} \\
         -\frac{k}{m} & \frac{2k}{m}
@@ -710,7 +804,7 @@ So we can derive two normal mode frequencies:
     \begin{bmatrix}
         A \\ B
     \end{bmatrix}
-\end{equation}
+$$
 To find the eigenvalues \( \omega^2 \), we solve the characteristic equation:
 $$
     \text{det}\left(\begin{bmatrix}
@@ -727,12 +821,12 @@ $$
     \omega^4 - \frac{4k}{m}\omega^2 + \frac{5k^2}{m^2} = 0
 $$
 This gives us the two normal mode frequencies:
-\begin{equation}
+$$
     \begin{cases}
         \omega_1^2 &= \frac{k}{m} \implies \omega_1 = \sqrt{\frac{k}{m}} \\
         \omega_2^2 &= \frac{3k}{m} \implies \omega_2 = \sqrt{\frac{3k}{m}}
     \end{cases}
-\end{equation}
+$$
 
 \begin{example}
     CConsider two equal masses $m$ suspended from identical springs of spring constant $k$. The masses are hanged on the celing. We can solve this system's frequency via the eigenvalue method. The equations of motion are:
@@ -848,6 +942,17 @@ This gives us the two normal mode frequencies:
 
 \subsection{Travelling Waves}
 
+\begin{keybox}
+\textbf{Key Equations:}
+\begin{itemize}
+    \item Wave function: $y(x,t) = A\cos(kx - \omega t + \phi_0)$ (travelling right)
+    \item Wave speed: $v = \omega/k = f\lambda$
+    \item Wave number: $k = 2\pi/\lambda$, Angular frequency: $\omega = 2\pi f$
+    \item String wave speed: $v = \sqrt{\tau/\mu}$ where $\tau$ is tension, $\mu$ is linear density
+\end{itemize}
+\textbf{Common Pitfall:} Don't confuse particle velocity $(\partial y/\partial t)$ with wave velocity $v$!
+\end{keybox}
+
 \begin{definition}[Travelling Pulse]
     A travelling pulse is a disturbance that moves through a medium. For any wave function $f(x,t)$, if it satisfies the property:
     \begin{equation} \label{eq:travelling_wave}
@@ -858,9 +963,9 @@ This gives us the two normal mode frequencies:
 
 \begin{definition}[Sinusoidal Wave]
     A sinusoidal wave is a wave that can be described by a sine or cosine function. The general form of a sinusoidal wave travelling in the positive x-direction is:
-    \begin{equation}
+    $$
         y(x,t) = A \cos(kx \pm \omega t + \phi_0)
-    \end{equation}
+    $$
     where:
     \begin{itemize}
         \item \( A \) is the amplitude (maximum displacement)
@@ -869,11 +974,11 @@ This gives us the two normal mode frequencies:
         \item \( \phi _0 \) is the initial phase.
     \end{itemize}
     So we can write the wave function as a form of \eqref{eq:travelling_wave}:
-    \begin{equation}
+    $$
         y(x,t) = A \cos\left[k(x \pm vt) + \phi_0\right]
-    \end{equation}
+    $$
     The wave speed \( v \) is related to the angular frequency and wave number by:
-    \begin{equation}
+    \begin{equation}\label{eq:wave_speed}
         v = \frac{\omega}{k} = f\lambda
     \end{equation}
 \end{definition}
@@ -889,9 +994,9 @@ This gives us the two normal mode frequencies:
 \end{itemize}
 \begin{definition}[Velocity of a Fixed Particle]
     For a fixed particle, we have:
-    \begin{equation}
+    $$
         v_y = \frac{\partial y}{\partial t} = A \omega \cos(kx \pm \omega t + \phi_0)
-    \end{equation}
+    $$
 \end{definition}
 
 \begin{example}[Vibrating String]
@@ -923,71 +1028,71 @@ This gives us the two normal mode frequencies:
 \end{example}
 \begin{definition}[The Wave Equation]
     The wave equation is a second-order linear partial differential equation that describes the propagation of waves (sound, EM, water) through a medium. In one dimension, it is given by:
-    \begin{equation}
+    \begin{equation}\label{eq:wave_equation}
         \frac{\partial^2 u}{\partial t^2} - c^2 \frac{\partial^2 u}{\partial x^2} = 0
     \end{equation}
     where $u(x,t)$ is the disturbance, $c$ is the wave speed, $x$ is position, and $t$ is time.
 
     Or in general:
-    \begin{equation}
+    $$
         \frac{\partial^2 u}{\partial t^2} - c^2 \nabla^2 u = 0
-    \end{equation}
+    $$
     where \( \nabla^2 \) is the Laplacian operator.
 \end{definition}
 
 \begin{definition}[Energy of a String]
     The kinetic energy of a string segment of mass \( \text{d}m = \mu \text{d}x \) is given by:
-    \begin{equation}
+    $$
         \text{d}K = \frac{1}{2} \text{d}m v_y^2 = \frac{1}{2} \mu \text{d}x \left(\frac{\partial y}{\partial t}\right)^2
-    \end{equation}
+    $$
     The potential energy stored in the string due to its tension is given by:
-    \begin{equation}
+    $$
         \text{d}U = \frac{1}{2} \tau (\delta s - \delta x) 
-    \end{equation}
+    $$
     where \( \delta s \) is the actual length of the string segment and \( \delta x \) is the horizontal length. For small displacements, we can approximate:
     $$
         \delta s \approx \delta x \left(1 + \frac{1}{2}\left(\frac{\partial y}{\partial x}\right)^2\right)
     $$
     Thus, the potential energy becomes:
-    \begin{equation}
+    $$
         \text{d}U \approx \frac{1}{2} \tau \delta x \left(\frac{\partial y}{\partial x}\right)^2
-    \end{equation}
+    $$
     The total energy \( E \) of the string segment is the sum of its kinetic and potential energies:
-    \begin{equation}
+    $$
         \text{d}E = \frac{1}{2} \mu \text{d}x \left(\frac{\partial y}{\partial t}\right)^2 + \frac{1}{2} \tau \text{d}x \left(\frac{\partial y}{\partial x}\right)^2
-    \end{equation}
+    $$
     For a sinusoidal wave \( y(x,t) = A \cos(kx - \omega t) \), the change in energy is:
-    \begin{equation}
+    $$
         \text{d}E = \frac{1}{2} \mu A^2 \omega^2 \sin^2(kx - \omega t) \text{d}x + \frac{1}{2} \tau A^2 k^2 \sin^2(kx - \omega t) \text{d}x
-    \end{equation}
+    $$
     Integrating over one wavelength \( \lambda \), we find the total energy in one wavelength:
-    \begin{equation}
+    $$
         E = \int_0^\lambda \text{d}E = \frac{1}{4} \mu A^2 \omega^2 \lambda + \frac{1}{4} \tau A^2 k^2 \lambda
-    \end{equation}
+    $$
     
 \end{definition}
 
 \begin{definition}[Power Transmitted by a String]
    The power carried by a transverse wave could be calculated from $P=Fv$. The transverse force on the string is given by:
-    \begin{equation}
+    $$
         P(x,t) = A^2 \mu v \omega^2 \sin^2(kx - \omega t + \phi_0)
-    \end{equation}
+    $$
     The average power is then given by:
-    \begin{equation}
+    $$
         \bar{P} = \frac{1}{2} A^2 \mu v \omega^2 = \frac{1}{2} \mu A^2 \omega^2 \frac{\lambda}{T}
-    \end{equation}
+    $$
     And the maximum power is given by:
-    \begin{equation}
+    $$
         P_{max} = A^2 \mu v \omega^2
-    \end{equation}
+    $$
 \end{definition}
 
 \paragraph{Speed of Sound} The speed of sound waves through various meida is as follows:
 \begin{itemize}
     \item In ideal gas, it is given by:
-    \begin{equation}
+    $$
         v = \sqrt{\frac{\gamma RT}{m}} = \sqrt{\frac{\gamma k_B T}{m}}
-    \end{equation}
+    $$
     where \( \gamma \) is the adiabatic index, \( R \) is the universal gas constant, \( k_B \) is the Boltzmann constant, \( T \) is the absolute temperature, and \( m \) is the molar mass of the gas. $\gamma$ varies based on the type of gas:
     \begin{itemize}
         \item Monatomic gases (e.g., helium, neon): \( \gamma = \frac{5}{3} \)
@@ -995,14 +1100,14 @@ This gives us the two normal mode frequencies:
         \item Polyatomic gases (e.g., carbon dioxide, methane): \( \gamma \) is typically between 1.3 and 1.4
     \end{itemize}
     \item In a liquid, it is given by:
-    \begin{equation}
+    $$
         v = \sqrt{\frac{B_{\text{adiabatic}}}{m}} = \sqrt{\frac{B}{\rho}}
-    \end{equation}
+    $$
     where \(B_{\text{adiabatic}}\) is the adiabatic bulk modulus, \( B \) is the bulk modulus, \( \rho \) is the density of the liquid and \( m \) is the molar mass of the liquid.
     \item In a solid, it is given by:
-    \begin{equation}
+    $$
         v = \sqrt{\frac{E}{\rho}} 
-    \end{equation}
+    $$
     where \( E \) is the Young's modulus and \( \rho \) is the density of the solid. It could also be given by:
     $$
         v = \sqrt{\frac{B}{\rho}}
@@ -1014,45 +1119,45 @@ This gives us the two normal mode frequencies:
     Similar to electrical impedance, we also have acoustic impedance and mechanical, they measure how much a structure recisits motion when subjected to a harmonic force. They are defined as follows:
     \begin{itemize}
         \item Electical impedance \( Z_e \):
-        \begin{equation}
+        $$
             Z_e = \sqrt{R^2 + \left(\omega L - \frac{1}{\omega C}\right)^2}
-        \end{equation}
+        $$
         \item Acoustic impedance \( Z_a \), it is the ratio of acoustic pressure to particle velocity:
-        \begin{equation}
+        $$
             Z_a = \frac{p}{v} = \rho v = \sqrt{B\rho}
-        \end{equation}
+        $$
         \item Mechanical impedance \( Z_m \):
-        \begin{equation}
+        $$
             Z_m = v\mu = \sqrt{\tau\mu}
-        \end{equation}
+        $$
     \end{itemize}
 \end{definition}
 
 \paragraph{Wave boundry Conditions} When a wave encounters a boundary between two different media, part of the wave is reflected back into the original medium, and part is transmitted into the new medium. This is constrined by the following boundary conditions:
 \begin{itemize}
     \item The displacement of the wave must be continuous across the boundary:
-    \begin{equation}
+    $$
         y_1(x_b, t) = y_2(x_b, t) = y_3(x_b, t)
-    \end{equation}
+    $$
     \item The derivative of the displacement with respect to position must also be continuous across the boundary:
-    \begin{equation}
+    $$
         \frac{\partial y_1}{\partial x}\bigg|_{x_b} = \frac{\partial y_2}{\partial x}\bigg|_{x_b} = \frac{\partial y_3}{\partial x}\bigg|_{x_b}
-    \end{equation}
+    $$
 \end{itemize}
 and then from these conditions, we can derive the amplitudes of the reflected and transmitted waves:
-\begin{equation}
+\begin{equation}\label{eq:amp-continuity}
     A_i = A_r + A_t
 \end{equation}
 and 
-\begin{equation}
+$$
     A_i Z_1 = A_r Z_1 + A_t Z_2
-\end{equation}
+$$
 From these two equations, we can solve for the reflection and transmission coefficients:
-\begin{equation}
+\begin{equation}\label{eq:reflection_coeff}
     R = \frac{A_r}{A_i} = \frac{Z_2 - Z_1}{Z_2 + Z_1}
 \end{equation}
 and
-\begin{equation}
+\begin{equation}\label{eq:transmission_coeff}
     T = \frac{A_t}{A_i} = \frac{2Z_2}{Z_2 + Z_1}
 \end{equation}
 
@@ -1064,23 +1169,35 @@ and
 
 \begin{example}[Transmission of 64\% Energy]
 Suppose a wave transmits \(64\%\) of its incident energy across a boundary. Then:
-\begin{equation}
+$$
     T_e = 0.64, 
     \quad R_e = 1 - T_e = 0.36
-\end{equation}
+$$
 so that the amplitude reflection coefficient is
-\begin{equation}
+$$
     R = +\sqrt{R_e} = 0.6 
-\end{equation}
+$$
 \textbf{Important} the positive sign indicates the reflected wave is \emph{in phase} with the incident wave.
 
 From the boundary condition in Eq.~\eqref{eq:amp-continuity},
-\begin{equation}
+$$
     T = 1 + R = 1 + 0.6 = 1.6
-\end{equation}
+$$
 Thus, the amplitude transmission coefficient is \(T = 1.6\), even though only \(64\%\) of the energy is transmitted. This apparent paradox arises because the transmitted energy depends on both the amplitude squared and the ratio of impedances \(\tfrac{Z_2}{Z_1}\).
 \end{example}
 \subsection{Superposition and Standing Waves}
+
+\begin{keybox}
+\textbf{Key Equations:}
+\begin{itemize}
+    \item Standing wave: $y(x,t) = 2A\sin(kx)\cos(\omega t)$ (for fixed-fixed ends)
+    \item Allowed wavelengths: $\lambda_n = 2L/n$ where $n = 1,2,3,...$
+    \item Frequencies: $f_n = nv/(2L) = nf_1$ (harmonics)
+    \item Constructive interference: path difference $= m\lambda$
+    \item Destructive interference: path difference $= (m+1/2)\lambda$
+\end{itemize}
+\textbf{Tip:} Nodes are spaced $\lambda/2$ apart; antinodes too!
+\end{keybox}
 \begin{definition}[Modulation of two waves]
     Consider two monochromatic waves:
     $$
@@ -1090,72 +1207,222 @@ Thus, the amplitude transmission coefficient is \(T = 1.6\), even though only \(
     \end{cases}
     $$
     Then, the resultant wave $y_1 + y_2$ can be expressed as:
-    \begin{equation}
+    $$
         y(x,t) = 2A \cos\left(\frac{(k_1 - k_2)x - (\omega_1 - \omega_2)t}{2}\right) \cos\left(\frac{(k_1 + k_2)x - (\omega_1 + \omega_2)t}{2}\right)
-    \end{equation}
+    $$
 \end{definition}
 
 \begin{definition}[Coherence]
     Two waves are said to be coherent if they are monochromatic and maintain a constant phase relationship over time. This means that the difference in phase between the two waves does not change as they propagate:
-    \begin{equation}
+    $$
         \Delta \phi = \phi_1 - \phi_2 = \text{constant}
-    \end{equation}
+    $$
     Coherent waves can produce stable interference patterns, such as constructive and destructive interference.
 \end{definition}
 
 \begin{definition}[Phase and Phase Difference]
     Phase of the wave is an argument $kx \pm \omega t + \phi_0$ of the wave function. The phase difference between two waves at a given point in space and time is given by:
-    \begin{equation}
+    $$
         \Delta \phi = (k_1 x - \omega_1 t + \phi_1) - (k_2 x - \omega_2 t + \phi_2)
-    \end{equation}
+    $$
     where \( k_1, k_2 \) are the wave numbers, \( \omega_1, \omega_2 \) are the angular frequencies, and \( \phi_1, \phi_2 \) are the initial phases of the two waves.
 
     If we consider two waves of the same frequency and wave number, the phase difference simplifies to:
-    \begin{equation}
+    $$
         \Delta \phi = \Delta\phi + k\Delta x + \omega \Delta t
-    \end{equation}
+    $$
 
 \end{definition}
 \begin{definition}[Waves in Two and Three Dimensions]
     In two or three dimensions, waves can propagate in various directions. The general form of a wave in two dimensions is:
-    \begin{equation}
+    $$
         z(x,y,t) = A \cos(k_x x + k_y y - \omega t + \phi_0)
-    \end{equation}
+    $$
     where \( k_x \) and \( k_y \) are the wave numbers in the \( x \) and \( y \) directions, respectively, and \( \phi_0 \) is the initial phase. We also define $v$ and $k$ as:
-    \begin{equation}
+    $$
         v = \frac{\omega}{k}, \quad k = \sqrt{k_x^2 + k_y^2}
-    \end{equation}
+    $$
 \end{definition}
 
 \begin{definition}[Spherical Waves]
     A spherical wave is a wave that propagates outward in all directions from a point source. The general form of a spherical wave is:
-    \begin{equation}
+    $$
         y(r,t) = \frac{A}{r} \cos(kr - \omega t + \phi_0)
-    \end{equation}
+    $$
     where \( r = \sqrt{x^2 + y^2 + z^2} \) is the radial distance from the source, \( A \) is the amplitude at a reference distance, \( k \) is the wave number, \( \omega \) is the angular frequency, and \( \phi_0 \) is the initial phase. The amplitude decreases with distance as \( 1/r \) due to the spreading of the wavefront.
     
 \end{definition}
 
 \begin{definition}[Interference]
     Consider two coherent in phase sources $S_1$ and $S_2$ separated by a distance \( d \). The path difference \( \Delta r \) between the two waves at a point \( P \) is given by:
-    \begin{equation}
+    $$
         \Delta r = r_2 - r_1
-    \end{equation}
+    $$
     where \( r_1 \) and \( r_2 \) are the distances from the sources \( S_1 \) and \( S_2 \) to the point \( P \), respectively.
 
     We have the following two cases for constructive and destructive interference:
     \begin{itemize}
         \item \textbf{Constructive Interference}: Occurs when the path difference is an integer multiple of the wavelength:
-        \begin{equation}
+        $$
             \Delta r = m \lambda, \quad m = 0, 1, 2, \ldots
-        \end{equation}
+        $$
         \item \textbf{Destructive Interference}: Occurs when the path difference is an odd multiple of half the wavelength:
-        \begin{equation}
+        $$
             \Delta r = \left(m + \frac{1}{2}\right) \lambda, \quad m = 0, 1, 2, \ldots
-        \end{equation}
+        $$
     \end{itemize}
 \end{definition}
 
-\chapter{Modern Physics}
+\paragraph{Nodes and Antinodes} In a standing wave, nodes are points where the medium does not move (zero displacement), while antinodes are points where the medium experiences maximum displacement. The distance between two consecutive nodes or antinodes is half the wavelength (\( \frac{\lambda}{2} \)). Nodes occur at positions where \( kx = n\pi \) (for integer \( n \)), and antinodes occur at positions where \( kx = (n + \frac{1}{2})\pi \).
+\begin{definition}[Nodes]
+    Nodes are points along a standing wave where the wave has zero amplitude. At these points, destructive interference occurs, and the medium remains at rest. Nodes occur at:
+    $$
+        x_n = n \frac{\lambda}{2}, \quad n = 0, 1, 2, \ldots
+    $$
+\end{definition}
+\begin{definition}[Antinodes]
+    Antinodes are points along a standing wave where the wave has maximum amplitude. At these points, constructive interference occurs, and the medium oscillates with the greatest displacement. Antinodes occur at:
+    $$
+        x_a = \left(n + \frac{1}{2}\right) \frac{\lambda}{2}, \quad n = 0, 1, 2, \ldots
+    $$
+\end{definition}
+
+\paragraph{Antinodal Curves} In two-dimensional standing waves, antinodal curves are the loci of points where the amplitude of the wave is maximum. These curves are formed by the constructive interference of waves from multiple sources. The shape and spacing of antinodal curves depend on the geometry of the wave sources and the wavelength of the waves. An antindal curve could be visuallized as following:
+\begin{figure}[h!]
+    \centering
+    % tikz, one source at (0, -3), another at (0, 3), cetner line at y = 0
+    \resizebox{0.4\textwidth}{!}{
+    
+    \begin{tikzpicture}
+        % Draw the sources
+        \filldraw[black] (0, -3) circle (2pt) node[below] {$S_1$};
+        \filldraw[black] (0, 3) circle (2pt) node[above] {$S_2$};   
+        % Draw the center line
+        \draw[thick] (-5, 0) -- (5, 0) node[right] {};
+        % Draw the antinodal curves as circles radiating from the sources
+        \foreach \r in {1, 2, 3, 4} {
+            \draw[blue, thick] (0, -3) circle (\r);
+            \draw[blue, thick] (0, 3) circle (\r);
+        }
+        % Label the antinodal curves
+        \node at (3, -3) [right] {Antinodal Curves};
+        \node at (3, 3) [right] {Antinodal Curves};
+    \end{tikzpicture}
+    }
+    \caption{Antinodal Curves}
+    \label{fig:antinodal_curves}
+\end{figure}
+
+
+\begin{definition}[Standing Waves]
+    Standing waves are formed by the superposition of two waves of the same frequency and amplitude traveling in opposite directions. The solution of the standing waves must satisfy a quantization condition, which leads to discrete frequencies and wavelengths. This discretized solution is given by:
+    \begin{equation}\label{eq:standing_wave}
+        y(x,t) = A_n \sin(kx) \cos(\omega t)
+    \end{equation}
+    where \( k = \frac{n\pi}{L} \) for \( n = 1, 2, 3, \ldots \), and \( L \) is the length of the medium (e.g., a string fixed at both ends). The corresponding frequencies are given by: 
+    $$
+        f_n = \frac{n v}{2L}
+    $$
+    In turn, the wavelengths are given by:
+    $$
+        \lambda_n = \frac{2L}{n}
+    $$
+    where \( v \) is the wave speed. The distance between two consecutive nodes or antinodes is given by:
+    $$
+        d = \frac{\lambda}{2}
+    $$
+    
+\end{definition}
+
+\paragraph{Systems with no Fixed Ends} For systems with no fixed ends, the general solution is given by:
+$$
+    y(x,t) = A_n \cos(kx) \cos(\omega_n t)
+$$
+where \( k = \frac{n\pi}{L} \) for \( n = 0, 1, 2, \ldots \). 
+the postion of the nodes are:
+$$
+    x_n = n \frac{\lambda}{2}, \quad n = 0, \pm 1, \pm 2, \ldots
+$$
+and the position of the antinodes are:
+$$
+    x_a = \left(n + \frac{1}{2}\right) \frac{\lambda}{2}, \quad n = 0, \pm 1, \pm 2, \ldots
+$$
+
+\paragraph{Systems with no free Ends} For systems with no free ends, the general solution is given by:
+$$
+    y(x,t) = A_n \sin(kx) \cos(\omega_n t)
+$$
+
+The postion of the nodes are:
+$$
+    x_n = \left(n + \frac{1}{2}\right) \frac{\lambda}{2}, \quad n = 0, 1, 2, \ldots
+$$
+and the position of the antinodes are:
+$$
+    x_a = n \frac{\lambda}{2}, \quad n = 0, 1, 2, \ldots
+$$
+
+\paragraph{System with Mixed Ends} For systems with mixed ends (one fixed and one free), the general solution has two cases:
+$$
+    y(x,t) = \begin{cases}
+        A_n \sin(kx) \cos(\omega_n t) & \text{if the fixed end is at } x=0 \\
+        A_n \cos(kx) \cos(\omega_n t) & \text{if the fixed end is at } x=L
+    \end{cases}
+$$
+The postion of the nodes are:
+$$
+    x_n = \left(n + \frac{1}{2}\right) \frac{\lambda}{2}, \quad n = 0, 1, 2, \ldots
+$$
+and the position of the antinodes are:
+$$
+    x_a = n \frac{\lambda}{2}, \quad n = 0, 1, 2, \ldots
+$$
+
+\begin{definition}[Energy of Standing Waves]
+    The total energy stored in a standing wave on a string of length \( L \) is given by:
+    $$
+        E = \frac{1}{4} \mu A^2 \omega^2 L
+    $$
+    where \( \mu \) is the linear mass density of the string, \( A \) is the amplitude of the wave, and \( \omega \) is the angular frequency. The energy is equally divided between kinetic and potential energy, with each contributing half of the total energy.
+\end{definition}
+
+\begin{definition}[Average Power of Standing Waves]
+    The average power transmitted by a standing wave on a string is given by:
+    $$
+        \bar{P} = \frac{1}{2} \mu A^2 \omega^2 v
+    $$
+    where \( \mu \) is the linear mass density of the string, \( A \) is the amplitude of the wave, \( \omega \) is the angular frequency, and \( v \) is the wave speed. This power represents the rate at which energy is transferred along the string.
+    
+\end{definition}
+\subsection{Fourier analysis}
+\begin{definition}[Standing Waves as Normal Modes of a Vibrating String]
+    The superposition principle states that if $y_1(x,t)$ and $y_2(x,t)$ are two solutions to the wave equation, then their sum $y(x,t) = y_1(x,t) + y_2(x,t)$ is also a solution. For a string fixed at both ends, the $n^\text{th}$ normal mode of vibration can be expressed as:
+    \begin{equation}
+        y_n(x,t) = A_n \sin\left(\frac{n\pi x}{L}\right) \cos(\omega_n t)
+    \end{equation}
+    
+    The motion of the string will be a superposition of normal modes:
+    \begin{equation}
+        y(x,t) = \sum_{n=1}^{\infty} A_n \sin\left(\frac{n\pi x}{L}\right) \cos(\omega_n t)
+    \end{equation}
+    where \( A_n \) are the amplitudes of the respective modes, and \( \omega_n = \frac{n\pi v}{L} \) are the angular frequencies of the modes.
+\end{definition}
+
+\begin{definition}[The amplitude of normal modes – Fourier analysis]
+    If we look at the initial shape of the string:
+    $$
+        y(x,0) = \sum_n A_n \sin\left(\frac{n\pi x}{L}\right)
+    $$
+    Any initial shape of the string can be expressed as a Fourier sine series. Also, for fixed ends ($f(0)=f(L)=0$), we can write the shape as the following:
+    $$
+        f(x) = \sum_n A_n \sin\left(\frac{n\pi x}{L}\right)
+    $$
+
+
+    To find the coefficients \( A_n \), we use:
+    \begin{equation}
+        A_n = \frac{2}{L} \int_0^L f(x) \sin\left(\frac{n\pi x}{L}\right) \, dx
+    \end{equation}
+\end{definition}
 \end{document}
 
