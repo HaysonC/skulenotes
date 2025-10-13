@@ -1916,9 +1916,47 @@ Therefore the general solution of \(\mathbf{x}'=A\mathbf{x}\) is the linear comb
 C_1 + C_2 t \\[4pt] C_2
 \end{bmatrix}
 \end{equation}
-The phase portrait of this system is shown below:
-% insert later
 
+\paragraph{Applying the matrix to the generalized eigenvector} We can apply the matrix \( A \) to the generalized eigenvector \( v_g \), then , $Av_g$ would stay in the span of $v$ and $v_g$: In other words, we call this subspace invariant under the transformation $A$.
+
+\begin{example}[Generalized Eigenvectors]
+    Consider the system of ODEs:
+    $$
+    \textbf{x}' = \begin{bmatrix} 4 & 1 \\ -1 & 2
+    \end{bmatrix}\textbf{x}
+    $$
+    We find the eigenvalues and eigenvectors by solving the characteristic polynomial:
+    \begin{align*}
+    \det(A - \lambda I) &= \det\begin{bmatrix} 4 - \lambda & 1 \\ -1 & 2 - \lambda
+    \end{bmatrix} \\
+    &= (\lambda - 3)^2 = 0 \\
+    \implies \lambda_1 &= 3, \quad \lambda_2 = 3
+    \end{align*}
+    The corresponding eigenvector is:
+    \begin{align*}
+    \vec{v}_1 &= \begin{bmatrix} 1 \\ -1
+    \end{bmatrix}
+    \end{align*}
+    Since there is only one linearly independent eigenvector, we need to find a generalized eigenvector \( v_g \) satisfying:
+    $$
+    (A - 3I)v_g = v_1
+    $$
+    Solving this, we find:
+    $$
+    v_g = \begin{bmatrix} 0 \\ 1
+    \end{bmatrix}
+    $$
+    Thus, the two linearly independent solutions to the system are:
+    $$x_1(t) = v_1 e^{3t} = \begin{bmatrix} 1 \\ -1
+    \end{bmatrix} e^{3t}$$
+    $$x_2(t) = (v_g + tv_1)e^{3t} = \left(\begin{bmatrix} 0 \\ 1
+    \end{bmatrix} + t\begin{bmatrix} 1 \\ -1
+    \end{bmatrix}\right)e^{3t}$$
+    
+    Therefore, the general solution to the system is:
+    $$\textbf{x}(t) = c_1 x_1(t) + c_2 x_2(t)$$
+    where \( c_1 \) and \( c_2 \) are constants determined by the initial conditions.
+\end{example}
 \begin{definition}[Trace-Determinant Plane]
     We found that we can find the eigenvalues of a \( 2 \times 2 \) matrix \( A \) using:
     $$
@@ -2291,11 +2329,9 @@ This means that the slope of the trajectory is equal to the slope of the positio
     \end{cases}$$
     where \( f \) and \( g \) are continuously differentiable functions. If there exists a trajectory that remains in a closed, bounded region \( R \) of the phase plane for all future time and if \( R \) contains only unstable nodes, then all trajectories in \( R \) approach a limit cycle as \( t \to \infty \).
 \end{theorem}
-\paragraph{Intuition} A monotonically increasing function that gets bounded must converge. 
+\paragraph{Intuition} A monotonically increasing function that gets bounded must converge. A similar idea applies to trajectories in a dynamical system: if they are confined to a bounded region and cannot escape, they must eventually settle into a steady state, such as a limit cycle.
 
-\section{Matrices and Linear Algebra}
-
-\subsection{Matrix Exponentials}
+\section{Matrix Exponentials}
 \begin{shaded}
 \subsubsection*{Taylor Series Definition of Exponentials}
 Consider a scalar exponential, then,
@@ -2359,6 +2395,214 @@ this would make it easier to compute the matrix exponential.
         &= \langle \phi(0) | \Psi(0) \rangle
     \end{align*}
     Then, the solution lies on the same norm as the initial condition, in other words, the solution is in $S^{n-1}$ if the initial condition is in $S^{n-1}$.
+\end{example}
+
+\paragraph{What if \( A \) is not diagonalizable?} If \( A \) is not diagonalizable there could be two cases:
+\begin{itemize}
+    \item If we know the fundamental set of solutions \( \{x_1(t), x_2(t), \ldots, x_n(t)\} \), then we can construct the fundamental matrix \( \Phi(t) \) and compute the matrix exponential as:
+    \begin{equation}
+    e^{At} = \Phi(t)\Phi(0)^{-1}
+    \end{equation}
+    where \( \Phi(0) \) is the fundamental matrix evaluated at \( t = 0 \). And $\phi = [x_1, x_2, \ldots, x_n]$.
+    \item Otherwise, we can consider its Jordan Canonical Form.
+\end{itemize}
+
+
+\paragraph{Jordan Canonical Form} We first define the AM and GM of an eigenvalue:
+\begin{definition}[Geometric and Algebraic Multiplicity]
+    Consider a square matrix \( A \in \mathbb{R}^{n \times n} \) and an eigenvalue \( \lambda \) of \( A \). The algebraic multiplicity (AM) of \( \lambda \) is the number of times \( \lambda \) appears as a root of the characteristic polynomial of \( A \). The geometric multiplicity (GM) of \( \lambda \) is the dimension of the eigenspace corresponding to \( \lambda \), which is the null space of \( A - \lambda I \). Diagonalizability is characterized by the condition that for each eigenvalue, its algebraic multiplicity equals its geometric multiplicity.
+\end{definition}
+
+\begin{definition}[Jordan Block]
+    A Jordan block \( J_k(\lambda) \) of size \( k \) associated with an eigenvalue \( \lambda \) is a \( k \times k \) matrix of the form:
+    \begin{equation}
+    J_k(\lambda) = \begin{bmatrix}
+    \lambda & 1 & 0 & \cdots & 0 \\
+    0 & \lambda & 1 & \cdots & 0 \\
+    0 & 0 & \lambda & \cdots & 0 \\
+    \vdots & \vdots & \vdots & \ddots & 1 \\
+    0 & 0 & 0 & \cdots & \lambda
+    \end{bmatrix}
+    \end{equation}
+    where \( \lambda \) is the eigenvalue and the superdiagonal entries are all ones, while all other entries are zero.
+    
+\end{definition}
+
+\begin{definition}[Jordan Canonical Form]
+    A square matrix \( A \in \mathbb{R}^{n \times n} \) is said to be in Jordan canonical form if it is a block diagonal matrix where each block is a Jordan block. Specifically, \( A \) can be expressed as:
+    \begin{equation}
+    A = PJP^{-1}
+    \end{equation}
+    where \( P \) is an invertible matrix and \( J \) is the Jordan matrix composed of Jordan blocks along its diagonal. The Jordan canonical form provides a way to represent matrices that are not diagonalizable, allowing for the computation of functions of matrices, such as the matrix exponential.
+\end{definition}
+\begin{example}
+    Consider the system of ODEs:
+    $$x' = \begin{bmatrix}
+    1 & -1 \\
+    1 & 3
+    \end{bmatrix} x$$
+    The characteristic polynomial is given by:
+    \begin{align*}
+        p(\lambda) &= \det\begin{bmatrix}
+        1 - \lambda & -1 \\
+        1 & 3 - \lambda
+        \end{bmatrix} \\
+        &= (1 - \lambda)(3 - \lambda) + 1 \\
+        &= \lambda^2 - 4\lambda + 4 \\
+        &= (\lambda - 2)^2
+    \end{align*}
+    So, we have a repeated eigenvalue \( \lambda = 2 \) with algebraic multiplicity 2. To find the eigenvectors, we solve:
+    \begin{align*}
+        (A - 2I)v &= 0 \\
+        \begin{bmatrix}
+        -1 & -1 \\
+        1 & 1
+        \end{bmatrix} \begin{bmatrix}
+        v_1 \\ v_2
+        \end{bmatrix} &= 0
+    \end{align*}
+    This gives us the eigenvector \( v = \begin{bmatrix}1 \\ -1 \end{bmatrix} \). Since the geometric multiplicity is 1, we need to find a generalized eigenvector \( w \) such that:
+    \begin{align*}
+        (A - 2I)w &= v \\
+        \begin{bmatrix}
+        -1 & -1 \\
+        1 & 1
+        \end{bmatrix} \begin{bmatrix}
+        w_1 \\ w_2
+        \end{bmatrix} &= \begin{bmatrix}1 \\ -1
+        \end{bmatrix}
+    \end{align*}
+    Solving this, we can take \( w = \begin{bmatrix}0 \\ -1 \end{bmatrix} \). Now, we can form the Jordan matrix:
+    $$
+    J = \begin{bmatrix}
+    2 & 1 \\
+    0 & 2
+    \end{bmatrix} = 2I + \begin{bmatrix}
+    0 & 1 \\
+    0 & 0
+    \end{bmatrix}
+    $$
+    Obserbe that $N = \begin{bmatrix}
+    0 & 1 \\
+    0 & 0
+    \end{bmatrix}$ is nilpotent since $N^2 = 0$. And that $I$ commutes with everything. So, we can compute the matrix exponential as:
+    \begin{align*}
+        e^{At} &= Pe^{Jt}P^{-1} \\
+        &= P e^{(2I + N)t} P^{-1} \\
+        &= P e^{2tI} e^{Nt} P^{-1} \\
+        &= P e^{2t} \left(I + Nt + \frac{(Nt)^2}{2!} + \ldots \right) P^{-1} \\
+        &= P e^{2t} \left(I + Nt\right) P^{-1} \\
+        &= e^{2t} P \begin{bmatrix}
+        1 & t \\
+        0 & 1
+        \end{bmatrix} P^{-1}
+    \end{align*}
+    where \( P = \begin{bmatrix}1 & 0 \\
+    -1 & -1
+    \end{bmatrix} \) and \( P^{-1} = \begin{bmatrix}
+    1 & 0 \\
+    -1 & -1
+    \end{bmatrix} \). Thus, we have:
+    $$
+        e^{At} = e^{2t} \begin{bmatrix}1 + t & t \\
+        -t & 1 - t
+        \end{bmatrix}
+    $$
+\end{example}
+
+
+\section{Higher Order ODEs}
+\subsection{Second Order Linear ODEs}
+
+\begin{definition}[General Form of Second Order Linear ODEs]
+    A second-order linear ordinary differential equation (ODE) has the general form:
+    \begin{equation}
+     y'' = f(t, y, y')
+    \end{equation}
+    
+\end{definition}
+
+\begin{example} \label{ex:2ndOrderTo1stOrder}
+    We can convert a second-order linear ODE into a system of first-order ODEs. Consider the second-order ODE:
+    $$
+     y'' + p(t)y' + q(t)y = g(t)
+    $$
+    We can define:
+    $$\begin{cases}
+    x_1 = y \\
+    x_2 = y'
+    \end{cases}$$
+    Then, we have the system of first-order ODEs:
+    $$\begin{cases}
+    x_1' = x_2 \\
+    x_2' = -g(t) - p(t)x_2 - q(t)x_1
+    \end{cases}$$
+
+    In matrix form, this can be written as:
+    $$\begin{bmatrix}
+    x_1' \\ x_2'
+    \end{bmatrix} = \begin{bmatrix}
+    0 & 1 \\
+    -q(t) & -p(t)
+    \end{bmatrix} \begin{bmatrix}
+    x_1 \\ x_2
+    \end{bmatrix} + \begin{bmatrix}
+    0 \\ -g(t)
+    \end{bmatrix}$$ 
+    This transformation allows us to apply techniques for first-order systems to analyze and solve second-order ODEs. 
+    
+\end{example}
+
+\begin{example}
+    Consider the above Example \ref{ex:2ndOrderTo1stOrder} with constant coefficients:
+    $$y'' + p y' + q y = 0
+    $$
+    We can write the corresponding system of first-order ODEs as:
+    $$\begin{bmatrix}
+    x_1' \\ x_2'
+    \end{bmatrix} = \begin{bmatrix}
+    0 & 1 \\
+    -q & -p
+    \end{bmatrix} \begin{bmatrix}
+    x_1 \\ x_2
+    \end{bmatrix}
+    $$
+    And you should be able to solve and analyze the system using the techniques we have learned for first-order systems, especially the trace-determinant plane.
+
+\end{example}
+
+\begin{definition}[Characteristic Equation]
+    The characteristic equation of a second-order linear ODE with constant coefficients:
+    $$y'' + p y' + q y = 0$$
+    is given by the quadratic equation:
+    \begin{equation}
+    r^2 + pr + q = 0
+    \end{equation}
+    where \( r \) represents the roots of the characteristic polynomial. The nature of the roots (real and distinct, real and repeated, or complex conjugates) determines the form of the general solution to the ODE. This comes from the assuned solution of the form \( y = e^{rt} \).
+\end{definition}
+
+\begin{example}[Cauchy-Euler Equation]
+    Consider the following second-order ODE:
+    $$t^2 y'' - t y' + y = 0$$
+    This is in the form of a Cauchy-Euler equation:
+    $$
+    \sum_m y^{(m)}(t) a_m t^m = 0
+    $$
+    where \( a_2 = 1, a_1 = -1, a_0 = 1 \). We can solve this by assuming a solution of the form \( y = t^r \). Then, we have:
+    \begin{align*}
+        y' &= r t^{r-1} \\
+        y'' &= r(r-1) t^{r-2}
+    \end{align*}
+    Substituting these into the original equation gives:
+    \begin{align*}
+        t^2 (r(r-1) t^{r-2}) - t (r t^{r-1}) + t^r &= 0 \\
+        r(r-1) t^r - r t^r + t^r &= 0 \\
+        (r^2 - 2r + 1) t^r &= 0 \\
+        (r - 1)^2 t^r &= 0
+    \end{align*}
+    Thus, we have a repeated root \( r = 1 \). The general solution for this case is given by:
+    $$y(t) = C_1 t + C_2 t \ln(t)$$
+    where \( C_1 \) and \( C_2 \) are constants determined by initial conditions.
 \end{example}
 
 \end{document}

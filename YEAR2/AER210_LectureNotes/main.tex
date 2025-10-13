@@ -1774,7 +1774,6 @@ which could be rewritten as the following defintion:
 \end{example}
 
 \section{Vector Calculus}
-\section{Line Integrals}
 
 \subsection{Line Integrals and Vector Fields}
 
@@ -2195,5 +2194,178 @@ where $-C$ is the curve $C$ traversed in the opposite direction.
     where \(0 \leq \phi \leq \frac{\pi}{2}\) and \(0 \leq \theta \leq 2\pi\).
 \end{example}
 
+
+\begin{definition}[Surface Area]
+    The surface area of a parametric surface \(\vec{r(u,v)}\) over a domain \(D\) is given by:
+    \begin{equation}
+        S = \iint_D ||\vec{r_u} \times \vec{r_v}|| \, dA
+    \end{equation}
+    where \(\vec{r_u} = \frac{\partial \vec{r}}{\partial u}\) and \(\vec{r_v} = \frac{\partial \vec{r}}{\partial v}\).
+\end{definition}
+
+\begin{example}[Surface Area of a Sphere]
+    Find the surface area of a sphere with radius \(a\).
+
+    We can parametrize the sphere using spherical coordinates:
+    $$    
+        \vec{r}(\phi, \theta) = \langle x, y , z \rangle = \langle a \sin \phi \cos \theta, a \sin \phi \sin \theta, a \cos \phi \rangle
+    $$
+    where over the domain \(D = \{(\phi, \theta) | 0 \leq \phi \leq \pi, 0 \leq \theta \leq 2\pi\}\).
+
+    We can compute the partial derivatives:
+    $$
+        \vec{r_\phi} = \langle a \cos \phi \cos \theta, a \cos \phi \sin \theta, -a \sin \phi \rangle
+    $$
+    $$
+        \vec{r_\theta} = \langle -a \sin \phi \sin \theta, a \sin \phi \cos \theta, 0 \rangle
+    $$
+
+    Then, we can compute the cross product:
+    $$
+        \vec{r_\phi} \times \vec{r_\theta} = 
+        \begin{vmatrix}
+            \hat{i} & \hat{j} & \hat{k} \\ 
+            a\cos\phi\cos\theta & a\cos\phi\sin\theta & -a\sin\phi \\ 
+            -a\sin\phi\sin\theta & a\sin\phi\cos\theta & 0
+        \end{vmatrix}
+        = a^2 \sin^2 \phi \cos \theta \hat{i} + a^2 \sin^2 \phi \sin \theta \hat{j} + a^2 \sin \phi \cos \phi \hat{k}
+    $$
+
+    The magnitude of the cross product is:
+    $$
+        ||\vec{r_\phi} \times \vec{r_\theta}|| = a^2 \sin \phi
+    $$
+
+    Finally, we can compute the surface area:
+    $$
+        S = \iint_D ||\vec{r_\phi} \times \vec{r_\theta}|| \, dA = \int_0^{2\pi} \int_0^\pi a^2 \sin \phi \, d\phi \, d\theta = 2\pi a^2 \left[ -\cos \phi \right]_0^\pi = 4\pi a^2
+    $$
+    
+\end{example}
+
+\subsection{Surface Integrals}
+\begin{definition}[Surface Integral over Scalar Field]
+    Consider a scalar field \(f(x,y,z)\) and a smooth parametric surface \(\vec{r(u,v)}\) over a domain \(D\). Then we define the surface integral of \(f\) over the surface as:
+    \begin{equation}
+        \iint_S f(x,y,z) \, dS = \iint_D f(\vec{r(u,v)}) ||\vec{r_u} \times \vec{r_v}|| \, du \, dv
+    \end{equation}
+
+    And if $S$ is piecewise smooth, then we can express the surface integral as the sum of the surface integrals over each smooth piece:
+    \begin{equation}
+        \iint_S f(x,y,z) \, dS = \sum_{i=1}^n \iint_{S_i} f(x,y,z) \, dS
+    \end{equation}
+    where \( \bigcup_{i=1}^n S_i = S \) and each \(S_i\) is a smooth surface.
+\end{definition}
+\begin{example}
+    \textit{Evaluate the $\iint_S \sqrt{x^2 + y^2 + 1} \, dS$ where \(S\) is the surface given by $\vec{r}(u,v) = \langle u\cos v, u\sin v, v \rangle$, $0 \leq u \leq 1$, $0 \leq v \leq 2\pi$.}   
+    We can compute the partial derivatives:
+    $$        \vec{r_u} = \langle \cos v, \sin v, 0 \rangle $$
+    $$        \vec{r_v} = \langle -u \sin v, u \cos v, 1 \rangle $$
+    Then, we can compute the cross product:
+    $$        \vec{r_u} \times \vec{r_v} = 
+        \begin{vmatrix}
+            \hat{i} & \hat{j} & \hat{k} \\ 
+            \cos v & \sin v & 0 \\ 
+            -u \sin v & u \cos v & 1
+        \end{vmatrix}
+        = \sin v \hat{i} - \cos v \hat{j} + u \hat{k}
+    $$
+    The magnitude of the cross product is:
+    $$        ||\vec{r_u} \times \vec{r_v}|| = \sqrt{\sin^2 v + \cos^2 v + u^2} = \sqrt{1 + u^2} $$
+    Finally, we can compute the surface integral:
+    \begin{align*}
+        \iint_S \sqrt{x^2 + y^2 + 1} \, dS &= \iint_D \sqrt{u^2 \cos^2 v + u^2 \sin^2 v + 1} \cdot \sqrt{1 + u^2} \, du \, dv \\
+        &= \int_0^{2\pi} \int_0^1 \sqrt{u^2 + 1} \cdot \sqrt{1 + u^2} \, du \, dv = \int_0^{2\pi} \int_0^1 (1 + u^2) \, du \, dv \\
+        &= \int_0^{2\pi} \left[ u + \frac{u^3}{3} \right]_0^1 \, dv = \int_0^{2\pi} \frac{4}{3} \, dv = \frac{8\pi}{3}
+    \end{align*}
+\end{example}
+\begin{definition}[Orientability]
+    A surface is said to be orientable if it is possible to assign a consistent normal vector at every point on the surface. In other words, a surface is orientable if it has two distinct sides. \\
+    (Examples) Spheres, Torus, Cylinder, Plane \\    
+    (Non-examples) Möbius Strip, Klein Bottle
+\end{definition}
+
+\begin{definition}[Orientation]
+    An orientation of a surface is a choice of a continuous normal vector field on the surface. For a given surface, there are two possible orientations: one with the normal vector pointing "outward" and the other with the normal vector pointing "inward". The choice of orientation affects the sign of the surface integral. For closed surfaces, the outward orientation is typically chosen for obvious reasons.
+\end{definition}
+\begin{definition}[Surface Integrals of Vector Fields]
+    Consider a vector field \(\vec{F}(x,y,z)\) and an orientable smooth surface \(S\) with a chosen orientation. Then we define the surface integral of \(\vec{F}\) over \(S\) as:
+    \begin{equation}
+        \iint_D \vec{F}(\vec{r(u,v)}) \cdot \hat{n} \, dS = \iint_D \vec{F}(\vec{r(u,v)}) \cdot (\vec{r_u} \times \vec{r_v}) \, du \, dv
+    \end{equation}
+    where $\hat{n} = \frac{\vec{r_u} \times \vec{r_v}}{||\vec{r_u} \times \vec{r_v}||}$ is the unit normal vector to the surface and $dS = ||\vec{r_u} \times \vec{r_v}|| \, du \, dv$ is the infinitesimal area element on the surface.
+\end{definition}
+
+\paragraph{Physical Interpretation - Flux Integration} Consider a fluid with density $\rho (x, y, z)$ and velocity filed $\vec{v(x, y, z)}$. For each patch of surface $dS$ with unit normal vector $\vec{n}$, the volume of fluid passing through the patch per unit time is given by is one of a prism given by:
+$$
+     \text{Height} = \vec{v} \cdot \vec{n} \, dt, \quad \text{Volume} = (\vec{v} \cdot \vec{n}) \, dS \, dt \, \implies dm = \rho (\vec{v} \cdot \vec{n}) \, dS \, dt
+$$
+The mass flow rate $d\text{Mass}/dt$ is given by:
+$$
+    \frac{\text{Mass}}{dt} = \rho (\vec{v} \cdot \vec{n}) \, dS
+$$
+So we write:
+$$
+    \text{Mass flow rate} = \iint_S \rho \vec{v} \cdot \vec{n}\, dS = \iint_S F \cdot \vec{n} \, dS = \iint_S \vec{F} \cdot d\vec{S}
+$$
+where $\vec{F} = \rho \vec{v}$ is the flux density vector field.
+
+\begin{example}
+    \textit{Calculate the flux of the vector filed $\vec{F}(x,y,z) = x \, \hat{i} + y \, \hat{j} + z \, \hat{k}$ across the closed cylindrical surface \(S\) given by \(x^2 + y^2 = a^2\), \(-1 \leq z \leq 1\), oriented outward.}
+
+    We first parametrize the cylindrical surface as:
+    $$        \vec{r}(\theta, z) = \langle a \cos \theta, a \sin \theta, z \rangle $$
+    over the domain \(D = \{(\theta, z) | 0 \leq \theta \leq 2\pi, -1 \leq z \leq 1\}\).
+
+    Then, we can compute the partial derivatives:
+    $$        \vec{r_\theta} = \langle -a \sin \theta, a \cos \theta, 0 \rangle $$
+    $$        \vec{r_z} = \langle 0, 0, 1 \rangle $$
+    Then, we can compute the cross product:
+    $$        \vec{r_\theta} \times \vec{r_z} = 
+        \begin{vmatrix}
+            \hat{i} & \hat{j} & \hat{k} \\ 
+            -a \sin \theta & a \cos \theta & 0 \\ 
+            0 & 0 & 1
+        \end{vmatrix}
+        = a \cos \theta \hat{i} + a \sin \theta \hat{j} + 0 \hat{k}
+    $$
+    The magnitude of the cross product is:
+    $$        ||\vec{r_\theta} \times \vec{r_z}|| = \sqrt{(a \cos \theta)^2 + (a \sin \theta)^2 + 0^2} = a $$
+    Finally, we can compute the surface integral:
+    \begin{align*}
+        \iint_S \vec{F} \cdot d\vec{S} &= \iint_D \vec{F}(\vec{r}(\theta, z)) \cdot (\vec{r_\theta} \times \vec{r_z}) \, d\theta \, dz \\
+        &= \int_0^{2\pi} \int_{-1}^1 \langle a \cos \theta, a \sin \theta, z \rangle \cdot \langle a \cos \theta, a \sin \theta, 0 \rangle \, dz \, d\theta \\
+        &= \int_0^{2\pi} \int_{-1}^1 a^2 (\cos^2 \theta + \sin^2 \theta) \, dz \, d\theta = 2\int_0^{2\pi} a^2 (1) (1 - 0) \, d\theta = 4\pi a^2
+    \end{align*}
+    And for the top and bottom surfaces, we have:
+    \begin{align*}
+        \iint_{S_{top}} \vec{F} \cdot d\vec{S} &= \iint_D \vec{F}(\vec{r}(r, \theta)) \cdot (\vec{r_r} \times \vec{r_\theta}) \, dr \, d\theta \\
+        &= \int_0^{2\pi} \int_0^a \langle r \cos \theta, r \sin \theta, 1 \rangle \cdot \langle 0, 0, r \rangle \, dr \, d\theta \\
+        &= \int_0^{2\pi} \int_0^a r \, dr \, d\theta = \int_0^{2\pi} \left[ \frac{r^2}{2} \right]_0^a \, d\theta = \int_0^{2\pi} \frac{a^2}{2} \, d\theta = \pi a^2
+    \end{align*}
+    And then, by symmetry, we have:
+    $$        \iint_{S_{bottom}} \vec{F} \cdot d\vec{S} = \pi a^2 $$
+    So, the total flux across the closed surface is:
+    $$        \iint_S \vec{F} \cdot d\vec{S} = 4\pi a^2 + \pi a^2 + \pi a^2 = 6\pi a^2 $$
+\end{example}
+
+\begin{example}
+    Find the flux of $\vec{F}(x,y,z) = \frac{2x \hat{i} + 2y \hat{j}}{x^2 + y^2} + \hat{k}$ across the surface of the paraboloid $\vec{r}(u, v) = \langle u \cos v, u \sin v, u^2 \rangle$, $0 \leq u \leq 1$, $0 \leq v \leq 2\pi$, oriented downward.
+
+    We can compute the partial derivatives:
+    $$        \vec{r_u} = \langle \cos v, \sin v, 2u \rangle $$
+    $$        \vec{r_v} = \langle -u \sin v, u \cos v, 0 \rangle $$
+    Then, we can compute the cross product:
+    $$        \vec{r_u} \times \vec{r_v} = -2u^2 \cos v \hat{i} - 2u^2 \sin v \hat{j} + u \hat{k}
+    $$
+    Notice, since the surface is oriented downward, we take the negative of the cross product:
+    $$        \vec{r_v} \times \vec{r_u} = 2u^2 \cos v \hat{i} + 2u^2 \sin v \hat{j} - u \hat{k}
+    $$
+\end{example}
 \chapter{Fluid Mechanics}
+\section{Introduction to Fluid Mechanics}
+\begin{definition}[Fluid]
+    A fluid is a substance that continuously deforms (flows) under an applied shear stress, no matter how small the stress. Fluids include liquids and gases.
+    
+\end{definition}
 \end{document} 

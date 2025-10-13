@@ -1819,6 +1819,39 @@ The following table shows the 3-bit binary and Gray code representations:
     
 \end{example}
 
+\begin{example}[Alternative Design]
+    Alternatively, we can design the state diagram in which each state represents the last three values. We can set the following states table:
+    \begin{table}[h!]
+        \centering
+        \begin{tabular}{|c|cc|c|}
+            \hline
+            $y_1 y_2 y_3$ & $w=0$ & $w=1$ & Output \\
+            \hline
+            000 & 000 & 001 & 0 \\
+            001 & 010 & 011 & 0 \\
+            010 & 100 & 101 & 0 \\
+            011 & 110 & 111 & 0 \\
+            100 & 000 & 001 & 0 \\
+            101 & 010 & 011 & 1 \\
+            110 & 100 & 101 & 0 \\
+            111 & 110 & 111 & 0 \\
+            \hline
+        \end{tabular}
+        \caption{State Table for Alternative FSM that detects `101'}
+        \label{tab:alternative_fsm_state_table}
+    \end{table}
+    And then we can draw the following equations:
+    \begin{itemize}
+        \item $Y_3 = w$
+        \item $Y_2 = y_3$
+        \item $Y_1 = y_2$
+    \end{itemize}
+    The output $Z = y_3 \overline{y_2} y_1$.
+    This design is simpler, but it uses more states (8 states instead of 4 states). This is an example of the trade-off between the number of states and the complexity of the logic.
+    
+    We call this a shift register, where the input is shifted into the register on each clock cycle. The output is taken from the last bit of the register.
+\end{example}
+
 \begin{definition}[Finite State Machine (FSM)]
     A finite state machine (FSM) is a mathematical model of computation used to design both computer programs and sequential logic circuits. It is composed of a finite number of states, transitions between those states, inputs, and outputs. FSMs are used to model the behavior of systems that can be in one of a limited number of states at any given time and can transition from one state to another based on input signals.
 
