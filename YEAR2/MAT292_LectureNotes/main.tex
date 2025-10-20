@@ -2570,7 +2570,7 @@ this would make it easier to compute the matrix exponential.
     And you should be able to solve and analyze the system using the techniques we have learned for first-order systems, especially the trace-determinant plane.
 
 \end{example}
-
+\subsection{Second Order Homogeneous ODE}
 \begin{definition}[Characteristic Equation]
     The characteristic equation of a second-order linear ODE with constant coefficients:
     $$y'' + p y' + q y = 0$$
@@ -2605,4 +2605,161 @@ this would make it easier to compute the matrix exponential.
     where \( C_1 \) and \( C_2 \) are constants determined by initial conditions.
 \end{example}
 
+\subsection{Second Order Inhomogeneous ODE}
+\begin{theorem}[General Solution of Inhomogeneous ODE]
+    The general solution of a second-order inhomogeneous ODE:
+    $$y'' + p y' + q y = \sum_i g_i(t)$$
+    is given by:
+    \begin{equation}
+    y(t) = c_1 y_1(t) + c_2 y_2(t) + \sum_i y_{p_i}(t)
+    \end{equation}
+    where \(c_1, c_2\) are constants determined by initial conditions, \( y_h(t) = \{ y_1(t) , y_2(t) \} \) is the general solution of the corresponding homogeneous equation \( y'' + p y' + q y = 0 \), and \( y_{p_i}(t) \) are particular solutions corresponding to each \( g_i(t) \). Each \( y_{p_i}(t) \) satisfies:
+    \begin{enumerate}
+        \item $\text{Null}(L) = \{y_h\}$
+        \item $L(y_{p_i}) = g_i(t)$
+    \end{enumerate}
+\end{theorem}
+\begin{theorem}[Uniqueness of Particular Solutions]
+    If \( y_{p_1}(t) \) and \( y_{p_2}(t) \) are two particular solutions of the inhomogeneous ODE:
+    $$y'' + p y' + q y = g(t)$$
+    then their difference \( y_{p_1}(t) - y_{p_2}(t) \) is a solution of the corresponding homogeneous equation:
+    $$y'' + p y' + q y = 0$$
+
+    And since the homongenous solution is unique up to a linear combination of basis solutions, we have:
+    $$y_{p_1}(t) - y_{p_2}(t) = c_1 y_1(t) + c_2 y_2(t)$$
+    where \( c_1 \) and \( c_2 \) are constants, and \( y_1(t) \) and \( y_2(t) \) are the fundamental solutions of the corresponding homogeneous equation.
+\end{theorem}
+\begin{proof}
+    We have:
+    \begin{align*}
+        L(y_{p_1}) &= g(t) \\
+        L(y_{p_2}) &= g(t)
+    \end{align*}
+    Subtracting these two equations gives:
+    \begin{align*}
+        L(y_{p_1}) - L(y_{p_2}) &= g(t) - g(t) \\
+        L(y_{p_1} - y_{p_2}) &= 0
+    \end{align*}
+    Thus, \( y_{p_1}(t) - y_{p_2}(t) \) is indeed a solution of the corresponding homogeneous equation.
+\end{proof}
+
+\begin{definition}[Wronskian Derivation of $y_p$]
+    If $y_1(t)$ and $y_2(t)$ are two linearly independent solutions of the corresponding homogeneous equation (a.k.a. the fundamental set of homogeneous solutions), then we can assume a particular solution of the form:
+    $$y_p(t) = -y_1(t) \int \frac{y_2(t) g(t)}{W(t)} dt + y_2(t) \int \frac{y_1(t) g(t)}{W(t)} dt$$
+    where \( W(t) = y_1(t)y_2'(t) - y_2(t)y_1'(t) \) is the Wronskian determinant of \( y_1 \) and \( y_2 \).
+\end{definition}
+
+
+\begin{example}
+    Consider the following second-order inhomogeneous ODE:
+    $$y'' - 3y'- 4y = 3e^{2t} + \sin(t)$$
+    The corresponding homogeneous equation is:
+    $$y'' - 3y' - 4y = 0$$
+    The characteristic equation is:
+    $$r^2 - 3r - 4 = 0$$
+    Solving this gives the roots \( r_1 = 4 \) and \( r_2 = -1 \). Thus, the general solution of the homogeneous equation is:
+    $$y_h(t) = C_1 e^{4t} + C_2 e^{-t}$$
+    where \( C_1 \) and \( C_2 \) are constants determined by initial conditions.
+    
+    Next, we find particular solutions for each term on the right-hand side of the inhomogeneous equation. For the term \( 3e^{2t} \), we can assume a particular solution of the form $y_{p_1}(t) = A e^{2t}$. Substituting this into the left-hand side of the ODE gives:
+    \begin{align*}
+        y_{p_1}'' - 3y_{p_1}' - 4y_{p_1} &= 4A e^{2t} - 6A e^{2t} - 4A e^{2t} \\
+        &= -6A e^{2t}
+    \end{align*}
+    Setting this equal to \( 3e^{2t} \) gives:
+    $$-6A e^{2t} = 3e^{2t} \implies A = -\frac{1}{2}$$
+    Thus, we have:
+    $$y_{p_1}(t) = -\frac{1}{2} e^{2t}$$
+    For the term \( \sin(t) \), we can assume a particular solution of the form \( y_{p_2}(t) = B \cos(t) + C \sin(t) \). Substituting this into the left-hand side of the ODE gives:
+    \begin{align*}
+        y_{p_2}'' - 3y_{p_2}' - 4y_{p_2} &= -B \cos(t) - C \sin(t) + 3B \sin(t) - 3C \cos(t) - 4B \cos(t) - 4C \sin(t) \\
+        &= (-5B - 3C) \cos(t) + (3B - 5C) \sin(t)
+    \end{align*}
+    Setting this equal to \( \sin(t) \) gives the system of equations:
+    \begin{align*}
+        -5B - 3C &= 0 \\
+        3B - 5C &= 1
+    \end{align*}
+    Solving this system gives \( B = -\frac{3}{34} \) and \( C = \frac{5}{34} \). Thus, we have:
+    $$y_{p_2}(t) = -\frac{3}{34} \cos(t) + \frac{5}{34} \sin(t)$$
+    Finally, the general solution of the inhomogeneous ODE is:
+    $$y(t) = C_1 e^{4t} + C_2 e^{-t} - \frac{1}{2} e^{2t} - \frac{3}{34} \cos(t) + \frac{5}{34} \sin(t)$$
+\end{example}
+
+\paragraph{Operator Theory} We call the differential operator \( L = D^2 + pD + qI \) where \( D \) is the differentiation operator and \( I \) is the identity operator. Then, we would call $L: C^2(\mathbb{R}) \to C(\mathbb{R})$ a transformation from the space of twice differentiable functions to the space of continuous functions. We can consider the factorization of this operator:
+$$L = (D - \lambda_1 I)(D - \lambda_2 I)$$
+where \( \lambda_1 \) and \( \lambda_2 \) are the roots of the characteristic equation.
+
+ 
+Then, we can consider the eigenvalues and eigenfunctions of this operator:
+\begin{definition}[Eigenvalues and Eigenfunctions of Differential Operators]
+    An eigenvalue \( \lambda \) of a differential operator \( L \) is a scalar such that there exists a non-trivial function \( y(t) \) (called an eigenfunction) satisfying the equation:
+    \begin{equation}
+    L[y(t)] = \lambda y(t)
+    \end{equation}
+    In the context of second-order linear ODEs, if we consider the operator \( L = D^2 + pD + qI \), then the eigenvalue problem becomes:
+    \begin{equation}
+    y'' + py' + qy = \lambda y
+    \end{equation}
+    The solutions to this equation can provide insights into the behavior of the system described by the differential equation, including stability and oscillatory properties.
+\end{definition}
+
+\begin{example}[Eigenfunctions of $D$]
+    Consider the differential operator \( D \) defined by \( D[y(t)] = y'(t) \). We want to find the eigenvalues and eigenfunctions of this operator. The eigenvalue equation is given by:
+    $$D[y(t)] = \lambda y(t)$$
+    which translates to the first-order ODE, solving this gives:
+    $$ f_\lambda = e^{\lambda t} $$
+    where \( \lambda \) is any complex number. Thus, the eigenfunctions of the operator \( D \) exists in a dense, uncoutable spectrum.
+    
+    If we impose boundary conditions, for example, \( y(0) = 1 = y(2\pi) \), then we have:
+    $$ e^{\lambda 2\pi} = 1 \implies \lambda = ik, k \in \mathbb{Z} $$
+    Thus, the eigenvalues are discrete and countable, and the corresponding eigenfunctions are:
+    $$ f_k(t) = e^{ikt}, k \in \mathbb{Z} $$
+    which form a basis for the space of periodic functions with period \( 2\pi \).
+\end{example}
+
+\begin{definition}[Fourier Basis]
+    The set of functions \( \{ e^{ikt} \mid k \in \mathbb{Z} \} \) forms an orthogonal basis for the space of square-integrable functions on the interval \( [0, 2\pi] \). This basis is known as the Fourier basis. Any function \( f(t) \) in this space can be expressed as a Fourier series:
+    \begin{equation}
+    f(t) = \sum_{k=-\infty}^{\infty} c_k e^{ikt}
+    \end{equation}
+    where the coefficients \( c_k \) are given by:
+    \begin{equation}
+    c_k = \frac{1}{2\pi} \int_0^{2\pi} f(t) e^{-ikt} dt
+    \end{equation}
+    The Fourier basis is widely used in various fields, including signal processing, heat transfer, and quantum mechanics, due to its ability to represent periodic functions and analyze frequency components.
+    
+\end{definition}
+
+\begin{definition}[Generalized Eigenfunction]
+    A generalized eigenfunction of a differential operator \( L \) associated with an eigenvalue \( \lambda \) is a function \( y(t) \) that satisfies the equation:
+    \begin{equation}
+    (L - \lambda I)^m[y(t)] = 0
+    \end{equation}
+    for some positive integer \( m \). Here, \( I \) is the identity operator, and \( m \) is the order of the generalized eigenfunction. Generalized eigenfunctions arise in cases where the operator \( L \) has repeated eigenvalues, and they extend the concept of eigenfunctions to include functions that may not satisfy the standard eigenvalue equation but still provide valuable information about the structure of the solution space.
+    
+\end{definition}
+
+\begin{definition}[Spectrum]
+    The spectrum of a differential operator \( L \) is the set of all eigenvalues \( \lambda \) for which there exists a non-trivial solution \( y(t) \) (eigenfunction):
+    \begin{equation}
+        \mathrm{spec}(L) = \{ \lambda \in \mathbb{C} \mid L[y(t)] = \lambda y(t) \text{ has a non-trivial solution } y(t) \}
+    \end{equation}
+\end{definition}
+
+\begin{definition}[Variation of Parameters]
+    Variation of parameters is a method used to find a particular solution to a non-homogeneous linear differential equation. For a second-order ODE of the form:
+    $$y'' + p(t)y' + q(t)y = g(t)$$
+    where \( y_1(t) \) and \( y_2(t) \) are two linearly independent solutions of the corresponding homogeneous equation, a particular solution \( y_p(t) \) can be expressed as:
+    \begin{equation}
+    y_p(t) = u_1(t)y_1(t) + u_2(t)y_2(t)
+    \end{equation}
+    where \( u_1(t) \) and \( u_2(t) \) are functions to be determined. These functions satisfy the system of equations:
+    \begin{align*}
+        u_1'(t)y_1(t) + u_2'(t)y_2(t) &= 0 \\
+        u_1'(t)y_1'(t) + u_2'(t)y_2'(t) &= g(t)
+    \end{align*}
+    Solving this system allows us to find \( u_1(t) \) and \( u_2(t) \), and thus the particular solution \( y_p(t) \).
+    
+\end{definition}
 \end{document}

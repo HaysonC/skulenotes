@@ -1872,6 +1872,73 @@ The following table shows the 3-bit binary and Gray code representations:
 \end{shaded}
 The assembly code is then assembled into machine code, which is a series of 0s and 1s that the computer can understand. The assembly would be specific to the architecture of the computer (machine dependent), which is why we have different assembly languages for different architectures (e.g., x86, RISC-V, ARM).
 \section{Computer Organization}
-\section{Assembly Language}
+\section{RISC-V Assembly Language}
+\begin{definition}[Arithmetic Logical Unit]
+    An Arithmetic Logical Unit (ALU) is a digital circuit that performs arithmetic and logical operations on binary numbers. It is a fundamental building block of the central processing unit (CPU) in a computer. The ALU takes two binary inputs, performs the specified operation, and produces a binary output.
+
+    The ALU can perform a variety of operations, including:
+    \begin{itemize}
+        \item Arithmetic operations: addition, subtraction, multiplication, division
+        \item Logical operations: AND, OR, NOT, XOR
+        \item Bitwise operations: shift left, shift right
+        \item Comparison operations: equal to, less than, greater than
+    \end{itemize}
+    The specific operations supported by an ALU depend on its design and the architecture of the computer it is used in.
+\end{definition}
+
+\begin{definition}[Instructions]
+    Instructions are the basic commands that a CPU can execute. They are typically represented in assembly language, which is a low-level programming language that is specific to a particular computer architecture. Each instruction consists of an operation code (opcode) and operands, which specify the data to be operated on.
+
+    In RISC-V architecture, instructions are 32 bits long and are divided into different formats based on the type of operation being performed. The most common instruction formats are R-type, I-type, S-type, B-type, U-type, and J-type. Each format has a specific layout for the opcode and operands.
+
+    RISC-V instructions can perform a variety of operations, including arithmetic operations (e.g., addition, subtraction), logical operations (e.g., AND, OR), data movement (e.g., load, store), and control flow (e.g., branch, jump).
+    
+\end{definition}
+
+\begin{definition}[Registers]
+    Registers are small, high-speed storage locations within a CPU that hold data temporarily during the execution of instructions. They are used to store operands, intermediate results, and memory addresses. Registers are faster to access than main memory, which allows for quicker data manipulation and processing.
+
+    In RISC-V architecture, there are 32 general-purpose registers (x0 to x31), each 32 bits wide in the RV32I variant. The register x0 is hardwired to zero and cannot be modified. The other registers can be used for various purposes, such as holding function arguments, return values, and temporary data.
+\end{definition}
+
+\begin{definition}[Intermediates]
+    Intermediates are temporary values that are used during the execution of instructions. They are typically stored in registers and are used to hold the results of operations before they are written back to memory or used as inputs to other operations.
+\end{definition}
+
+\begin{definition}[Operahands and Instruction Operations]
+    The following is a table of RISC-V instructions and the operations they perform:
+    
+    The registers are \verb|rX| and \verb|rY|, and \verb|D| is a 12 bit value.
+    
+    \begin{table}[h!]
+        \centering
+        \begin{tabular}{|c|c|c|}
+            \hline
+            Instruction & Operation & Description \\
+            \hline
+            MV rX, rY & rX = rY & Move value from rY to rX \\
+            MV rX, #D & rX = D & Load sign extended immediate D into rX \\
+            \hline
+            ADD rX, rY & rX = rX + rY & Add rX and rY, store result in rX \\
+            ADD rX, #D & rX = rX + D & Add immediate D to rX, store result in rX \\
+            \hline 
+            SUB rX, rY & rX = rX - rY & Subtract rY from rX, store result in rX \\
+            SUB rX, #D & rX = rX - D & Subtract immediate D from rX, store result in rX \\
+            \hline
+            MUL rX, rY & rX = rX * rY & Multiply rX and rY, store result in rX \\
+            \hline
+            DIV rX, rY & rX = rX / rY & Divide rX by rY, store quotient in rX \\
+            \hline
+        \end{tabular}
+        \caption{RISC-V Arithmetic Instructions}
+        \label{tab:riscv_arithmetic_instructions}
+    \end{table}
+\end{definition}
+\begin{definition}[Instruction Encoding]
+    Encodings are 16-bit or 32-bit binary representations of instructions that the CPU can understand and execute. Each instruction is represented by a unique binary code that specifies the operation to be performed and the operands involved. The encoding of an instruction typically includes the following components:
+    \begin{itemize}
+        \item \textbf{Opcode:} A unique binary code that identifies the operation to be performed (e.g., addition, subtraction, load, store).
+        \item \textbf
+\end{definition}
 \end{document}
 

@@ -979,5 +979,65 @@ We can now summarize thermal dynamics as a logical system.
 \end{itemize}
     
 \chapter{Heat Transfer}
+\section{Modes of Heat Transfer}
+\subsection{Conduction}
+\begin{definition}[Conduction]
+    Conduction is the transfer of heat through a solid material without the movement of the material itself. It occurs due to the vibration and collision of atoms and molecules within the material. The rate of heat transfer by conduction is given by Fourier's law:
+    \begin{equation}
+        \dot{Q} = -k A \frac{dT}{dx}
+    \end{equation}
+    where $\dot{Q}$ is the heat transfer rate, $k$ is the thermal conductivity of the material, $A$ is the cross-sectional area through which heat is being transferred, and $\frac{dT}{dx}$ is the temperature gradient in the direction of heat transfer.
+\end{definition}
+\begin{definition}[Heat Flux]
+    Heat flux is the rate of heat transfer per unit area. It is given by:
+    \begin{equation}
+        q'' = \frac{\dot{Q}}{A} = -k \frac{dT}{dx}
+    \end{equation}
+    where $q''$ is the heat flux, $\dot{Q}$ is the heat transfer rate, $A$ is the cross-sectional area, $k$ is the thermal conductivity, and $\frac{dT}{dx}$ is the temperature gradient.
+    
+\end{definition}
 
+\begin{definition}[Fourier's Law]
+    Fourier's law states that the rate of heat transfer through a material is proportional to the negative gradient of temperature and the area through which the heat is being transferred. Mathematically, it is expressed as:
+    \begin{equation}
+        \dot{Q} = -k A \frac{dT}{dx}
+    \end{equation}
+    where $\dot{Q}$ is the heat transfer rate, $k$ is the thermal conductivity of the material, $A$ is the cross-sectional area, and $\frac{dT}{dx}$ is the temperature gradient.
+
+    In other words, heat flows from regions of higher temperature to regions of lower temperature, and the rate of heat transfer is influenced by the material's thermal conductivity and the geometry of the system.
+\end{definition}
+\begin{example}
+   \textit{ A cone frustum is conducting heat at staady-state with no generation. If the frustum is insulated, and the there is heat flux onto the smaller face, the heat flux in would be \underline{\hspace{2cm}} the heat flux out:}
+    \begin{itemize}
+        \item Equal to
+        \item Greater than
+        \item Less than
+    \end{itemize}
+
+    \textbf{Answer:} Greater than. We can set up the energy balance:
+    \begin{align*}
+        \dot{Q}_\text{in} - \dot{Q}_\text{out} + \dot{Q}_\text{gen} &= 0 \\
+        \dot{q}_{in} A_{in} - \dot{q}_\text{out} A_\text{out} + 0 &= 0 \\
+        \dot{q}_\text{in} A_\text{in} &= \dot{q}_\text{out} A_\text{out} \\
+        \dot{q}_\text{out} &= \dot{q}_\text{in} \frac{A_\text{in}}{A_\text{out}} \\
+        &< \dot{q}_\text{in} \quad \text{since } A_\text{out} > A_\text{in}
+    \end{align*}
+\end{example}
+
+\begin{definition}[Common Thermal Conductors]
+    Common thermal conductors and their thermal conductivities ($k$) at room temperature are:
+    \begin{itemize}
+        \item Copper: $k \approx 400\, \text{W/m·K}$
+        \item Aluminum: $k \approx 237\, \text{W/m·K}$
+        \item Steel: $k \approx 50\, \text{W/m·K}$
+        \item Glass: $k \approx 1\, \text{W/m·K}$
+        \item Wood: $k \approx 0.1 - 0.2\, \text{W/m·K}$
+        \item Diamond: $k \approx 2200\, \text{W/m·K}$
+    \end{itemize}
+\end{definition}
+
+Diamond conducts well because of its crystalline structure, but why does metal conduct well? Metals have free electrons that can move easily through the lattice structure, allowing them to transfer thermal energy quickly. The free electrons collide with atoms and other electrons, facilitating the transfer of heat. This is why metals generally have high thermal conductivity compared to non-metals, which rely primarily on lattice vibrations (phonons) for heat transfer.
+\begin{definition}[Electron Conduction]
+    In metals, heat conduction occurs primarily through the movement of free electrons. These electrons can move freely throughout the metal lattice and transverse quickly through different energy states. When a temperature gradient is present, the higher-energy electrons from the hotter region move towards the cooler region, transferring their kinetic energy to the lattice atoms through collisions. This process results in efficient heat conduction in metals.
+\end{definition}
 \end{document}

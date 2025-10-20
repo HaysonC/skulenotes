@@ -55,9 +55,9 @@ Equivalences: $\beta = \tfrac{\gamma}{2}$ and our underdamped condition $\gamma 
 
 \begin{definition}[Driven Harmonic Oscillator]
     A driven harmonic oscillator is described by the following differential equation, which includes an external driving force $F(t)$:
-    \begin{equation}\label{eq:driven_ho}
-        m \ddot{x} + b \dot{x} + kx = F(t)
-    \end{equation}
+    $$
+        m \frac{d^2 x}{dt^2} + b \frac{dx}{dt} + kx = F(t)   
+    $$
 \end{definition}
 % [Moved: The Wave Equation section is presented later for a smoother flow after oscillators]
 
@@ -77,29 +77,29 @@ Equivalences: $\beta = \tfrac{\gamma}{2}$ and our underdamped condition $\gamma 
 We analyze the undamped solution forms, relate constants to initial conditions, and derive period/frequency relations.
 \begin{definition}[Simple Harmonic Motion]
     You should have learned Hooke's law and Newton's second law, which give us the equation of motion for a simple harmonic oscillator. The same as equation (\ref{eq:hooke}), which can be rewritten as:
-    \begin{equation}\label{eq:newton_hooke}
+    $$
         F = m\ddot{x} = -kx
-    \end{equation}xs
+    $$
     By setting $\omega^2 = \frac{k}{m}$, a general solution can be written as:
-    \begin{equation}\label{eq:sho_general}
+    $$
         x(t) = x_0 + A_1 \cos(\omega t) + A_2 \sin(\omega t)
-    \end{equation}
+    $$
     where $A_1$ and $A_2$ are constants determined by the IVP, $\omega$ is the angular frequency, and $\phi$ is the phase constant. $x_0$ is the equilibrium position (often set to 0). The unknown constants can be determined by knowing $x, \dot{x}$ at specific times.
 \end{definition}
 
 \begin{definition}[Period, Frequency, and Angular Frequency]
     The period \( T \) is the time it takes for one complete cycle of the motion, given by:
-    \begin{equation}\label{eq:period}
+    $$
         T = 2\pi \sqrt{\frac{m}{k}}
-    \end{equation}
+    $$
     The frequency \( f \) is the number of cycles per unit time, given by:
-    \begin{equation}\label{eq:frequency}
+    $$
         f = \frac{1}{T} = \frac{1}{2\pi} \sqrt{\frac{k}{m}}
-    \end{equation}
+    $$
     The angular frequency \( \omega \) is related to the frequency by:
-    \begin{equation}\label{eq:omega_rel}
+    $$
         \omega = 2\pi f = \sqrt{\frac{k}{m}}
-    \end{equation}
+    $$
     
 \end{definition}
 
@@ -208,9 +208,9 @@ by the cosine addition formula.
 We solve the damped ODE, classify regimes (underdamped, critical, overdamped), and connect decay rates with parameters.
 \begin{definition}[Damped Harmonic Motion]
     For small velocities, the drag force is approximately proportional to the velocity and acts in the opposite direction. This drag force can be modeled as \( F_d = -\gamma \dot{x} \), where \( \gamma \) is the damping coefficient. Including this drag force in the equation of motion for a harmonic oscillator leads to the damped harmonic oscillator equation (\ref{eq:damped_ho}). Which could be rewritten as:
-    \begin{equation}\label{eq:damped_ode}
+    $$
         \ddot{x} + \gamma \dot{x} + \omega_0^2 x = 0
-    \end{equation}
+    $$
     where \( \omega_0 = \sqrt{\frac{k}{m}} \) is the natural angular frequency of the undamped oscillator, and \( \gamma = \frac{b}{m} \) is the damping coefficient per unit mass.
     
     To skip the math, lets assume a solution of the form \( x(t) = e^{i\omega t} \), substituting into the differential equation gives us a formulation for \( \omega \):
@@ -389,13 +389,13 @@ We can also consider the ratio between the energy at one time and the energy one
 We examine steady-state response to sinusoidal driving without losses and identify resonance behavior.
 \begin{definition}[Undamped Forced Oscillations]
     Consider a driver force acting on the mass-spring system; the ODE becomes:
-    \begin{equation}\label{eq:forced_undamped}
+    $$
         m\ddot{x} + kx = \eta
-    \end{equation}
+    $$
     where \( \eta = F_0 \cos(\omega t) \) is the driving force with amplitude \( F_0 \) and angular frequency \( \omega \). The steady-state particular solution is:
-    \begin{equation}\label{eq:forced_ss}
-        x(t) = A(\omega)\cos(\omega t - \delta)
-    \end{equation}
+    $$
+        x(t) = A(\omega)\cos(\omega t - \delta) 
+    $$
     To derive $A(\omega)$ and $\delta$, use the equation of motion:
     \begin{align*}
         A(\omega)(-\omega^2 + \omega_0^2) \cos(\delta) = \omega_0^2 a
@@ -557,67 +557,64 @@ To illustrate the graph, we can plot \( \bar{P}(\omega) \) versus \( \omega \) f
 \end{keybox}
 
 Consider the arc length \( s \) of a pendulum bob, we have:
-\begin{equation}\label{eq:pendulum_arc}
-\begin{aligned}
-    s &= l\theta \\
-    m\ddot{s} &= -mg\sin\theta
-\end{aligned}
-\end{equation}
+$$
+    s = l\theta \quad m\ddot{s} = -mg\sin(\theta)
+$$
 
 For small angles, we can approximate \( \sin(\theta) \approx \theta \), leading to:
-\begin{equation}\label{eq:pendulum_small}
+$$
     \ddot{\theta} + \frac{g}{l}\theta = 0
-\end{equation}
+$$
 And the ODE has solution:
-\begin{equation}\label{eq:pendulum_solution}
-    	heta(t) = \theta_0 \cos(\omega t + \phi)
-\end{equation}
+$$
+    \theta(t) = \theta_0 \cos(\omega t + \phi)
+$$
 
 \paragraph{Energy} For small angle $\theta$, the total mechanical energy \( E \) of the pendulum is given by:
-\begin{equation}\label{eq:pendulum_energy}
-    E = K + U = \frac{1}{2}ml^2\dot{\theta}^2 + mgl\big(1 - \cos\theta\big) \approx \frac{1}{2}ml^2\dot{\theta}^2 + \frac{1}{2}mgl\theta^2
-\end{equation}
+$$
+    E = K + U = \frac{1}{2}ml^2\dot{\theta}^2 + mgl(1 - \cos(\theta)) \approx \frac{1}{2}ml^2\dot{\theta}^2 + \frac{1}{2}mgl\theta^2
+$$
 This shows that the pendulum behaves like a simple harmonic oscillator with an effective spring constant \( k = \frac{mg}{l} \).    
 
 
 \paragraph{The physical pendulum} For a rigid body swinging about a pivot point, the equation of motion is given by:
-\begin{equation}\label{eq:physical_tau}
-    I\ddot{\theta} = \tau
-\end{equation}
-For simple rod of length \( L \) and mass \( m \) pivoted at one end, the moment of inertia about the pivot point is \( I = \frac{1}{3}mL^2 \). The torque due to gravity when the rod is displaced by an angle \( \theta \) from the vertical is \( \tau = -mg\tfrac{L}{2}\sin\theta \). For small angles, we can approximate \( \sin\theta \approx \theta \), leading to:
-\begin{equation}\label{eq:physical_small}
+$$
+    I\ddot{\theta} = \tau 
+$$
+For simple rod of length \( L \) and mass \( m \) pivoted at one end, the moment of inertia about the pivot point is \( I = \frac{1}{3}mL^2 \). The torque due to gravity when the rod is displaced by an angle \( \theta \) from the vertical is \( \tau = -mg\frac{L}{2}\sin(\theta) \). For small angles, we can approximate \( \sin(\theta) \approx \theta \), leading to:
+$$
     \ddot{\theta} + \frac{3g}{2L}\theta = 0
-\end{equation}
-And the small angle approximation leads to:
-\begin{equation}\label{eq:physical_omega_form}
+$$
+And the small angle approximates leads to:
+$$
     \ddot{\theta} + \omega^2 \theta = 0
-\end{equation}
-where \( \omega = \sqrt{\tfrac{3g}{2L}} \). The solution to this ODE is:
-\begin{equation}\label{eq:physical_solution}
-    	heta(t) = \theta_0 \cos(\omega t + \phi)
-\end{equation}
+$$
+where \( \omega = \sqrt{\frac{3g}{2L}} \). The solution to this ODE is:
+$$
+    \theta(t) = \theta_0 \cos(\omega t + \phi)
+$$
 The angular frequency of oscillation for the physical pendulum is:
-\begin{equation}\label{eq:physical_omega}
+$$
     \omega = \sqrt{\frac{3g}{2L}}
-\end{equation}
+$$
 
 \paragraph{The LC Circuit} An LC circuit consists of an inductor \( L \) and a capacitor \( C \) connected in series. The charge \( q(t) \) on the capacitor satisfies the differential equation:
-\begin{equation}\label{eq:LC_ode}
+$$
     L\frac{d^2q}{dt^2} + \frac{1}{C}q = 0
-\end{equation}
+$$
 This is analogous to the equation of motion for a simple harmonic oscillator, with the angular frequency given by:
-\begin{equation}\label{eq:LC_omega}
+$$
     \omega = \frac{1}{\sqrt{LC}}
-\end{equation}  
+$$  
 
 \paragraph{The RLC Circuit} An RLC circuit consists of a resistor \( R \), inductor \( L \), and capacitor \( C \) connected in series. The charge \( q(t) \) on the capacitor satisfies the differential equation:
-\begin{equation}\label{eq:RLC_ode}
+$$
     L\frac{d^2q}{dt^2} + R\frac{dq}{dt} + \frac{1}{C}q = 0
-\end{equation}
+$$
 This is analogous to the resistor behaving as a damped harmonic oscillator, with the angular frequency given by:
-\begin{equation}\label{eq:RLC_omega}
+$$
     \omega = \sqrt{\frac{1}{LC} - \left(\frac{R}{2L}\right)^2}
-\end{equation}
+$$
 The following are equations that summarize the analogies between mechanical and electrical oscillators:
 \begin{table}[h!]
     \centering
@@ -652,48 +649,48 @@ The following are equations that summarize the analogies between mechanical and 
 \begin{definition}[Coupled Oscillators]
     Consider two masses \( m_1 \) and \( m_2 \) on two pendulum connected by springs with spring constant \( k \).  The equations of motion for the two masses are given by:
 
-    \begin{equation}\label{eq:coupled_pendulum}
+    $$
         \begin{cases}
-            \ddot{x}_1 = -\dfrac{g}{L}x_1 + \dfrac{k}{m_1} (x_1 - x_2) \\
-            \ddot{x}_2 = -\dfrac{g}{L}x_2 - \dfrac{k}{m_2} (x_1 - x_2)
+            \ddot{x}_1 &= -\frac{g}{L}x_1 + \frac{k}{m_1} (x_1 - x_2) \quad (a) \\
+            \ddot{x}_2 &= -\frac{g}{L}x_2 - \frac{k}{m_2} (x_1 - x_2) \quad (b)
         \end{cases}
-    \end{equation}
+    $$
     where \( x_1 \) and \( x_2 \) are the displacements of masses \( m_1 \) and \( m_2 \) from their equilibrium positions, respectively. Now if we add and subtract the two equations, we get:
-    \begin{equation}\label{eq:sum_diff}
+    $$
         \begin{cases}
-            \ddot{x}_1 + \ddot{x}_2 = -\dfrac{g}{L}(x_1 + x_2) \\
-            \ddot{x}_1 - \ddot{x}_2 = -\left(\dfrac{g}{L} + \dfrac{k}{m_1} + \dfrac{k}{m_2}\right)(x_1 - x_2)
+            \ddot{x}_1 + \ddot{x}_2 &= -\frac{g}{L}(x_1 + x_2) \quad (c) \\
+            \ddot{x}_1 - \ddot{x}_2 &= -\left(\frac{g}{L} + \frac{k}{m_1} + \frac{k}{m_2}\right)(x_1 - x_2) \quad (d)
         \end{cases}
-    \end{equation}
+    $$
     Let:
-    \begin{equation}\label{eq:q_defs}
-    q_1 = x_1 + x_2, \quad q_2 = x_1 - x_2
-    \end{equation}
+    $$ 
+    q_1 = x_1 + x_2 \quad \text{and} \quad q_2 = x_1 - x_2
+    $$
     also, we let:
-    \begin{equation}\label{eq:omega12}
-        \omega_1 = \sqrt{\frac{g}{L}}, \quad \omega_2 = \sqrt{\frac{g}{L} + \frac{k}{m_1} + \frac{k}{m_2}}
-    \end{equation}
+    $$
+        \omega_1 = \sqrt{\frac{g}{L}} \quad \text{and} \quad \omega_2 = \sqrt{\frac{g}{L} + \frac{k}{m_1} + \frac{k}{m_2}}
+    $$
     Then, the equations of motion can be rewritten as:
-    \begin{equation}\label{eq:q_odes}
+    $$
         \begin{cases}
-            \ddot{q}_1 = -\omega_1^2 q_1 \\
-            \ddot{q}_2 = -\omega_2^2 q_2
+            \ddot{q}_1 &= -\omega_1^2 q_1 \\
+            \ddot{q}_2 &= -\omega_2^2 q_2
         \end{cases}
-    \end{equation}
+    $$
     Observe that \( q_1 \) and \( q_2 \) are decoupled, and each behaves like a simple harmonic oscillator with angular frequencies \( \omega_1 \) and \( \omega_2 \), respectively. The general solutions for \( q_1(t) \) and \( q_2(t) \) are:
-    \begin{equation}\label{eq:q_solutions}
+    $$
         \begin{cases}
-            q_1(t) = A_1 \cos(\omega_1 t + \phi_1) \\
-            q_2(t) = A_2 \cos(\omega_2 t + \phi_2)
+            q_1(t) &= A_1 \cos(\omega_1 t + \phi_1) \\
+            q_2(t) &= A_2 \cos(\omega_2 t + \phi_2)
         \end{cases}
-    \end{equation}
+    $$
     where \( A_1, A_2, \phi_1, \) and \( \phi_2 \) are constants determined by the initial conditions. Finally, we can expressions for \( x_1(t) \) and \( x_2(t) \) in terms of \( q_1(t) \) and \( q_2(t) \):
-    \begin{equation}\label{eq:x_from_q}
+    $$
         \begin{cases}
-            x_1(t) = \dfrac{q_1(t) + q_2(t)}{2} = \dfrac{A_1}{2} \cos(\omega_1 t + \phi_1) + \dfrac{A_2}{2} \cos(\omega_2 t + \phi_2) \\
-            x_2(t) = \dfrac{q_1(t) - q_2(t)}{2} = \dfrac{A_1}{2} \cos(\omega_1 t + \phi_1) - \dfrac{A_2}{2} \cos(\omega_2 t + \phi_2)
+            x_1(t) &= \frac{q_1(t) + q_2(t)}{2} = \frac{A_1}{2} \cos(\omega_1 t + \phi_1) + \frac{A_2}{2} \cos(\omega_2 t + \phi_2) \\
+            x_2(t) &= \frac{q_1(t) - q_2(t)}{2} = \frac{A_1}{2} \cos(\omega_1 t + \phi_1) - \frac{A_2}{2} \cos(\omega_2 t + \phi_2)
         \end{cases}
-    \end{equation}
+    $$
     All parts of the system oscillate with the same normal frequency (eigenvalue) in a normal mode (eigenvector).
 \end{definition}
 
@@ -703,26 +700,26 @@ The following are equations that summarize the analogies between mechanical and 
     For the two-mass pendulum system, there are two normal modes:
     \begin{itemize}
         \item \textbf{In-phase mode} (\(\omega_1\)): both masses swing together, reaching maximum displacement on the same side at the same time.  
-    \begin{equation}\label{eq:in_phase}
-    x_1 = x_2
-    \end{equation}
+        $$
+        x_1 = x_2
+        $$
         
         \item \textbf{Out-of-phase mode} (\(\omega_2\)): the two masses swing in opposite directions, so when one moves left, the other moves right.  
-    \begin{equation}\label{eq:out_phase}
-    x_1 = -x_2
-    \end{equation}
+        $$
+        x_1 = -x_2
+        $$
     \end{itemize}
 
     Any general motion of the system can be written as a combination (superposition) of these two normal modes.
 \end{definition}
 \paragraph{Energy in Coupled Oscillators} The total mechanical energy \( E \) of the coupled oscillator system is given by:
-\begin{equation}\label{eq:coupled_energy}
+$$
     E = \frac{1}{2}m_1\dot{x}_1^2 + \frac{1}{2}m_2\dot{x}_2^2 + \frac{1}{2}k(x_1 - x_2)^2 + \frac{1}{2}m_1\frac{g}{L}x_1^2 + \frac{1}{2}m_2\frac{g}{L}x_2^2
-\end{equation}
+$$
 Substituting the expressions for \( x_1 = \frac{q_1 + q_2}{2} \) and \( x_2 = \frac{q_1 - q_2}{2} \) into the energy equation, two independent energies terms for $q_1$ and $q_2$ emerge:
-\begin{equation}\label{eq:mode_energy}
+$$
     E = \left[ \frac{1}{4} m \dot{q}_1^2 + \frac{1}{4}\frac{m_1 g}{L} q_1^2 \right] + \left[ \frac{1}{4} m \dot{q}_2^2 + \frac{1}{4}\frac{m_2 g}{L} q_2^2 \right]
-\end{equation}
+$$
 This shows that the total energy is the sum of the energies associated with each normal mode, and that no cross term between the modes exists. Thus energy does not flow from one mode to another.
 
 \begin{example}
@@ -1170,12 +1167,6 @@ and
     \item \textbf{Free End}: If the wave encounters a boundary where the medium is free to move (e.g., a string attached to a ring that can slide along a rod), the reflected wave does not undergo a phase change. The reflection coefficient is \( R = 1 \) and the transmission coefficient is \( T = 2 \).
 \end{itemize}
 
-\paragraph{Energy Reflection and Transmission} The energy reflection and transmission coefficients are given by:
-\begin{equation}\label{eq:energy_coeff}
-    R_e = R^2 = \left(\frac{Z_2 - Z_1}{Z_2 + Z_1}\right)^2, \quad T_e = \frac{P_t}{P_i} = \frac{Z_1}{Z_2} T^2 = \frac{4Z_1 Z_2}{(Z_2 + Z_1)^2}
-\end{equation}
-Note that \( R_e + T_e = 1 \), which means that the total energy is conserved across the boundary.
-
 \begin{example}[Transmission of 64\% Energy]
 Suppose a wave transmits \(64\%\) of its incident energy across a boundary. Then:
 $$
@@ -1193,28 +1184,6 @@ $$
     T = 1 + R = 1 + 0.6 = 1.6
 $$
 Thus, the amplitude transmission coefficient is \(T = 1.6\), even though only \(64\%\) of the energy is transmitted. This apparent paradox arises because the transmitted energy depends on both the amplitude squared and the ratio of impedances \(\tfrac{Z_2}{Z_1}\).
-\end{example}
-\begin{example}[Tricky Case: Impedance Mismatch with Energy Conservation]
-Let \(Z_2 = 3Z_1\). Then:
-\[
-R = \frac{Z_2 - Z_1}{Z_2 + Z_1} = \frac{1}{2}, 
-\quad T = \frac{2Z_2}{Z_2 + Z_1} = 1.5
-\]
-Amplitude transmission seems large, but power depends on both amplitude and impedance.
-
-Energy (power) transmission and reflection coefficients are:
-\[
-R_e = R^2 = 0.25, \qquad 
-T_e = \frac{Z_1}{Z_2} T^2 = \frac{1}{3}(1.5)^2 = 0.75
-\]
-so
-\[
-R_e + T_e = 1.00
-\]
-confirming energy conservation.
-
-\textbf{Interpretation:}
-The transmitted amplitude is higher because the second medium has greater impedance (\(Z_2 > Z_1\)), which means each unit of amplitude carries less energy. Therefore, amplitude ratios alone can be misleading — energy flow must always be evaluated using both amplitude and impedance.
 \end{example}
 \subsection{Superposition and Standing Waves}
 
@@ -1455,109 +1424,72 @@ $$
         A_n = \frac{2}{L} \int_0^L f(x) \sin\left(\frac{n\pi x}{L}\right) \, dx
     \end{equation}
 \end{definition}
-\subsection{Dispersion of Waves}
-\begin{definition}[Wave Number]
-    The wave number \( k \) is defined as:
-    \begin{equation}
-        k = \frac{2\pi}{\lambda}
-    \end{equation}
-    where \( \lambda \) is the wavelength of the wave. The wave number represents the spatial frequency of the wave, indicating how many wavelengths fit into a unit distance.
-\end{definition}
-\begin{definition}[Dispersion Relation]
-    The dispersion relation describes how the angular frequency \( \omega \) of a wave depends on its wave number \( k \). It is given by:
-    \begin{equation}
-        \omega = \omega(k)
-    \end{equation}
-    The specific form of the dispersion relation depends on the type of wave and the properties of the medium through which it propagates.
 
-    \textbf{Non-dispersive waves}: If \( \omega \) is directly proportional to \( k \) (i.e., \( \omega = vk \)), the wave is non-dispersive, meaning all frequency components travel at the same phase velocity \( v \).
+\chapter{Modern Physics}
+\section{Quantum Mechanics}
+\begin{definition}[Quantization]
+    Quantization is the constraint that energy and other physical properties can only take on discrete values (\textit{quanta}) rather than a continuous range.
+\end{definition}
+\begin{definition}[Probabilistic Framework]
+    Predictions in quantum mechanics are inherently probabilistic. The exact outcome of a measurement cannot be determined, only the probability of different outcomes.
 \end{definition}
 
-\begin{definition}[Phase and Group Velocity]
-    The phase velocity \( v_p \) is the rate at which the phase of the wave propagates in space. It is given by:
-    \begin{equation}
-        v_p = \frac{\omega}{k}  = \frac{c}{n}
-    \end{equation}
-    where \( c \) is the speed of light in a vacuum and \( n \) is the refractive index of the medium.
 
-    The group velocity \( v_g \) is the rate at which the envelope of a wave packet (or group of waves) propagates. It is given by:
+\begin{definition}[Black Body]
+    A black body is an idealized physical object that absorbs all incident electromagnetic radiation, regardless of frequency or angle of incidence. It also emits radiation in a characteristic spectrum that depends solely on its temperature.
+\end{definition}
+\begin{definition}[Classical View of Black Body Radiation]
+    According to classical physics, Reyleigh-Jeans law predicts that the energy density of black body radiation increases indefinitely with frequency, leading to the "ultraviolet catastrophe." The classical formula is given by:
+    $$    u(\nu, T) = \frac{8\pi \nu^2 k_B T}{c^3} $$
+    where \( u(\nu, T) \) is the energy density per unit frequency, \( \nu \) is the frequency, \( k_B \) is the Boltzmann constant, \( T \) is the absolute temperature, and \( c \) is the speed of light.
+\end{definition}
+\begin{definition}[Quantum View of Black Body Radiation]
+    Max Planck resolved the ultraviolet catastrophe by proposing that electromagnetic energy is quantized. He introduced the concept that energy is emitted or absorbed in discrete packets called \textbf{quanta}, with energy given by:
     \begin{equation}
-        v_g = \frac{d\omega}{dk} = v - k \frac{dv}{dk} \frac{\lambda}{k} = v - \lambda \frac{dv}{d\lambda}
+        E_n = n h f \quad n = 0, 1, 2, \ldots
     \end{equation}
-    where \( v \) is the average of the phase velocities of the individual waves in the packet. $\lambda$ is average wavelength of the wave packet.
+    where \( h \) is Planck's constant and \( f \) is the frequency of the radiation. This leads to Planck's law for black body radiation. The resulting law for the black body spectrum is:
+    \begin{equation}
+        u(\nu, T) = \frac{8\pi h \nu^3}{c^3} \frac{1}{e^{\frac{h\nu}{k_B T}} - 1}
+    \end{equation}
+\end{definition}
 
-    We have the following three cases:
+
+
+\begin{definition}[Photoelectric Effect]
+    The photoelectric effect is the phenomenon where electrons are emitted from a material (usually a metal) when it is exposed to light of sufficient frequency. The key observations of the photoelectric effect are:
     \begin{itemize}
-        \item If \( v_p = v_g \), the wave is non-dispersive.
-        \item If \( v_p > v_g \), the wave is said to be normally dispersive.
-        \item If \( v_p < v_g \), the wave is said to be anomalously dispersive.
+        \item Electrons are emitted only if the incident light has a frequency above a certain threshold frequency \( f_0 \).
+        \item The kinetic energy of the emitted electrons depends on the frequency of the incident light, not its intensity.
+        \item The number of emitted electrons is proportional to the intensity of the incident light, provided the frequency is above the threshold.
     \end{itemize}
-\end{definition}
-\begin{definition}[Refractive Index]
-    The refractive index \( n \) of a medium is defined as the ratio of the speed of light in a vacuum \( c \) to the phase velocity \( v_p \) of light in the medium:
-    \begin{equation}
-        n = \frac{c}{v_p}
-    \end{equation}
-    The refractive index indicates how much the light slows down when it enters the medium compared to its speed in a vacuum. A higher refractive index means that light travels more slowly in that medium.
-\end{definition}
-\begin{example}
-    The yellow light from sodium has two components with wavelengths of 589.00 nm and 589.59 nm. The refractive index $n$ of a particular glass at these wavelengths has values of 1.6351 and 1.6350, respectively. 
-    \textit{\begin{enumerate}
-        \item What are the phase velocities of the light at these wavelengths?
-        \item What is the velocity of the narrow pulse of sodium transmitted through the glass?
-    \end{enumerate}}
-    Also, we are given the following data:
-    \begin{figure}[h!]
-        \centering
-        \includegraphics[width=0.5\textwidth]{nlambda.png}
-        \caption{$n-\lambda$ data}
-        \label{fig:refractive_index_data}
-    \end{figure}
-    \begin{enumerate}
-        \item The phase velocity \( v_p \) is given by:
-        $$
-            v_p = \frac{c}{n}
-        $$
-        For the first wavelength (589.00 nm):
-        $$
-            v_{p1} = \frac{3 \times 10^8 \,\text{m/s}}{1.6351} \approx 1.834 \times 10^8 \,\text{m/s}
-        $$
-        For the second wavelength (589.59 nm):
-        $$
-            v_{p2} = \frac{3 \times 10^8 \,\text{m/s}}{1.6350} \approx 1.834 \times 10^8 \,\text{m/s}
-        $$
-        \item To find the group velocity \( v_g \), we first need to calculate the average phase velocity \( v \) and average wavelength \( \lambda \):
-        $$            v = \frac{v_{p1} + v_{p2}}{2} \approx 1.834 \times 10^8 \,\text{m/s} $$
-        $$            \lambda = \frac{589.00 \,\text{nm} + 589.59 \,\text{nm}}{2} = 589.295 \,\text{nm} = 5.89295 \times 10^{-7} \,\text{m} $$
-        We are given the $n-\lambda$ data, so we have $\frac{dn}{d\lambda} = -0.0001/0.59 \text{nm} = -1.6949 \times 10^{-7} \text{nm}^{-1} = -1.6949 \times 10^{-16} \text{m}^{-1}$. And by chain rule, we have:
-        $$            \frac{dv}{d\lambda} = \frac{dv}{dn} \frac{dn}{d\lambda} = -\frac{c}{n^2} \frac{dn}{d\lambda} = -\frac{v}{n} \frac{dn}{d\lambda} $$
-        Thus, we can calculate the group velocity \( v_g \):
-        $$
-            v_g = v - \lambda \frac{dv}{d\lambda} = v - \lambda \frac{v}{n} \frac{dn}{d\lambda} = 0.5742c \approx 1.722 \times 10^8 \,\text{m/s}   
-        $$
-    
-    \end{enumerate}
-\end{example}
-
-\subsection{Wave Pockets}
-\begin{definition}[Wave Packet]
-    A wave packet is a localized disturbance that results from the superposition of multiple waves with different wavelengths and frequencies. It can be represented mathematically as:
-    \begin{equation}
-        y(x,t) = \int_{-\infty}^{\infty} A(k) e^{i(kx - \omega t)} \, dk
-    \end{equation}
-    where \( A(k) \) is the amplitude distribution function in wave number space, \( k \) is the wave number, and \( \omega \) is the angular frequency. The wave packet travels with the group velocity \( v_g = \frac{d\omega}{dk} \).
-\end{definition}
-
-\begin{definition}[Width of the Wave Packet]
-    The spatial width \( \Delta x \) of a wave packet is inversely related to the spread in wave numbers \( \Delta k \) of the constituent waves. This relationship is given by:
-    \begin{equation}
-        \Delta x \Delta k \approx 1
-    \end{equation}
-    where \( \Delta x \) is the uncertainty in position and \( \Delta k \) is the uncertainty in wave number. A narrower wave packet (smaller \( \Delta x \)) corresponds to a broader range of wave numbers (larger \( \Delta k \)), and vice versa.
+    The energy of the incident photons is given by:
+    $$
+        E = h f
+    $$
+    where \( h \) is Planck's constant and \( f \) is the frequency of the light. The maximum kinetic energy \( K_{max} \) of the emitted electrons is given by:
+    $$
+        K_{max} = h f - \phi
+    $$
+    where \( \phi \) is the work function of the material, representing the minimum energy required to liberate an electron from the surface.
     
 \end{definition}
 
-
-
+\begin{definition}[Campton Effect]
+    The Compton effect is the increase in wavelength (or decrease in energy) of X-rays or gamma rays when they are scattered by electrons. This phenomenon provides evidence for the particle-like behavior of light. The change in wavelength \( \Delta \lambda \) of the scattered photon is given by the Compton formula:
+    \begin{equation}
+        \Delta \lambda = \lambda' - \lambda = \frac{h}{m_e c} (1 - \cos \theta)
+    \end{equation}
+    where:
+    \begin{itemize}
+        \item \( \lambda \) is the initial wavelength of the photon,
+        \item \( \lambda' \) is the wavelength after scattering,
+        \item \( h \) is Planck's constant,
+        \item \( m_e \) is the rest mass of the electron,
+        \item \( c \) is the speed of light,
+        \item \( \theta \) is the angle at which the photon is scattered.
+    \end{itemize}
+    
+\end{definition}
 \end{document}
 

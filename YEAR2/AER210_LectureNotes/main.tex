@@ -2362,10 +2362,338 @@ where $\vec{F} = \rho \vec{v}$ is the flux density vector field.
     $$        \vec{r_v} \times \vec{r_u} = 2u^2 \cos v \hat{i} + 2u^2 \sin v \hat{j} - u \hat{k}
     $$
 \end{example}
+\subsection{Divergence and Curl}
+
+\begin{definition}[Divergence]
+    The divergence of a vector field \(\vec{F} = P \, \hat{i} + Q \, \hat{j} + R \, \hat{k}\) is a scalar function defined as:
+    \begin{equation}
+        \nabla \cdot \vec{F} = \frac{\partial P}{\partial x} + \frac{\partial Q}{\partial y} + \frac{\partial R}{\partial z}
+    \end{equation}
+    It measures the rate at which "density" exits a point in the field.
+\end{definition}
+
+
+\begin{definition}[Curl]
+    The curl of a vector field \(\vec{F} = P \, \hat{i} + Q \, \hat{j} + R \, \hat{k}\) is a vector function defined as:
+    \begin{equation}
+        \nabla \times \vec{F} = \begin{vmatrix}
+            \hat{i} & \hat{j} & \hat{k} \\
+            \frac{\partial}{\partial x} & \frac{\partial}{\partial y} & \frac{\partial}{\partial z} \\
+            P & Q & R
+        \end{vmatrix}
+    \end{equation}
+    It measures the rotation of the field around a point.
+\end{definition}
+
+\begin{theorem}[Properties of Divergence and Curl]
+    Let \(\vec{F}\) and \(\vec{G}\) be vector fields, and \(f\) be a scalar function. Then:
+    \begin{itemize}
+        \item \(\nabla \cdot (f \vec{F}) = f (\nabla \cdot \vec{F}) + \vec{F} \cdot (\nabla f)\)
+        \item \(\nabla \times (f \vec{F}) = f (\nabla \times \vec{F}) + (\nabla f) \times \vec{F}\)
+        \item \(\nabla \cdot (\nabla \times \vec{F}) = 0\)
+        \item \(\nabla \times (\nabla f) = 0\)
+    \end{itemize}
+\end{theorem}
+
+\begin{definition}[Consdervative Vector Field]
+    A vector field \(\vec{F}\) is said to be conservative if its curl is zero:
+    \begin{equation}
+        \nabla \times \vec{F} = 0
+    \end{equation}
+    
+\end{definition}
+
+\begin{definition}[Incompressible Vector Field]
+    A vector field \(\vec{F}\) is said to be incompressible if its divergence is zero:
+    \begin{equation}
+        \nabla \cdot \vec{F} = 0
+    \end{equation}
+    
+\end{definition}
+
+\subsection{Divergence Theorem}
+\begin{theorem}
+    Let \(E\) be a solid region in \(\mathbb{R}^3\) with a smooth boundary surface \(S\) oriented outward. If \(\vec{F}\) is a vector field with continuous partial derivatives on an open region containing \(E\), then:
+    \begin{equation}
+        \iint_S \vec{F} \cdot \vec{n} \, dS = \iiint_E (\nabla \cdot \vec{F}) \, dV
+    \end{equation}
+    and $\vec{n}$ is the unit normal vector to the surface \(S\).
+\end{theorem}
+
+\begin{definition}[Flux]
+    The flux of a vector field \(\vec{F}\) across a surface \(S\) is defined as the surface integral of the normal component of \(\vec{F}\) over \(S\):
+    \begin{equation}
+        \text{Flux} = \iint_S \vec{F} \cdot \vec{n} \, dS
+    \end{equation}
+\end{definition}
+\begin{example}[Flux]
+\textit{Compute the flux of the vector field \(\vec{F}(x,y,z) = x \, \hat{i} + y \, \hat{j} + z \, \hat{k}\) across the surface of the unit sphere \(x^2 + y^2 + z^2 = 1\).}
+
+We can use the Divergence Theorem to compute the flux. Notice the following equality holds under the Divergence Theorem:
+\[\iint_S \vec{F} \cdot \vec{n} \, dS = \iiint_E (\nabla \cdot \vec{F}) \, dV\]
+where \(E\) is the solid region enclosed by the surface \(S\).
+
+First, we compute the divergence of \(\vec{F}\):
+\[
+\nabla \cdot \vec{F} = \frac{\partial x}{\partial x} + \frac{\partial y}{\partial y} + \frac{\partial z}{\partial z} = 1 + 1 + 1 = 3
+\]
+Next, we compute the volume integral over the unit sphere:
+\[
+\iiint_E (\nabla \cdot \vec{F}) \, dV = \iiint_E 3 \, dV = 3 \cdot \text{Volume of unit sphere} = 3 \cdot \frac{4}{3} \pi = 4\pi
+\]
+Thus, the flux of \(\vec{F}\) across the surface of the unit sphere is \(4\pi\).
+
+\end{example}
+\subsection{Stokes Theorem}
+\begin{theorem}[Stokes' Theorem]
+    Let \(S\) be an oriented smooth surface bounded by a simple, closed, piecewise-smooth curve \(C\) with positive orientation. If \(\vec{F}\) is a vector field with continuous partial derivatives on an open region containing \(S\), then:
+    \begin{equation}
+        \iint_S (\nabla \times \vec{F}) \cdot \vec{n} \, dS = \oint_C \vec{F} \cdot d\vec{r}
+    \end{equation}
+    where \(\vec{n}\) is the unit normal vector to the surface \(S\).
+
+    In other words, Stokes' theorem is a generalization of Green's theorem to three dimensions.
+\end{theorem}
+
+\begin{example}
+    Let $S$ be the part of the paraboloid $z = 9 - x^2 - y^2$ that lies above the $xy$-plane. Let $C$ be the trace of $S$ in the $xy$-plane. Let $\vec{F}(x,y,z) = \langle 3z, 4x, 2y \rangle$. \textit{Verify Stokes' Theorem by computing both $\iint_S (\nabla \times \vec{F}) \cdot \vec{n} \, dS$ and $\oint_C \vec{F} \cdot d\vec{r}$.}
+
+First, we compute the curl of \(\vec{F}\):
+\[\nabla \times \vec{F} = \begin{vmatrix}
+\hat{i} & \hat{j} & \hat{k} \\
+\frac{\partial}{\partial x} & \frac{\partial}{\partial y} & \frac{\partial}{\partial z} \\
+3z & 4x & 2y
+\end{vmatrix} = \langle 0 - 0, 0 - 3, 4 - 0 \rangle = \langle 0, -3, 4 \rangle\]    
+Next, we parametrize the surface \(S\) using polar coordinates:
+\[\vec{r}(r, \theta) = \langle r \cos \theta, r \sin \theta, 9 - r^2 \rangle\]
+where \(0 \leq r \leq 3\) and \(0 \leq \theta \leq 2\pi\).
+
+We compute the partial derivatives:
+\[\vec{r_r} = \langle \cos \theta, \sin \theta, -2r \rangle\]
+\[\vec{r_\theta} = \langle -r \sin \theta, r \cos \theta, 0 \rangle\]
+Then, we compute the cross product:
+\[\vec{r_r} \times \vec{r_\theta} = \begin{vmatrix}
+\hat{i} & \hat{j} & \hat{k} \\
+\cos \theta & \sin \theta & -2r \\
+-r \sin \theta & r \cos \theta & 0 
+\end{vmatrix} = 2r^2 \cos \theta \hat{i} + 2r^2 \sin \theta \hat{j} + r \hat{k}\]
+The magnitude of the cross product is:
+\[||\vec{r_r} \times \vec{r_\theta}|| = \sqrt{(2r^2 \cos \theta)^2 + (2r^2 \sin \theta)^2 + r^2} = \sqrt{4r^4 + r^2} = r \sqrt{4r^2 + 1}\]
+Now, we can compute the surface integral:
+\[\iint_S (\nabla \times \vec{F}) \cdot \vec{n} \, dS = \iint_D (\nabla \times \vec{F}) \cdot (\vec{r_r} \times \vec{r_\theta}) \, dr \, d\theta\]
+\begin{align*}
+&= \int_0^{2\pi} \int_0^3 \langle 0, -3, 4 \rangle \cdot \langle 2r^2 \cos \theta, 2r^2 \sin \theta, r \rangle \, dr \, d\theta \\
+&= \int_0^{2\pi} \int_0^3 (-6r^2 \sin \theta + 4r) \, dr \, d\theta \\
+&= \int_0^{2\pi} \left[ -2r^3 \sin \theta + 2r^2 \right]_0^3 \, d\theta \\
+&= \int_0^{2\pi} (-54 \sin \theta + 18) \, d\theta \\
+&= \left[ 54 \cos \theta + 18 \theta \right]_0^{2\pi} = 36\pi   
+\end{align*}
+
+Next, we compute the line integral around the curve \(C\). The curve \(C\) is the circle \(x^2 + y^2 = 9\) in the \(xy\)-plane. We can parametrize \(C\) as:
+\[\vec{r}(t) = \langle 3 \cos t, 3 \sin t, 0 \rangle\]
+where \(0 \leq t \leq 2\pi\).
+We compute \(d\vec{r}\):
+\[d\vec{r} = \langle -3 \sin t, 3 \cos t, 0 \rangle \, dt\]
+Now, we can compute the line integral:
+\[\oint_C \vec{F} \cdot d\vec{r} = \int_0^{2\pi} \vec{F}(\vec{r(t)}) \cdot d\vec{r}\]
+\begin{align*}
+&= \int_0^{2\pi} \langle 0, 12 \cos t, 6 \sin t \rangle \cdot \langle -3 \sin t, 3 \cos t, 0 \rangle \, dt \\   
+&= \int_0^{2\pi} (0 + 36 \cos^2 t + 0) \, dt \\
+&= 36 \int_0^{2\pi} \cos^2 t \, dt \\
+&= 36 \cdot \pi = 36\pi
+\end{align*}        
+Both the surface integral and the line integral yield the same result, confirming Stokes' Theorem.
+\end{example}
+
 \chapter{Fluid Mechanics}
 \section{Introduction to Fluid Mechanics}
 \begin{definition}[Fluid]
     A fluid is a substance that continuously deforms (flows) under an applied shear stress, no matter how small the stress. Fluids include liquids and gases.
     
 \end{definition}
-\end{document} 
+\subsection{Basic Concepts in Fluid Mechanics}
+\begin{definition}[Continuum Hypothesis]
+    The continuum hypothesis assumes that fluids can be treated as continuous media, meaning that their properties (such as density, pressure, and velocity) vary smoothly and continuously throughout the fluid, without abrupt changes or discontinuities. This allows us to use calculus and differential equations to model fluid behavior.
+\end{definition}
+\begin{definition}[Stress Field and Stress Tensor]
+    A \textbf{stress field} is a vector field that describes the distribution of internal forces (stresses) within a fluid at every point in space. 
+    
+    The \textbf{stress tensor} is a mathematical representation of the stress field, which encapsulates the normal and shear stresses acting on infinitesimal fluid elements in all directions. It is typically represented as a 3x3 matrix as follows:
+    \[\mathbf{T} = \begin{bmatrix}
+    \sigma_{xx} & \tau_{xy} & \tau_{xz} \\
+    \tau_{yx} & \sigma_{yy} & \tau_{yz} \\
+    \tau_{zx} & \tau_{zy} & \sigma_{zz}
+    \end{bmatrix}\]
+    where \(\sigma_{ii}\) are the normal stresses and \(\tau_{ij}\) are the shear stresses.
+    
+\end{definition}
+
+\subsection{Viscosity}
+\begin{definition}[Viscosity]
+    Viscosity is a measure of a fluid's resistance to deformation or flow. It quantifies the internal friction within the fluid, which arises from the interactions between its molecules. A fluid with high viscosity (like honey) resists motion and flows slowly, while a fluid with low viscosity (like water) flows easily.
+\end{definition}
+
+\begin{definition}[Newtonian Fluid]
+    A Newtonian fluid is a type of fluid whose viscosity remains constant regardless of the applied shear rate. In other words, the relationship between shear stress and shear rate is linear. Mathematically, this can be expressed as:
+    \begin{equation}
+        \tau_\text{newtonian}= \mu \frac{du}{dy}
+    \end{equation}
+    where \(\tau_\text{newtonian}\) is the shear stress, \(\mu\) is the dynamic viscosity (a constant for Newtonian fluids), and \(\frac{du}{dy}\) is the shear rate (the rate of change of velocity with respect to distance in the direction perpendicular to the flow).
+    
+    A non-Newtonian fluid, on the other hand, exhibits a non-linear relationship between shear stress and shear rate, meaning that its viscosity can change with the applied shear rate. Examples of non-Newtonian fluids include ketchup, blood, and certain polymers. Non-newtonian fluids can be further classified into various types:
+    \begin{itemize}
+        \item \textbf{Shear-thinning fluids (pseudoplastic)} Viscosity decreases with increasing shear rate (e.g., paint, blood, ketchup).
+        \item \textbf{Shear-thickening fluids (dilatant)} Viscosity increases with increasing shear rate (e.g., cornstarch in water).
+        \item \textbf{Bingham plastics} Behave as a solid until a certain yield stress is exceeded, after which they flow like a viscous fluid (e.g., toothpaste, mud).
+    \end{itemize}
+\end{definition}
+
+\begin{definition}[Temperature Dependency of Viscosity]
+    The viscosity of fluids is generally temperature-dependent. The behavours differs between liquids and gases:
+    \begin{itemize}
+        \item \textbf{Liquids} As temperature increases, the viscosity of liquids typically decreases. This is because higher temperatures provide more thermal energy to the molecules, allowing them to overcome intermolecular forces more easily, resulting in reduced resistance to flow.
+        \item \textbf{Gases} As temperature increases, the viscosity of gases typically increases. This is because higher temperatures lead to more frequent and energetic molecular collisions, which enhances the momentum transfer between layers of the gas, resulting in increased resistance to flow.
+    \end{itemize}
+\end{definition}
+
+
+\begin{definition}[Kinematic Viscosity]
+    Kinematic viscosity is a measure of a fluid's resistance to flow under the influence of gravity. It is defined as the ratio of dynamic viscosity to fluid density:
+    \begin{equation}
+        \nu = \frac{\mu}{\rho}
+    \end{equation}
+    where \(\nu\) is the kinematic viscosity, \(\mu\) is the dynamic viscosity, and \(\rho\) is the fluid density.
+\end{definition}
+
+\subsection{Compressibility of Fluids}
+\begin{subequations}
+\begin{definition}[Compressibility]
+    Compressibility is a measure of the change in volume of a fluid in response to a change in pressure. It is quantified by the \textbf{bulk modulus} \(E_v\), which is defined as:
+    \begin{equation}
+        E_v = -V \frac{dP}{dV}
+    \end{equation}
+    where \(V\) is the volume of the fluid, \(P\) is the pressure, and \(\frac{dP}{dV}\) is the rate of change of pressure with respect to volume. A fluid with high compressibility can be easily compressed, while a fluid with low compressibility is more resistant to compression.
+
+    The negative sign indicates that an increase in pressure typically results in a decrease in volume.
+\end{definition}
+
+
+\begin{definition}[Bulk Modulus]
+    The bulk modulus $E_v$ also can be written in terms of density rather than volume:
+    \begin{equation}
+        E_v = \rho \frac{dP}{d\rho}
+    \end{equation}
+\end{definition}
+
+In other words, the larger the bulk modulus, the less compressible the fluid is. For water, the bulk modulus is approximately \(2.2 \times 10^9 \, \text{Pa}\) at $20^\circ$C, indicating that it is relatively incompressible. 
+
+\end{subequations}
+
+\begin{example}[Compressibility of Water]
+    \textit{Calculate the pressure needed to compress water by 0.05\% at $20^\circ$C.}
+
+    Given that the bulk modulus of water at $20^\circ$C is approximately \(E_v = 2.2 \times 10^9 \, \text{Pa}\), we can use the definition of bulk modulus to find the required pressure change:
+    \[E_v = -V \frac{dP}{dV} \implies dP = -E_v \frac{dV}{V}\]
+    Since we want to compress water by 0.05\%, we have:
+    \[\frac{dV}{V} = -0.0005\]
+    Substituting this into the equation for \(dP\):
+    \[dP = - (2.2 \times 10^9 \,\text{Pa}) \times (-0.0005) = 1.1 \times 10^6 \, \text{Pa}\]
+    Therefore, a pressure increase of approximately 1.1 MPa is needed to compress water by 0.05\% at $20^\circ$C.
+\end{example}
+In fact, we often take water as a nearly incompressible fluid in fluid mechanics problems due to its high bulk modulus.
+
+\begin{definition}[Incompressible Fluid]
+    An incompressible fluid is a fluid whose density remains constant regardless of changes in pressure or temperature. In other words, the volume of an incompressible fluid does not change significantly when subjected to external forces. Mathematically, this can be expressed as:
+    $$
+        \frac{d\rho}{dt} = 0
+    $$
+    where \(\rho\) is the density of the fluid and \(t\) is time. In some cases we would assume incompressibility if the density changes are negligible.
+    
+\end{definition}
+
+\section{Dimensional Analysis and Similitude}
+\begin{definition}[Dimensional Analysis]
+    Dimensional analysis is a mathematical technique used to analyze the relationships between physical quantities by examining their dimensions (units of measurement). It helps to identify the fundamental variables that govern a physical phenomenon and to derive dimensionless groups that can be used to simplify complex problems.
+\end{definition}
+
+
+\section{Hydrostatics}
+\begin{example}
+    A cylindrical tank of height \(h\) contains a rubber membrane at its base. When the tank is filled with water to a height \(H\), the membrane deflects by an amount \(d_c\) due to the hydrostatic pressure. Consider now a similar setup using a smaller-diameter cylinder but the \emph{same} membrane and the same water height \(H\). Let the corresponding deflection be \(d_s\). Empirically, it is found that
+    \[
+    d_c = d_s.
+    \] 
+    This section would like to explain why this is the case.
+\end{example}
+
+\begin{definition}[Hydrostatic]
+    Hydrostatics is the branch of fluid mechanics that studies fluids at rest or in rigid body motion. It focuses on the behavior of fluids under the influence of gravity and other external forces, and it examines the pressure distribution, buoyancy, and stability of fluids in various configurations.
+
+    We cosndier two main forces acting on a fluid at rest:
+    \begin{itemize}
+        \item \textbf{Body Forces}: These are forces that act on the entire volume of the fluid, such as gravitational forces. The body force per unit volume is given by:
+        \[\vec{f_b} = \rho \vec{g}\]
+        where \(\rho\) is the fluid density and \(\vec{g}\) is the acceleration due to gravity.
+        \item \textbf{Surface Forces}: These are forces that act on the surface of the fluid, such as pressure forces. The surface force per unit area is given by:
+        \[\vec{f_s} = -P \vec{n}\]
+        where \(P\) is the pressure and \(\vec{n}\) is the unit normal vector to the surface.
+    \end{itemize}
+    We, however, DO NOT consider shear forces since the fluid is at rest.
+\end{definition}
+
+\subsection{Pressure in a Fluid at Rest}
+\begin{definition}[Pressure]
+    Pressure is the result of molecular collisions on a real or imaginary surface.
+\end{definition}
+
+\paragraph{Sign Convention} A negative force indicates a compressive force (acts on the molecules by the surface), while a positive force indicates a tensile force (acts on the surface by the molecules).
+
+\begin{theorem}[Surface Pressure]
+    Consider a surface that is has complicated geometry. We pressure acting on the surface is the inward acting normal force per unit area. Thus, we ignore shear forces and only consider normal forces. Mathematically, we write:
+    \begin{equation}
+        P = -\frac{dF_n}{dA}
+    \end{equation}
+\end{theorem}
+
+\begin{theorem}[Pascal's Law]
+    The pressure at a point in a hydrostatic fluid is the same in all directions. Mathematically, we write:
+    \begin{equation}
+        P = P(x,y,z)
+    \end{equation}
+\end{theorem}
+
+\begin{proof}
+    Consider a small fluid element in the shape of a tetrahedron with one face oriented in the \(xy\)-plane, one face in the \(yz\)-plane, and one face in the \(xz\)-plane. Let the area of the face in the \(xy\)-plane be \(dA\), and let the areas of the other two faces be \(dA_x\) and \(dA_y\). The height of the tetrahedron is \(dz\).
+
+    The forces acting on the tetrahedron are:
+    \begin{itemize}
+        \item The pressure force on the face in the \(xy\)-plane: \(P \cdot dA\)
+        \item The pressure force on the face in the \(yz\)-plane: \(P_x \cdot dA_x\)
+        \item The pressure force on the face in the \(xz\)-plane: \(P_y \cdot dA_y\)
+    \end{itemize}
+
+    Since the fluid is at rest, the net force on the tetrahedron must be zero. Therefore, we have:
+    \[
+    P \cdot dA = P_x \cdot dA_x + P_y \cdot dA_y
+    \]
+    Dividing both sides by \(dA\), we get:
+    \[
+    P = P_x \frac{dA_x}{dA} + P_y \frac{dA_y}{dA}
+    \]
+    As we let the dimensions of the tetrahedron approach zero, we find that:
+    \[
+    P = P_x = P_y
+    \]
+    Thus, we conclude that the pressure at a point in a hydrostatic fluid is the same in all directions.
+\end{proof}
+
+
+\subsection{Basic Eqaution for Preessure Fiekd}
+\begin{theorem}[Hydrostatic Pressure Equation]
+    In a fluid at rest, the pressure gradient is related to the body forces acting on the fluid. Mathematically, we write:
+    \begin{equation}
+        \nabla P = \rho \vec{g}
+    \end{equation}
+    where \(\nabla P\) is the pressure gradient, \(\rho\) is the fluid density, and \(\vec{g}\) is the acceleration due to gravity. 
+\end{theorem}
+\end{document}
