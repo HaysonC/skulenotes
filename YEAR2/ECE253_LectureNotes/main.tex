@@ -1861,6 +1861,7 @@ The following table shows the 3-bit binary and Gray code representations:
         \item \textbf{Mealy Machine:} In a Mealy machine, the outputs depend on both the current state and the current inputs. The output can change immediately in response to changes in the input, even if the state remains the same.
     \end{itemize}
 \end{definition}
+
 \chapter{Computer Organization and Assembly Language}
 \begin{shaded}
 \textbf{What is Assembly Language?} We know that we can run C/C++ on any computer (Machine Agnostic), but how does the computer understand C/C++? The answer is the compiler that parse it to assembly through:
@@ -1872,7 +1873,7 @@ The following table shows the 3-bit binary and Gray code representations:
 \end{shaded}
 The assembly code is then assembled into machine code, which is a series of 0s and 1s that the computer can understand. The assembly would be specific to the architecture of the computer (machine dependent), which is why we have different assembly languages for different architectures (e.g., x86, RISC-V, ARM).
 \section{Computer Organization}
-\section{RISC-V Assembly Language}
+\subsection{Basic Computational Units}
 \begin{definition}[Arithmetic Logical Unit]
     An Arithmetic Logical Unit (ALU) is a digital circuit that performs arithmetic and logical operations on binary numbers. It is a fundamental building block of the central processing unit (CPU) in a computer. The ALU takes two binary inputs, performs the specified operation, and produces a binary output.
 
@@ -1907,38 +1908,166 @@ The assembly code is then assembled into machine code, which is a series of 0s a
 
 \begin{definition}[Operahands and Instruction Operations]
     The following is a table of RISC-V instructions and the operations they perform:
-    
-    The registers are \verb|rX| and \verb|rY|, and \verb|D| is a 12 bit value.
-    
-    \begin{table}[h!]
-        \centering
-        \begin{tabular}{|c|c|c|}
-            \hline
-            Instruction & Operation & Description \\
-            \hline
-            MV rX, rY & rX = rY & Move value from rY to rX \\
-            MV rX, #D & rX = D & Load sign extended immediate D into rX \\
-            \hline
-            ADD rX, rY & rX = rX + rY & Add rX and rY, store result in rX \\
-            ADD rX, #D & rX = rX + D & Add immediate D to rX, store result in rX \\
-            \hline 
-            SUB rX, rY & rX = rX - rY & Subtract rY from rX, store result in rX \\
-            SUB rX, #D & rX = rX - D & Subtract immediate D from rX, store result in rX \\
-            \hline
-            MUL rX, rY & rX = rX * rY & Multiply rX and rY, store result in rX \\
-            \hline
-            DIV rX, rY & rX = rX / rY & Divide rX by rY, store quotient in rX \\
-            \hline
-        \end{tabular}
-        \caption{RISC-V Arithmetic Instructions}
-        \label{tab:riscv_arithmetic_instructions}
-    \end{table}
+        
+        The registers are \verb|rX| and \verb|rY|, and \verb|D| is a 12 bit value.
+        
+        \begin{table}[h!]
+            \centering
+            \begin{tabular}{|c|c|c|}
+                \hline
+                Instruction & Operation & Description \\
+                \hline
+                \verb|MV rX, rY| & rX = rY & Move value from rY to rX \\
+                \verb|MV rX, #D| & rX = D & Load sign extended immediate D into rX \\
+                \hline
+                \verb|ADD rX, rY| & rX = rX + rY & Add rX and rY, store result in rX \\
+                \verb|ADD rX, #D| & rX = rX + D & Add immediate D to rX, store result in rX \\
+                \hline
+                \verb|SUB rX, rY| & rX = rX - rY & Subtract rY from rX, store result in rX \\
+                \verb|SUB rX, #D| & rX = rX - D & Subtract immediate D from rX, store result in rX \\
+                \hline
+                \verb|MUL rX, rY| & rX = rX * rY & Multiply rX and rY, store result in rX \\
+                \hline
+                \verb|DIV rX, rY| & rX = rX / rY & Divide rX by rY, store quotient in rX \\
+                \hline
+            \end{tabular}
+            \caption{RISC-V Arithmetic Instructions}
+            \label{tab:riscv_arithmetic_instructions}
+        \end{table}
 \end{definition}
-\begin{definition}[Instruction Encoding]
-    Encodings are 16-bit or 32-bit binary representations of instructions that the CPU can understand and execute. Each instruction is represented by a unique binary code that specifies the operation to be performed and the operands involved. The encoding of an instruction typically includes the following components:
+\begin{definition}[Opcodes]
+    An opcode (operation code) is a portion of a machine language instruction that specifies the operation to be performed. It is typically represented as a binary or hexadecimal value and is used by the CPU to determine which operation to execute.
+
+    In RISC-V architecture, opcodes are 7 bits long and are located in the least significant bits of the instruction. The opcode determines the type of instruction (e.g., arithmetic, logical, load/store, branch) and the specific operation to be performed within that type.
+
+    For example, the opcode for the ADD instruction is 0000000, while the opcode for the SUB instruction is 0100000. The CPU uses these opcodes to identify the operation and execute it accordingly.
+\end{definition}
+
+\begin{definition}[Instrctuion Cycles]
+    An instruction cycle is the process by which a CPU fetches, decodes, and executes an instruction. It consists of several stages, including:
     \begin{itemize}
-        \item \textbf{Opcode:} A unique binary code that identifies the operation to be performed (e.g., addition, subtraction, load, store).
-        \item \textbf
+        \item \textbf{Fetch:} The CPU retrieves the instruction from memory.
+        \item \textbf{Decode:} The CPU decodes the instruction to determine the operation to be performed and the operands involved.
+        \item \textbf{Execute:} The CPU performs the operation specified by the instruction.
+        \item \textbf{Write Back:} The CPU writes the result of the operation back to memory or a register.
+    \end{itemize}
+    The instruction cycle is repeated for each instruction in a program until the program is complete.
+\end{definition}
+
+\subsection{ALU Control and Datapath}
+\begin{definition}[Datapath]
+    A datapath is a collection of functional units, registers, and buses that work together to perform data processing operations within a computer system. It is responsible for the flow of data between different components of the system, such as the CPU, memory, and input/output devices.
+
+    The datapath typically includes components such as:
+    \begin{itemize}
+        \item \textbf{Registers:} Temporary storage locations for data.
+        \item \textbf{ALU (Arithmetic Logic Unit):} Performs arithmetic and logical operations on data.
+        \item \textbf{Multiplexers:} Selects between multiple data sources.
+        \item \textbf{Buses:} Pathways for data transfer between components.
+    \end{itemize}
+    The datapath works in conjunction with the control unit, which generates control signals to coordinate the operation of the datapath components based on the instructions being executed.
+\end{definition}
+\begin{definition}[Control Path]
+    A control path is a collection of control signals and logic that manage the operation of the datapath in a computer system. It is responsible for generating the necessary control signals to coordinate the activities of the various components within the datapath, such as registers, ALU, multiplexers, and buses.
+
+    The control path typically includes components such as:
+    \begin{itemize}
+        \item \textbf{Control Unit:} Generates control signals based on the current instruction being executed.
+        \item \textbf{Instruction Decoder:} Decodes the instruction to determine the required operations and generates corresponding control signals.
+        \item \textbf{Timing Signals:} Synchronizes the operation of the datapath components with the system clock.
+    \end{itemize}
+    The control path works in conjunction with the datapath to ensure that data is processed correctly and efficiently according to the instructions being executed.
+
+    The control signal would cotnrol the following:
+    \begin{itemize}
+        \item Which operation the ALU would perform.
+        \item Which registers to read from and write to.
+        \item When to read from or write to memory.
+        \item How to route data through the datapath using multiplexers.
+    \end{itemize}
+\end{definition}
+\section{Memory Hierarchy}
+\begin{definition}[Memory]
+    The CPU uses a memory address to specify the location of the data it wants to access. For example, a 32-bit system specifies a memory address using 32 bits, which amounts to a total addressable memory of around 4GB ($2^32$ bytes).
+\end{definition}
+
+\begin{definition}[Bit, Byte, Word]
+    A \textbf{bit} is the smallest unit of data in a computer and can have a value of either 0 or 1.
+
+    A \textbf{byte} is a group of 8 bits and is the standard unit of data used to represent a character in most computer systems.
+
+    A \textbf{word} is a group of bytes that is used to represent a larger unit of data, such as an integer or a floating-point number. The size of a word can vary depending on the architecture of the computer, but it is typically 4 bytes (32 bits).
+\end{definition}
+
+\begin{definition}[Memory Array]
+    A memory array is a collection of memory cells that are organized in a grid-like structure. On a high-level, we think of it as a shape-2 matrix, where each row represents a memory address and each column represents a bit within that address.
+
+    Each cell in the array can store a single bit of data (0 or 1). The memory array is typically organized into words, where each word consists of a fixed number of bits.
+    
+    For example, take a 4-byte word, then the memory array would have 4 columns, and $n-2$ rows, where $n$ is the total number of bits in the memory. The address format would be, for example:
+    $$
+    \overbrace{A_n \dots A_2}^{\text{which word}} \underbrace{A_1 A_0}_{\text{which byte in the word}}
+    $$
+\end{definition}
+
+\section{Assembly Language}
+\begin{definition}[Assembly Language]
+    Assembly language is a low-level programming language that is specific to a particular computer architecture. It provides a human-readable representation of machine code instructions, allowing programmers to write code that can be directly executed by the CPU. 
+
+    Assembly language uses mnemonics to represent machine instructions, making it easier for humans to understand and write code. Each assembly instruction corresponds to a specific machine code instruction, and the assembly code is typically translated into machine code using an assembler.
+\end{definition}
+
+\paragraph{List of Assembly Languages} The following are some common assembly languages:
+\begin{itemize}
+    \item x86 Assembly: Used in Intel and AMD processors. It is a CISC (\textbf{C}omplex \textbf{I}nstruction \textbf{S}et \textbf{C}omputer) architecture.
+    \item ARM Assembly: Used in ARM processors, commonly found in mobile devices. It is a RISC (\textbf{R}educed \textbf{I}nstruction \textbf{S}et \textbf{C}omputer) architecture.
+    \item RISC-V Assembly: An open-source instruction set architecture (ISA) that is gaining popularity in academia and industry. As in its name, it is a RISC architecture. In this course, we will sue the RISC-V 32I flavor.
+\end{itemize}
+\paragraph{RISC vs CISC} RISC architectures have a smaller set of instructions, which are designed to be executed quickly and efficiently. CISC architectures have a larger set of instructions, which can perform more complex operations in a single instruction. This can lead to more efficient code in some cases, but it can also make the architecture more complex and harder to optimize.
+
+\begin{definition}[Instruction Set Architecture (ISA)]
+    An \textbf{I}nstruction \textbf{S}et \textbf{A}rchitecture (ISA) is a specification that defines the set of instructions that a computer's CPU can execute. It serves as the interface between software and hardware, providing a standardized way for programmers to write code that can be executed on a specific architecture.
+
+    The ISA includes details such as:
+    \begin{itemize}
+        \item The format and encoding of instructions
+        \item The types of operations that can be performed (e.g., arithmetic, logical, data movement)
+        \item The number and types of registers available
+        \item The addressing modes used to access memory
+        \item The conventions for function calls and returns
+    \end{itemize}
+    Different ISAs are designed for different types of processors and applications, and they can vary significantly in terms of complexity and capabilities.
+
+    Notably, the instruction set does not define the underlying hardware implementation, which can vary even for processors that implement the same ISA.
+\end{definition}
+
+\subsection{Types of Instructions}
+\begin{definition}[Operand]
+    An operand is a value or data that an instruction operates on. In assembly language, operands can be registers, memory addresses, or immediate values (constants). The operands specify the source and destination of the data for the operation being performed by the instruction.
+\end{definition}
+\begin{definition}[Arithmetic Instructions]
+    Arithmetic instructions are a type of assembly language instruction that perform mathematical operations on numerical data. These instructions typically operate on values stored in registers or memory locations and can include operations such as addition, subtraction, multiplication, and division.
+
+    Lets start with high level code:
+    \begin{verbatim}
+    int a = b + c; // addition
+    int a = b - c; // subtraction
+    \end{verbatim}
+
+    The equivalent assembly code using RISC-V instructions would be:
+    \begin{verbatim}
+    ADD rA, rB, rC  # rA = rB + rC
+    SUB rA, rB, rC  # rA = rB - rC
+    \end{verbatim}  
+    the \verb|rA| occupies the destination operand, while \verb|rB| and \verb|rC| are the source operands.
+
+
+\end{definition}
+
+\begin{definition}[Register Set]
+    A register set is a collection of registers within a CPU that are used for temporary storage of data during the execution of instructions. Registers are small, high-speed storage locations that can hold data such as operands, intermediate results, and memory addresses.
+
+    In RISC-V architecture, there are 32 general-purpose registers (x0 to x31), each 32 bits wide in the RV32I variant. The register x0 is hardwired to zero and cannot be modified. The other registers can be used for various purposes, such as holding function arguments, return values, and temporary data.
 \end{definition}
 \end{document}
 

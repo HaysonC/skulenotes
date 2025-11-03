@@ -2581,7 +2581,30 @@ this would make it easier to compute the matrix exponential.
     where \( r \) represents the roots of the characteristic polynomial. The nature of the roots (real and distinct, real and repeated, or complex conjugates) determines the form of the general solution to the ODE. This comes from the assuned solution of the form \( y = e^{rt} \).
 \end{definition}
 
-\begin{example}[Cauchy-Euler Equation]
+\begin{definition}[Cauchy-Euler Equation and Indicial Equation] \label{def:cauchyEuler}
+    A Cauchy-Euler equation is a type of second-order linear ODE of the form:
+    \begin{equation}
+    t^2 y'' + a t y' + b y = 0
+    \end{equation}
+    where \( a \) and \( b \) are constants. To solve this equation, we assume a solution of the form \( y = t^r \), where \( r \) is a constant to be determined. Substituting this assumed solution into the Cauchy-Euler equation leads to the indicial equation:
+    \begin{equation}
+    r(r - 1) + a r + b = 0
+    \end{equation}
+    The roots of the indicial equation determine the general solution of the Cauchy-Euler equation, which can take different forms depending on whether the roots are real and distinct, real and repeated, or complex conjugates.
+
+    To generalize, a Cauchy-Euler equation can be expressed as: 
+    \begin{equation}
+    \sum_m y^{(m)}(t) a_m t^m = 0
+    \end{equation}
+    where \( a_m \) are constants. 
+
+    And the indicial equation in this generalized form is given by:
+    \begin{equation}
+    \sum_m a_m r (r - 1) (r - 2) \ldots (r - m + 1) = 0
+    \end{equation}
+\end{definition}
+
+\begin{example}[Cauchy-Euler Equation] 
     Consider the following second-order ODE:
     $$t^2 y'' - t y' + y = 0$$
     This is in the form of a Cauchy-Euler equation:
@@ -2643,7 +2666,7 @@ this would make it easier to compute the matrix exponential.
     Thus, \( y_{p_1}(t) - y_{p_2}(t) \) is indeed a solution of the corresponding homogeneous equation.
 \end{proof}
 
-\begin{definition}[Wronskian Derivation of $y_p$]
+\begin{definition}[Wronskian Derivation of $y_p$] \label{def:wronskian_method}
     If $y_1(t)$ and $y_2(t)$ are two linearly independent solutions of the corresponding homogeneous equation (a.k.a. the fundamental set of homogeneous solutions), then we can assume a particular solution of the form:
     $$y_p(t) = -y_1(t) \int \frac{y_2(t) g(t)}{W(t)} dt + y_2(t) \int \frac{y_1(t) g(t)}{W(t)} dt$$
     where \( W(t) = y_1(t)y_2'(t) - y_2(t)y_1'(t) \) is the Wronskian determinant of \( y_1 \) and \( y_2 \).
@@ -2747,7 +2770,7 @@ Then, we can consider the eigenvalues and eigenfunctions of this operator:
     \end{equation}
 \end{definition}
 
-\begin{definition}[Variation of Parameters]
+\begin{theorem}[Variation of Parameters]
     Variation of parameters is a method used to find a particular solution to a non-homogeneous linear differential equation. For a second-order ODE of the form:
     $$y'' + p(t)y' + q(t)y = g(t)$$
     where \( y_1(t) \) and \( y_2(t) \) are two linearly independent solutions of the corresponding homogeneous equation, a particular solution \( y_p(t) \) can be expressed as:
@@ -2755,11 +2778,172 @@ Then, we can consider the eigenvalues and eigenfunctions of this operator:
     y_p(t) = u_1(t)y_1(t) + u_2(t)y_2(t)
     \end{equation}
     where \( u_1(t) \) and \( u_2(t) \) are functions to be determined. These functions satisfy the system of equations:
-    \begin{align*}
-        u_1'(t)y_1(t) + u_2'(t)y_2(t) &= 0 \\
-        u_1'(t)y_1'(t) + u_2'(t)y_2'(t) &= g(t)
-    \end{align*}
+    \begin{equation}
+        \begin{cases}
+        u_1'(t)y_1(t) + u_2'(t)y_2(t) = 0 \\
+        u_1'(t)y_1'(t) + u_2'(t)y
+        \end{cases}
+    \end{equation}
     Solving this system allows us to find \( u_1(t) \) and \( u_2(t) \), and thus the particular solution \( y_p(t) \).
+
+    Or, we can also plug in the following formula directly:
+    \begin{equation}
+    \begin{cases}
+        u_1(t) = -\int \frac{y_2(t) g(t)}{W(t)} dt \\
+        u_2(t) = \int \frac{y_1(t) g(t)}{W(t)} dt
+    \end{cases}
+    \end{equation}
+    where \( W(t) = y_1(t)y_2'(t) - y_2(t)y_1'(t) \) is the Wronskian determinant of \( y_1 \) and \( y_2 \). However, practically, we only use this when $g$ is a sum of functions that are:
+    \begin{itemize}
+        \item Trigonometric functions
+        \item Exponential functions
+        \item Polynomials
+    \end{itemize}
+\end{theorem}
+\begin{proof}
+    We start with Defintion \ref{def:wronskian_method} and assume a particular solution of the form:
+    $$y_p(t) = -y_1(t) \int \frac{y_2(t) g(t)}{W(t)} dt + y_2(t) \int \frac{y_1(t) g(t)}{W(t)} dt$$
+    where \( W(t) = y_1(t)y_2'(t) - y_2(t)y_1'(t) \) is the Wronskian determinant of \( y_1 \) and \( y_2 \). To verify that this is indeed a particular solution, we need to show that it satisfies the original inhomogeneous ODE:
+    $$y'' + p(t)y' + q(t)y = g(t)$$
+    We can compute the first and second derivatives of \( y_p(t) \) using the product rule and the chain rule. After substituting these derivatives back into the left-hand side of the ODE, we can simplify the expression. The key step involves using the properties of the Wronskian determinant and the fact that \( y_1(t) \) and \( y_2(t) \) are solutions of the corresponding homogeneous equation. After simplification, we find that the left-hand side reduces to \( g(t) \), confirming that \( y_p(t) \) is indeed a particular solution of the inhomogeneous ODE.       
+\end{proof}
+
+\begin{example}
+    Conisder the following second-order inhomogeneous ODE:
+    $$y'' + y = \tan(t)$$
+    The corresponding homogeneous equation is:
+    $$y'' + y = 0$$
+    The characteristic equation is:
+    $$r^2 + 1 = 0$$
+    Solving this gives the roots \( r_1 = i \) and \( r_2 = -i \). Thus, the fundamental set of solutions to the homogeneous equation is:
+    $$y_1(t) = \cos(t), \quad y_2(t) = \sin(t)$$
+    The Wronskian determinant \( W(t) \) is given by:
+    $$W(t) = y_1(t)y_2'(t) - y_2(t)y_1'(t) = \cos(t)\cos(t) - \sin(t)(-\sin(t)) = \cos^2(t) + \sin^2(t) = 1$$
+    Using the variation of parameters formula, we can find a particular solution \( y_p(t) \):
+    \begin{align*}
+        u_1(t) &= -\int \frac{y_2(t) g(t)}{W(t)} dt = -\int \sin(t) \tan(t) dt = -\int \sin^2(t)/\cos(t) dt \\
+        &= -\int (1 - \cos^2(t))/\cos(t) dt = -\int \sec(t) dt + \int \cos(t) dt \\
+        &= -\ln|\sec(t) + \tan(t)| + \sin(t) + C_1
+    \end{align*}
+    \begin{align*}
+        u_2(t) &= \int \frac{y_1(t) g(t)}{W(t)} dt = \int \cos(t) \tan(t) dt = \int \sin(t) dt = -\cos(t) + C_2
+    \end{align*}
+    Thus, a particular solution is given by:
+    \begin{align*}
+        y_p(t) &= u_1(t)y_1(t) + u_2(t)y_2(t) \\
+        &= \left[ -\ln|\sec(t) + \tan(t)| + \sin(t)\right] \cos(t) + \left[-\cos(t)\right] \sin(t) \\
+        &= -\cos(t) \ln|\sec(t) + \tan(t)|
+    \end{align*}
+    Finally, the general solution of the inhomogeneous ODE is:
+    $$y(t) = C_1 \cos(t) + C_2 \sin(t) - \cos(t) \ln|\sec(t) + \tan(t)|$$
+\end{example}
+
+\paragraph{Finding the fundamental set of solutions} We can find the fundamental set of solutions using:
+\begin{itemize}
+    \item Cauchy-Euler Equation method if applicable (see Definition \ref{def:cauchyEuler})
+    \item Reduction of Order if one solution is known:
+    \begin{equation}
+    y_2(t) = y_1(t) \int \frac{e^{-\int p(t) dt}}{(y_1(t))^2} dt
+    \end{equation}
+    where \( y_1(t) \) is a known solution of the homogeneous equation.
+    \item Variation of Parameters
+\end{itemize}
+
+\section{Numerical Methods for ODEs}
+\begin{definition}[Euler's Method]
+    Euler's method is a numerical technique used to approximate the solution of ordinary differential equations (ODEs) with a given initial value. It is a first-order method that uses a simple iterative approach to estimate the value of the solution at discrete points. Given an initial value problem of the form:
+    $$y' = f(t, y), \quad y(t_0) = y_0$$
+    Euler's method approximates the solution at successive time steps \( t_n = t_0 + nh \) (where \( h \) is the step size) using the formula:
+    \begin{equation}
+    y_{n+1} = y_n + h f(t_n, y_n)
+    \end{equation}
+    for \( n = 0, 1, 2, \ldots \). The method provides a straightforward way to compute approximate solutions, but it may require small step sizes for accurate results, especially for stiff equations or problems with rapid changes.
     
+    The local truncation error of Euler's method is \( O(h^2) \), and the global truncation error is \( O(h) \). The formula, given the upperbound \( M \) on the second derivative of the true solution, is:
+    \begin{equation}
+    |y(t_n) - y_n| \leq \frac{hM}{2} (e^{L(t_n - t_0)} - 1)
+    \end{equation}
+    where \( L \) is the Lipschitz constant for \( f \) with respect to \( y \).
 \end{definition}
+
+\begin{definition}[Improved Euler's Method (Heun's Method)]
+    Improved Euler's method, also known as Heun's method, is a numerical technique used to approximate the solution of ordinary differential equations (ODEs) with a given initial value. It is a second-order method that improves upon the basic Euler's method by using an average of slopes to estimate the next value. Given an initial value problem of the form:
+    $$y' = f(t, y), \quad y(t_0) = y_0$$
+    Improved Euler's method approximates the solution at successive time steps \( t_n = t_0 + nh \) (where \( h \) is the step size) using the following steps:
+    \begin{subequations}
+    \begin{align}
+        k_1 &= f(t_n, y_n) \\
+        k_2 &= f(t_n + h, y_n + h k_1) \\
+        y_{n+1} &= y_n + \frac{h}{2} (k_1 + k_2)
+    \end{align}
+    \end{subequations}
+
+    The local truncation error of Improved Euler's method is \( O(h^3) \), and the global truncation error is \( O(h^2) \). The formula, given the upperbound \( M \) on the second derivative of the true solution, is:
+    \begin{equation}
+    |y(t_n) - y_n| \leq \frac{h^2 M}{2} (e^{L(t_n - t_0)} - 1)
+    \end{equation}
+    where \( L \) is the Lipschitz constant for \( f \) with respect to \( y \).
+\end{definition}
+
+
+\begin{definition}[Runge-Kutta Method]
+    The Runge-Kutta method is a family of iterative methods used to approximate the solutions of ordinary differential equations (ODEs). The most commonly used version is the fourth-order Runge-Kutta method (RK4), which provides a good balance between accuracy and computational efficiency. Given an initial value problem of the form:
+    $$y' = f(t, y), \quad y(t_0) = y_0$$
+    the RK4 method approximates the solution at successive time steps \( t_n = t_0 + nh \) (where \( h \) is the step size) using the following steps:
+    1. Compute the slopes:
+    \begin{align*}
+        k_1 &= f(t_n, y_n) \\
+        k_2 &= f\left(t_n + \frac{h}{2}, y_n + \frac{h}{2} k_1\right) \\
+        k_3 &= f\left(t_n + \frac{h}{2}, y_n + \frac{h}{2} k_2\right) \\
+        k_4 &= f(t_n + h, y_n + h k_3)
+    \end{align*}
+    2. Update the solution using a weighted average of these slopes:
+    $$y_{n+1} = y_n + \frac{h}{6} (k_1 + 2k_2 + 2k_3 + k_4)$$
+    for \( n = 0, 1, 2, \ldots \). The RK4 method is widely used due to its high accuracy and stability for a variety of ODE problems.
+    
+    The local truncation error of the RK4 method is \( O(h^5) \), and the global truncation error is \( O(h^4) \). The formula, given the upperbound \( M \) on the fifth derivative of the true solution, is:
+    \begin{equation}
+    |y(t_n) - y_n| \leq \frac{h^4 M}{90} (e^{L(t_n - t_0)} - 1)
+    \end{equation}
+    where \( L = \max_{t,y} \left| \frac{\partial f}{\partial y} \right| \) is the Lipschitz constant for \( f \) with respect to \( y \).
+\end{definition}
+
+
+\begin{definition}[Order of a Method]
+    The order of a numerical method for solving ordinary differential equations (ODEs) refers to the rate at which the local truncation error decreases as the step size \( h \) approaches zero. Specifically, a method is said to be of order \( p \) if the local truncation error \( \tau(h) \) satisfies:
+    \begin{equation}
+    \tau(h) = O(h^{p+1})
+    \end{equation}
+    This means that as the step size \( h \) is halved, the local truncation error decreases by a factor of approximately \( 2^{p+1} \). Higher-order methods generally provide more accurate results for a given step size, but they may also require more computational effort per step. For example, Euler's method is a first-order method, while the fourth-order Runge-Kutta method (RK4) is a fourth-order method.
+\end{definition}
+
+\begin{example}[Estimating the Order of a Method]
+    Given the following approximations of the solution to an ODE at a specific point using different step sizes:
+    \begin{align*}
+        y(h) &= 1.2 \\
+        y(h/2) &= 1.1 \\
+        y(h/4) &= 1.05
+    \end{align*}
+    We can estimate the order of the numerical method used. Let \( E(h) \) be the error associated with step size \( h \). Assuming the error behaves as:
+    $$
+    E(h) = C h^p
+    $$
+    for some constant \( C \) and order \( p \), we can set up the following equations based on the given approximations:
+    \begin{align*}
+        E(h) &= |y(h) - y_{\text{exact}}| \\
+        E(h/2) &= |y(h/2) - y_{\text{exact}}| \\
+        E(h/4) &= |y(h/4) - y_{\text{exact}}|
+    \end{align*}
+    By taking the ratios of these errors, we can solve for \( p \):
+    \begin{align*}
+        \frac{E(h)}{E(h/2)} &= \frac{C h^p}{C (h/2)^p} = 2^p \\
+        \frac{E(h/2)}{E(h/4)} &= \frac{C (h/2)^p}{C (h/4)^p} = 2^p
+    \end{align*}
+    Taking the logarithm of both sides gives:
+    \begin{align*}
+        p &= \log_2\left(\frac{E(h)}{E(h/2)}\right) \\
+        p &= \log_2\left(\frac{E(h/2)}{E(h/4)}\right)
+    \end{align*}
+    By substituting the actual error values (which can be computed if the exact solution is known), we can estimate the order \( p \) of the numerical method used. In this case, we find that \( p \approx 1 \), indicating that the method is first-order accurate.
+\end{example}
 \end{document}

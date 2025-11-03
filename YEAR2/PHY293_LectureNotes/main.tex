@@ -1454,8 +1454,30 @@ $$
     \end{equation}
 \end{definition}
 
+\subsection{Quantization of Light}
+
+\begin{definition}[De Broglie Wavelength]
+    The de Broglie wavelength is the wavelength associated with a particle and is given by:
+    \begin{equation}
+        \lambda = \frac{h}{p}
+    \end{equation}
+    where \( h \) is Planck's constant and \( p \) is the momentum of the particle. This concept suggests that all matter exhibits wave-like properties, with the wavelength inversely proportional to the momentum.
+    
+\end{definition}
 
 
+\begin{definition}[Energy of a Wave]
+    The energy of a photon (quantum of light) is given by:
+    \begin{equation}
+        E = h f = \frac{h c}{\lambda}
+    \end{equation}
+    where \( E \) is the energy of the photon, \( h \) is Planck's constant, and \( f \) is the frequency of the electromagnetic wave.
+    
+    And the momentum of a photon is given by:
+    \begin{equation}
+        p = \frac{E}{c} = \frac{h f}{c}
+    \end{equation}
+\end{definition}
 \begin{definition}[Photoelectric Effect]
     The photoelectric effect is the phenomenon where electrons are emitted from a material (usually a metal) when it is exposed to light of sufficient frequency. The key observations of the photoelectric effect are:
     \begin{itemize}
@@ -1491,5 +1513,195 @@ $$
     \end{itemize}
     
 \end{definition}
+
+
+\begin{example}[Photoelectric Experiment]
+    Consider the folling $V-f$ graph of a photoelectric experiment:
+    % work fuction at f = 1, slope around 4
+    \begin{figure}[h!]
+        \centering
+        % tikz graph
+        \begin{tikzpicture}
+            \begin{axis}[
+                axis lines = left,
+                xlabel = {$f$ (frequency)},
+                ylabel = {$V$ (stopping potential)},
+                xmin=0, xmax=5,
+                ymin=-1, ymax=5,
+                xtick={0,1,2,3,4,5},
+                ytick={0,1,2,3,4,5},
+                grid=major,
+                width=10cm,
+                height=8cm,
+            ]
+            \addplot[
+                domain=0:5,
+                samples=100,
+                color=blue,
+            ]
+            {4*x - 4};
+            \addlegendentry{$V = \frac{h}{e} f - \frac{\phi}{e}$}
+            \end{axis}
+        \end{tikzpicture}
+        \caption{Photoelectric Experiment $V-f$ Graph}
+        \label{fig:photoelectric_experiment}
+    \end{figure}
+    From the graph, we can determine the work function \( \phi \) and Planck's constant \( h \):
+    
+    First, we find the planks constant from the slope of the line:
+    $$
+        \text{slope} = \frac{h}{e} = 4 \,\text{V·s}
+    $$
+    Thus, we have:
+    $$
+        h = 4e \,\text{V·s} = 4 \times 1.602 \times 10^{-19} \,\text{C·V·s} = 6.408 \times 10^{-19} \,\text{J·s}
+    $$
+    which is approximately equal to the known value of Planck's constant \( h \approx 6.626 \times 10^{-34} \,\text{J·s} \). We can find the work function from the x-intercept, and covnert to energy using the experimental value of \( h \):
+    $$
+        f_0 = 1 \,\text{Hz} \implies \phi = h f_0 = 6.408 \times 10^{-19} \,\text{J}
+    $$
+    converting to electron volts:
+    $$
+        \phi = \frac{6.408 \times 10^{-19} \,\text{J}}{1.602 \times 10^{-19} \,\text{J/eV}} \approx 4 \,\text{eV}
+    $$
+    
+\end{example}
+\subsection{Quantization of Atomic Energy Level}
+% the 1 electron atom model, rydburg formula, hydrogen spectrum, and the 13.6/n^2 eV
+
+\begin{definition}[Bohr Model of the Hydrogen Atom]
+    The Bohr model describes the hydrogen atom as a system where the electron orbits the nucleus in discrete energy levels. The key postulates of the Bohr model are:
+    \begin{itemize}
+        \item The electron moves in circular orbits around the nucleus under the influence of the Coulomb force.
+        \item Only certain discrete orbits are allowed, corresponding to quantized angular momentum:
+        \begin{equation}
+            L = n \hbar = n \frac{h}{2\pi}, \quad n = 1, 2, 3, \ldots
+        \end{equation}
+        \item The electron does not radiate energy while in a stable orbit.
+        \item Energy is emitted or absorbed when the electron transitions between these quantized orbits, with the energy difference given by:
+        \begin{equation}
+            \Delta E = E_f - E_i = h f
+        \end{equation}
+    \end{itemize}
+\end{definition}
+
+\begin{definition}[Energy Levels of the Hydrogen Atom]
+    The energy levels of the hydrogen atom are quantized and given by the formula:
+    \begin{equation}
+        E_n = -\frac{13.6 \,\text{eV}}{n^2}, \quad n = 1, 2, 3, \ldots
+    \end{equation}
+    where \( E_n \) is the energy of the electron in the \( n^\text{th} \) energy level. The negative sign indicates that the electron is bound to the nucleus. The energy difference between two levels \( n_i \) and \( n_f \) corresponds to the emission or absorption of a photon with frequency \( f \):
+    \begin{equation}
+        h f = E_{n_f} - E_{n_i} = -13.6 \,\text{eV} \left( \frac{1}{n_f^2} - \frac{1}{n_i^2} \right)
+    \end{equation}
+\end{definition}
+
+\begin{definition}[Energy Spectrum of Hydrogen-Like Atoms]
+    The energy spectrum of hydrogen-like atoms (atoms with a single electron, such as He\(^+\), Li\(^{2+}\), etc.) is given by:
+    \begin{equation}
+        E_n = -\frac{Z^2 \cdot 13.6 \,\text{eV}}{n^2}, \quad n = 1, 2, 3, \ldots
+    \end{equation}
+    where \( Z \) is the atomic number of the nucleus (number of protons). The energy difference between two levels \( n_i \) and \( n_f \) corresponds to the emission or absorption of a photon with frequency \( f \):
+    \begin{equation}
+        h f = E_{n_f} - E_{n_i} = -Z^2 \cdot 13.6 \,\text{eV} \left( \frac{1}{n_f^2} - \frac{1}{n_i^2} \right)
+    \end{equation}
+\end{definition}
+
+\paragraph{Hydrogen-Like Atoms} Atoms with one valence electron, such as He\(^+\), Li\(^{2+}\), Be\(^{3+}\), etc. Or, alkaline metals like Na, K, Rb, Cs, Fr.
+
+
+\begin{definition}[Characteristic X-Rays and Moseley's Law] When high-energy electrons strike a metal target, they can eject inner-shell electrons, leading to characteristic X-ray emission as outer-shell electrons fill the vacancies. Moseley's law relates the frequency of the emitted X-rays to the atomic number \( Z \) of the target element:
+\begin{equation}
+    \sqrt{f} = K (Z - b)
+\end{equation}
+where \( f \) is the frequency of the emitted X-ray, \( K \) is a constant, and \( b \) is a screening constant that accounts for the shielding effect of the inner electrons.
+\end{definition}
+
+
+\subsection{De Broglie's Wavelength}
+\begin{definition}[De Broglie Hypothesis]
+    The de Broglie hypothesis posits that all matter exhibits wave-like properties, with the wavelength \( \lambda \) of a particle being inversely proportional to its momentum \( p \):
+    \begin{equation}
+        \lambda = \frac{h}{p}
+    \end{equation}
+    where \( h \) is Planck's constant. This concept extends wave-particle duality to all particles, suggesting that particles such as electrons, protons, and even larger objects have associated wavelengths.
+\end{definition}
+
+\begin{definition}[Wave Nature of Electrons]
+    The electron behave as wave satisfying the de Broglie relation. For a stable robit, the elevtron wave must fit exactly into the circumference of the orbit:
+    \begin{equation}
+        2 \pi r = n \lambda, \quad n = 1, 2, 3, \ldots
+    \end{equation}
+    where \( r \) is the radius of the orbit and \( \lambda \) is the de Broglie wavelength of the electron. This condition leads to the quantization of angular momentum in Bohr's model of the atom:
+    \begin{equation}
+        L = rp = n \hbar = n \frac{h}{2\pi}, \quad n = 1, 2, 3, \ldots
+    \end{equation}
+
+\end{definition}
+
+\begin{definition}[De Broglie Wavelength of an Electron]
+    \textit{Calculate the de Broglie wavelength of an electron moving with a velocity of \( 2 \times 10^6 \) m/s. The mass of the electron is \( 9.11 \times 10^{-31} \) kg and Planck's constant is \( 6.626 \times 10^{-34} \) J·s. Ignore relativistic effects.}
+
+    To calculate the de Broglie wavelength \( \lambda \) of the electron, we use the de Broglie relation:
+   $$
+        \lambda = \frac{h}{p}
+    $$
+    where \( p \) is the momentum of the electron, given by:
+    $$
+        p = mv
+    $$
+    where \( m \) is the mass of the electron and \( v \) is its velocity.
+
+    First, we calculate the momentum \( p \):
+    $$        p = (9.11 \times 10^{-31} \, \text{kg})(2 \times 10^6 \, \text{m/s}) = 1.822 \times 10^{-24} \, \text{kg·m/s} $$
+
+    Now, we can calculate the de Broglie wavelength \( \lambda \):
+    $$        \lambda = \frac{6.626 \times 10^{-34} \, \text{J·s}}{1.822 \times 10^{-24} \, \text{kg·m/s}} \approx 3.64 \times 10^{-10} \, \text{m} $$
+    Therefore, the de Broglie wavelength of the electron is approximately \( 3.64 \times 10^{-10} \) meters.
+\end{definition}
+
+\begin{example}[De Broglie Wavelength of a Baseball]
+    \textit{Jeff Hoffman was pitching a baseball with a speed of \( 30 \) m/s, sending Blue Jays to the World Series. The mass of the baseball is \( 0.1 \) kg. Calculate the de Broglie wavelength of the baseball.}
+
+    Using the same method, we have:
+    $$
+    \lambda = \frac{6.63 \times 10^{-34} \, \text{J·s}}{(0.1 \, \text{kg})(30 \, \text{m/s})} = 2.21 \times 10^{-34} \, \text{m}
+    $$
+    Therefore, the de Broglie wavelength of the baseball is approximately \( 2.21 \times 10^{-34} \) meters, which is extremely small and not observable in everyday life.
+\end{example}
+
+\begin{example}[Momentum is Wavelength]
+    \textit{The mass of the proton is 1836 times greater than the mass of the electron. In order for a proton to have the same momentum as an electron, how must the de Broglie wavelength of the proton compare to that of the electron?}  
+    According to the de Broglie relation:
+    $$        \lambda = \frac{h}{p}
+    $$
+    For the proton and electron to have the same momentum \( p \), we have:
+    $$        \lambda_p = \frac{h}{p} \quad \text{and} \quad \lambda_e = \frac{h}{p} $$
+    Therefore,:
+    $$        \lambda_p = \lambda_e $$
+    Thus, the de Broglie wavelength of the proton must be equal to that of the electron in order for them to have the same momentum.
+\end{example}
+
+\begin{example}[Davisson-Germer Experiment]
+    In the Davisson-Germer experiment, electrons were accelerated through a potential difference of \( 54 \) V before striking a nickel crystal. Calculate the de Broglie wavelength of the electrons after acceleration.
+
+    The interplaner spacing of the nickel crystal is \( d = 0.091 \) nm, and the first-order diffraction maximum was observed at an angle of \( \theta = 50^\circ \).
+
+    First, we calculate the kinetic energy \( K \) of the electrons after being accelerated through the potential difference \( V \):
+    $$        
+    K = eV = (1.602 \times 10^{-19} \, \text{C})(54 \, \text{V}) = 8.65 \times 10^{-18} \, \text{J} 
+    $$
+    Next, we calculate the momentum \( p \) of the electrons using the kinetic energy:
+    $$        K = \frac{p^2}{2m} \implies p = \sqrt{2mK} $$
+    where \( m \) is the mass of the electron (\(9.11 \times 10^{-31} \, \text{kg}\)). Thus,
+    $$        p = \sqrt{2(9.11 \times 10^{-31} \, \text{kg})(8.65 \times 10^{-18} \,\text{J})} \approx 1.26 \times 10^{-24} \text{kg·m/s} $$
+    Now, we can calculate the de Broglie wavelength \( \lambda \) of the electrons:
+    $$        \lambda = \frac{h}{p} = \frac{6.626 \times 10^{-34} \, \text{J·s}}{1.26 \times 10^{-24} \, \text{kg·m/s}} \approx 1.67 \times 10^{-10} \, \text{m} $$
+    Finally, we can verify this wavelength using Bragg's law for diffraction:
+    $$        n\lambda = 2d \sin \theta $$
+    For the first-order maximum (\( n = 1 \)), \( \theta = \frac{180 - 50}{2} = 65^\circ \):
+    $$        \lambda = 2(0.091 \times 10^{-9} \, \text{m}) \sin(65^\circ) \approx 1.67 \times 10^{-10} \, \text{m} $$
+    This matches our earlier calculation, confirming the de Broglie wavelength of the electrons is approximately \( 1.67 \times 10^{-10} \) meters.
+\end{example}
 \end{document}
 
