@@ -2069,5 +2069,150 @@ The assembly code is then assembled into machine code, which is a series of 0s a
 
     In RISC-V architecture, there are 32 general-purpose registers (x0 to x31), each 32 bits wide in the RV32I variant. The register x0 is hardwired to zero and cannot be modified. The other registers can be used for various purposes, such as holding function arguments, return values, and temporary data.
 \end{definition}
+
+\begin{definition}[\texttt{lw} and \texttt{la} Instructions]
+    The \verb|lw| (load word) instruction is used to load a 32-bit word from memory into a register. The syntax for the \verb|lw| instruction is as follows:
+    \begin{verbatim}
+    lw rX, offset(rY)
+    \end{verbatim}
+    This instruction loads the word located at the memory address calculated by adding the value in register \verb|rY| and the signed immediate \verb|offset| into register \verb|rX|.
+
+    The \verb|la| (load address) instruction is used to load the address of a label or variable into a register. The syntax for the \verb|la| instruction is as follows:
+    \begin{verbatim}
+    la rX, LABEL
+    \end{verbatim}
+    This instruction loads the address of the label or variable \verb|LABEL| into register \verb|rX|.
+\end{definition}
+
+\begin{example}[RISC-V Assembly Code - Rolling Sum]
+    Consider the following C code that uses that performs a rolling sum using pointers of a 4 words array:
+    \begin{verbatim}
+    void rolling_sum(int *arr, int n) {
+        int sum = 0;
+        for (int i = 0; i < n; i++) {
+            sum += arr[i];
+        }
+        return sum;
+    }
+
+    int main() {
+        int LIST[4] = {1, 2, 3, 4};
+        int result = rolling_sum(LIST, 4);
+        return 0;
+    }
+    \end{verbatim}
+    The equivalent RISC-V assembly code would be:
+    \begin{verbatim}
+    .data
+    LIST: .word 1, 2, 3, 4  # Example array
+
+    .global _start # label is visible to other files
+    .text # where the instructions are located
+    
+    _start:
+        la s1, LIST   # Load address of LIST into s1
+        lw s2, 0(s1)  # Load first element of LIST into s2
+        lw s3, 4(s1)  # Load second element of LIST into s3
+        add s2 , s2, s3 # sum = arr[0] + arr[1]
+        lw s3, 8(s1)  # Load third element of LIST into s3
+        add s2 , s2, s3 # sum += arr[2]
+        lw s3, 12(s1)  # Load fourth element of LIST into s3
+        add s2 , s2, s3 # sum += arr[3]
+        # sum is now in s2
+    END: ebreak # we use ebreak to end the program, to transfer control to the simulator
+    \end{verbatim}
+\end{example}
+
+\begin{definition}[Logic Instructions]
+    Logic instructions are a type of assembly language instruction that perform bitwise operations on binary data. These instructions typically operate on values stored in registers or memory locations and can include operations such as AND, OR, NOT, and XOR.
+
+    For example, consider the following high-level code:
+    \begin{verbatim}
+    int a = b & c; // bitwise AND
+    int a = b | c; // bitwise OR
+    int a = b ^ c; // bitwise XOR
+    int a = ~b;    // bitwise NOT
+    \end{verbatim}
+
+    The equivalent assembly code using RISC-V instructions would be:
+    \begin{verbatim}
+    AND rA, rB, rC  # rA = rB & rC
+    OR  rA, rB, rC  # rA = rB | rC
+    XOR rA, rB, rC  # rA = rB ^ rC
+    NOT rA, rB      # rA = ~rB; Pseudo-instruction,
+    # use XORI rA, rB, -1, since -1 = 0xFFFFFFFF
+    \end{verbatim}
+    where \verb|rA| occupies the destination operand, while \verb|rB| and \verb|rC| are the source operands.
+
+    We can also use the immediate values as operands:
+    \begin{verbatim}
+    ANDI rA, rB, #D  # rA = rB & D
+    ORI  rA, rB, #D  # rA = rB | D
+    XORI rA, rB, #D  # rA = rB ^ D
+    \end{verbatim}
+\end{definition}
+
+\begin{definition}[Shift Instructions]
+    Shift instructions are a type of assembly language instruction that perform bitwise shift operations on binary data. These instructions typically operate on values stored in registers and can include operations such as logical shift left (LSL), logical shift right (LSR), and arithmetic shift right (ASR).
+
+    For example, consider the following high-level code:
+    \begin{verbatim}
+    int a = b << n; // logical shift left
+    int a = b >> n; // logical shift right
+    int a = b >> n; // arithmetic shift right
+    \end{verbatim}
+
+    The equivalent assembly code using RISC-V instructions would be:
+    \begin{verbatim}
+    SLL rA, rB, rC  # rA = rB << rC (logical shift left)
+    SRL rA, rB, rC  # rA = rB >> rC (logical shift right)
+    SRA rA, rB, rC  # rA = rB >> rC (arithmetic shift right)
+    \end{verbatim}
+    where \verb|rA| occupies the destination operand, while \verb|rB| is the source operand and \verb|rC| specifies the number of bits to shift.
+    
+    The arithmetic shift right (ASR) preserves the sign bit (the most significant bit) when shifting right, which is important for signed integers. In contrast, the logical shift right (LSR) fills the vacated bits with zeros, regardless of the sign of the number. 
+
+    To multiply or divide by powers of two, we can use shift instructions:
+    \begin{verbatim}
+    SLA rA, rB, #D  # rA = rB * 2^D (multiply by 2^D)
+    SRA rA, rB, #D  # rA = rB / 2^D (divide by 2^D, if it is divisable)
+    \end{verbatim}
+
+    We can also use immediate values as operands:
+    \begin{verbatim}
+    SLLI rA, rB, #D  # rA = rB << D (logical shift left)
+    SRLI rA, rB, #D  # rA = rB >> D (logical shift right)
+    SRAI rA, rB, #D  # rA = rB >> D (arithmetic shift right)
+    \end{verbatim}
+\end{definition}
+
+\begin{definition}[Accessing a byte and half word]
+    In RISC-V, we can access individual bytes and half-words (16 bits) using specific load and store instructions. 
+
+    To load a byte from memory into a register, we use the \verb|lb| (load byte) instruction:
+    \begin{verbatim}
+    lb rX, offset(rY)
+    \end{verbatim}
+    This instruction loads the byte located at the memory address calculated by adding the value in register \verb|rY| and the signed immediate \verb|offset| into register \verb|rX|. The loaded byte is sign-extended to fill the 32-bit register.
+
+    To load a half-word from memory into a register, we use the \verb|lh| (load half-word) instruction:
+    \begin{verbatim}
+    lh rX, offset(rY)
+    \end{verbatim}
+    This instruction loads the half-word located at the memory address calculated by adding the value in register \verb|rY| and the signed immediate \verb|offset| into register \verb|rX|. The loaded half-word is sign-extended to fill the 32-bit register.
+
+    Similarly, to store a byte from a register into memory, we use the \verb|sb| (store byte) instruction:
+    \begin{verbatim}
+    sb rX, offset(rY)
+    \end{verbatim}
+    This instruction stores the least significant byte of register \verb|rX| into the memory address calculated by adding the value in register \verb|rY| and the signed immediate \verb|offset|.
+
+    To store a half-word from a register into memory, we use the \verb|sh| (store half-word) instruction:
+    \begin{verbatim}
+    sh rX, offset(rY)
+    \end{verbatim}
+    This instruction stores the least significant half-word of register \verb|rX| into the memory address calculated by adding the value in register \verb|rY| and the signed immediate \verb|offset|.
+    
+\end{definition}
 \end{document}
 

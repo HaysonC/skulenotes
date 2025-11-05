@@ -1986,6 +1986,53 @@ C_1 + C_2 t \\[4pt] C_2
     \end{itemize}
 \end{definition}
 
+\begin{definition}[General Planar System of ODEs]
+    Consider the general planar system of ODEs:
+    $$
+    X' = P(t)X + G(t)
+    $$
+    where \( X = \begin{bmatrix} x \\ y \end{bmatrix} \), \( P(t) = \begin{bmatrix} p_{11}(t) & p_{12}(t) \\ p_{21}(t) & p_{22}(t) \end{bmatrix} \), and \( G(t) = \begin{bmatrix} g_1(t) \\ g_2(t) \end{bmatrix} \). The system is called:
+    \begin{itemize}
+        \item \textbf{Homogeneous} if \( G(t) = 0 \) for all \( t \).
+        \item \textbf{Non-homogeneous} if \( G(t) \neq 0 \) for some \( t \).
+        \item \textbf{Autonomous} if \( P(t) \) and \( G(t) \) are constant matrices/vectors.
+        \item \textbf{Non-autonomous} if \( P(t) \) and/or \( G(t) \) are functions of \( t \).
+    \end{itemize}
+\end{definition}
+
+\begin{definition}[Method to Solve General Planar System of ODEs]
+    To solve the general planar system of ODEs, we can translate the system into a higher-dimensional homogeneous system by translating the fixed point to the origin. Let \( X^* \) be the fixed point of the system, then we define a new variable \( Y = X - X^* \). The system becomes:
+    $$Y' = P(t)Y
+$$
+    We can then solve this homogeneous system using methods for linear systems of ODEs.
+\end{definition}
+
+\begin{example}
+    Consider the system of ODEs:
+    $$
+    \textbf{x}' = \begin{bmatrix} 2 & 3 \\ 1 & 4
+    \end{bmatrix}\textbf{x} + \begin{bmatrix} 5 \\ 6
+    \end{bmatrix}
+    $$
+    We find the fixed point by solving:
+    $$
+    A\textbf{x}^* + \textbf{b} = 0 \implies \begin{bmatrix} 2 & 3 \\ 1 & 4
+    \end{bmatrix}\textbf{x}^* = -\begin{bmatrix} 5 \\ 6
+    \end{bmatrix}
+    $$
+    Solving this, we find:
+    $$
+    \textbf{x}^* = \begin{bmatrix} -3 \\ 2
+    \end{bmatrix}
+    $$
+    We define a new variable \( \textbf{y} = \textbf{x} - \textbf{x}^* \), then the system becomes:
+    $$
+    \textbf{y}' = \begin{bmatrix} 2 & 3 \\ 1 & 4
+    \end{bmatrix}\textbf{y}
+    $$
+    We can then solve this homogeneous system using methods for linear systems of ODEs.
+\end{example}
+    
 \subsection{Wronskian and Fundamental Matrix}
 \begin{definition}[Functionals]
     A functional is a mapping from a vector space of functions to the real numbers. For example, consider the space of continuous functions on an interval \( [a, b] \), denoted by \( C[a, b] \). A functional \( J: C[a, b] \to \mathbb{R} \) could be defined as:
@@ -2769,6 +2816,61 @@ Then, we can consider the eigenvalues and eigenfunctions of this operator:
         \mathrm{spec}(L) = \{ \lambda \in \mathbb{C} \mid L[y(t)] = \lambda y(t) \text{ has a non-trivial solution } y(t) \}
     \end{equation}
 \end{definition}
+
+We want to formalize the two methods of finding particular solutions: undetermined coefficients and variation of parameters.
+
+\begin{theorem}[Method of Undetermined Coefficients]
+    The method of undetermined coefficients is a technique used to find a particular solution to a non-homogeneous linear differential equation with constant coefficients. For a second-order ODE of the form:
+    $$y'' + p y' + q y = g(t)$$
+    where \( g(t) \) is a linear combination of functions such as polynomials, exponentials, sines, and cosines, we can assume a particular solution \( y_p(t) \) of the same form as \( g(t) \), but with undetermined coefficients. The steps to apply this method are as follows:
+    \begin{enumerate}
+        \item Identify the form of \( g(t) \).
+        \item Assume a particular solution \( y_p(t) \) with undetermined coefficients based on the form of \( g(t) \).
+        \item Substitute \( y_p(t) \) into the left-hand side of the differential equation.
+        \item Solve for the undetermined coefficients by equating the resulting expression to \( g(t) \).
+    \end{enumerate}
+    This method is effective when \( g(t) \) is composed of functions whose derivatives are similar in form to the original function.
+\end{theorem}
+
+\begin{example}
+    Consider the ODE:
+    $$y'' - 3y' + 2y = e^{2t} + \sin(t)$$
+    The corresponding homogeneous equation is:
+    $$y'' - 3y' + 2y = 0$$
+    The characteristic equation is:
+    $$r^2 - 3r + 2 = 0$$
+    Solving this gives the roots \( r_1 = 2 \) and \( r_2 = 1 \). Thus, the general solution of the homogeneous equation is:
+    $$y_h(t) = C_1 e^{2t} + C_2 e^{t}$$
+    where \( C_1 \) and \( C_2 \) are constants determined by initial conditions.
+
+    Next, we find a particular solution for each term on the right-hand side of the inhomogeneous equation. For the term \( e^{2t} \), since \( e^{2t} \) is already a solution of the homogeneous equation, we assume a particular solution of the form \( y_{p_1}(t) = At e^{2t} \). Substituting this into the left-hand side of the ODE gives:
+    \begin{align*}
+        y_{p_1}'' - 3y_{p_1}' + 2y_{p_1} &= (4At + 4A)e^{2t} - 3(2At + A)e^{2t} + 2At e^{2t} \\
+        &= (4At + 4A - 6At - 3A + 2At)e^{2t} \\
+        &= (0At + A)e^{2t} \\
+        &= Ae^{2t}
+    \end{align*}
+
+    Setting this equal to \( e^{2t} \) gives:
+    $$Ae^{2t} = e^{2t} \implies A = 1$$
+    Thus, we have:
+    $$y_{p_1}(t) = t e^{2t}$$   
+
+    For the term \( \sin(t) \), we can assume a particular solution of the form \( y_{p_2}(t) = B \cos(t) + C \sin(t) \). Substituting this into the left-hand side of the ODE gives:
+    \begin{align*}
+        y_{p_2}'' - 3y_{p_2}' + 2y_{p_2} &= -B \cos(t) - C \sin(t) + 3B \sin(t) - 3C \cos(t) + 2B \cos(t) + 2C \sin(t) \\
+        &= (B - 3C) \cos(t) + (3B - C) \sin(t)
+    \end{align*}
+    Setting this equal to \( \sin(t) \) gives the system of equations:
+    \begin{align*}
+        B - 3C &= 0 \\
+        3B - C &= 1
+    \end{align*}
+    Solving this system gives \( B = \frac{3}{10} \) and \( C = \frac{1}{10} \). Thus, we have:
+    $$y_{p_2}(t) = \frac{3}{10} \cos(t) + \frac{1}{10} \sin(t)$$
+    Finally, the general solution of the inhomogeneous ODE is:
+    $$y(t) = C_1 e^{2t} + C_2 e^{t} + t e^{2t} + \frac{3}{10} \cos(t) + \frac{1}{10} \sin(t)$$
+\end{example}
 
 \begin{theorem}[Variation of Parameters]
     Variation of parameters is a method used to find a particular solution to a non-homogeneous linear differential equation. For a second-order ODE of the form:

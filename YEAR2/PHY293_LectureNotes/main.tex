@@ -1703,5 +1703,114 @@ where \( f \) is the frequency of the emitted X-ray, \( K \) is a constant, and 
     $$        \lambda = 2(0.091 \times 10^{-9} \, \text{m}) \sin(65^\circ) \approx 1.67 \times 10^{-10} \, \text{m} $$
     This matches our earlier calculation, confirming the de Broglie wavelength of the electrons is approximately \( 1.67 \times 10^{-10} \) meters.
 \end{example}
+\subsection{Matter Waves}
+\begin{definition}[Matter Wave Function]
+    In quantum mechanics, the matter wave function \( \psi(x,t) \) describes the quantum state of a particle. The probability density 
+    
+    \begin{equation}
+        D(x,t) = |\psi(x,t)|^2
+    \end{equation}
+    gives the likelihood of finding the particle at position \( x \) and time \( t \). The wave function must satisfy the normalization condition:
+
+    \begin{equation}
+        \int_{-\infty}^{\infty} |\psi(x,t)|^2 \, dx = 1
+    \end{equation}
+
+    The wave function can be expressed as a superposition of plane waves:
+\end{definition}
+
+\begin{definition}[Fourier Integtal]
+    The foruer transformer of a function $f(x)$ is given by:
+    $$
+        A(k) = \frac{1}{\sqrt{2\pi}} \int_{-\infty}^{\infty} f(x) e^{-ikx} \, dx
+    $$
+    The inverse fourier transform is given by:
+    $$       
+        f(x) = \int _{-\infty}^{\infty} A(k) e^{ikx} \, dk
+    $$
+\end{definition}
+\begin{definition}[Postion and Momentum Space]
+    In quantum mechanics, the wave function can be represented in both position space and momentum space. In terms of fourier transformation, $f(x)$ is the wave function in position space, while $A(k)$ is the wave function in momentum space, where \( k \) is related to the momentum \( p \) by \( p = \hbar k \). The probability density in momentum space is given by:
+\end{definition}
+
+\begin{definition}[Localization Trade-off]
+    In fourier transform, there is a trade-off between the localization of a function in position space and its localization in momentum (wave-number) space. A function that is highly localized in position space will have a broad distribution in momentum space, and vice versa. This is a manifestation of the Heisenberg uncertainty principle. That is, if the position is well-defined, we would see a broad distribution of momenta, and if the momentum is well-defined, we would see a broad distribution of positions.
+\end{definition}
+
+\begin{theorem}[Fourier Uncertainty Relation]
+    The Fourier uncertainty relation states that the product of the standard deviations of a function in position space and its Fourier transform in momentum space is bounded by a constant:
+    \begin{equation}
+        \Delta x \Delta k \geq \frac{1}{2}
+    \end{equation}
+    where \( \Delta x \) is the standard deviation in position space and \( \Delta k \) is the standard deviation in wave-number space:
+    $$
+        \Delta x = \sqrt{\langle x^2 \rangle - \langle x \rangle^2}, \quad \Delta k = \sqrt{\langle k^2 \rangle - \langle k \rangle^2}
+    $$  
+    Also, we have, in the time space:
+    \begin{equation}
+        \Delta t \Delta \omega \geq \frac{1}{2}
+    \end{equation}
+    where \( \Delta t \) is the standard deviation in time and \( \Delta \omega \) is the standard deviation in angular frequency space.
+\end{theorem}
+
+\begin{theorem}[Heisenberg Uncertainty Principle]
+    The Heisenberg uncertainty principle states that it is impossible to simultaneously know both the exact position and exact momentum of a particle. The product of the uncertainties in position \( \Delta x \) and momentum \( \Delta p \) is bounded by a constant:
+    \begin{equation}
+        \Delta x \Delta p \geq \frac{\hbar}{2}
+    \end{equation}
+    where \( \hbar = \frac{h}{2\pi} \) is the reduced Planck's constant. This principle reflects the fundamental limit on the precision with which certain pairs of physical properties can be known.
+    
+\end{theorem}
+\begin{proof}
+    (Direct Proof) Starting from the Fourier uncertainty relation:
+    $$
+        \Delta x \Delta k \geq \frac{1}{2}
+    $$
+    We know that momentum \( p \) is related to wave-number \( k \) by:
+    $$
+        p = \hbar k
+    $$
+    Therefore, the uncertainty in momentum \( \Delta p \) can be expressed in terms of the uncertainty in wave-number \( \Delta k \):
+    $$
+        \Delta p = \hbar \Delta k
+    $$
+    Substituting this into the Fourier uncertainty relation gives:
+    $$
+        \Delta x \left( \frac{\Delta p}{\hbar} \right) \geq \frac{1}{2}
+    $$
+    Multiplying both sides by \( \hbar \) yields:
+    $$
+        \Delta x \Delta p \geq \frac{\hbar}{2}
+    $$
+    This completes the proof of the Heisenberg uncertainty principle.
+\end{proof}
+
+\begin{definition}[Time-Energy Uncertainty Principle]
+    The time-energy uncertainty principle states that there is a fundamental limit to the precision with which energy and time can be simultaneously known. The product of the uncertainties in wave angular frequency \( \Delta \omega \) and time \( \Delta t \) is bounded by a constant:
+    \begin{equation}
+        \Delta \omega \Delta t \geq \frac{\hbar}{2}
+    \end{equation}
+    This principle implies that if a system exists in a state for a very short time, there is a corresponding uncertainty in its energy.
+\end{definition}
+\begin{proof}
+    (Sketch) Starting from the Fourier uncertainty relation in the time domain, we use the same reasoning as in the position-momentum case. 
+\end{proof}
+\begin{definition}[Hilbert Space]
+    A Hilbert space is a complete inner product space that provides the mathematical framework for quantum mechanics. it is the space cotnaining all physically allowed wave function that are:
+    \begin{itemize}
+        \item Complex, continuous, and normalizable.
+        \item Can be added together and multiplied by complex scalars (i.e., it is a vector space).
+        \item Equipped with an inner product that allows for the calculation of probabilities and expectation values.
+    \end{itemize}
+\end{definition}
+\begin{theorem}[From fourier to Hilbert Space]
+    Every wave function $\psi(x,t)$ can be represented as a vector in a Hilbert space. Where each of the basis vectors corresponds to a specific state of the system, such as a position eigenstate or momentum eigenstate. The inner product in this space allows us to calculate probabilities and expectation values of observables. Of coruse, it must satisfy the normalization condition:
+    $$        \int_{-\infty}^{\infty} |\psi(x,t)|^2 \, dx = 1
+    $$
+    This idea will be explored further in the next chapters.
+\end{theorem}
+
+
+
 \end{document}
 

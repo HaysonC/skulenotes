@@ -2696,4 +2696,42 @@ In fact, we often take water as a nearly incompressible fluid in fluid mechanics
     \end{equation}
     where \(\nabla P\) is the pressure gradient, \(\rho\) is the fluid density, and \(\vec{g}\) is the acceleration due to gravity. 
 \end{theorem}
+
+\begin{definition}[Hydrodatic Force on a Submerged Surface]
+    The hydrostatic force \(F\) acting on a submerged surface \(S\) is given by:
+    \begin{equation}
+        F = \iint_S P \, dA
+    \end{equation}
+    where \(P\) is the pressure at each point on the surface and \(dA\) is the infinitesimal area element of the surface.
+
+    The point of application of the hydrostatic force, known as the center of pressure, can be determined by finding the centroid of the pressure distribution on the surface.
+\end{definition}
+
+\begin{definition}[Pressure Prism]
+    A pressure prism is a graphical representation of the pressure distribution on a submerged surface. It is typically used to visualize the variation of pressure with depth in a fluid. The height of the prism at any point on the surface corresponds to the pressure at that point, and the area of the prism represents the total hydrostatic force acting on the surface.
+\end{definition}
+
+\begin{example}[Pressure Prsim]
+    Cosndier a rectangular dam with a width \(b\) and a height \(h\). The dam is submerged in water, and we want to calculate the hydrostatic force acting on the dam. The pressure at a depth \(z\) below the water surface is given by:
+    \[P(z) = \rho g z\]
+    where \(\rho\) is the density of water and \(g\) is the acceleration due to gravity. The average pressure on the dam can be calculated as:
+    \[P_{avg} = \frac{\rho g h}{2}\]
+    The hydrostatic force acting on the dam is then given by:
+    \[F = P_{avg} \cdot A = \frac{\rho g h}{2} \cdot (b \cdot h) = \frac{1}{2} \rho g b h^2\]
+    where \(A = b \cdot h\) is the area of the dam. To visulzied this, we can draw a pressure prism in the \textit{prssure-area space} where the base of the prism is the area of the dam and the height of the prism is the average pressure acting on the dam. Then, we can condlue that the magnitude of the hydrostatic force is equal to the volume of the pressure prism. 
+
+    The centroid of the pressure prism can be found to determine the point of application of the hydrostatic force. For a rectangular dam, the centroid is located at a depth of \(\frac{h}{3}\) from the base of the dam.
+
+    \textbf{Important} This method is \textbf{only valid for planar surfaces}.
+\end{example}
+
+\begin{definition}[Determining Centroid]
+ Recall, the centroid of a shape with multiple geometries is calculated by: 
+\begin{equation}
+\bar{y} = \frac{\sum_i V_i  y_i}{\sum_i V_i}
+\end{equation}
+\end{definition}
+
+\paragraph{Note} Effect of atmospheric pressure: In most hydrostatic problems, the effect of atmospheric pressure is neglected because it acts uniformly on all surfaces and does not contribute to the net force on submerged surfaces. However, if the surface is exposed to the atmosphere, the atmospheric pressure must be considered in addition to the hydrostatic pressure.
+
 \end{document}
