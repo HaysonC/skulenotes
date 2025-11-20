@@ -2688,7 +2688,7 @@ In fact, we often take water as a nearly incompressible fluid in fluid mechanics
 \end{proof}
 
 
-\subsection{Basic Eqaution for Preessure Fiekd}
+\subsection{Basic Eqaution for Preessure Field}
 \begin{theorem}[Hydrostatic Pressure Equation]
     In a fluid at rest, the pressure gradient is related to the body forces acting on the fluid. Mathematically, we write:
     \begin{equation}
@@ -2733,5 +2733,47 @@ In fact, we often take water as a nearly incompressible fluid in fluid mechanics
 \end{definition}
 
 \paragraph{Note} Effect of atmospheric pressure: In most hydrostatic problems, the effect of atmospheric pressure is neglected because it acts uniformly on all surfaces and does not contribute to the net force on submerged surfaces. However, if the surface is exposed to the atmosphere, the atmospheric pressure must be considered in addition to the hydrostatic pressure.
+\subsection{Buoyancy}
+\begin{definition}[Buoyant Force]
+    The buoyant force \(F_b\) acting on a submerged or partially submerged object is given by Archimedes' principle:
+    \begin{equation}
+        F_b = \rho_f V_d g
+    \end{equation}
+    where \(\rho_f\) is the density of the fluid, \(V_d\) is the volume of fluid displaced by the object, and \(g\) is the acceleration due to gravity.
+\end{definition}    
+\begin{definition}[Stability of Submerged Bodies]
+    The stability of a submerged body is determined by the relative positions of its center of gravity (CG) and center of buoyancy (CB). A submerged body is considered stable if, when tilted, it returns to its original position. This occurs when the CB creates a righting moment that opposes the tilt. If the CG is below the CB, the body is stable; if the CG is above the CB, the body is unstable and will tip over.
+\end{definition}
+\begin{definition}[Stability of Floating Bodies]
+    The stability of a floating body is determined by the relative positions of its center of gravity (CG) and center of buoyancy (CB). A floating body is considered stable if, when tilted, it returns to its original position. This occurs when the metacenter (M), the point where the line of action of the buoyant force intersects the vertical line through the CG when the body is tilted, is above the CG. If M is below CG, the body is unstable and will tip over. 
+\end{definition}
+\section{Fluids in Rigid Body Motion}
+\begin{example}[Fluid in Linear Rigid Body Motion]
+    Consider a container partially filled with liquid. A particle is moving on a straight path with constant acceleration. Determine the shape of the liquid surface inside the container.
 
+    Using the following equation for pressure in a fluid in rigid body motion:
+    \[
+    -\nabla P + \rho (\vec{g} - \vec{a}) = 0
+    \]
+    where \(\vec{a}\) is the acceleration of the particle, we can analyze the situation. The acceleration vector \(\vec{a}\) can be expressed as:
+    \[\vec{a} = a_y \hat{j} + a_z \hat{k}\]
+    where \(a_y\) and \(a_z\) are the components of acceleration in the \(y\) and \(z\) directions, respectively. Then, we can apply to the vector equation:
+    \[-\nabla P + \rho ( - a_y \hat{j} + (g - a_z) \hat{k}) = 0\]
+    This gives us the following system of equations:
+    \[\frac{\partial P}{\partial x} = 0\]
+    \[\frac{\partial P}{\partial y} = -\rho a_y\]
+    \[\frac{\partial P}{\partial z} = -\rho (g + a_z)\]
+    Integrating these equations, we find:
+    \[P = -\rho a_y y - \rho (g + a_z) z + C\]
+    where \(C\) is a constant of integration.
+
+    To determine the shape of the liquid surface, we set the pressure \(P\) equal to the atmospheric pressure \(P_{atm}\) at the free surface:
+    \[P_{atm} = -\rho a_y y - \rho (g + a_z) z + C\]
+    Rearranging this equation, we find the equation of the liquid surface:
+    \[z = \frac{C - P_{atm}}{\rho (g + a_z)} - \frac{a_y}{g + a_z} y = C_1 - \frac{a_y}{g + a_z} y\]
+    where \(C_1 = \frac{C - P_{atm}}{\rho (g + a_z)}\) is a new constant.
+
+    This equation describes a plane inclined at an angle determined by the ratio of the acceleration components. Thus, the liquid surface inside the container will be a plane inclined in the direction of the acceleration.
+
+\end{example}
 \end{document}

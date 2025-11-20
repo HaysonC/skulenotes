@@ -1715,6 +1715,11 @@ where \( f \) is the frequency of the emitted X-ray, \( K \) is a constant, and 
     \begin{equation}
         \int_{-\infty}^{\infty} |\psi(x,t)|^2 \, dx = 1
     \end{equation}
+    , where $|\psi(x,t)|^2$ is:
+    $$
+        |\psi(x,t)|^2 = \psi^*(x,t) \psi(x,t)
+    $$
+    Here, \( \psi^*(x,t) \) is the complex conjugate of
 
     The wave function can be expressed as a superposition of plane waves:
 \end{definition}
@@ -1810,7 +1815,176 @@ where \( f \) is the frequency of the emitted X-ray, \( K \) is a constant, and 
     This idea will be explored further in the next chapters.
 \end{theorem}
 
+\section{The Schrödinger Equation in One-Dimensional Space}
+\paragraph{Standing Waves and Stationary States}
+\begin{itemize}
+    \item A particle confined in space behaves like a standing wave.
+    \item For a stationary state:
+    \[
+        \Psi(x,t) = \psi(x)e^{-iEt/\hbar},
+    \]
+    giving a time-independent probability density $|\Psi|^2 = |\psi|^2$.
+    \item Superpositions of stationary states produce time-dependent densities.
+\end{itemize}
+\begin{definition}[Time Dependent Schrödinger Equation]
+    The time-dependent Schrödinger equation describes how the quantum state of a physical system changes over time. It is given by:
+    \begin{equation}
+        i \hbar \frac{\partial \Psi(x,t)}{\partial t} = -\frac{\hbar^2}{2m} \frac{\partial^2 \Psi(x,t)}{\partial x^2} + V(x) \Psi(x,t)
+    \end{equation}
+    where \( \Psi(x,t) \) is the wave function of the particle, \( m \) is the mass of the particle, \( V(x) \) is the potential energy as a function of position, and \( \hbar \) is the reduced Planck's constant.    
+    
+\end{definition}
+\begin{example}[Particle in a Box]
+    Consider a particle confined in a one-dimensional box of length \( L \) with infinitely high potential walls at \( x = 0 \) and \( x = L \). The potential \( V(x) \) is given by:
+    $$
+        V(x) = \begin{cases}
+            0 & \text{for } 0 < x < L \\
+            \infty & \text{otherwise}
+        \end{cases}
+    $$
+    The time-independent Schrödinger equation inside the box is:
+    $$
+        -\frac{\hbar^2}{2m} \frac{d^2 \psi(x)}{dx^2} = E \psi(x)
+    $$
+    The general solution to this equation is:
+    $$
+        \psi(x) = A \sin(kx) + B \cos(kx)
+    $$
+    where \( k = \sqrt{\frac{2mE}{\hbar^2}} \).
+
+    Applying the boundary conditions \( \psi(0) = 0 \) and \( \psi(L) = 0 \), we find that \( B = 0 \) and \( kL = n\pi \) for \( n = 1, 2, 3, \ldots \). Thus, the allowed wave numbers are:
+    $$
+        k_n = \frac{n\pi}{L}
+    $$
+    The corresponding energy levels are quantized:
+    $$
+        E_n = \frac{\hbar^2 k_n^2}{2m} = \frac{n^2 \pi^2 \hbar^2}{2mL^2}, \quad n = 1, 2, 3, \ldots
+    $$
+    The normalized wave functions are:
+    $$
+        \psi_n(x) = \sqrt{\frac{2}{L}} \sin\left(\frac{n\pi x}{L}\right)
+    $$
+    Therefore, the stationary states of the particle in the box are given by:
+    $$        
+    \Psi_n(x,t) = \sqrt{\frac{2}{L}} \sin\left(\frac{n\pi x}{L}\right) e^{-iE_n t/\hbar}
+    $$
+\end{example}
+
+\begin{definition}[Energy Quantization]
+    \begin{itemize}
+    \item Only discrete energies $E_n$ yield normalizable solutions satisfying boundary conditions.
+    \item Examples:
+    \[
+        \begin{aligned}
+        U(x) &= 0 &\text{(infinite square well)}\\
+        U(x) &= \tfrac{1}{2}kx^2 &\text{(harmonic oscillator)}\\
+        U(r) &= -\frac{ke^2}{r} &\text{(hydrogen atom)}
+        \end{aligned}
+    \]
+\end{itemize}
+
+\end{definition}
+\subsection{Eigenstates and Observables}
+\begin{definition}[Ovservables and Operators]
+    In quantum mechanics, physical observables such as position, momentum, and energy are represented by operators that act on the wave function. An operator is a mathematical entity that transforms one function into another. For example:
+    \begin{itemize}
+        \item Position operator: \( \hat{x} = x \)
+        \item Momentum operator: \( \hat{p} = -i\hbar \frac{d}{dx} \)
+        \item Hamiltonian (energy) operator: \( \hat{H} = -\frac{\hbar^2}{2m} \frac{d^2}{dx^2} + V(x) \)
+    \end{itemize}
+\end{definition}
+\paragraph{From Schrödinger Equation to Observables}
+The time-independent Schrödinger equation (TISE) governs quantum systems:
+\begin{equation}
+-\frac{\hbar^2}{2m}\frac{d^2\psi(x)}{dx^2} + U(x)\psi(x) = E\psi(x)
+\end{equation}
+Notice, that it is an \textbf{eigenvalue equation}.
+
+\paragraph{Eigenvalue Equation}
+When an operator $\hat{A}$ acts on a special function called an \textbf{eigenfunction} $\psi(x)$, it returns the function scaled by a measurable number called an \textbf{eigenvalue} $\lambda$:
+\begin{equation}
+\hat{A}\psi(x) = \lambda\psi(x)
+\end{equation}
+
+The TISE is precisely this structure, where $\hat{H}$ (the Hamiltonian) is the operator and $E$ is the eigenvalue:
+\begin{equation}
+    \hat{H}\psi(x) = E\psi(x)
+\end{equation}
 
 
+\paragraph{Common Operators} Below is a table of common quantum operators:
+\begin{center}
+\begin{tabular}{|c|c|c|}
+\hline
+\textbf{Observable} & \textbf{Operator} & \textbf{Eigenvalue} \\
+\hline
+Position & $\hat{x} = x$ & $x_0$ \\
+Momentum & $\hat{p} = -i\hbar\frac{d}{dx}$ & $p_0$ \\
+Potential Energy & $\hat{V} = V(x)$ & $V(x_0)$ \\
+Kinetic Energy & $\hat{K} = -\frac{\hbar^2}{2m}\frac{d^2}{dx^2}$ & $K$ \\
+Energy (Hamiltonian) & $\hat{H} = -\frac{\hbar^2}{2m}\frac{d^2}{dx^2} + V(x)$ & $E$ \\
+\hline
+\end{tabular}
+\end{center}
+The choice of $V(x)$ depends on the physical system being modeled:
+\begin{itemize}
+    \item Infinite square well: $V(x) = 0$ inside the well, $V(x) = \infty$ outside.
+    \item 
+    \item Harmonic oscillator: $V(x) = \frac{1}{2}kx^2$.
+    \item Hydrogen atom: $V(r) = -\frac{ke^2}{r}$.
+\end{itemize}
+\begin{definition}[Expected Value]
+In quantum mechanics, the expectation value of an observable represented by operator $\hat{A}$ is:
+\begin{equation}
+    \langle A \rangle = \int_{-\infty}^{\infty} \psi^*(x) \, \hat{A}\psi(x) \, dx
+\end{equation}
+where $\psi(x)$ is the wave function of the system, and $\psi^*(x)$ is its complex conjugate. The expectation value represents the average outcome of measurements of the observable $A$ on a large number of identically prepared systems.
+\end{definition}
+\begin{example}
+    A particle of mass \( m \) is confined in a one-dimensional infinite potential well of width \( L \). Its wave function is given by:
+    $$
+        \psi_n(x) = Ae^{x/L} \quad \text{for } 0 < x < L
+    $$
+    and \( \psi_n(x) = 0 \) elsewhere. Determine $\langle x \rangle$ for the particle and $\langle H \rangle$. 
+
+    First, we need to normalize the wave function to find the constant \( A \):
+    $$        \int_0^L |\psi_n(x)|^2 \, dx = 1 $$
+    This gives:
+    $$        |A|^2 \int_0^L e^{2x/L} \, dx = 1 $$
+    Evaluating the integral:
+    $$        |A|^2 \left[ \frac{L}{2} e^{2x/L} \right]_0^L = 1 $$
+    $$        |A|^2 \left( \frac{L}{2} (e^2 - 1) \right) = 1 $$
+    Thus, we find:
+    $$        |A|^2 = \frac{2}{L(e^2 - 1)} \implies A = \sqrt{\frac{2}{L(e^2 - 1)}} $$
+    Now, we can calculate the expectation value of position \( \langle x \rangle \):
+    $$        \langle x \rangle = \int_0^L \psi_n^*(x) \, x \, \psi_n(x) \, dx $$
+    $$        = |A|^2 \int_0^L x e^{2x/L} \, dx $$
+    Evaluating the integral using integration by parts:
+    $$        \int x e^{2x/L} \, dx = \left(\frac{L}{2} x e^{2x/L} - \frac{L^2}{4} e^{2x/L}\right) + C $$
+    Thus,
+    $$        \langle x \rangle = |A|^2 \left[ \frac{L}{2} x e^{2x/L} - \frac{L^2}{4} e^{2x/L} \right]_0^L $$
+    $$        = |A|^2 \left( \frac{L^2}{2} e^2 - \frac{L^2}{4} e^2 + \frac{L^2}{4} \right) $$
+    $$        = |A|^2 \frac{L^2}{4} (e^2 + 1) $$
+    Substituting \( |A|^2 \):
+    $$        \langle x \rangle = \frac{2}{L(e^2 - 1)} \cdot \frac{L^2}{4} (e^2 + 1) = \frac{L(e^2 + 1)}{2(e^2 - 1)} $$
+    Next, we calculate the expectation value of the Hamiltonian \( \langle H \rangle \):
+    $$        \langle H \rangle = \int_0^L \psi_n^*(x) \, \hat{H} \, \psi_n(x) \, dx $$
+    where the Hamiltonian operator \( \hat{H} \) for a particle in an infinite potential well is:
+    $$        \hat{H} = -\frac{\hbar^2}{2m} \frac{d^2}{dx^2} $$
+    Calculating the second derivative of \( \psi_n(x) \):
+    $$        \frac{d^2 \psi_n(x)}{dx^2} = \frac{A}{L^2} e^{x/L} $$
+    Thus,
+    $$        \hat{H} \psi_n(x) = -\frac{\hbar^2}{2m} \cdot \frac{A}{L^2} e^{x/L} = -\frac{\hbar^2 A}{2m L^2} e^{x/L} $$
+    Now, we can compute \( \langle H \rangle \):
+    $$        \langle H \rangle = -\frac{\hbar^2 A^2}{2m L^2} \int_0^L e^{2x/L} \, dx $$
+    Evaluating the integral:
+    $$        \int_0^L e^{2x/L} \, dx = \left[ \frac{L}{2} e^{2x/L} \right]_0^L = \frac{L}{2} (e^2 - 1) $$
+    Thus,
+    $$        \langle H \rangle = -\frac{\hbar^2 A^2}{2m L^2} \cdot \frac{L}{2} (e^2 - 1) = -\frac{\hbar^2 A^2 (e^2 - 1)}{4m L} $$
+    Substituting \( A^2 \):
+    $$        \langle H \rangle = -\frac{\hbar^2}{4m L} \cdot \frac{2}{L(e^2 - 1)} (e^2 - 1) = -\frac{\hbar^2}{2m L^2} $$
+    Therefore, the expectation values are:
+    $$        \langle x \rangle = \frac{L(e^2 + 1)}{2(e^2 - 1)}, \quad \langle H \rangle = -\frac{\hbar^2}{2m L^2} $$
+\end{example}
 \end{document}
 

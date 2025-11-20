@@ -3048,4 +3048,322 @@ We want to formalize the two methods of finding particular solutions: undetermin
     \end{align*}
     By substituting the actual error values (which can be computed if the exact solution is known), we can estimate the order \( p \) of the numerical method used. In this case, we find that \( p \approx 1 \), indicating that the method is first-order accurate.
 \end{example}
+
+\section{Laplace Transform}
+\begin{center}
+    ``Laplace Transform kills derivatives''
+\end{center}
+\begin{definition}[Integral Transform]
+    An integral transform \( F :  C^0(\mathbb{C}) \to C^0(\mathbb{C}) \) is a functional such that it transforms integrable functions \( f(t) \) into other functions \( F[f(t)](s) \) via an integral of the form:
+    \begin{equation}
+    F[f(t)](s) = \int_\alpha^{\beta} K(t,s) f(t) dt
+    \end{equation}
+    where \( K(t,s) \) is called the kernel of the transform.
+\end{definition}
+\begin{definition}[Laplace Transform]
+    The Laplace transform is an integral transform used to convert a function of time \( f(t) \) into a function of a complex variable \( s \). It uses the kernel \( K(t,s) = e^{-st} \) and is defined as:
+    \begin{equation}
+    \mathcal{L}\{f(t)\} = F(s) = \int_0^{\infty} e^{-st} f(t) dt
+    \end{equation}
+    where \( s \in \mathbb{C} \). The Laplace transform is widely used in engineering, physics, and applied mathematics to solve differential equations, analyze systems, and perform control theory.
+
+    The Laplace transform turns a differential operator into an algebraic operator:
+    \begin{equation}
+    \mathcal{L}\{f^{(n)}(t)\} = s^n F(s) - s^{n-1} f(0) - s^{n-2} f'(0) - \ldots - f^{(n-1)}(0)
+    \end{equation}
+
+    By transforming it from the $t$-domain to the $s$-domain, we can solve ODEs and then inverse transform it back to the $t$-domain.
+\end{definition}
+\subsection{Analysis of Laplace Transform}
+\begin{definition}[Poles on the Complex Plane]
+    In the context of the Laplace transform, poles are specific values of the complex variable \( s \) at which the Laplace transform \( F(s) \) becomes unbounded or undefined. These poles correspond to the singularities of the transformed function and play a crucial role in determining the behavior of the original function \( f(t) \) in the time domain.
+
+    The location of poles in the complex plane provides insights into the stability and dynamics of systems described by differential equations. For instance, poles with positive real parts indicate instability, while those with negative real parts suggest stability. The imaginary parts of the poles are associated with oscillatory behavior in the time domain.
+\end{definition}
+\begin{example}[Lapalce Transform of the Unit]
+    The Laplace transform of 1 is given by:
+    \begin{equation*}
+    \mathcal{L}\{1\} = \int_0^{\infty} e^{-st} \cdot 1 \, dt = \int_0^{\infty} e^{-st} dt
+    \end{equation*}
+    Evaluating this integral, we have:
+    \begin{equation*}
+    \mathcal{L}\{1\} = \left[ -\frac{1}{s} e^{-st} \right]_0^{\infty} = \frac{1}{s}
+    \end{equation*}
+    where \( s = 0 \) is a pole in the complex plane.
+\end{example}
+\begin{example}[Laplace Transform of $\sin{(\alpha t)}$]
+    To find the Laplace transform of the function \( f(t) = \sin(\alpha t) \), we start with the definition of the Laplace transform:
+    \begin{equation*}
+    \mathcal{L}\{\sin(\alpha t)\} = \int_0^{\infty} e^{-st} \sin(\alpha t) dt
+    \end{equation*}
+    We can evaluate this integral using integration by parts or by recognizing it as a standard Laplace transform. The result is:
+    \begin{equation*}
+    \mathcal{L}\{\sin(\alpha t)\} = \frac{\alpha}{s^2 + \alpha^2}
+    \end{equation*}
+    where \( s > 0 \) to ensure convergence of the integral.
+
+    The poles of this transform are located at \( s = \pm i\alpha \) in the complex plane.
+\end{example}
+
+\begin{example}
+    Consider the following function:
+    $$f(t) = e^{at} \sin(bt)$$
+    To find the Laplace transform of \( f(t) \), we start with the definition of the Laplace transform:
+    \begin{equation*}
+    \mathcal{L}\{e^{at} \sin(bt)\} = \int_0^{\infty} e^{-st} e^{at} \sin(bt) dt
+    \end{equation*}
+    Simplifying the integrand gives:
+    \begin{equation*}
+    \mathcal{L}\{e^{at} \sin(bt)\} = \int_0^{\infty} e^{-(s - a)t} \sin(bt) dt
+    \end{equation*}
+    We can evaluate this integral using the standard Laplace transform result for \( \sin(bt) \):
+    \begin{equation*}
+    \mathcal{L}\{e^{at} \sin(bt)\} = \frac{b}{(s - a)^2 + b^2}
+    \end{equation*}
+    where \( s > a \) to ensure convergence of the integral.
+
+    The poles of this transform are located at \( s = a \pm ib \) in the complex plane.
+\end{example}
+
+
+\begin{definition}[Exponential Order] \label{def:exp_order}
+    A function \( f: \mathbb{R} \to \mathbb{R} \) is said to be of exponential order \( \alpha \) if there exist positive constants \( M \) and \( T \) such that:
+    \begin{equation}
+    |f(t)| \leq M e^{\alpha t} \quad \text{for all } t > T
+    \end{equation}
+    This condition ensures that the function does not grow faster than an exponential function as \( t \) approaches infinity. Functions of exponential order are important in the context of the Laplace transform, as they guarantee the existence of the transform for sufficiently large values of the complex variable \( s \).
+\end{definition}
+
+\begin{theorem}[Existence of the Laplace Transform]
+    The Laplace transform \( \mathcal{L}\{f(t)\} \) of a function \( f(t) \) exists for all complex numbers \( s \) with $\text{Re}(s) > \alpha$, for some $\alpha$ if the following conditions are satisfied:
+    \begin{enumerate}
+        \item The function \( f(t) \) is piecewise continuous on the interval \( [0, A] \) for any finite \( A > 0 \); and
+        \item The function \( f(t) \) is of exponential order \( \alpha \); that is, there exist positive constants \( M \) and \( T \) such that Definition \ref{def:exp_order} holds.
+    \end{enumerate}
+    In other words, the function has to be \textbf{initially} well-behaved and not grow too fast.
+\end{theorem}
+\begin{example}
+    Consider the following t-domain function:
+    $$f(t) = e^\alpha t$$
+    We can check its Laplace transform:
+    \begin{equation*}
+    \mathcal{L}\{e^{\alpha t}\} = \int_0^{\infty} e^{-st} e^{\alpha t} dt = \int_0^{\infty} e^{-(s - \alpha)t} dt
+    \end{equation*}
+    Evaluating this integral, we have:
+    \begin{equation*}
+    \mathcal{L}\{e^{\alpha t}\} = \left[ -\frac{1}{s - \alpha} e^{-(s - \alpha)t} \right]_0^{\infty} = \frac{1}{s - \alpha}
+    \end{equation*}
+    where \( \text{Re}(s) > \alpha \) to ensure convergence of the integral. Thus, the Laplace transform of \( f(t) = e^{\alpha t} \) exists for all complex numbers \( s \) with \( \text{Re}(s) > \alpha \).
+\end{example}
+
+\paragraph{Properties of the Laplace Transform} Following are some important properties of the Laplace transform:
+\begin{itemize}
+    \item Linearity: \( \mathcal{L}\{af(t) + bg(t)\} = a\mathcal{L}\{f(t)\} + b\mathcal{L}\{g(t)\} \)
+    \item First Derivative: \( \mathcal{L}\{f'(t)\} = sF(s) - f(0) \)
+    \item Second Derivative: \( \mathcal{L}\{f''(t)\} = s^2F(s) - sf(0) - f'(0) \)
+    \item Time Shifting: \( \mathcal{L}\{f(t - a)u(t - a)\} = e^{-as}F(s) \)
+    \item Frequency Shifting: \( \mathcal{L}\{e^{at}f(t)\} = F(s - a) \)
+    \item Convolution: \( \mathcal{L}\{f(t) * g(t)\} = F(s)G(s) \)  
+\end{itemize}
+We delve deeper into the linearity property:
+\begin{theorem}[Linearity of the Laplace Transform]
+    The Laplace transform is a linear operator. This means that for any two functions \( f(t) \) and \( g(t) \) that are piecewise continuous on \( [0, \infty) \) and of exponential order, and for any constants \( a \) and \( b \), the following property holds:
+    \begin{equation}
+    \mathcal{L}\{af(t) + bg(t)\} = a\mathcal{L}\{f(t)\} + b\mathcal{L}\{g(t)\}
+    \end{equation}
+    where \( \mathcal{L}\{f(t)\} = F(s) \) and \( \mathcal{L}\{g(t)\} = G(s) \).
+\end{theorem}
+\begin{proof}
+    Suppose that the Laplace transforms of \( f(t) \) and \( g(t) \) exist for \( \text{Re}(s_1), \text{Re}(s_2) > \alpha_1, \alpha_2 \) respectively. Then:
+    \begin{align*}
+        \mathcal{L}\{af(t) + bg(t)\} &= \int_0^{\infty} e^{-st} (af(t) + bg(t)) dt \\
+        &= a \int_0^{\infty} e^{-st} f(t) dt + b \int_0^{\infty} e^{-st} g(t) dt \\
+        &= a\mathcal{L}\{f(t)\} + b\mathcal{L}\{g(t)\} \\
+        &= aF(s) + bG(s)
+    \end{align*}
+    Thus, the Laplace transform is linear, and there exist \( \text{Re}(s) > \max(\alpha_1, \alpha_2) \) such that the property holds.
+
+    Note, the RHS of the equation only holds when both transforms exist.
+\end{proof}
+
+\begin{example}
+    Consider the function:
+    $$f_1(t) = e^{a_1 t}, \quad f_2(t) = e^{a_2 t}$$
+    Then, for:
+    $$
+    f_{(\alpha, \beta)} = \alpha f_1(t) + \beta f_2(t) = \alpha e^{a_1 t} + \beta e^{a_2 t}
+    $$
+    The Laplace transform exists for \( \text{Re}(s) > \max(a_1, a_2) \).
+\end{example}
+
+\subsection{Solution to ODEs using Laplace Transform}
+\subsubsection{Transforming ODEs to a s-domain Algebraic Equation}
+\begin{definition}[Laplace Transform of the Derivative Operator]
+    The derivative operator \( D \) defined by \( D[f(t)] = f'(t) \) can be transformed using the Laplace transform. The Laplace transform of the derivative operator is given by:
+    \begin{equation*}
+    \mathcal{L}\{D[f(t)]\} = \int_0^{\infty} e^{-st} D[f(t)] \, dt
+    \end{equation*}
+    By integrating by parts, we can show that:
+    \begin{equation}
+    \mathcal{L}\{D[f(t)]\} = sF(s) - f(0)
+    \end{equation} 
+    where \( F(s) = \mathcal{L}\{f(t)\} \). This shows that the Laplace transform converts the differentiation operation in the time domain into an algebraic operation in the frequency domain. We can extend this to $n$-th derivatives as follows:
+    \begin{equation}
+    \mathcal{L}\{D^n[f(t)]\} = s^n F(s) - s^{n-1} f(0) - s^{n-2} f'(0) - \ldots - f^{(n-1)}(0)
+    \end{equation}
+\end{definition} 
+
+\begin{definition}[Symetrical Differentiation Property]
+    We scaling by $t$ in the time domain corresponds to differentiating with respect to $s$ in the frequency domain. Specifically, the Laplace transform of \( t f(t) \) is given by:
+    \begin{equation}
+    \mathcal{L}\{t f(t)\} = -\frac{dF(s)}{ds}
+    \end{equation}
+    where \( F(s) = \mathcal{L}\{f(t)\} \).
+    
+\end{definition}
+\begin{example}
+    Consider the Laplace transform:
+    $$
+    \mathcal{L}\{t f(t)\}
+    $$
+    We can demonstrate this property by starting with the definition of the Laplace transform:
+    \begin{equation*}
+    \mathcal{L}\{t f(t)\} = \int_0^{\infty} e^{-st} t f(t) dt
+    \end{equation*}
+    We can differentiate \( F(s) = \mathcal{L}\{f(t)\} \) with respect to \( s \):
+    \begin{equation*}
+    \frac{dF(s)}{ds} = \frac{d}{ds} \int_0^{\infty} e^{-st} f(t) dt = \int_0^{\infty} \frac{d}{ds} (e^{-st}) f(t) dt = \int_0^{\infty} -t e^{-st} f(t) dt
+    \end{equation*}
+    Thus, we have:
+    \begin{equation*}
+    \mathcal{L}\{t f(t)\} = -\frac{dF(s)}{ds}
+    \end{equation*}    
+\end{example}
+
+\begin{definition}[Laplace Transform of the Integral Operator]
+    The integral operator \( I \) defined by \( I[f(t)] = \int_0^t f(\tau) d\tau \) can be transformed using the Laplace transform. The Laplace transform of the integral operator is given by:
+    \begin{equation*}
+    \mathcal{L}\{I[f(t)]\} = \int_0^{\infty} e^{-st} I[f(t)] \, dt
+    \end{equation*}
+    By changing the order of integration, we can show that:
+    \begin{equation}
+    \mathcal{L}\{I[f(t)]\} = \frac{F(s)}{s}
+    \end{equation} 
+    where \( F(s) = \mathcal{L}\{f(t)\} \). This shows that the Laplace transform converts the integration operation in the time domain into an algebraic operation in the frequency domain.
+\end{definition}
+
+
+\begin{example}[Transforming and ODEs to Algebraic Equation]
+    Consider the following ODE:
+    $$y'' + by' + cy = g(t)$$
+    with initial conditions \( y(0) = y_0 \) and \( y'(0) = y_1 \). Taking the Laplace transform of both sides gives:
+    $$\mathcal{L}\{y''\} + b\mathcal{L}\{y'\} + c\mathcal{L}\{y\} = \mathcal{L}\{g(t)\}$$
+    Using the properties of the Laplace transform, we have:
+    $$(s^2Y(s) - sy_0 - y_1) + b(sY(s) - y_0) + cY(s) = G(s)$$
+    where \( Y(s) = \mathcal{L}\{y(t)\} \) and \( G(s) = \mathcal{L}\{g(t)\} \). Rearranging terms gives:
+    $$Y(s)(s^2 + bs + c) = G(s) + sy_0 + y_1 + by_0$$
+    Thus, we can solve for \( Y(s) \):
+    $$Y(s) = \frac{G(s) + sy_0 + y_1 + by_0}{s^2 + bs + c}$$
+    Finally, we can find \( y(t) \) by taking the inverse Laplace transform of \( Y(s) \), which would be disccussed later:
+    $$y(t) = \mathcal{L}^{-1}\{Y(s)\}$$
+\end{example}
+\paragraph{Common Laplace Transforms} See Appendix  \ref{apx:common_laplace_transforms} for a list of common Laplace transforms.
+\begin{example}
+    Condider the following IVP:
+    $$y'' + ky = 0, \quad y(0) = 0, \quad y'(0) = \sqrt{k}$$
+    Taking the Laplace transform of both sides gives:
+    $$\mathcal{L}\{y''\} + k\mathcal{L}\{y\} = 0$$
+    Using the properties of the Laplace transform, we have:
+    $$(s^2Y(s) - sy(0) - y'(0)) + kY(s) = 0$$
+    Substituting the initial conditions:
+    $$(s^2Y(s) - \sqrt{k}) + kY(s) = 0$$
+    Rearranging terms gives:
+    $$Y(s)(s^2 + k) = \sqrt{k}$$
+    Thus, we can solve for \( Y(s) \):
+    $$Y(s) = \frac{\sqrt{k}}{s^2 + k} = \frac{\sqrt{k}}{s^2 + (\sqrt{k})^2}$$
+    Finally, we can find \( y(t) \) by taking the inverse Laplace transform of \( Y(s) \). Using the common Laplace transform table, we find:
+    $$y(t) = \mathcal{L}^{-1}\{Y(s)\} = \sin(\sqrt{k}t)$$
+\end{example}
+
+\begin{example}[Inverse Laplace Transform using Common Transforms and Partial Fraction Decomposition]
+    Consider the following equation in the s-domain:
+    $$0 = s^2 Y(s) - 2s- 1 + kY(s)$$
+    Rearranging terms gives:
+    $$Y(s)(s^2 + k) = 2s + 1$$
+    Thus, we can solve for \( Y(s) \):
+    $$Y(s) = \frac{2s + 1}{s^2 + k}$$
+    To find \( y(t) \), we need to take the inverse Laplace transform of \( Y(s) \). We can split \( Y(s) \) into two separate fractions:   
+    $$Y(s) = 2\frac{s}{s^2 + k} + \frac{1}{s^2 + k}$$
+    Using the common Laplace transform table, we find:
+    $$y(t) = \mathcal{L}^{-1}\{Y(s)\} = 2\cos(\sqrt{k}t) + \frac{1}{\sqrt{k}}\sin(\sqrt{k}t)$$
+    
+\end{example}
+        
+    
+    
+\begin{definition}[Inverse Laplace Transform]
+    The inverse Laplace transform is a mathematical operation that allows us to recover the original time-domain function \( f(t) \) from its Laplace transform \( F(s) \). It is denoted by \( \mathcal{L}^{-1}\{F(s)\} \) and is defined as:
+    \begin{equation}
+    f(t) = \mathcal{L}^{-1}[F(s)] = \frac{1}{2\pi i} \lim_{T \to \infty} \int_{\gamma - iT}^{\gamma + iT} e^{st} F(s) ds
+    \end{equation}
+    where \( \gamma \) is a real number such that all singularities of \( F(s) \) are to the left of the line \( \text{Re}(s) = \gamma \) in the complex plane. The inverse Laplace transform is widely used in engineering, physics, and applied mathematics to solve differential equations and analyze systems by transforming back from the frequency domain to the time domain.
+
+    In this course, we will primarily use common Laplace transform pairs and properties (from table in Appendix \ref{apx:common_laplace_transforms}) to find the inverse Laplace transform rather than evaluating the integral directly.
+\end{definition}
+
+
+
+\paragraph{Partial Fraction Decomposition} When finding the inverse Laplace transform, we may need to use partial fraction decomposition to break down complex rational functions into simpler fractions that can be easily inverted using common Laplace transform pairs. In our course, almost every function can be decomposed using partial fractions.
+\begin{theorem}[Linear Fraction]
+    Given the following function in the s-domain:
+    $$F(s) = \frac{a}{s - s_0}$$
+    We can find its inverse Laplace transform using the common Laplace transform table:
+    \begin{equation}
+    f(t) = \mathcal{L}^{-1}\{F(s)\} = a e^{s_0 t}
+    \end{equation}
+\end{theorem}
+
+\begin{theorem}[Repeated Linear Fraction]
+    Given the following function in the s-domain:
+    $$F(s) = \frac{a}{(s - s_0)^n}$$
+    We can find its inverse Laplace transform using the common Laplace transform table:
+    \begin{equation}
+    f(t) = \mathcal{L}^{-1}\{F(s)\} = \frac{a t^{n-1} e^{s_0 t}}{(n-1)!}
+    \end{equation}
+
+    This comes from the fact that multiplying by $e^{s_0 t}$ in the time domain corresponds to shifting by $s_0$ in the s-domain. So we can use the $\mathcal{L}[t^n] = \frac{n!}{s^{n+1}}$ property and shift it.
+\end{theorem}
+
+\begin{example}
+    Consider the following IVP:
+    $$y'' - 2y' + y = 0, \quad y(0) = 1, \quad y'(0) = 0$$
+    Taking the Laplace transform of both sides gives:
+    $$\mathcal{L}\{y''\} - 2\mathcal{L}\{y'\} + \mathcal{L}\{y\} = 0$$
+    Using the properties of the Laplace transform, we have:
+    $$(s^2Y(s) - sy(0) - y'(0)) - 2(sY(s) - y(0)) + Y(s) = 0$$
+    Substituting the initial conditions:
+    $$(s^2Y(s) - s) - 2(sY(s) - 1) + Y(s) = 0$$
+    Rearranging terms gives:
+    $$Y(s)(s^2 - 2s + 1) = s - 2$$
+    Thus, we can solve for \( Y(s) \):
+    $$Y(s) = \frac{s - 2}{(s - 1)^2}$$
+    To find \( y(t) \), we need to take the inverse Laplace transform of \( Y(s) \). We can split \( Y(s) \) into two separate fractions using partial fraction decomposition:   
+    $$Y(s) = \frac{s - 1}{(s - 1)^2} - \frac{1}{(s - 1)^2} = \frac{1}{s - 1} - \frac{1}{(s - 1)^2}$$
+    Using the common Laplace transform table and the repeated linear fraction theorem, we find:
+    $$y(t) = \mathcal{L}^{-1}\{Y(s)\} = e^{t} - t e^{t} = (1 - t)e^{t}$$
+\end{example}
+
+\begin{definition}[Transfer Function]
+    In control theory and signal processing, a transfer function is a mathematical representation that describes the relationship between the input and output of a linear time-invariant (LTI) system in the frequency domain. It is typically denoted by \( H(s) \) or \( G(s) \) and is defined as the ratio of the Laplace transform of the output \( Y(s) \) to the Laplace transform of the input \( X(s) \):
+    \begin{equation}
+    H(s) = \frac{Y(s)}{X(s)}
+    \end{equation}
+    where \( s \) is a complex variable. The transfer function encapsulates the system's dynamics, including its poles and zeros, which determine its stability and frequency response characteristics. Transfer functions are widely used in engineering disciplines to analyze and design control systems, filters, and other dynamic systems.
+\end{definition}
+
+
+\newpage
+\appendix 
+\section{Common Laplace Transforms} \label{apx:}
+\input{common_laplace_transforms.tex}
 \end{document}

@@ -1,0 +1,22 @@
+\begin{table}[h!]
+    \centering
+    \begin{tabular}{|c|c|}
+        \hline
+        Function \( f(t) \) & Laplace Transform \( F(s) = \mathcal{L}\{f(t)\} \) \\
+        \hline
+        \( 1 \) & \( \frac{1}{s} \) \\
+        \( t^n \) (for \( n = 0, 1, 2, \ldots \)) & \( \frac{n!}{s^{n+1}} \) \\
+        \( e^{at} \) & \( \frac{1}{s - a} \) (for \( s > a \)) \\
+        \( \sin(bt) \) & \( \frac{b}{s^2 + b^2} \) \\
+        \( \cos(bt) \) & \( \frac{s}{s^2 + b^2} \) \\
+        \( \sinh(bt) \) & \( \frac{b}{s^2 - b^2} \) (for \( s > |b| \)) \\
+        \( \cosh(bt) \) & \( \frac{s}{s^2 - b^2} \) (for \( s > |b| \)) \\
+        \( t^n e^{at} \) (for \( n = 0, 1, 2, \ldots \)) & \( \frac{n!}{(s - a)^{n+1}} \) (for \( s > a \)) \\
+        \( e^{at} \sin(bt) \) & \( \frac{b}{(s - a)^2 + b^2} \) (for \( s > a \)) \\
+        \( e^{at} \cos(bt) \) & \( \frac{s - a}{(s - a)^2 + b^2} \) (for \( s > a \)) \\
+        \( t^n \) & \( \frac{n!}{s^{n+1}} \) \\
+        \hline
+    \end{tabular}
+    \caption{Common Laplace Transforms}
+    \label{tab:common_laplace_transforms}
+\end{table}
