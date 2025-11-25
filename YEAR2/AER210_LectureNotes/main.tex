@@ -2776,4 +2776,75 @@ In fact, we often take water as a nearly incompressible fluid in fluid mechanics
     This equation describes a plane inclined at an angle determined by the ratio of the acceleration components. Thus, the liquid surface inside the container will be a plane inclined in the direction of the acceleration.
 
 \end{example}
+
+
+\section{Flowing Fluids}
+\begin{definition}[Flowing Fluid]
+    A flowing fluid is a fluid that is in motion, characterized by the movement of its particles from one location to another. This motion can be caused by various factors, such as pressure differences, gravitational forces, or external forces applied to the fluid. Flowing fluids can exhibit different types of flow patterns, including laminar flow (smooth and orderly) and turbulent flow (chaotic and irregular).
+\end{definition}
+
+\paragraph{Eulerian and Lagrangian Descriptions} There are two main approaches to describe the motion of flowing fluids:
+\begin{definition}[Eulerian Description]
+    The Eulerian description focuses on specific locations in the fluid and examines how the fluid properties (such as velocity, pressure, and density) change over time at those fixed points. In this approach, the observer is stationary, and the fluid flows past them. We can represent the fluid properties as functions of space and time, such as:
+    \[ \vec{v} = \vec{v}(x, y, z, t) \]
+    where \(\vec{v}\) is the velocity field of the fluid.
+\end{definition}
+
+\begin{definition}[Lagrangian Description]
+    The Lagrangian description, on the other hand, follows individual fluid particles as they move through space and time. In this approach, the observer moves with the fluid particles, tracking their trajectories and changes in properties. The fluid properties are expressed as functions of the initial position of the particles and time, such as:
+    \[ \vec{r} = \vec{r}(\vec{r_0}, t) \]
+    where \(\vec{r}\) is the position of a fluid particle at time \(t\) and \(\vec{r_0}\) is its initial position.
+\end{definition}
+
+\paragraph{Flow visualization} To visualize fluid flow, we often use:
+\begin{itemize}
+    \item \textbf{Streamlines}: Lines that are tangent to the velocity vector of the fluid at every point, representing the path that a fluid particle would follow.
+    \item \textbf{Pathlines}: The actual trajectory that a fluid particle follows over time.
+    \item \textbf{Streaklines}: The locus of all fluid particles that have passed through a specific point in space over time.
+\end{itemize}
+
+\begin{definition}[Steady and Unsteady Flow]
+    A flow is said to be steady if the fluid properties at any given point do not change over time. Mathematically, this means that the partial derivative of any fluid property with respect to time is zero:
+    \[
+    \frac{\partial \phi}{\partial t} = 0
+    \]
+    where \(\phi\) represents any fluid property (such as velocity, pressure, or density).
+
+    Conversely, a flow is unsteady if the fluid properties at a given point do change over time, meaning:
+    \[
+    \frac{\partial \phi}{\partial t} \neq 0
+    \]    
+\end{definition}
+
+\begin{definition}[Turbulent and Laminar Flow]
+    Laminar flow is characterized by smooth, orderly fluid motion in which fluid particles move in parallel layers with minimal mixing between them. In laminar flow, the velocity of the fluid is relatively low, and the flow is dominated by viscous forces.
+
+    Turbulent flow, on the other hand, is characterized by chaotic, irregular fluid motion with significant mixing between fluid layers. In turbulent flow, the velocity of the fluid is relatively high, and inertial forces dominate over viscous forces. This results in eddies, vortices, and fluctuations in velocity and pressure throughout the fluid.
+\end{definition}
+
+\paragraph{Viscous versus Inviscid (Nonviscous) Regions of Flow} In fluid dynamics, the distinction between viscous and inviscid (nonviscous) regions of flow is important for understanding the behavior of fluids under different conditions:
+
+\subsection{Mass and Energy Conservation}
+\begin{definition}[Volume Flow Rate]
+    The volume flow rate \(Q\) is defined as the volume of fluid passing through a given cross-sectional area per unit time. Mathematically, it is expressed as:
+    \begin{equation}
+        Q = \iint_A \vec{v} \cdot \vec{n} \, dA
+    \end{equation}
+    where \(\vec{v}\) is the velocity vector of the fluid, \(\vec{n}\) is the unit normal vector to the cross-sectional area \(A\), and \(dA\) is the infinitesimal area element.
+\end{definition}
+
+\begin{definition}[Mass Flow Rate]
+    The mass flow rate \(\dot{m}\) is defined as the mass of fluid passing through a given cross-sectional area per unit time. Mathematically, it is expressed as:
+    \begin{equation}
+        \dot{m} = \iint_A \rho \vec{v} \cdot \vec{n} \, dA
+    \end{equation}
+    where \(\rho\) is the fluid density, \(\vec{v}\) is the velocity vector of the fluid, \(\vec{n}\) is the unit normal vector to the cross-sectional area \(A\), and \(dA\) is the infinitesimal area element.
+\end{definition}
+
+\paragraph{Conservation of Mass along a Streamtube} For an incompressible fluid flowing through a streamtube, the volume flow rate must be constant along the length of the streamtube. This means that the volume flow rate at any cross-section of the streamtube is equal to the volume flow rate at any other cross-section. Mathematically, this can be expressed as:
+\[
+Q_1 = Q_2
+\]
+where \(Q_1\) and \(Q_2\) are the volume flow rates
+
 \end{document}

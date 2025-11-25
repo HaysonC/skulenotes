@@ -3361,8 +3361,283 @@ We delve deeper into the linearity property:
     where \( s \) is a complex variable. The transfer function encapsulates the system's dynamics, including its poles and zeros, which determine its stability and frequency response characteristics. Transfer functions are widely used in engineering disciplines to analyze and design control systems, filters, and other dynamic systems.
 \end{definition}
 
+\subsection{Convolutions}
 
-\newpage
+\begin{definition}[Convolution]
+    Convolution is a mathematical operation that combines two functions to produce a third function, expressing how the shape of one is modified by the other. In the context of Laplace transforms, the convolution of two functions \( f(t) \) and \( g(t) \) is defined as:
+    \begin{equation}
+    (f * g)(t) = \int_0^t f(\tau) g(t - \tau) d\tau
+    \end{equation}
+    where \( \tau \) is a dummy variable of integration. The convolution operation is commutative, meaning that \( f * g = g * f \).
+
+    In the context of Laplace transforms, the convolution theorem states that the Laplace transform of the convolution of two functions is equal to the product of their individual Laplace transforms:
+    \begin{equation}
+    \mathcal{L}\{f * g\}(s) = F(s) G(s)
+    \end{equation}
+    where \( F(s) = \mathcal{L}\{f(t)\} \) and \( G(s) = \mathcal{L}\{g(t)\} \).
+\end{definition}
+
+\begin{example}
+    Consider the following IVP:
+    $$ a y'' + b y' + c y = g(t), \quad y(0)=0,\quad y'(0)=0 $$
+
+    We can represent this system using the transfer function \(H(s)\):
+    $$ H(s) = \frac{Y(s)}{G(s)} = \frac{1}{as^2 + bs + c}. $$
+
+    Thus,
+    $$ 
+    Y(s) =  H(s)\big[(a s + b) y_0 + a y_1\big]  \;+\;H(s)G(s).
+    $$
+
+    Taking the inverse Laplace transform and applying the convolution theorem:
+    $$
+    y(t) = 
+    \mathcal{L}^{-1}\!\left\{
+       {H(s)\big[(a s + b) y_0 + a y_1\big]}
+    \right\}
+    \;+\;
+    \mathcal{L}^{-1}\{H(s) G(s)\}
+    $$
+    $$
+    y(t) =
+     \underbrace{\mathcal{L}^{-1}\{H(s)[(a s + b) y_0 + a y_1]\}}_{\text{free response}}
+    \;+\;
+    \underbrace{(h * g)(t).}_{\text{forced response}}
+    $$
+
+\end{example}
+
+\begin{definition}[Forced Response]
+    In the context of differential equations and system dynamics, the forced response refers to the part of the solution that arises due to an external input or forcing function acting on the system. It represents how the system responds to external stimuli over time.
+
+    Mathematically, for a linear time-invariant (LTI) system described by a differential equation, the total response \( y(t) \) can be expressed as the sum of the free response (or homogeneous solution) and the forced response (or particular solution):
+    \begin{equation}
+    y(t) = y_{\text{free}}(t) + y_{\text{forced}}(t)
+    \end{equation}
+    where \( y_{\text{free}}(t) \) is determined by the system's initial conditions and natural dynamics, while \( y_{\text{forced}}(t) \) is determined by the external input \( g(t) \).
+
+    The forced response can often be computed using techniques such as the method of undetermined coefficients, variation of parameters, or convolution with the system's impulse response.
+\end{definition}
+
+\begin{definition}[Free Response]
+    In the context of differential equations and system dynamics, the free response refers to the part of the solution that arises solely from the system's initial conditions, without any external input or forcing function. It represents how the system behaves naturally over time based on its inherent properties.
+
+    Mathematically, for a linear time-invariant (LTI) system described by a differential equation, the total response \( y(t) \) can be expressed as the sum of the free response (or homogeneous solution) and the forced response (or particular solution):
+    \begin{equation}
+    y(t) = y_{\text{free}}(t) + y_{\text{forced}}(t)
+    \end{equation}
+    where \( y_{\text{free}}(t) \) is determined by the system's initial conditions and natural dynamics, while \( y_{\text{forced}}(t) \) is determined by any external input \( g(t) \).
+
+    The free response is typically found by solving the homogeneous version of the differential equation, which involves setting the external input to zero.
+\end{definition}
+
+\begin{example}
+    % use e i t = cis t for convulution example
+    Consider the following IVP:
+    $$ y '' + 2y ' + 5y = t, \quad y(0) = 0, \quad y'(0) = 0 $$
+    Taking the Laplace transform of both sides gives:
+    $$ \mathcal{L}\{y''\} + 2\mathcal{L}\{y'\} + 5\mathcal{L}\{y\} = \mathcal{L}\{t\} $$
+    Using the properties of the Laplace transform, we have:
+    $$(s^2Y(s) - sy(0) - y'(0)) + 2(sY(s) - y(0)) + 5Y(s) = \frac{1}{s^2} = G(s)$$
+    So for the transfer function:
+    $$ H(s) = \frac{Y(s)}{G(s)} = \frac{1}{s^2 + 2s + 5} $$
+    Thus,
+    $$ 
+    Y(s) =  H(s)\big[(s) y_0 + y_1\big]  \;+\;H(s)G(s).
+    $$
+    Taking the inverse Laplace transform and applying the convolution theorem:  
+    $$
+    y(t) = 
+    \mathcal{L}^{-1}\!\left\{
+       {H(s)\big[(s) y_0 + y_1\big]} 
+    \right\}
+    \;+\;
+    \mathcal{L}^{-1}\{H(s) G(s)\}
+    $$
+    For the forced response, we repsonse, we can evaulte the convultion. 
+    \begin{align*}
+    y(t) &= (h * g)(t) \\
+    &= \int_0^t h(\tau) g(t - \tau) d\tau \\
+    &= \int_0^t e^{-\tau} \sin(2\tau) (t - \tau) d\tau \\
+    \end{align*}
+        We use the euler's formula to simplify the integral:
+
+    \begin{align*}
+        y(t)
+        &= \mathrm{Re}\!\left\{ 
+        \frac{1}{2i}\!\left[
+        \int_0^t (t-\tau)e^{(-1+i2)\tau} d\tau
+        -
+        \int_0^t (t-\tau)e^{(-1-i2)\tau} d\tau
+        \right]\right\} \\[4pt]
+        &= -\mathrm{Im}\!\left\{ 
+        \int_0^t (t-\tau)e^{(-1+i2)\tau} d\tau +
+        \int_0^t (t-\tau)e^{(-1-i2)\tau} d\tau
+        \right\} \\[4pt]
+        &= \frac{1}{5}
+        - \frac{e^{-t}}{25} 
+        \Big[(5-2t)\cos(2t) + (2+t)\sin(2t)\Big].
+    \end{align*}
+
+    
+
+\end{example}
+
+\section{Fourier Transform}
+\begin{definition}[Fourier Transform]
+    The Fourier transform is an integral transform that converts a time-domain function \( f(t) \) into a frequency-domain function \( F(\omega) \). It is defined as:
+    \begin{equation}
+    \mathcal{F}\{f(t)\} = F(\omega) = \int_{-\infty}^{\infty} f(t) e^{-i\omega t} dt
+    \end{equation}
+    where \( \omega \) is the angular frequency in radians per second. The Fourier transform is widely used in signal processing, physics, and engineering to analyze the frequency content of signals and systems.
+
+    The inverse Fourier transform allows us to recover the original time-domain function from its frequency-domain representation:
+    \begin{equation}
+    f(t) = \mathcal{F}^{-1}\{F(\omega)\} = \frac{1}{2\pi} \int_{-\infty}^{\infty} F(\omega) e^{i\omega t} d\omega
+    \end{equation}
+\end{definition}
+
+\begin{definition}[Orthonormal Family of Functions]
+    Let $\mathrm{PC}[a,b]$ be the vector space of piecewise continuous functions on the interval $[a,b] \subset \mathbb{R}$. A family of functions $\{ \phi_n(t) \}_{n=0}^{\infty} \subset \mathrm{PC}[a,b]$ is said to be orthonormal on $[a,b]$ if it satisfies the following two conditions:
+    \begin{enumerate}
+        \item \textbf{Orthogonality}: For any two distinct functions $\phi_m(t)$ and $\phi_n(t)$ in the family (where $m \neq n$), the inner product is zero:
+        \begin{equation}
+        \langle \phi_m, \phi_n \rangle = \int_a^b \phi_m(t) \phi_n(t) dt = 0
+        \end{equation}
+        \item \textbf{Normalization}: Each function $\phi_n(t)$ has a unit norm, meaning that the inner product of the function with itself is equal to one:
+        \begin{equation}
+        \langle \phi_n, \phi_n \rangle = \int_a^b \phi_n(t)^2 dt = 1
+        \end{equation}
+    \end{enumerate}
+    If both conditions are satisfied, the family $\{ \phi_n(t) \}_{n=0}^{\infty}$ is called an orthonormal family of functions on the interval $[a,b]$. For example, the basis of wave function $\psi_n$ of a partiple in a infinite potential well is an orthonormal family on the interval $[0,L]$.
+\end{definition}
+
+\begin{example}
+    Cosndier the following set on the interval \( [-L, L] \):
+    $$ \left\{ \sqrt{\frac{2}{L}} \frac{1}{2} , \sqrt{\frac{1}{L}} \cos{\left(\frac{n \pi t}{L}\right)}, \sqrt{\frac{1}{L}} \sin{\left(\frac{n \pi t}{L}\right)} \right\}_{n=1}^{\infty} $$
+    This set forms an orthonormal family on the interval \( [-L, L] \). To verify this, we need to check both orthogonality and normalization conditions.
+
+    \begin{enumerate}
+        \item \textbf{Orthogonality}:
+        For any two distinct functions \( \phi_m(t) \) and \( \phi_n(t) \) in the set, we need to show that their inner product is zero:
+        \begin{equation*}
+        \langle \phi_m, \phi_n \rangle = \int_{-L}^L \phi_m(t) \phi_n(t) dt = 0
+        \end{equation*}
+        This can be verified using trigonometric identities and properties of integrals. First, we note that the integral of the product of sine and cosine functions over a full period is zero. Specifically, for \( m \neq n \):
+    
+        Additionally, the constant function is orthogonal to both sine and cosine functions over the interval       
+        \item \textbf{Normalization}:
+        For each function \( \phi_n(t) \) in the set, we need to show that its inner product with itself is equal to one:
+        \begin{equation*}
+        \langle \phi_n, \phi_n \rangle = \int_{-L}^L \phi_n(t)^2 dt = 1
+        \end{equation*}
+        This can also be verified through direct integration.
+    \end{enumerate}
+
+\end{example}
+
+\begin{theorem}[Fourier Theorem]
+    Suppose $f$ is periodic with period $2L$ and; $f$, $f'$ are piecewise continuous on $[-L,L]$. Then $f$ can be represented as a Fourier series:
+    \begin{equation}
+    f(t) = \frac{a_0}{2} + \sum_{n=1}^{\infty} \left[ a_n \cos\left(\frac{n \pi t}{L}\right) + b_n \sin\left(\frac{n \pi t}{L}\right) \right]
+    \end{equation}
+    where the Fourier coefficients \( a_n \) and \( b_n \) are given by:
+    \begin{subequations}
+        
+
+    \begin{equation}
+    a_n = \langle f(t), \sqrt{\frac{1}{L}} \cos\left(\frac{n \pi t}{L}\right) \rangle = \frac{1}{L} \int_{-L}^{L} f(t) \cos\left(\frac{n \pi t}{L}\right) dt
+    \end{equation}
+    \begin{equation}
+    b_n = \langle f(t), \sqrt{\frac{1}{L}} \sin\left(\frac{n \pi t}{L}\right) \rangle = \frac{1}{L} \int_{-L}^{L} f(t) \sin\left(\frac{n \pi t}{L}\right) dt
+    \end{equation}
+        \end{subequations}
+\end{theorem}
+\section{Partial Differential Equations}
+\begin{definition}[Partial Differential Equation]
+    A partial differential equation (PDE) is a mathematical equation that involves multiple independent variables, their partial derivatives, and an unknown function. PDEs are used to describe a wide range of physical phenomena, including heat conduction, wave propagation, fluid dynamics, and quantum mechanics.
+
+    A general form of a PDE can be expressed as:
+    \begin{equation}
+    F\left(x_1, x_2, \ldots, x_n, u, \frac{\partial u}{\partial x_1}, \frac{\partial u}{\partial x_2}, \ldots, \frac{\partial u}{\partial x_n}, \frac{\partial^2 u}{\partial x_1^2}, \ldots\right) = 0
+    \end{equation}
+    where \( u = u(x_1, x_2, \ldots, x_n) \) is the unknown function of the independent variables \( x_1, x_2, \ldots, x_n \), and \( F \) is a given function that relates these variables and their partial derivatives.
+
+    PDEs can be classified based on their order (the highest order of partial derivatives present), linearity (linear or nonlinear), and the number of independent variables involved. Solving PDEs often requires specialized techniques such as separation of variables, method of characteristics, or numerical methods.
+\end{definition}
+
+\begin{definition}[Boundry Value Problem]
+    A boundary value problem (BVP) is a type of differential equation problem characterized by a PDE and specified initial time condition and boundary conditions on the spatial domain. In a BVP, the solution is sought for a function \( u(x, t) \) that satisfies the PDE within a defined spatial domain and adheres to given conditions at the boundaries of that domain.
+
+    A general form of a BVP can be expressed as:
+    \begin{equation}
+    \begin{cases}
+    \frac{\partial u}{\partial t} = \mathcal{L}u + f(x, t), & x \in \Omega, \; t > 0 \\
+    u(x, 0) = u_0(x), & x \in \Omega \\
+    B[u] = g(x, t), & x \in \partial\Omega, \; t > 0
+    \end{cases}
+    \end{equation}
+    where \( \mathcal{L} \) is a differential operator, \( f(x, t) \) is a source term, \( u_0(x) \) is the initial condition, \( B[u] \) represents the boundary conditions applied on the boundary \( \partial\Omega \) of the spatial domain \( \Omega \), and \( g(x, t) \) is a function defining the boundary conditions. 
+    BVPs are commonly encountered in various fields of science and engineering, such as heat conduction, fluid dynamics, and electromagnetics, where the behavior of a system is influenced by both its internal dynamics and external constraints.
+\end{definition}
+
+\paragraph{Using Fourier Transform} We can transform PDEs into a algebraic domain using the Fourier transform, similar to how we used the Laplace transform for ODEs. This allows us to solve the PDE in the frequency domain and then transform back to the spatial domain using the inverse Fourier transform.
+\paragraph{Seperabilty Assumption} Many PDEs can be solved using the method of separation of variables, which assumes that the solution can be expressed as a product of functions, each depending on a single independent variable. This method reduces the PDE into a set of ODEs that can be solved individually. We assume that the solution can be written as:
+$$ u(x,t) = X(x)T(t) $$
+Substituting this into the PDE and separating variables allows us to derive ODEs for \( X(x) \) and \( T(t) \).
+
+\begin{example}
+    GIven the following PDE:
+    $$\begin{cases}
+         u_t = \alpha^2 u_{xx}, & 0 < x < L, \; t > 0 \\
+         u(0,t) = 0 = u(L,t), & t \geq 0 \\
+         u(x,0) = f(x), & 0 \leq x \leq L
+    \end{cases}$$
+
+    Assume a separable solution of the form:
+    $$ u(x,t) = X(x)T(t) $$
+    Substituting into the PDE gives:
+    $$ X(x) T'(t) = \alpha^2 X''(x) T(t) $$
+    Dividing both sides by \( \alpha^2 X(x) T(t) \) gives:
+    $$ \frac{T'(t)}{\alpha^2 T(t)} = \frac{X''(x)}{X(x)} = -\lambda $$
+    This leads to two ODEs:
+    \begin{align*}
+        T'(t) + \alpha^2 \lambda T(t) &= 0 \\
+        X''(x) + \lambda X(x) &= 0
+    \end{align*}
+
+    For the spatial part, we have the boundary conditions:
+    \begin{align*}
+        X(0) &= 0 \\
+        X(L) &= 0
+    \end{align*}
+    The general solution for \( X(x) \) is:
+    $$ X(x) = A \sin(\sqrt{\lambda} x) + B \cos(\sqrt{\lambda} x) $$
+    Applying the boundary conditions leads to:
+    \begin{align*}
+        B &= 0 \\
+        \sqrt{\lambda} L &= n \pi, \quad n = 1, 2, 3, \ldots
+    \end{align*}
+    Thus, the eigenvalues are:
+    $$ \lambda_n = \left( \frac{n \pi}{L} \right)^2 $$
+    and the corresponding eigenfunctions are:
+    $$ X_n(x) = A_n \sin\left( \frac{n \pi x}{L} \right) $$
+
+    For the temporal part, the solution is:
+    $$ T_n(t) = C_n e^{-\alpha^2 \lambda_n t} = C_n \exp\left( -\alpha^2 \left( \frac{n \pi}{L} \right)^2 t \right) $$
+
+    So the fundamental solutions are:
+    $$ u_n(x,t) = A_n C_n \sin\left( \frac{n \pi x}{L} \right) \exp\left( -\alpha^2 \left( \frac{n \pi}{L} \right)^2 t \right) $$
+
+    The general solution is a superposition of all fundamental solutions:
+    $$ u(x,t) = \sum_{n=1}^{\infty} a_n \sin\left( \frac{n \pi x}{L} \right) \exp\left( -\alpha^2 \left( \frac{n \pi}{L} \right)^2 t \right) $$ 
+    where \( a_n = A_n C_n \).
+
+    To determine the coefficients \( a_n \), we use the initial condition:
+    $$ u(x,0) = f(x) = \sum_{n=1}^{\infty} a_n \sin\left( \frac{n \pi x}{L} \right) $$
+    This is a Fourier sine series expansion of \( f(x) \) on the interval \( [0, L] \). The coefficients \( a_n \) are given by:
+    $$ a_n = \frac{2}{L} \int_0^L f(x) \sin\left( \frac{n \pi x}{L} \right) dx $$
+\end{example}
 \appendix 
 \section{Common Laplace Transforms} \label{apx:}
 \input{common_laplace_transforms.tex}

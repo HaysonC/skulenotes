@@ -1986,5 +1986,116 @@ where $\psi(x)$ is the wave function of the system, and $\psi^*(x)$ is its compl
     Therefore, the expectation values are:
     $$        \langle x \rangle = \frac{L(e^2 + 1)}{2(e^2 - 1)}, \quad \langle H \rangle = -\frac{\hbar^2}{2m L^2} $$
 \end{example}
-\end{document}
 
+\subsection{Wave functions}
+\begin{definition}[Properties of wave functions]
+    A valid wave function \( \psi(x,t) \) must satisfy the following properties:
+    \begin{itemize}
+        \item \textbf{Normalization}: The total probability of finding the particle in all space must be 1:
+        \begin{equation}
+            \int_{-\infty}^{\infty} |\psi(x,t)|^2 \, dx = 1
+        \end{equation}
+        \item \textbf{Continuity}: The wave function and its first derivative must be continuous everywhere, except at points where the potential is infinite.
+        \item \textbf{Single-valuedness}: The wave function must have a unique value at each point in space and time.
+        \item \textbf{Square Integrability}: The integral of the square of the wave function over all space must be finite:
+        \begin{equation}
+            \int_{-\infty}^{\infty} |\psi(x,t)|^2 \, dx < \infty
+        \end{equation}
+    \end{itemize}
+\end{definition}
+
+\begin{definition}[Energy well]
+    An energy well is a potential energy profile that confines a particle within a specific region of space. It is characterized by a lower potential energy inside the well compared to the surrounding areas. Energy wells can be classified into different types based on their shape and depth, such as infinite square wells, finite square wells, and harmonic oscillator potentials. The quantization of energy levels arises from the boundary conditions imposed by the well, leading to discrete allowed energy states for the confined particle.
+\end{definition}
+
+\begin{definition}[Strödinger Equation - Time Independent]
+    The time-independent Schrödinger equation (TISE) describes the stationary states of a quantum system. It is given by:
+    \begin{equation}
+        -\frac{\hbar^2}{2m} \frac{d^2 \psi(x)}{dx^2} + V(x) \psi(x) = E \psi(x)
+    \end{equation}
+    where \( \psi(x) \) is the spatial part of the wave function, \( m \) is the mass of the particle, \( V(x) \) is the potential energy as a function of position, and \( E \) is the total energy of the particle. The TISE is derived from the time-dependent Schrödinger equation by separating variables and assuming a solution of the form \( \Psi(x,t) = \psi(x)e^{-iEt/\hbar} \).
+\end{definition}
+
+\begin{definition}[Particle in a One-Dimensional Infinite Potential Well]
+    A particle confined in a one-dimensional infinite potential well (also known as a "particle in a box") has quantized energy levels and corresponding wave functions. The potential \( V(x) \) is defined as:
+    \begin{equation}
+        V(x) = \begin{cases}
+            0 & \text{for } 0 < x < L \\
+            \infty & \text{otherwise}
+        \end{cases}
+    \end{equation}
+    The allowed energy levels are given by:
+    \begin{equation}
+        E_n = \frac{n^2 \pi^2 \hbar^2}{2mL^2}, \quad n = 1, 2, 3, \ldots
+    \end{equation}
+    The corresponding normalized wave functions are:
+    \begin{equation}
+        \psi_n(x) = \sqrt{\frac{2}{L}} \sin\left(\frac{n\pi x}{L}\right), \quad 0 < x < L
+    \end{equation}
+    and \( \psi_n(x) = 0 \) elsewhere.
+
+    The probability density of finding the particle are the square of the constnat in the wave function:
+    \begin{equation}
+        |\psi_n(x)|^2 = \frac{2}{L} c_n^2 \sin^2\left(\frac{n\pi x}{L}\right)
+    \end{equation}
+\end{definition}
+
+\begin{definition}[Particle in a Finite Potential Well]
+    A particle confined in a one-dimensional finite potential well has quantized energy levels and corresponding wave functions. The potential \( V(x) \) is defined as:
+    \begin{equation}
+        V(x) = \begin{cases}
+            0 & \text{for } 0 < x < L \\
+            V_0 & \text{otherwise}
+        \end{cases}
+    \end{equation}
+    where \( V_0 \) is a finite positive constant representing the potential outside the well. The allowed energy levels are determined by solving the time-independent Schrödinger equation with appropriate boundary conditions. The wave functions inside and outside the well must be continuous and differentiable at the boundaries \( x = 0 \) and \( x = L \). The energy levels are quantized, but unlike the infinite well, they depend on the depth \( V_0 \) of the well.
+    
+\end{definition}
+
+\begin{definition}[Quantum Tunneling]
+    Quantum tunneling is a phenomenon where a particle has a non-zero probability of crossing a potential barrier, even if its energy is less than the height of the barrier. This occurs due to the wave-like nature of particles in quantum mechanics, allowing the wave function to extend into and beyond the barrier region. The probability of tunneling depends on factors such as the width and height of the barrier, as well as the energy of the particle. Quantum tunneling has important applications in various fields, including nuclear fusion, semiconductor physics, and scanning tunneling microscopy. 
+
+    This is a result of the wave function penetrating into the classically forbidden region, leading to a finite probability of finding the particle on the other side of the barrier.
+\end{definition}
+
+\begin{definition}[Timed Case]
+    For each wave funtion, we can add the time dependent part:
+    \begin{equation}    
+        \Psi_n(x,t) = \psi_n(x) e^{-iE_n t/\hbar}
+    \end{equation}
+    where \( \Psi_n(x,t) \) is the full time-dependent wave function, \( \psi_n(x) \) is the spatial part of the wave function, \( E_n \) is the energy of the state, and \( \hbar \) is the reduced Planck's constant.
+\end{definition}
+
+\section{Relativity}
+\begin{definition}[Postulates of Special Relativity]
+    \begin{itemize}
+        \item The laws of physics are the same in all inertial frames of reference.
+        \item The speed of light in a vacuum is constant and independent of the motion of the light source or observer.
+    \end{itemize}
+\end{definition}
+
+\begin{definition}[Lorentz Transformation]
+    The Lorentz transformation relates the space and time coordinates of events as observed in two inertial frames of reference moving at a constant velocity relative to each other. If one frame \( S' \) is moving at a velocity \( v \) relative to another frame \( S \), the transformations are given by:
+    \begin{equation}
+        x' = \gamma (x - vt)
+    \end{equation}
+    \begin{equation}
+        t' = \gamma \left( t - \frac{vx}{c^2} \right)
+    \end{equation}
+    where \( \gamma = \frac{1}{\sqrt{1 - \frac{v^2}{c^2}}} \) is the Lorentz factor, and \( c \) is the speed of light in a vacuum.
+
+    These are observable when the relative velocity \( v \) approaches the speed of light \( c \), leading to significant effects such as time dilation and length contraction.
+    \begin{itemize}
+        \item \textbf{Faster Object Sees Slower Clocks}: A moving clock runs slower when observed from a stationary frame. For a fast moving object, the symmetry of time dilation means each observer sees the other's clock running slow. It breaks when we goes back to the original frame. A fast travelling would be younger than the one who stayed.
+        \item \textbf{Faster Object Sees Shorter Lengths}: An object moving at a high speed appears shorter in the direction of motion when observed from a stationary frame. This effect is known as length contraction.
+    \end{itemize}
+\end{definition}
+
+\begin{definition}[Simultaneity]
+    Simultaneity is the concept that two events occurring at the same time in one frame of reference may not occur at the same time in another frame of reference moving relative to the first. This is a direct consequence of the relativity of time in special relativity. The lack of absolute simultaneity means that observers in different inertial frames may disagree on the timing of events, leading to different interpretations of cause and effect.
+
+    Imagine two car crashes occuring at the same time in the Eath Frame, one is London one in New York. An observer on a plane flying from London to New York would see the crash in London happen first, while an observer on a plane flying from New York to London would see the crash in New York happen first. This illustrates how simultaneity is relative and depends on the observer's frame of reference.
+\end{definition}
+
+
+\end{document}
