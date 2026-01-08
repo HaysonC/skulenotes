@@ -1,0 +1,80 @@
+
+\usepackage[utf8]{inputenc}	% Para caracteres en español
+\usepackage{amsmath,amsthm,amsfonts,amssymb,amscd}
+\usepackage{multirow,booktabs}
+\usepackage[table]{xcolor}
+\usepackage{fullpage}
+\usepackage{lastpage}
+\usepackage{enumitem}
+\usepackage{fancyhdr}
+\usepackage{mathrsfs}
+\usepackage{wrapfig}
+\usepackage{setspace}
+\usepackage{hyperref}
+\usepackage{calc}
+\usepackage{multicol}
+\usepackage{cancel}
+\usepackage[retainorgcmds]{IEEEtrantools}
+\usepackage[margin=3cm]{geometry}
+\usepackage{amsmath}
+\newlength{\tabcont}
+\setlength{\parindent}{0.0in}
+\setlength{\parskip}{0.05in}
+\usepackage{empheq}
+\usepackage{framed}
+\usepackage[most]{tcolorbox}
+\usepackage{xcolor}
+% TikZ and pgfplots for figures (axis environment, \node at (axis cs:...), etc.)
+\usepackage{tikz}
+\usetikzlibrary{arrows.meta,positioning,calc,shapes}
+
+\tikzset{
+  >=Latex,
+  input/.style={coordinate},
+  output/.style={coordinate},
+  block/.style={
+    draw,
+    rectangle,
+    minimum height=1cm,
+    minimum width=3cm,
+    align=center
+  },
+  sum/.style={
+    draw,
+    circle,
+    inner sep=1pt,
+    minimum size=6mm
+  }
+}
+
+\usepackage{pgfplots}
+\pgfplotsset{compat=1.18}
+\usetikzlibrary{arrows.meta,positioning,calc,shapes,decorations.pathmorphing}
+\colorlet{shadecolor}{orange!15}
+\parindent 0in
+\parskip 12pt
+\geometry{margin=1in, headsep=0.25in}
+\theoremstyle{definition}
+\newtheorem{defn}{Definition}
+\newtheorem{reg}{Rule}
+\newtheorem{exer}{Exercise}
+\newtheorem{note}{Note}
+
+% Green shaded box for key concepts/equations
+\newtcolorbox{keybox}{
+    colback=green!10,
+    colframe=green!50!black,
+    fonttitle=\bfseries,
+    title=Key Concepts \& Equations
+}
+\usepackage{fancyhdr}\usepackage{xcolor}\usepackage{amsmath}\usepackage{amssymb}\pagestyle{fancy}\rhead{}
+\newtheorem{theorem}{Theorem}[subsection]
+\theoremstyle{definition}
+\newtheorem{definition}[theorem]{Definiton}
+\newtheorem{example}[theorem]{Example}
+\newtheorem{corollary}[theorem]{Corollary}
+\newtheorem{lemma}[theorem]{Lemma}
+\usepackage{etoolbox}
+
+\makeatother
+\title{PHY 293 Lecture Notes}

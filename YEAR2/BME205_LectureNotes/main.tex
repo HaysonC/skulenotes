@@ -1,0 +1,98 @@
+\documentclass[11pt]{article}
+\input{preamble}
+\begin{document}
+\thispagestyle{empty}
+{\LARGE \bf BME 205 Lecture Notes}\\
+{\large Hei Shing Cheung}\\
+Fundamentals of Biomedical Engineering, Winter 2025 \hfill BME205\\
+\\
+The up-to-date version of this document can be found at \url{https://github.com/HaysonC/skulenotes}\\
+
+\section{Homeostasis and DNA}
+\subsection{Feedback Control Systems in Biology}
+\begin{definition}[Homeostasis] Homeostasis is the ability of a system, particularly living organisms, to maintain a stable internal environment despite changes in external conditions. This involves various physiological processes that regulate factors such as temperature, pH, and electrolyte balance to ensure optimal functioning of cells and organs.
+\end{definition}
+
+\paragraph{The body as a Feedback-Control System} We can represent the human body as a feedback-control system, where various physiological parameters are monitored and adjusted to maintain homeostasis. The key components of this system could be drawn with the following control system diagram:
+\begin{figure}p[h]
+    \centering
+
+\begin{center}
+\resizebox{0.8\textwidth}{!}{
+
+\begin{tikzpicture}[auto, node distance=2cm,>=latex]
+    \node [input, name=input] {Set Point};
+    \node [sum, right of=input] (sum) {\tiny Error Detector};
+    \node [block, right of=sum, node distance=5cm] (controller) {Controller (e.g., brain)};
+    \node [block, right of=controller, node distance=7cm] (plant) {Plant (e.g., organs)};
+    \node [output, right of=plant, node distance=4cm] (output) {};
+    \node [block, below of=plant, node distance=2cm] (sensor) {Sensor (e.g., receptors)};
+    
+    \draw [->] (input) -- node {$r(t)$} (sum);
+    \draw [->] (sum) -- node {\small Error Signal} (controller);
+    \draw [->] (controller) -- node {Control Signals} (plant);
+    \draw [->] (plant) -- node {$y(t)$ output} (output);
+    \draw [->] (plant) -- (sensor);
+    \draw [->] (sensor) -| node[pos=0.99] {$-$} node [near end] {$y(t)$} (sum);
+\end{tikzpicture}
+
+}
+\end{center}
+    \caption{Feedback Control System Representing Homeostasis}
+\label{fig:feedback_system}
+\end{figure}
+\begin{definition}[Postive and Negative Feedback]
+Note that negative feedback is used to maintain stability in the system. Positive feedback, on the other hand, amplifies changes and is less common in homeostatic systems.
+\begin{itemize}
+    \item \textbf{Negative Feedback:} A feedback mechanism where the output of a system acts to reduce or counteract changes in the input, thereby maintaining stability and homeostasis. An example is the regulation of body temperature, where an increase in temperature triggers mechanisms to cool the body down.
+    \item \textbf{Positive Feedback:} A feedback mechanism where the output of a system amplifies or enhances changes in the input, leading to a further deviation from the original state.
+\end{itemize}
+\end{definition}
+
+\begin{example}[Neural Feedback System]
+    The same feedback system in Figure \ref{fig:feedback_system} can be used to model neural feedback systems in the body. For example, consider the regulation of blood glucose levels:
+\end{example}
+
+\subsection{Components of DNA}
+% Nucleobases, Nucleosides,
+%Nucleotides, & Deoxyribonucleic Acid (DNA) structure
+\begin{definition}[Nucleobases]
+    Nucleobases are the nitrogen-containing molecules that form the building blocks of nucleic acids, such as DNA and RNA. The four primary nucleobases in DNA are adenine (A), thymine (T), cytosine (C), and guanine (G). In RNA, uracil (U) replaces thymine. These bases pair specifically (A with T, and C with G) to form the rungs of the DNA double helix.
+\end{definition}
+
+\begin{definition}[Nucleosides]
+    Nucleosides are molecules formed by attaching a nucleobase to a sugar molecule (ribose in RNA and deoxyribose in DNA) without the phosphate group. They serve as precursors to nucleotides, which are the building blocks of nucleic acids.
+\end{definition}
+
+\begin{definition}[Nucleotides]
+    Nucleotides are the basic building blocks of nucleic acids like DNA and RNA. They consist of a nucleobase, a sugar molecule (ribose in RNA and deoxyribose in DNA), and one or more phosphate groups. Nucleotides link together through phosphodiester bonds to form the backbone of nucleic acid strands.
+\end{definition}
+
+\begin{figure}[h!]
+    \centering
+    \includegraphics[width=0.6\textwidth]{nucleotides.png}
+    \caption{Structure of a Nucleotide}
+    \label{fig:nucleotide_structure}
+\end{figure}
+
+\begin{definition}[DNA Structure]
+    DNA (Deoxyribonucleic Acid) is a double-stranded helical molecule composed of nucleotides. The strands run in opposite directions (antiparallel) and are held together by hydrogen bonds between complementary nucleobases (A pairs with T, and C pairs with G). The sugar-phosphate backbone forms the structural framework of the DNA molecule.
+\end{definition}
+
+\paragraph{Numbering Convetion in a Sugar} The base-attaching carbon is designated as the 1' (one prime) carbon. The sugar ring is numbered clockwise from the 1' carbon to the 5' carbon, which is outside the ring. The 3' carbon has a hydroxyl group (-OH) that forms a phosphodiester bond with the phosphate group of the next nucleotide.
+% \paragraph{Directionality} The 3' and 5' designations indicate the directionality of a nucleic acid strand. The 5' end has a free phosphate group attached to the 5' carbon of the sugar, while the 3' end has a free hydroxyl group attached to the 3' carbon. Nucleic acids are synthesized in the 5' to 3' direction.
+\begin{definition}[Directionality of DNA]
+    DNA strands have directionality, indicated by the 3' and 5' ends. The 5' end has a free phosphate group attached to the 5' carbon of the sugar, while the 3' end has a free hydroxyl group attached to the 3' carbon. DNA strands are synthesized in the 5' to 3' direction. The directions have the following properties:
+    \begin{itemize}
+        \item \textbf{Direction of Dioxyribose Sugar:} The sugar molecules in the DNA backbone are oriented in a specific direction, with one end having a free 5' phosphate group and the other end having a free 3' hydroxyl group.
+        \item \textbf{Antiparallel Strands:} The two strands of the DNA double helix run in opposite directions, meaning that one strand runs from 5' to 3', while the complementary strand runs from 3' to 5'.
+    \end{itemize}
+\end{definition}
+\begin{figure}[h!]
+    \centering
+    \includegraphics[width=0.6\textwidth]{directional.png}   
+    \caption{Directionality of DNA Strands}
+    \label{fig:dna_directionality}
+\end{figure}
+
+\end{document}

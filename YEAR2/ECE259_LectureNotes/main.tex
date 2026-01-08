@@ -1,0 +1,53 @@
+\documentclass[11pt]{article}
+\input{preamble}
+\begin{document}
+\thispagestyle{empty}
+{\LARGE \bf ECE 259 Lecture Notes}\\
+{\large Hei Shing Cheung}\\
+Electromagetism, Winter 2025 \hfill ECE259\\
+\\
+The up-to-date version of this document can be found at \url{https://github.com/HaysonC/skulenotes}\\
+
+\section{Electrostatics}
+\begin{definition}[Electromagnetic Force]
+The electromagnetic force is one of the four fundamental forces of nature. It is responsible for the interactions between charged particles and is described by the theory of electromagnetism. The electromagnetic force can be attractive or repulsive, depending on the charges involved. It is mediated by photons, which are the force carriers of the electromagnetic field. The electro and magetic forces differs by the following:
+\begin{itemize}
+    \item Electic Force: Acts by stationary charges. Described by Coulomb's Law.
+    \item Magnetic Force: Acts by moving charges (currents). Described by the Biot-Savart Law and Lorentz Force Law.
+\end{itemize}
+\end{definition}
+
+\subsection{Coulomb's Law}
+\begin{definition}[Coulomb's Law]
+    The force between two points charges is given by:
+    \begin{equation}
+        \mathbf{F}_{21} = \frac{1}{4 \pi \epsilon_0} \frac{q_1 q_2}{r^2} \hat{\mathbf{r}}
+    \end{equation}
+    where \(\epsilon_0\) is the permittivity of free space, \(q_1\) and \(q_2\) are the magnitudes of the charges, \(r\) is the distance between the charges, and \(\hat{\mathbf{r}}\) is the unit vector pointing from one charge to the other.
+    and that the force is symmetric:
+    \begin{equation}
+        \mathbf{F}_{12} = -\mathbf{F}_{21}
+    \end{equation}
+    \end{definition}
+
+\begin{example}[Two Charge at $r_1$ and $r_2$]
+    Consider two point charges \(q_1\) and \(q_2\) located at positions \(\mathbf{r}_1\) and \(\mathbf{r}_2\), respectively. The force exerted on charge \(q_2\) by charge \(q_1\) can be calculated using Coulomb's Law:
+    \begin{equation}
+        \mathbf{F}_{21} = \frac{1}{4 \pi \epsilon_0} \frac{q_1 q_2}{|\mathbf{r}_2 - \mathbf{r}_1|^2} \hat{\mathbf{r}}_{21}
+    \end{equation}
+    where \(\hat{\mathbf{r}}_{21}\) is the unit vector pointing from \(q_1\) to \(q_2\).
+\end{example}
+
+\subsection{Electric Field}
+\begin{definition}[Electric Field]
+    The electric field \(\mathbf{E}\) at a point in space is defined as the force \(\mathbf{F}\) experienced by a positive test charge \(q_0\) placed at that point, divided by the magnitude of the test charge (i.e., force normalized by charge):
+    \begin{equation}
+        \mathbf{E} = \frac{\mathbf{F}}{q_0}
+    \end{equation}
+    The electric field due to a point charge \(q\) located at position \(\mathbf{r}_q\) is derived from the Coulomb's Law and is given by:
+    \begin{equation}
+        \mathbf{E}(\mathbf{r}) = \frac{1}{4 \pi \epsilon_0} \frac{q}{|\mathbf{r} - \mathbf{r}_q|^2} \hat{\mathbf{r}}_{q}
+    \end{equation}
+    where \(\hat{\mathbf{r}}_{q}\) is the unit vector pointing from the charge to the point where the field is being calculated.
+\end{definition}
+\end{document}

@@ -1,0 +1,75 @@
+\section{The Schrödinger Equation}
+
+\subsection{Review of Wavefunctions and Operators}
+\begin{definition}[The Schrödinger Equation] The time-dependent Schrödinger equation for a single non-relativistic particle in one dimension is given by
+\begin{equation}
+    i\hbar \frac{\partial}{\partial t} \Psi(x,t) = -\frac{\hbar^2}{2m} \frac{\partial^2}{\partial x^2} \Psi(x,t) + V(x) \Psi(x,t)
+\end{equation}
+where $\Psi(x,t)$ is the wavefunction of the particle, $V(x)$ is the potential energy, $m$ is the mass of the particle, and $\hbar$ is the reduced Planck's constant.
+
+We denote the the momentum operator as
+\begin{subequations}
+\begin{equation}
+    \hat{p} = -i\hbar \frac{\partial}{\partial x}
+\end{equation}
+and the Hamiltonian operator as the sum of kinetic and potential energy operators:
+\begin{equation}
+    \hat{H} = \frac{\hat{p}^2}{2m} + V(x) = -\frac{\hbar^2}{2m} \frac{\partial^2}{\partial x^2} + V(x)
+\end{equation}
+and the energy operator as
+\begin{equation}
+    \hat{E} = i\hbar \frac{\partial}{\partial t}
+\end{equation}
+\end{subequations}
+
+
+
+\end{definition}
+
+
+\begin{definition}[Expectation Value] The expectation value of an operator $\hat{O}$ in a state described by the wavefunction $\Psi(x,t)$ is given by
+\begin{equation}
+    \langle \hat{O} \rangle = \int_{-\infty}^{\infty} \Psi^*(x,t) \hat{O} \Psi(x,t) \, dx
+\end{equation}
+where $\Psi^*(x,t)$ is the complex conjugate of the wavefunction.
+\end{definition}
+
+\begin{example}
+    The expectation value of the momentum operator $\hat{p}$ is given by
+    \begin{equation}
+        \langle \hat{p} \rangle = \int_{-\infty}^{\infty} \Psi^*(x,t) \left(-i\hbar \frac{\partial}{\partial x}\right) \Psi(x,t) \, dx
+    \end{equation}
+
+    We also write this as:
+    \begin{equation}
+        \langle \hat{p} \rangle = -i\hbar  \langle \Psi | \frac{\partial}{\partial x} | \Psi \rangle
+    \end{equation}
+\end{example}
+
+\begin{definition}[Infinite Square Well Potential] The infinite square well potential is defined as
+\begin{equation}
+    V(x) = \begin{cases}
+    0 & \text{for } 0 < x < a \\
+    \infty & \text{otherwise}
+    \end{cases}
+\end{equation}
+where $a$ is the width of the well.
+
+The normalized stationary state wavefunctions for the infinite square well are given by
+\begin{equation}
+    \psi_n(x) = \sqrt{\frac{2}{a}} \sin\left(\frac{n\pi x}{a}\right) \quad \text{for }n = 1, 2, 3, \ldots
+\end{equation}
+with corresponding energy eigenvalues
+\begin{equation}
+    E_n = \frac{n^2 \pi^2 \hbar^2}{2ma^2}
+\end{equation}
+Thus, the momentum eigenvalues are
+\begin{equation}
+    p_n = \pm \frac{n\pi \hbar}{a}
+\end{equation}
+
+Then, according to uncertainty principle, the uncertainty in position $\Delta x$ and uncertainty in momentum $\Delta p$ satisfy
+\begin{equation}
+    \Delta x \Delta p \geq \frac{\hbar}{2}
+\end{equation}
+\end{definition}

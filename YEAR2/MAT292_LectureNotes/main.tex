@@ -3601,10 +3601,12 @@ Substituting this into the PDE and separating variables allows us to derive ODEs
     Dividing both sides by \( \alpha^2 X(x) T(t) \) gives:
     $$ \frac{T'(t)}{\alpha^2 T(t)} = \frac{X''(x)}{X(x)} = -\lambda $$
     This leads to two ODEs:
-    \begin{align*}
-        T'(t) + \alpha^2 \lambda T(t) &= 0 \\
-        X''(x) + \lambda X(x) &= 0
-    \end{align*}
+    $$ \begin{cases}
+        
+        T'(t) + \alpha^2 \lambda T(t) = 0 \\
+        X''(x) + \lambda X(x) = 0
+        
+    \end{cases}$$
 
     For the spatial part, we have the boundary conditions:
     \begin{align*}
@@ -3624,7 +3626,7 @@ Substituting this into the PDE and separating variables allows us to derive ODEs
     $$ X_n(x) = A_n \sin\left( \frac{n \pi x}{L} \right) $$
 
     For the temporal part, the solution is:
-    $$ T_n(t) = C_n e^{-\alpha^2 \lambda_n t} = C_n \exp\left( -\alpha^2 \left( \frac{n \pi}{L} \right)^2 t \right) $$
+    $$ T_n(t) =  C_n \exp\left( -\alpha^2 \left( \frac{n \pi}{L} \right)^2 t \right) $$
 
     So the fundamental solutions are:
     $$ u_n(x,t) = A_n C_n \sin\left( \frac{n \pi x}{L} \right) \exp\left( -\alpha^2 \left( \frac{n \pi}{L} \right)^2 t \right) $$
@@ -3637,6 +3639,68 @@ Substituting this into the PDE and separating variables allows us to derive ODEs
     $$ u(x,0) = f(x) = \sum_{n=1}^{\infty} a_n \sin\left( \frac{n \pi x}{L} \right) $$
     This is a Fourier sine series expansion of \( f(x) \) on the interval \( [0, L] \). The coefficients \( a_n \) are given by:
     $$ a_n = \frac{2}{L} \int_0^L f(x) \sin\left( \frac{n \pi x}{L} \right) dx $$
+\end{example}
+
+\begin{example}[Electrostatics]
+    Consider the point-wise charge distribution \( \rho(\vec{r}') \) in three-dimensional space. The electric potential \( V(\vec{r}) \) at a point \( \vec{r} \) due to this charge distribution can be expressed using the integral form of Coulomb's law:
+    $$
+    V(\vec{r}) = \frac{1}{4 \pi \epsilon_0} \int_S \frac{\rho(\vec{r}')}{|\vec{r}|} d^3 r
+    $$ 
+    where \( \epsilon_0 \) is the permittivity of free space, and \( |\vec{r}| = \sqrt{(x - x')^2 + (y - y')^2 + (z - z')^2} \) is the distance between the point of observation \( \vec{r} \) and the source point \( \vec{r}' \). Then, the electric field \( \vec{E}(\vec{r}) \) can be derived from the electric potential using the negative gradient:
+    $$
+    \vec{E}(\vec{r}) = -\nabla V(\vec{r}) = -\left( \frac{\partial V}{\partial x} \hat  
+    {i} + \frac{\partial V}{\partial y} \hat{j} + \frac{\partial V}{\partial z} \hat{k} \right) 
+    $$
+    We also have Gauss's law in differential form, which relates the divergence of the electric field to the charge density:
+    $$
+    \nabla \cdot \vec{E} = \frac{\rho}{\epsilon_0}
+    $$
+    By substituting the expression for \( \vec{E} \) into Gauss's law, we obtain Poisson's equation for the electric potential:
+    $$
+    \nabla^2 V = -\frac{\rho}{\epsilon_0}
+    $$
+    In regions where there is no charge (\( \rho = 0 \)), Poisson's equation reduces to Laplace's equation:
+    $$
+    \nabla^2 V = 0
+    $$
+    Thus, we have the follwoing PDE:
+    $$
+        \frac{\partial^2 V}{\partial x^2} + \frac{\partial^2 V}{\partial y^2} + \frac{\partial^2 V}{\partial z^2} = -\frac{\rho}{\epsilon_0} = 0 
+    $$
+    Let's cosider a infinitely long metal rod along the $x$-axis. We can assume a seperatble solution of the form:
+    $$ V(x,y,z) = X(x)Y(y)Z(z) $$
+    Substituting into the PDE gives:
+    $$ X''(x)Y(y)Z(z) + X(x)Y''(y)Z(z) + X(x)Y(y)Z''(z) = 0 $$
+    Dividing both sides by \( X(x)Y(y)Z(z) \) gives:
+    $$ \frac{X''(x)}{X(x)} + \frac{Y''(y)}{Y(y)} + \frac{Z''(z)}{Z(z)} = 0 $$
+    The three terms must each be equal to a constant. Let's denote these constants as \( c_2 = -k^2 \) and \( c_3 = -l^2 \), and thus \( c_1 = k^2 + l^2 \). This leads to three ODEs:
+    $$ \begin{cases}    
+        X''(x) - (k^2 + l^2) X(x) = 0 \\
+        Y''(y) + k^2 Y(y) = 0 \\
+        Z''(z) + l^2 Z(z) = 0
+    \end{cases} $$
+    The general solutions for these ODEs are:
+    \begin{align*}
+        X(x) &= A e^{\sqrt{k^2 + l^2} x} + B e^{-\sqrt{k^2 + l^2} x} \\
+        Y(y) &= C \cos(k y) + D \sin(k y) \\
+        Z(z) &= E \cos(l z) + F \sin(l z)
+    \end{align*}
+    Lets assume for the follwoign boundary conditions:
+    $$\begin{cases}
+        V(0,y,z) &= V_0 \\
+        \partial V &= 0 \text{ for } x \neq 0
+    \end{cases}$$
+    Applying these boundary conditions leads to:
+    \begin{align*}
+        A &= 0 \\
+        C &= 0 \\
+        E &= 0
+    \end{align*}
+    Thus, the solution simplifies to:
+    $$ V(x,y,z) = B e^{-\sqrt{k^2 + l^2} x} D \sin(k y) F \sin(l z) $$
+    The general solution is a superposition of all fundamental solutions:
+    $$ V(x,y,z) = \int_0^{\infty} \int_0^{\infty} A(k,l) e^{-\sqrt{k^2 + l^2} x} \sin(k y) \sin(l z) dk dl $$
+    where \( A(k,l) = B D F \).
 \end{example}
 \appendix 
 \section{Common Laplace Transforms} \label{apx:}
