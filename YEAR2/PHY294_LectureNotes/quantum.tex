@@ -1,31 +1,64 @@
 \section{The Schrödinger Equation}
 
-\subsection{Review of Wavefunctions and Operators}
+\begin{keybox}
+\textbf{Key Equations:}
+\begin{itemize}
+    \item Time-dependent Schrödinger equation: $i\hbar \frac{\partial}{\partial t} \Psi(x,t) = \hat{H} \Psi(x,t)$
+    \item Momentum operator: $\hat{p} = -i\hbar \frac{\partial}{\partial x}$
+    \item Hamiltonian: $\hat{H} = \frac{\hat{p}^2}{2m} + V(x)$
+    \item Energy operator: $\hat{E} = i\hbar \frac{\partial}{\partial t}$
+\end{itemize}
+\textbf{Tip:} The Schrödinger equation governs the time evolution of quantum systems.
+\end{keybox}
+
+Quantum mechanics describes the behavior of particles at the atomic and subatomic scales. The fundamental equation governing this behavior is the Schrödinger equation, which replaces classical mechanics for quantum systems.
+
+\subsection{Time-Dependent Schrödinger Equation}
+
 \begin{definition}[The Schrödinger Equation] The time-dependent Schrödinger equation for a single non-relativistic particle in one dimension is given by
 \begin{equation}
     i\hbar \frac{\partial}{\partial t} \Psi(x,t) = -\frac{\hbar^2}{2m} \frac{\partial^2}{\partial x^2} \Psi(x,t) + V(x) \Psi(x,t)
 \end{equation}
 where $\Psi(x,t)$ is the wavefunction of the particle, $V(x)$ is the potential energy, $m$ is the mass of the particle, and $\hbar$ is the reduced Planck's constant.
+\end{definition}
 
-We denote the the momentum operator as
-\begin{subequations}
+We can rewrite this equation using operators. The momentum operator is defined as
 \begin{equation}
     \hat{p} = -i\hbar \frac{\partial}{\partial x}
 \end{equation}
-and the Hamiltonian operator as the sum of kinetic and potential energy operators:
+and the Hamiltonian operator, representing the total energy, is
 \begin{equation}
     \hat{H} = \frac{\hat{p}^2}{2m} + V(x) = -\frac{\hbar^2}{2m} \frac{\partial^2}{\partial x^2} + V(x)
 \end{equation}
-and the energy operator as
+The energy operator is
 \begin{equation}
     \hat{E} = i\hbar \frac{\partial}{\partial t}
 \end{equation}
-\end{subequations}
+Thus, the Schrödinger equation becomes
+\begin{equation}
+    \hat{H} \Psi = i\hbar \frac{\partial}{\partial t} \Psi
+\end{equation}
 
+\subsection{Properties of Wavefunctions}
 
+For the wavefunction to represent a physical state, it must satisfy certain properties.
 
+\begin{definition}[Properties of Wavefunctions] The wavefunction $\Psi(x,t)$ must satisfy the following properties:
+\begin{itemize}
+    \item \textbf{Normalization:} The total probability of finding the particle somewhere in space must be 1:
+    \begin{equation*}
+        \int_{-\infty}^{\infty} |\Psi(x,t)|^2 \, dx = 1
+    \end{equation*}
+    \item \textbf{Continuity:} The wavefunction and its first derivative must be continuous everywhere.
+    \item \textbf{Second-order discontinuities:} The second derivative of the wavefunction may be discontinuous at points where the potential $V(x)$ has infinite discontinuities (e.g., infinite potential walls). The discontinuity depends on the sign of $V(x) - E$ at the point of discontinuity.
+    \item \textbf{Single-valuedness:} The wavefunction must have a unique value at each point in space and time.
+    \item \textbf{Decay at infinity:} The wavefunction must approach zero as $x$ approaches $\pm \infty$ to ensure normalizability.
+\end{itemize}
 \end{definition}
 
+\subsection{Expectation Values}
+
+In quantum mechanics, we often deal with expectation values rather than definite values.
 
 \begin{definition}[Expectation Value] The expectation value of an operator $\hat{O}$ in a state described by the wavefunction $\Psi(x,t)$ is given by
 \begin{equation}
@@ -36,24 +69,42 @@ where $\Psi^*(x,t)$ is the complex conjugate of the wavefunction.
 
 \begin{example}
     The expectation value of the momentum operator $\hat{p}$ is given by
-    \begin{equation}
+    \begin{equation*}
         \langle \hat{p} \rangle = \int_{-\infty}^{\infty} \Psi^*(x,t) \left(-i\hbar \frac{\partial}{\partial x}\right) \Psi(x,t) \, dx
-    \end{equation}
+    \end{equation*}
 
     We also write this as:
-    \begin{equation}
+    \begin{equation*}
         \langle \hat{p} \rangle = -i\hbar  \langle \Psi | \frac{\partial}{\partial x} | \Psi \rangle
-    \end{equation}
+    \end{equation*}
 \end{example}
 
+\section{Quantum Systems in One Dimension}
+
+\subsection{Infinite Square Well}
+
+\begin{keybox}
+\textbf{Key Equations for Infinite Square Well:}
+\begin{itemize}
+    \item Potential: $V(x) = 0$ for $0 < x < a$, $\infty$ otherwise
+    \item Wavefunctions: $\psi_n(x) = \sqrt{\frac{2}{a}} \sin\left(\frac{n\pi x}{a}\right)$
+    \item Energies: $E_n = \frac{n^2 \pi^2 \hbar^2}{2ma^2}$
+    \item Momentum: $p_n = \pm \frac{n\pi \hbar}{a}$
+\end{itemize}
+\textbf{Tip:} Remember the boundary conditions: $\psi(0) = \psi(a) = 0$.
+\end{keybox}
+
+The infinite square well is one of the simplest quantum systems and illustrates quantization of energy levels.
+
 \begin{definition}[Infinite Square Well Potential] The infinite square well potential is defined as
-\begin{equation}
+\begin{equation*}
     V(x) = \begin{cases}
     0 & \text{for } 0 < x < a \\
     \infty & \text{otherwise}
     \end{cases}
-\end{equation}
+\end{equation*}
 where $a$ is the width of the well.
+\end{definition}
 
 The normalized stationary state wavefunctions for the infinite square well are given by
 \begin{equation}
@@ -63,13 +114,269 @@ with corresponding energy eigenvalues
 \begin{equation}
     E_n = \frac{n^2 \pi^2 \hbar^2}{2ma^2}
 \end{equation}
-Thus, the momentum eigenvalues are
-\begin{equation}
+
+The momentum eigenvalues are
+\begin{equation*}
     p_n = \pm \frac{n\pi \hbar}{a}
+\end{equation*}
+
+According to the uncertainty principle, the uncertainty in position $\Delta x$ and uncertainty in momentum $\Delta p$ satisfy
+\begin{equation*}
+    \Delta x \Delta p \geq \frac{\hbar}{2}
+\end{equation*}
+
+\subsection{Finite Square Well}
+
+\begin{keybox}
+\textbf{Key Equations for Finite Square Well:}
+\begin{itemize}
+    \item Potential: $V(x) = 0$ for $0 < x < a$, $V_0$ otherwise
+    \item Bound states: $E < V_0$, oscillatory inside, exponential decay outside
+    \item Scattering states: $E > V_0$, traveling waves everywhere
+\end{itemize}
+\textbf{Tip:} Bound states have discrete energies, scattering states have continuous spectrum.
+\end{keybox}
+
+The finite square well allows particles to tunnel through the barriers, unlike the infinite well.
+
+\begin{definition}[Finite Square Well Potential]
+The finite square well potential is defined as
+\begin{equation*}
+V(x) =
+\begin{cases}
+0 & 0 < x < a \\
+V_0 & \text{otherwise}
+\end{cases}
+\end{equation*}
+\end{definition}
+
+The time-independent Schrödinger equation is
+\begin{equation}
+-\frac{\hbar^2}{2m}\frac{d^2\psi}{dx^2} + V(x)\psi = E\psi
+\end{equation}
+which can be written as a curvature condition
+\begin{equation*}
+\frac{d^2\psi}{dx^2} = \frac{2m}{\hbar^2}(V(x)-E)\psi
+\end{equation*}
+
+The energy is related to the wavevector and wavelength by
+\begin{equation*}
+E = \frac{\hbar^2 k^2}{2m}, \quad k = \frac{2\pi}{\lambda}, \quad E \propto \frac{1}{\lambda^2}
+\end{equation*}
+
+\subsubsection{Bound States ($E < V_0$)}
+
+For bound states, the wavefunction is oscillatory inside the well ($E > V(x)$) and decays exponentially outside ($E < V(x)$):
+\begin{equation*}
+\psi(x) =
+\begin{cases}
+C\, e^{\kappa x} & x < 0 \\[6pt]
+A \sin(kx) + B \cos(kx) & 0 < x < a \\[6pt]
+D\, e^{-\kappa (x - a)} & x > a
+\end{cases}
+\end{equation*}
+where
+\begin{equation*}
+k = \sqrt{\frac{2mE}{\hbar^2}}, \quad \kappa = \sqrt{\frac{2m(V_0 - E)}{\hbar^2}}
+\end{equation*}
+
+Because the wavefunction penetrates the finite walls, the effective wavelength inside the well is larger than that of an infinite square well of the same width. Consequently,
+\begin{equation*}
+\lambda_n^{(\text{finite})} > \lambda_n^{(\infty)} \quad \Longrightarrow \quad E_n^{(\text{finite})} < E_n^{(\infty)}
+\end{equation*}
+
+Only discrete energies allow the curvature of the oscillatory solution inside the well to match smoothly onto the exponential decay outside, producing quantized bound states.
+
+\subsubsection{Scattering States ($E > V_0$)}
+
+For scattering states, the particle propagates in all regions with momentum
+\begin{equation*}
+p_x = \pm \hbar k, \quad k = \sqrt{\frac{2mE}{\hbar^2}}
+\end{equation*}
+
+The wavefunction is
+\begin{equation*}
+\psi(x) =
+\begin{cases}
+C\, e^{iqx} + D\, e^{-iqx} & x < 0 \\[6pt]
+A\, e^{ikx} + B\, e^{-ikx} & 0 < x < a \\[6pt]
+F\, e^{iq(x - a)} + G\, e^{-iq(x - a)} & x > a
+\end{cases}
+\end{equation*}
+where
+\begin{equation*}
+q = \sqrt{\frac{2m(E - V_0)}{\hbar^2}}
+\end{equation*}
+
+In this case, traveling-wave solutions exist in all regions and the energy spectrum is continuous.
+
+\section{Quantum Harmonic Oscillator}
+
+\begin{keybox}
+\textbf{Key Equations for Quantum Harmonic Oscillator:}
+\begin{itemize}
+    \item Potential: $V(x) = \frac{1}{2} k x^2 = \frac{1}{2} m \omega^2 x^2$ where $k$ is the spring constant
+    \item Angular frequency: $\omega = \sqrt{k/m}$
+    \item Energy levels: $E_n = \hbar \omega (n + \frac{1}{2})$ for $n = 0,1,2,\dots$
+    \item Wavefunctions: $\psi_n(x) = \frac{1}{\sqrt{2^n n!}} \left(\frac{m\omega}{\pi\hbar}\right)^{1/4} H_n(\xi) e^{-\xi^2/2}$ where $\xi = \sqrt{\frac{m\omega}{\hbar}} x$
+\end{itemize}
+\textbf{Tip:} The zero-point energy $E_0 = \frac{1}{2} \hbar \omega$ is a purely quantum effect.
+\end{keybox}
+
+Many physical systems can be approximated as harmonic oscillators near their equilibrium points, such as atoms in molecules or lattice vibrations in solids.
+
+The potential energy for a harmonic oscillator is
+\begin{equation}
+V(x) = \frac{1}{2} k x^2 = \frac{1}{2} m \omega^2 x^2
+\end{equation}
+where the angular frequency is given by
+\begin{equation}
+\omega = \sqrt{\frac{k}{m}}
+\end{equation}
+and $k$ is the spring constant (force constant) that determines the stiffness of the oscillator.
+
+The time-independent Schrödinger equation becomes
+\begin{equation*}
+-\frac{\hbar^2}{2m} \frac{d^2 \psi}{dx^2} + \frac{1}{2} m \omega^2 x^2 \psi = E \psi
+\end{equation*}
+
+The solutions involve Hermite polynomials, and the energy levels are quantized as
+\begin{equation}
+E_n = \hbar \omega \left(n + \frac{1}{2}\right)
+\end{equation}
+where $n = 0, 1, 2, \ldots$
+
+The wavefunctions are given by
+\begin{equation*}
+\psi_n(x) = \frac{1}{\sqrt{2^n n!}} \left(\frac{m\omega}{\pi\hbar}\right)^{1/4} H_n\left(\sqrt{\frac{m\omega}{\hbar}} x\right) \exp\left(-\frac{m\omega x^2}{2\hbar}\right)
+\end{equation*}
+where $H_n(\xi)$ are the Hermite polynomials.
+
+\begin{definition}[Hermite Polynomials]
+The Hermite polynomials $H_n(\xi)$ are defined by Rodrigues' formula:
+\begin{equation*}
+H_n(\xi) = (-1)^n e^{\xi^2} \frac{d^n}{dx^n} e^{-\xi^2}
+\end{equation*}
+for $n = 0, 1, 2, \ldots$ where $\xi = \sqrt{\frac{m\omega}{\hbar}} x$.
+
+The first few Hermite polynomials are:
+\begin{align*}
+H_0(\xi) & = 1 \\
+H_1(\xi) & = 2\xi \\
+H_2(\xi) & = 4\xi^2 - 2 \\
+H_3(\xi) & = 8\xi^3 - 12\xi \\
+H_4(\xi) & = 16\xi^4 - 48\xi^2 + 12
+\end{align*}
+
+They satisfy the orthogonality condition:
+\begin{equation*}
+\int_{-\infty}^{\infty} H_m(\xi) H_n(\xi) e^{-\xi^2} d\xi = \sqrt{\pi} 2^n n! \delta_{mn}
+\end{equation*}
+\end{definition}
+
+\begin{definition}[Properties of the Quantum Harmonic Oscillator]
+The quantum harmonic oscillator has the following properties:
+\begin{itemize}
+    \item \textbf{Orthogonality:} The wavefunctions $\psi_n(x)$ are orthogonal:
+    \begin{equation*}
+        \int_{-\infty}^{\infty} \psi_m^*(x) \psi_n(x) \, dx = \delta_{mn}
+    \end{equation*}
+    \item \textbf{Zero-point Energy:} The ground state ($n=0$) has energy $\frac{1}{2} \hbar \omega$, which cannot be zero due to the uncertainty principle.
+    \item \textbf{Equally Spaced Levels:} Energy levels are equally spaced by $\hbar \omega$.
+    \item \textbf{Probability Distribution:} $|\psi_n(x)|^2$ gives the probability density for finding the particle at position $x$ in state $n$.
+\end{itemize}
+\end{definition}
+
+\section{Time-Dependent Schrödinger Equation}
+The time-dependent Schrödinger equation describes how quantum states evolve over time.
+\begin{definition}[Time-Dependent Schrödinger Equation]
+The time-dependent Schrödinger equation is given by
+\begin{equation}
+i\hbar \frac{\partial}{\partial t} \Psi(x,t) = \hat{H} \Psi(x,t)
+\end{equation}
+where $\hat{H}$ is the Hamiltonian operator.
+\end{definition} 
+
+\begin{definition}[Free Particle Solution for TDSE]
+For a free particle (i.e., $V(x) = 0$), the time-dependent Schrödinger equation simplifies to
+\begin{equation}
+i\hbar \frac{\partial}{\partial t} \Psi(x,t) = -\frac{\hbar^2}{2m} \frac{\partial^2}{\partial x^2} \Psi(x,t)
+\end{equation}
+A general solution can be expressed as a superposition of plane waves:
+\begin{equation}
+\Psi(x,t) = \int_{-\infty}^{\infty} A(k) e^{i(kx - \omega t)} \, dk, \quad \Psi_k(x,t) = e^{i(kx - \omega t)}
+\end{equation}
+where $\omega = \frac{\hbar k^2}{2m}$ and $A(k)$ is the amplitude distribution in momentum space.
+\end{definition}
+
+\begin{keybox}
+\textbf{Separation of Variables for TDSE:} To solve the time-dependent Schrödinger equation, we can use the method of separation of variables by assuming a solution of the form $\Psi(x,t) = \psi(x) T(t)$. This leads to two separate equations:
+\begin{itemize}
+    \item Spatial part (time-independent Schrödinger equation):
+    \begin{equation*}
+    \hat{H} \psi(x) = E \psi(x)
+    \end{equation*}
+    \item Temporal part:
+    \begin{equation*}
+    i\hbar \frac{dT(t)}{dt} = E T(t)
+    \end{equation*}
+\end{itemize}
+The temporal equation has the solution:
+\begin{equation*}
+T(t) = e^{-iEt/\hbar}
+\end{equation*}
+Thus, the full solution is:
+\begin{equation}
+\Psi(x,t) = \psi(x) e^{-iEt/\hbar}
+\end{equation}
+\end{keybox}
+
+\begin{example}[Simplest Non-trivial Solution to TDSE: infinite square well]
+Consider a particle in an infinite square well of width \(a\). The time-independent Schrödinger equation gives the stationary states:
+\begin{align*}
+\psi_n(x) &= \sqrt{\frac{2}{a}} \sin\left(\frac{n\pi x}{a}\right), \\
+E_n &= \frac{n^2 \pi^2 \hbar^2}{2ma^2}
+\end{align*}
+Using separation of variables, the time-dependent solution is:
+\begin{equation}
+\Psi_n(x,t) = \psi_n(x) e^{-iE_n t/\hbar} = \sqrt{\frac{2}{a}} \sin\left(\frac{n\pi x}{a}\right) e^{-i \frac{n^2 \pi^2 \hbar}{2ma^2} t}
+\end{equation}
+This describes the quantum state of the particle in the infinite square well over time.
+\end{example}
+
+\begin{definition}[Time-Dependent Probability in Superposition States]
+For a superposition of two energy eigenstates, the total wavefunction is
+\begin{equation}
+\Psi(x,t) = a_1 \Psi_1(x,t) + a_2 \Psi_2(x,t),
+\end{equation}
+where the coefficients satisfy the normalization condition
+\begin{equation}
+|a_1|^2 + |a_2|^2 = 1.
 \end{equation}
 
-Then, according to uncertainty principle, the uncertainty in position $\Delta x$ and uncertainty in momentum $\Delta p$ satisfy
+Each energy eigenstate has time dependence
 \begin{equation}
-    \Delta x \Delta p \geq \frac{\hbar}{2}
+\Psi_n(x,t) = \psi_n(x)e^{-iE_n t/\hbar}.
 \end{equation}
+Substituting,
+\begin{equation}
+\Psi(x,t)
+= a_1 \psi_1(x)e^{-iE_1 t/\hbar}
++ a_2 \psi_2(x)e^{-iE_2 t/\hbar}.
+\end{equation}
+
+The time-dependent probability density is obtained by taking the modulus squared:
+\begin{equation}
+|\Psi(x,t)|^2
+= \left| a_1 \psi_1(x) + a_2 \psi_2(x)e^{-i(E_2-E_1)t/\hbar} \right|^2.
+\end{equation}
+
+Using the identity $|U + V e^{i\theta}|^2 = U^2 + V^2 + 2UV\cos\theta$, the probability density becomes
+\begin{equation}
+|\Psi(x,t)|^2
+= \underbrace{|a_1|^2|\psi_1(x)|^2 + |a_2|^2|\psi_2(x)|^2}_{\text{time-independent}}
++ \underbrace{2a_1a_2\psi_1(x)\psi_2(x) \cos\!\left(\frac{(E_2-E_1)t}{\hbar}\right)}_{\text{time-dependent}}.
+\end{equation}
+
+This shows that interference between energy eigenstates produces a time-dependent oscillation in the probability density with angular frequency $(E_2-E_1)/\hbar$.
 \end{definition}

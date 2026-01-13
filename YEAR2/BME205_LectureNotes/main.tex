@@ -9,17 +9,28 @@ Fundamentals of Biomedical Engineering, Winter 2025 \hfill BME205\\
 The up-to-date version of this document can be found at \url{https://github.com/HaysonC/skulenotes}\\
 
 \section{Homeostasis and DNA}
+
+\begin{keybox}
+\textbf{Key Concepts in Homeostasis:}
+\begin{itemize}
+    \item Homeostasis: Maintenance of stable internal environment
+    \item Feedback control systems: Negative feedback maintains stability
+    \item DNA structure: Double helix with complementary base pairing
+    \item Central dogma: DNA → RNA → Protein
+\end{itemize}
+\textbf{Tip:} Biological systems use feedback control to maintain homeostasis, similar to engineering control systems.
+\end{keybox}
+
 \subsection{Feedback Control Systems in Biology}
+
 \begin{definition}[Homeostasis] Homeostasis is the ability of a system, particularly living organisms, to maintain a stable internal environment despite changes in external conditions. This involves various physiological processes that regulate factors such as temperature, pH, and electrolyte balance to ensure optimal functioning of cells and organs.
 \end{definition}
 
-\paragraph{The body as a Feedback-Control System} We can represent the human body as a feedback-control system, where various physiological parameters are monitored and adjusted to maintain homeostasis. The key components of this system could be drawn with the following control system diagram:
-\begin{figure}p[h]
+The human body can be modeled as a feedback control system where physiological parameters are monitored and adjusted to maintain homeostasis. The key components are shown in the following control system diagram:
+
+\begin{figure}[h]
     \centering
-
-\begin{center}
 \resizebox{0.8\textwidth}{!}{
-
 \begin{tikzpicture}[auto, node distance=2cm,>=latex]
     \node [input, name=input] {Set Point};
     \node [sum, right of=input] (sum) {\tiny Error Detector};
@@ -35,17 +46,16 @@ The up-to-date version of this document can be found at \url{https://github.com/
     \draw [->] (plant) -- (sensor);
     \draw [->] (sensor) -| node[pos=0.99] {$-$} node [near end] {$y(t)$} (sum);
 \end{tikzpicture}
-
 }
-\end{center}
     \caption{Feedback Control System Representing Homeostasis}
-\label{fig:feedback_system}
+    \label{fig:feedback_system}
 \end{figure}
-\begin{definition}[Postive and Negative Feedback]
-Note that negative feedback is used to maintain stability in the system. Positive feedback, on the other hand, amplifies changes and is less common in homeostatic systems.
+
+\begin{definition}[Positive and Negative Feedback]
+Biological systems use feedback mechanisms to maintain homeostasis:
 \begin{itemize}
-    \item \textbf{Negative Feedback:} A feedback mechanism where the output of a system acts to reduce or counteract changes in the input, thereby maintaining stability and homeostasis. An example is the regulation of body temperature, where an increase in temperature triggers mechanisms to cool the body down.
-    \item \textbf{Positive Feedback:} A feedback mechanism where the output of a system amplifies or enhances changes in the input, leading to a further deviation from the original state.
+    \item \textbf{Negative Feedback:} A mechanism where the output acts to reduce changes in the input, maintaining stability. Example: body temperature regulation.
+    \item \textbf{Positive Feedback:} A mechanism where the output amplifies changes in the input, leading to further deviation from the original state. Less common in homeostatic systems.
 \end{itemize}
 \end{definition}
 
@@ -56,9 +66,33 @@ Note that negative feedback is used to maintain stability in the system. Positiv
 \subsection{Components of DNA}
 % Nucleobases, Nucleosides,
 %Nucleotides, & Deoxyribonucleic Acid (DNA) structure
+
+\begin{keybox}
+\textbf{Key DNA Components:}
+\begin{itemize}
+    \item Nucleobases: A, T, C, G (purines: A, G; pyrimidines: C, T)
+    \item Base pairing: A-T (2 H-bonds), C-G (3 H-bonds)
+    \item Directionality: 5' → 3' synthesis, antiparallel strands
+    \item Double helix: Right-handed twist, sugar-phosphate backbone
+\end{itemize}
+\textbf{Tip:} DNA stability comes from hydrogen bonding between complementary bases and hydrophobic interactions in the helix core.
+\end{keybox}
+
 \begin{definition}[Nucleobases]
     Nucleobases are the nitrogen-containing molecules that form the building blocks of nucleic acids, such as DNA and RNA. The four primary nucleobases in DNA are adenine (A), thymine (T), cytosine (C), and guanine (G). In RNA, uracil (U) replaces thymine. These bases pair specifically (A with T, and C with G) to form the rungs of the DNA double helix.
 \end{definition}
+
+\paragraph{Purines} Purines are a class of nucleobases characterized by a two-ring structure. The two purine bases found in DNA and RNA are adenine (A) and guanine (G).
+
+\paragraph{Pyrimidines} Pyrimidines are a class of nucleobases characterized by a single-ring structure. The three pyrimidine bases found in nucleic acids are cytosine (C), thymine (T) in DNA, and uracil (U) in RNA.
+
+They are connected via a hydrogen bond as follows:
+\begin{itemize}
+    \item Adenine (A) pairs with Thymine (T) in DNA through two hydrogen bonds.
+    \item Guanine (G) pairs with Cytosine (C) through three hydrogen bonds.
+\end{itemize}  
+
+U in RNA is less stable than T in DNA because U lacks a methyl group present in T, making it more prone to hydrolytic deamination. This instability is acceptable in RNA due to its typically shorter lifespan and single-stranded nature, whereas DNA requires greater stability for long-term genetic information storage.
 
 \begin{definition}[Nucleosides]
     Nucleosides are molecules formed by attaching a nucleobase to a sugar molecule (ribose in RNA and deoxyribose in DNA) without the phosphate group. They serve as precursors to nucleotides, which are the building blocks of nucleic acids.
@@ -79,12 +113,12 @@ Note that negative feedback is used to maintain stability in the system. Positiv
     DNA (Deoxyribonucleic Acid) is a double-stranded helical molecule composed of nucleotides. The strands run in opposite directions (antiparallel) and are held together by hydrogen bonds between complementary nucleobases (A pairs with T, and C pairs with G). The sugar-phosphate backbone forms the structural framework of the DNA molecule.
 \end{definition}
 
-\paragraph{Numbering Convetion in a Sugar} The base-attaching carbon is designated as the 1' (one prime) carbon. The sugar ring is numbered clockwise from the 1' carbon to the 5' carbon, which is outside the ring. The 3' carbon has a hydroxyl group (-OH) that forms a phosphodiester bond with the phosphate group of the next nucleotide.
-% \paragraph{Directionality} The 3' and 5' designations indicate the directionality of a nucleic acid strand. The 5' end has a free phosphate group attached to the 5' carbon of the sugar, while the 3' end has a free hydroxyl group attached to the 3' carbon. Nucleic acids are synthesized in the 5' to 3' direction.
+\paragraph{Numbering Convention in a Sugar} The base-attaching carbon is designated as the 1' (one prime) carbon. The sugar ring is numbered clockwise from the 1' carbon to the 5' carbon, which is outside the ring. The 3' carbon has a hydroxyl group (-OH) that forms a phosphodiester bond with the phosphate group of the next nucleotide.
+
 \begin{definition}[Directionality of DNA]
     DNA strands have directionality, indicated by the 3' and 5' ends. The 5' end has a free phosphate group attached to the 5' carbon of the sugar, while the 3' end has a free hydroxyl group attached to the 3' carbon. DNA strands are synthesized in the 5' to 3' direction. The directions have the following properties:
     \begin{itemize}
-        \item \textbf{Direction of Dioxyribose Sugar:} The sugar molecules in the DNA backbone are oriented in a specific direction, with one end having a free 5' phosphate group and the other end having a free 3' hydroxyl group.
+        \item \textbf{Direction of Deoxyribose Sugar:} The sugar molecules in the DNA backbone are oriented in a specific direction, with one end having a free 5' phosphate group and the other end having a free 3' hydroxyl group.
         \item \textbf{Antiparallel Strands:} The two strands of the DNA double helix run in opposite directions, meaning that one strand runs from 5' to 3', while the complementary strand runs from 3' to 5'.
     \end{itemize}
 \end{definition}
@@ -94,5 +128,50 @@ Note that negative feedback is used to maintain stability in the system. Positiv
     \caption{Directionality of DNA Strands}
     \label{fig:dna_directionality}
 \end{figure}
+
+
+\paragraph{DNA Always Twist Right} The DNA double helix twists in a right-handed manner, meaning that if you hold the helix vertically and look down from the top, the strands spiral clockwise as they ascend. This right-handed twist is a fundamental characteristic of the DNA structure and contributes to its stability and functionality in biological systems.
+
+\begin{definition}[Chromosome Structure]
+    A chromosome is a long, continuous thread of DNA that contains numerous genes and regulatory elements. In eukaryotic cells, DNA is tightly coiled and packaged around histone proteins to form a complex structure called chromatin. The chromosome follows the following hierarchy:
+    \begin{itemize}
+        \item \textbf{Nucleotides and DNAs:} Nucleotides are the building blocks of DNA, which consists of two strands forming a double helix.
+        \item \textbf{Histone Proteins and Nucleosomes:} DNA wraps around histone proteins to form nucleosomes, which are the basic units of chromatin structure.
+        \item \textbf{Chromatin Fibers and Loops:} Nucleosomes further coil and fold to form chromatin fibers, which can loop and fold to create higher-order structures.
+        \item \textbf{Chromosome:} The chromatin fiber is organized into higher-order structures to form a chromosome, which is visible during cell division.
+    \end{itemize}
+\end{definition}
+
+\subsection{Functions of DNA}
+
+\begin{definition}[RNA]
+    RNA (Ribonucleic Acid) is a single-stranded nucleic acid that plays a crucial role in various biological processes, including protein synthesis and gene regulation. RNA is similar to DNA but contains ribose sugar instead of deoxyribose and uses uracil (U) instead of thymine (T) as one of its nucleobases. Unlike DNA, RNA is typically single-stranded and can fold into complex three-dimensional structures.
+\end{definition}
+\begin{keybox}
+\textbf{Central Dogma of Molecular Biology:}
+\begin{itemize}
+    \item \textbf{DNA} → \textbf{RNA} (Transcription)
+    \item \textbf{RNA} → \textbf{Protein} (Translation)
+    \item Information flows from DNA to RNA to protein, but not in reverse
+\end{itemize}
+\textbf{Tip:} Transcription occurs in the nucleus, translation in the cytoplasm. RNA polymerase reads 3'→5', writes 5'→3'.
+\end{keybox}
+
+\paragraph{Central Dogma} The central dogma of molecular biology describes the flow of genetic information within a biological system. It states that DNA is transcribed into RNA, which is then translated into proteins. This process involves two main steps:
+\begin{itemize}
+    \item \textbf{Transcription:} The process by which a segment of DNA is copied into messenger RNA (mRNA) by the enzyme RNA polymerase. It consist of two components:
+    \begin{itemize}
+        \item \textbf{Read Up:} The RNA polymerase reads the DNA template strand in the 3' to 5' direction.
+        \item \textbf{Write Down:} The mRNA is synthesized in the 5' to 3' direction.
+    \end{itemize}
+    This consist of three phases: initiation, elongation, and termination:
+    \begin{itemize}
+        \item \textbf{Initiation:} The `TATA' box in the promoter region of DNA signals the RNA polymerase to bind and start transcription.
+        \item \textbf{Elongation:} RNA polymerase moves along the DNA template strand, synthesizing the mRNA strand by adding complementary RNA nucleotides.
+        \item \textbf{Termination:} Transcription ends when RNA polymerase reaches a terminator sequence, releasing the newly formed mRNA strand.
+    \end{itemize}
+    \item \textbf{Translation:} The process by which the mRNA is decoded by ribosomes to synthesize a specific protein, based on the sequence of codons in the mRNA. Each codon (a sequence of three nucleotides) corresponds to a specific amino acid or a stop signal during protein synthesis.
+\end{itemize}
+
 
 \end{document}

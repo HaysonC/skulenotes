@@ -7,7 +7,96 @@
 Probability and Statistics, Winter 2025 \hfill MIE286\\
 \\
 The up-to-date version of this document can be found at \url{https://github.com/HaysonC/skulenotes}\\
+\section{Random Variables}
+\begin{definition}[Random Variable]
+A random variable is a variable whose possible values are numerical outcomes of a random phenomenon. There are two main types of random variables:
+\begin{itemize}
+    \item Discrete Random Variable: Takes on a countable number of distinct values. Examples include the outcome of rolling a die or the number of heads in a series of coin flips.
+    \item Continuous Random Variable: Takes on an infinite number of possible values within a given range. Examples include the height of individuals or the time it takes to complete a task.
+    \item Mixed Random Variable: Exhibits properties of both discrete and continuous random variables. It can take on specific discrete values as well as a continuous range of values.
+\end{itemize}
+\end{definition}
 
+\begin{definition}[Probability Mass Function (PMF)]
+A Probability Mass Function (PMF) is a function that gives the probability that a discrete random variable is exactly equal to some value. The PMF must satisfy the following properties:
+\begin{itemize}
+    \item Non-negativity: \( P(X = x) \geq 0 \) for all \( x \).
+    \item Normalization: The sum of the probabilities over all possible values of the random variable must equal 1:
+    \[ \sum_{x} P(X = x) = 1 \]
+\end{itemize}
+\end{definition}
 
+\begin{definition}[Probability Density Function (PDF)] 
+A Probability Density Function (PDF) is a function that describes the likelihood of a continuous random variable to take on a particular value. The PDF must satisfy the following properties:
+\begin{itemize}
+    \item Non-negativity: \( f(x) \geq 0 \) for all \( x \).
+    \item Normalization: The total area under the PDF curve must equal 1:
+    \[ \int_{-\infty}^{\infty} f(x) \, dx = 1 \]
+\end{itemize}
+\end{definition}
+% Common distributions, visualizations, experiments, sample space
+\section{Common Distributions and Visualization}
+\subsection{Uniform Distribution}
+\begin{definition}[Uniform Distribution]
+Discrete uniform on a finite set $\{x_1,\dots,x_n\}$: $P(X=x_i)=1/n$ for each $i$.
+Continuous uniform on an interval $[a,b]$: the density is
+$$
+f(x)=\frac{1}{b-a},\qquad a\le x\le b,
+$$
+with mean $\mu=(a+b)/2$ and variance $\sigma^2=(b-a)^2/12$.
+\end{definition}
+
+\subsection{Normal Distribution}
+\begin{definition}[Normal Distribution]
+A random variable $X$ is normal with mean $\mu$ and variance $\sigma^2$, written $X\sim\mathcal{N}(\mu,\sigma^2)$, if its density is
+$$  
+f(x)=\frac{1}{\sigma\sqrt{2\pi}}\exp\left(-\frac{(x-\mu)^2}{2\sigma^2}\right).
+$$
+The distribution is symmetric about $\mu$, and the standard normal is $\mathcal{N}(0,1)$.
+\end{definition}
+
+\subsection{Addign Distributions}
+\paragraph{} We can add random variables or constants. For example, we can do $Y = 2 + \mathrm{Uni}(0,1)$ or $Z = \mathrm{Norm}(0,1) + \mathrm{Norm}(0,1)$. The resulting distribution can be found by convolution of the original distributions.
+
+\subsection{Symmetric Distributions}
+A distribution is symmetric about a point $c$ if for all $x$ the density or mass satisfies $f(c+x)=f(c-x)$. Symmetry implies the mean (when it exists) equals the center $c$.
+
+\subsection{Stem-and-Leaf Plot}
+A stem-and-leaf plot is a simple textual visualization which preserves raw data while showing shape. Example for the data
+$$\{12,14,15,17,21,22,22,24,31\}$$
+is shown with stems (tens) and leaves (ones):
+\begin{verbatim}
+1 | 2 4 5 7
+2 | 1 2 2 4
+3 | 1
+\end{verbatim}
+This quickly reveals distributional shape and outliers.
+
+\subsection{Experiments and Sample Space}
+\begin{definition}[Experiment]
+An experiment is a process that leads to the occurrence of one and only one of several possible outcomes. Simply, it generates data. 
+\end{definition}
+\begin{definition}[Sample Space]
+The sample space, denoted by $\Omega$, is the set of all possible outcomes of an experiment. Each outcome in the sample space is called a sample point.
+\end{definition}
+\section{Sets and Sample Space}
+The sample space $\Omega$ is a set and events are subsets of $\Omega$. For sets $A,B\subseteq\Omega$ we define:
+\begin{itemize}
+    \item \textbf{Union:} $A\cup B=\{x:\;x\in A\text{ or }x\in B\}$.
+    \item \textbf{Intersection:} $A\cap B=\{x:\;x\in A\text{ and }x\in B\}$.
+    \item \textbf{Complement:} $A^c=\Omega\setminus A=\{x:\;x\notin A\}$.
+    \item \textbf{Set difference:} $A\setminus B=\{x:\;x\in A,\;x\notin B\}$.
+    \item \textbf{Disjoint:} $A$ and $B$ are disjoint if $A\cap B=\varnothing$.
+    \item \textbf{Subset:} $A\subseteq B$ means every element of $A$ is also in $B$.
+\end{itemize}
+
+Basic probability properties follow:
+\begin{itemize}
+    \item $P(\varnothing)=0$, $P(\Omega)=1$.
+    \item For any event $A$, $P(A^c)=1-P(A)$.
+    \item For any events $A,B$, $P(A\cup B)=P(A)+P(B)-P(A\cap B)$.
+\end{itemize}
+
+De Morgan's laws: $(A\cup B)^c=A^c\cap B^c$ and $(A\cap B)^c=A^c\cup B^c$.
 
 \end{document}

@@ -4,50 +4,189 @@
 \thispagestyle{empty}
 {\LARGE \bf ECE 259 Lecture Notes}\\
 {\large Hei Shing Cheung}\\
-Electromagetism, Winter 2025 \hfill ECE259\\
+Electromagnetism, Winter 2025 \hfill ECE259\\
 \\
 The up-to-date version of this document can be found at \url{https://github.com/HaysonC/skulenotes}\\
 
 \section{Electrostatics}
-\begin{definition}[Electromagnetic Force]
-The electromagnetic force is one of the four fundamental forces of nature. It is responsible for the interactions between charged particles and is described by the theory of electromagnetism. The electromagnetic force can be attractive or repulsive, depending on the charges involved. It is mediated by photons, which are the force carriers of the electromagnetic field. The electro and magetic forces differs by the following:
+
+\begin{keybox}
+\textbf{Key Concepts in Electrostatics:}
 \begin{itemize}
-    \item Electic Force: Acts by stationary charges. Described by Coulomb's Law.
-    \item Magnetic Force: Acts by moving charges (currents). Described by the Biot-Savart Law and Lorentz Force Law.
+    \item Coulomb's Law: Force between point charges
+    \item Electric Field: Force per unit charge
+    \item Coordinate systems: Cartesian, cylindrical, spherical
+    \item Dipoles: Electric field of charge pairs
+\end{itemize}
+\textbf{Tip:} Electromagnetic force acts on both stationary (electric) and moving (magnetic) charges.
+\end{keybox}
+
+\begin{definition}[Electromagnetic Force]
+The electromagnetic force is one of the four fundamental forces of nature. It is responsible for the interactions between charged particles and is described by the theory of electromagnetism. The electromagnetic force can be attractive or repulsive, depending on the charges involved. It is mediated by photons, which are the force carriers of the electromagnetic field. The electric and magnetic forces differ by the following:
+\begin{itemize}
+    \item \textbf{Electric Force:} Acts on stationary charges. Described by Coulomb's Law.
+    \item \textbf{Magnetic Force:} Acts on moving charges (currents). Described by the Biot-Savart Law and Lorentz Force Law.
 \end{itemize}
 \end{definition}
 
 \subsection{Coulomb's Law}
+
+\begin{keybox}
+\textbf{Coulomb's Law:}
+\begin{itemize}
+    \item Force: \(\mathbf{F}_{21} = \frac{1}{4\pi\epsilon_0} \frac{q_1 q_2}{r^2} \hat{\mathbf{r}}_{21}\)
+    \item Direction: Along line joining charges
+    \item Sign: Like charges repel, opposite attract
+    \item Units: Newtons (N)
+\end{itemize}
+\textbf{Tip:} Force is symmetric: \(\mathbf{F}_{12} = -\mathbf{F}_{21}\)
+\end{keybox}
+
 \begin{definition}[Coulomb's Law]
-    The force between two points charges is given by:
+    The force between two point charges is given by:
     \begin{equation}
-        \mathbf{F}_{21} = \frac{1}{4 \pi \epsilon_0} \frac{q_1 q_2}{r^2} \hat{\mathbf{r}}
+        \mathbf{F}_{21} = \frac{1}{4 \pi \epsilon_0} \frac{q_1 q_2}{r^2} \hat{\mathbf{r}}_{21}
     \end{equation}
-    where \(\epsilon_0\) is the permittivity of free space, \(q_1\) and \(q_2\) are the magnitudes of the charges, \(r\) is the distance between the charges, and \(\hat{\mathbf{r}}\) is the unit vector pointing from one charge to the other.
-    and that the force is symmetric:
+    where \(\epsilon_0\) is the permittivity of free space, \(q_1\) and \(q_2\) are the magnitudes of the charges, \(r\) is the distance between the charges, and \(\hat{\mathbf{r}}_{21}\) is the unit vector pointing from charge 1 to charge 2.
+    The force is symmetric:
     \begin{equation}
         \mathbf{F}_{12} = -\mathbf{F}_{21}
     \end{equation}
-    \end{definition}
+\end{definition}
+
+\begin{example}[Force between two Electrons]
+    The force between two electrons separated by a distance \(r = 10^{-12} \, \text{m}\) can be calculated using Coulomb's Law. The charge of an electron is approximately \(q_e = -1.6 \times 10^{-19} \, \text{C}\). The magnitude of the force is given by:
+    $$
+        F = \frac{1}{4 \pi \epsilon_0} \frac{q_e^2}{r^2}
+    $$
+    Substituting the values, we get:
+    $$
+        F = \frac{1}{4 \pi (8.854 \times 10^{-12} \, \text{C}^2/\text{N} \cdot \text{m}^2)} \frac{(1.6 \times 10^{-19} \, \text{C})^2}{(10^{-12} \, \text{m})^2}
+    $$
+    Calculating this gives:
+    $$
+        F \approx 2.3 \times 10^{-4} \, \text{N}
+    $$
+    Therefore, the force between the two electrons is approximately \(2.3 \times 10 ^{-4} \, \text{N}\), and it is repulsive since both charges are negative.
+\end{example}
 
 \begin{example}[Two Charge at $r_1$ and $r_2$]
     Consider two point charges \(q_1\) and \(q_2\) located at positions \(\mathbf{r}_1\) and \(\mathbf{r}_2\), respectively. The force exerted on charge \(q_2\) by charge \(q_1\) can be calculated using Coulomb's Law:
-    \begin{equation}
+    $$
         \mathbf{F}_{21} = \frac{1}{4 \pi \epsilon_0} \frac{q_1 q_2}{|\mathbf{r}_2 - \mathbf{r}_1|^2} \hat{\mathbf{r}}_{21}
-    \end{equation}
+    $$
     where \(\hat{\mathbf{r}}_{21}\) is the unit vector pointing from \(q_1\) to \(q_2\).
 \end{example}
 
 \subsection{Electric Field}
+
+\begin{keybox}
+\textbf{Electric Field Fundamentals:}
+\begin{itemize}
+    \item Definition: \(\mathbf{E} = \frac{\mathbf{F}}{q_0}\) (force per unit charge)
+    \item Point charge: \(\mathbf{E} = \frac{1}{4\pi\epsilon_0} \frac{q}{r^2} \hat{\mathbf{r}}\)
+    \item Units: N/C or V/m
+    \item Direction: Away from positive, toward negative charges
+\end{itemize}
+\textbf{Tip:} Electric field exists even without test charge - it's a property of space.
+\end{keybox}
+
 \begin{definition}[Electric Field]
-    The electric field \(\mathbf{E}\) at a point in space is defined as the force \(\mathbf{F}\) experienced by a positive test charge \(q_0\) placed at that point, divided by the magnitude of the test charge (i.e., force normalized by charge):
+    The electric field \(\mathbf{E}\) at a point in space is defined as the force \(\mathbf{F}\) experienced by a positive test charge \(q_0\) placed at that point, divided by the magnitude of the test charge:
     \begin{equation}
         \mathbf{E} = \frac{\mathbf{F}}{q_0}
     \end{equation}
-    The electric field due to a point charge \(q\) located at position \(\mathbf{r}_q\) is derived from the Coulomb's Law and is given by:
+    The electric field due to a point charge \(q\) located at position \(\mathbf{r}_q\) is given by:
     \begin{equation}
-        \mathbf{E}(\mathbf{r}) = \frac{1}{4 \pi \epsilon_0} \frac{q}{|\mathbf{r} - \mathbf{r}_q|^2} \hat{\mathbf{r}}_{q}
+        \mathbf{E}(\mathbf{r}) = \frac{1}{4 \pi \epsilon_0} \frac{q}{|\mathbf{r} - \mathbf{r}_q|^2} \hat{\mathbf{r}}_{q} = \frac{1}{4 \pi \epsilon_0} \frac{q}{|\mathbf{r}-\mathbf{r}_q|^3} (\mathbf{r} - \mathbf{r}_q)
     \end{equation}
     where \(\hat{\mathbf{r}}_{q}\) is the unit vector pointing from the charge to the point where the field is being calculated.
 \end{definition}
+
+\begin{example}[Point Charge at the Origin]
+    Consider a point charge \(q\) located at the origin. The electric field at a distance \(r\) from the charge is given by:
+    $$
+        \mathbf{E}(r) = \frac{1}{4 \pi \epsilon_0} \frac{q}{r^2} \hat{\mathbf{r}}
+    $$
+    where \(\hat{\mathbf{r}}\) is the unit vector pointing radially outward from the charge. This field points away from the charge if \(q\) is positive and toward the charge if \(q\) is negative.
+\end{example}
+
+\subsection{Coordinate Systems}
+
+\begin{keybox}
+\textbf{Coordinate System Conversions:}
+\begin{itemize}
+    \item \textbf{Cylindrical:} \((\rho, \phi, z)\) where \(x = \rho\cos\phi\), \(y = \rho\sin\phi\)
+    \item \textbf{Spherical:} \((r, \theta, \phi)\) where \(x = r\sin\theta\cos\phi\), \(y = r\sin\theta\sin\phi\), \(z = r\cos\theta\)
+    \item Use cylindrical for axial symmetry, spherical for radial symmetry
+\end{itemize}
+\textbf{Tip:} Choose coordinate system that matches the symmetry of your problem.
+\end{keybox}
+
+\begin{definition}[Cylindrical Coordinate System]
+    The cylindrical coordinate system is a three-dimensional coordinate system that extends polar coordinates by adding a height (z) dimension. A point in cylindrical coordinates is represented by the tuple \((\rho, \phi, z)\), where:
+    \begin{itemize}
+        \item \(\rho\) is the radial distance from the z-axis to the point.
+        \item \(\phi\) is the azimuthal angle in the xy-plane from the positive x-axis.
+        \item \(z\) is the height above the xy-plane.
+    \end{itemize}
+    The relationship between cylindrical coordinates and Cartesian coordinates \((x, y, z)\) is given by:
+    \begin{equation}
+        x = \rho \cos(\phi), \quad y = \rho \sin(\phi), \quad z = z
+    \end{equation}
+\end{definition}
+
+\begin{example}
+    Consider $R = x_0 \hat{x} + y_0 \hat{y} + z_0 \hat{z}$ in Cartesian coordinates. To convert this to cylindrical coordinates, we use the following transformations:
+    \begin{align*}
+        \rho &= \sqrt{x_0^2 + y_0^2} \\
+        \phi &= \tan^{-1}\left(\frac{y_0}{x_0}\right) \\
+        z &= z_0
+    \end{align*}
+    Thus, the point in cylindrical coordinates is given by:
+    \begin{align*}
+        R &= \rho \hat{\rho} + z \hat{z} \\
+          &= \sqrt{x_0^2 + y_0^2} \hat{\rho} + z_0 \hat{z}
+    \end{align*}
+\end{example}
+
+
+\begin{definition}[Spherical Coordinate System]
+    The spherical coordinate system is a three-dimensional coordinate system that represents points in space using three parameters: the radial distance \(r\), the polar angle \(\theta\), and the azimuthal angle \(\phi\). A point in spherical coordinates is represented by the tuple \((r, \theta, \phi)\), where:
+    \begin{itemize}
+        \item \(r\) is the distance from the origin to the point.
+        \item \(\theta\) is the polar angle measured from the positive z-axis.
+        \item \(\phi\) is the azimuthal angle measured in the xy-plane from the positive x-axis.
+    \end{itemize}
+    The relationship between spherical coordinates and Cartesian coordinates \((x, y, z)\) is given by:
+    \begin{equation}
+        x = r \sin(\theta) \cos(\phi), \quad y = r \sin(\theta) \sin(\phi), \quad z = r \cos(\theta)
+    \end{equation}
+\end{definition}
+
+
+\subsection{Dipoles}
+
+\begin{keybox}
+\textbf{Electric Dipoles:}
+\begin{itemize}
+    \item Dipole moment: \(\mathbf{p} = q\mathbf{d}\) (charge × separation vector)
+    \item Field far away: \(\mathbf{E} \approx \frac{1}{4\pi\epsilon_0} \frac{1}{r^3} [3(\mathbf{p}\cdot\hat{\mathbf{r}})\hat{\mathbf{r}} - \mathbf{p}]\)
+    \item Applications: Antennas, dielectrics, molecular interactions
+    \item Key approximation: \(R \gg d\) (far-field limit)
+\end{itemize}
+\textbf{Tip:} Dipoles are fundamental to understanding electromagnetic radiation and material polarization.
+\end{keybox}
+
+\begin{example}[Electric Dipole Field]
+    Consider \(\mathbf{R}\) as the distance to the origin. Two charges +Q and -Q are located at positions \( \mathbf{r}_1 = -\frac{d}{2} \hat{z} \) and \( \mathbf{r}_2 = \frac{d}{2} \hat{z} \), respectively. The electric field at a point \( \mathbf{R} \) due to these two charges can be calculated using the principle of superposition and Taylor expansion for \( R \gg d \):
+    \begin{align*}
+        \mathbf{E}(\mathbf{R}) &= \frac{1}{4 \pi \epsilon_0} \left( \frac{Q}{|\mathbf{R} - \mathbf{r}_2|^2} \hat{\mathbf{R}}_{2} - \frac{Q}{|\mathbf{R} - \mathbf{r}_1|^2} \hat{\mathbf{R}}_{1} \right) \\
+        &= \frac{1}{4 \pi \epsilon_0} \left[ \frac{\mathbf{R} - \frac{d}{2} \hat{z}}{|\mathbf{R} - \frac{d}{2} \hat{z}|^3} Q - \frac{\mathbf{R} + \frac{d}{2} \hat{z}}{|\mathbf{R} + \frac{d}{2} \hat{z}|^3} Q \right] \\
+        &\approx \frac{1}{4 \pi \epsilon_0} \frac{Q d}{R^3} \left( 3 \frac{(\mathbf{R} \cdot \hat{z}) \mathbf{R}}{R^2} - \hat{z} \right)
+    \end{align*}
+    where \( \hat{\mathbf{R}}_{1} \) and \( \hat{\mathbf{R}}_{2} \) are the unit vectors pointing from the charges to the point \( \mathbf{R} \), and \( \theta \) is the angle between \( \mathbf{R} \) and the z-axis.
+\end{example}
+
+\paragraph{Relationship to Interference and Signals} As dipoles are fundamental sources of electromagnetic radiation, understanding their behavior is crucial for analyzing interference patterns and signal propagation in various applications, including antennas and wireless communication systems. The superposition principle used in calculating the electric field from multiple dipoles directly relates to how signals combine and interfere in space.
 \end{document}
